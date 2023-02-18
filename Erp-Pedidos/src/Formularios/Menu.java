@@ -4,6 +4,8 @@
  */
 package Formularios;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Inte-Soft
@@ -15,6 +17,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -26,21 +30,188 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jd_ventanaPrincipal = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        lb_Comercial = new javax.swing.JLabel();
+        lb_Ingenieria = new javax.swing.JLabel();
+        lb_Compras = new javax.swing.JLabel();
+        lb_Almacen = new javax.swing.JLabel();
+        lb_Reporte = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jd_ventanaPrincipalLayout = new javax.swing.GroupLayout(jd_ventanaPrincipal);
+        jd_ventanaPrincipal.setLayout(jd_ventanaPrincipalLayout);
+        jd_ventanaPrincipalLayout.setHorizontalGroup(
+            jd_ventanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1055, Short.MAX_VALUE)
+        );
+        jd_ventanaPrincipalLayout.setVerticalGroup(
+            jd_ventanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        lb_Comercial.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lb_Comercial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/adquisitivo.png"))); // NOI18N
+        lb_Comercial.setText("Comercial");
+        lb_Comercial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_ComercialMouseClicked(evt);
+            }
+        });
+
+        lb_Ingenieria.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lb_Ingenieria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/prototipo.png"))); // NOI18N
+        lb_Ingenieria.setText("Ingenieria");
+        lb_Ingenieria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_IngenieriaMouseClicked(evt);
+            }
+        });
+
+        lb_Compras.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lb_Compras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bolsa-de-la-compra.png"))); // NOI18N
+        lb_Compras.setText("Compras");
+        lb_Compras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_ComprasMouseClicked(evt);
+            }
+        });
+
+        lb_Almacen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lb_Almacen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cepo.png"))); // NOI18N
+        lb_Almacen.setText("Almacen");
+        lb_Almacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_AlmacenMouseClicked(evt);
+            }
+        });
+
+        lb_Reporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lb_Reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte-de-negocios.png"))); // NOI18N
+        lb_Reporte.setText("Reportes");
+        lb_Reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_ReporteMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_Comercial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Ingenieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Compras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lb_Comercial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_Ingenieria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_Compras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_Almacen)
+                .addGap(12, 12, 12)
+                .addComponent(lb_Reporte)
+                .addContainerGap(248, Short.MAX_VALUE))
+        );
+
+        jMenu1.setText("Archivo");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setText("Cerrar Sesion");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Salir del Sistema");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Administrar");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setText("Usuarios");
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu4.setText("Configuracion");
+
+        jMenuItem4.setText("Conectar BD");
+        jMenu4.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu3.setText("Ayuda");
+
+        jMenuItem5.setText("Acerca de");
+        jMenu3.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jd_ventanaPrincipal)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jd_ventanaPrincipal)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lb_ComercialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ComercialMouseClicked
+        
+    }//GEN-LAST:event_lb_ComercialMouseClicked
+
+    private void lb_IngenieriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_IngenieriaMouseClicked
+        //Creacion de objeto para llamar la actividad ventas
+        Pedidos pedido = new Pedidos();
+        jd_ventanaPrincipal.add(pedido);
+        pedido.show();
+    }//GEN-LAST:event_lb_IngenieriaMouseClicked
+
+    private void lb_ComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ComprasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lb_ComprasMouseClicked
+
+    private void lb_AlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_AlmacenMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lb_AlmacenMouseClicked
+
+    private void lb_ReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ReporteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lb_ReporteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +249,22 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JDesktopPane jd_ventanaPrincipal;
+    private javax.swing.JLabel lb_Almacen;
+    private javax.swing.JLabel lb_Comercial;
+    private javax.swing.JLabel lb_Compras;
+    private javax.swing.JLabel lb_Ingenieria;
+    private javax.swing.JLabel lb_Reporte;
     // End of variables declaration//GEN-END:variables
 }
