@@ -4,18 +4,48 @@
  */
 package Formularios;
 
+import clases.conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Inte-Soft
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
     }
+    public void validar_usuario(){
+    
+            try{
+                con=conexion.obtenerconexion();
+                String sql = "select * from USUARIOS where usuario='"+txt_Users.getText() +"' and contraseña='"+txt_Contraseña.getText()+"' ";
+                pst = con.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if (rs.next()){
+                    JOptionPane.showMessageDialog(null, "correcto");
+                    Menu menu = new Menu();
+                    menu.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "usuario o contraseña incorrecta, intentalo de nuevo");
+                    
+                }
+                
+                
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +80,11 @@ public class Login extends javax.swing.JFrame {
 
         btn_Ingresar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_Ingresar.setText("Ingresar");
+        btn_Ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_IngresarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 255));
@@ -111,6 +146,10 @@ public class Login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarActionPerformed
+     this.validar_usuario();
+    }//GEN-LAST:event_btn_IngresarActionPerformed
 
     /**
      * @param args the command line arguments

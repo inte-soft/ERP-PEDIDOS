@@ -4,18 +4,56 @@
  */
 package Formularios;
 
+import clases.conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import static java.time.Instant.now;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Inte-Soft
  */
 public class Pedidos extends javax.swing.JInternalFrame {
-
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    
+    
+    
+     public void buscar(){
+    
+            try{
+                con=conexion.obtenerconexion();
+                String sql = "select * from MAESTRO where CODIGO like '%"+txt_Codigo.getText() + "%'";
+                pst = con.prepareStatement(sql);
+                rs = pst.executeQuery();
+                while (rs.next()){
+                  txt_Descripcion.setText(rs.getString("DESCRIPCION"));
+                  txt_Tipo.setText(rs.getString("TIPO"));
+                  txt_Referencia.setText(rs.getString("REFERENCIA"));
+                  txt_Marca.setText(rs.getString("MARCA"));
+                  txt_Unidad.setText(rs.getString("UNIDAD"));
+                }
+                
+                
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+        }
+    
     /**
      * Creates new form Pedidos
      */
     public Pedidos() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +104,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("OT:");
 
+        txt_ot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_otKeyPressed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("ITEM:");
 
@@ -73,6 +117,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         jLabel3.setText("PEDIDO:");
 
         jcb_Pedidos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Consumibles Electricos", "Consumibles Mecanicos", "Pedido de equipos" }));
+        jcb_Pedidos.setToolTipText("");
         jcb_Pedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcb_PedidosActionPerformed(evt);
@@ -91,6 +136,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("CODIGO:");
+
+        txt_Codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_CodigoKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("DESCRIPCION");
@@ -112,6 +163,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         btn_Agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-archivo.png"))); // NOI18N
         btn_Agregar.setPreferredSize(new java.awt.Dimension(44, 40));
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
 
@@ -119,19 +175,10 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "OT", "ITEM", "DESCRIPCION", "TIPO", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "ADICIONAL Y/O INICIAL", "FECHA", "OPERACION", "DEPARTAMENTO"
+                "OT", "ITEM", "CODIGO", "DESCRIPCION", "TIPO", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "ADICIONAL Y/O INICIAL", "FECHA", "OPERACION", "DEPARTAMENTO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -250,12 +297,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_Eliminar)
                             .addComponent(btn_Imprimir))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_Enviar)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -268,6 +315,45 @@ public class Pedidos extends javax.swing.JInternalFrame {
         // Insertar item a lista desplegable
         
     }//GEN-LAST:event_jcb_PedidosActionPerformed
+
+    private void txt_otKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_otKeyPressed
+        
+    }//GEN-LAST:event_txt_otKeyPressed
+
+    private void txt_CodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CodigoKeyPressed
+          this.buscar();
+    }//GEN-LAST:event_txt_CodigoKeyPressed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        
+        
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        Calendar fecha = new GregorianCalendar();
+        String dia = Integer.toString(fecha.get(Calendar.DAY_OF_MONTH));
+        String mes = Integer.toString(fecha.get(Calendar.MONTH) + 1);
+        String year = Integer.toString(fecha.get(Calendar.YEAR));
+        String date = (year + "-" + mes+ "-" + dia);
+        
+        String []item=new String[13];
+        item[0]=txt_ot.getText();
+        item[1]=txt_Item.getText();
+        item[2]=txt_Codigo.getText();
+        item[3]=txt_Descripcion.getText();
+        item[4]=txt_Tipo.getText();
+        item[5]=txt_Referencia.getText();
+        item[6]=txt_Marca.getText();
+        item[7]=txt_Unidad.getText();
+        item[8]=txt_Cantidad.getText();
+        item[9]=jcb_tipoPedidos.getSelectedItem().toString();
+        item[10]=date;
+        item[11]=jcb_Pedidos.getSelectedItem().toString();
+        item[12]=jcb_Solicita.getSelectedItem().toString();
+        modelo.addRow(item);
+        jTable1.setModel(modelo);
+        
+              
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
