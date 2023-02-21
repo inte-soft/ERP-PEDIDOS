@@ -5,6 +5,7 @@
 package Formularios;
 
 import clases.conexion;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,12 +23,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+    int valor =0;
     
     
     
      public void buscar(){
-    
+            
             try{
                 con=conexion.obtenerconexion();
                 String sql = "select * from MAESTRO where CODIGO like '%"+txt_Codigo.getText() + "%'";
@@ -39,12 +40,51 @@ public class Pedidos extends javax.swing.JInternalFrame {
                   txt_Referencia.setText(rs.getString("REFERENCIA"));
                   txt_Marca.setText(rs.getString("MARCA"));
                   txt_Unidad.setText(rs.getString("UNIDAD"));
+                  valor=rs.getInt("PRECIO_DESCUENTO");
                 }
                 
                 
             }catch(Exception ex){
                 System.out.println(ex);
             }
+        }
+         public void enviar(){
+             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();   
+            try{
+                
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                    con=conexion.obtenerconexion();
+                    String sql = "INSERT INTO PEDIDOS (OT,ITEM,CODIGO,DESCRIPCION,TIPO,REFERENCIA,MARCA,UNIDAD,CANTIDAD,VALOR,ADICIONAL_INICIAL,FECHA,OPERACION,DEPARTAMENTO) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1,jTable1.getValueAt(i,0).toString());
+                    pst.setString(2,jTable1.getValueAt(i,1).toString());
+                    pst.setString(3,jTable1.getValueAt(i,2).toString());
+                    pst.setString(4,jTable1.getValueAt(i,3).toString());
+                    pst.setString(5,jTable1.getValueAt(i,4).toString());
+                    pst.setString(6,jTable1.getValueAt(i,5).toString());
+                    pst.setString(7,jTable1.getValueAt(i,6).toString());
+                    pst.setString(8,jTable1.getValueAt(i,7).toString());
+                    pst.setString(9,jTable1.getValueAt(i,8).toString());
+                    pst.setString(10,jTable1.getValueAt(i,9).toString());
+                    pst.setString(11,jTable1.getValueAt(i,10).toString());
+                    pst.setString(12,jTable1.getValueAt(i,11).toString());
+                    pst.setString(13,jTable1.getValueAt(i,12).toString());
+                    pst.setString(14,jTable1.getValueAt(i,13).toString());
+                    
+                    pst.executeUpdate();                    
+                }
+                
+                  for (int i = jTable1.getRowCount()-1; i>=0 ; i--) {
+                    
+                    modelo.removeRow(i);
+                
+                }
+                JOptionPane.showMessageDialog(rootPane,"Se ha realizado el pedido correctamente");
+                
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            
         }
     
     /**
@@ -170,20 +210,35 @@ public class Pedidos extends javax.swing.JInternalFrame {
         });
 
         btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarActionPerformed(evt);
+            }
+        });
 
         btn_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/impresora.png"))); // NOI18N
+        btn_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ImprimirActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "OT", "ITEM", "CODIGO", "DESCRIPCION", "TIPO", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "ADICIONAL Y/O INICIAL", "FECHA", "OPERACION", "DEPARTAMENTO"
+                "OT", "ITEM", "CODIGO", "DESCRIPCION", "TIPO", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "VALOR", "ADICIONAL_INICIAL", "FECHA", "OPERACION", "DEPARTAMENTO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         btn_Enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/enviar-mensaje.png"))); // NOI18N
+        btn_Enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EnviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -335,7 +390,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         String year = Integer.toString(fecha.get(Calendar.YEAR));
         String date = (year + "-" + mes+ "-" + dia);
         
-        String []item=new String[13];
+        String []item=new String[14];
         item[0]=txt_ot.getText();
         item[1]=txt_Item.getText();
         item[2]=txt_Codigo.getText();
@@ -345,15 +400,42 @@ public class Pedidos extends javax.swing.JInternalFrame {
         item[6]=txt_Marca.getText();
         item[7]=txt_Unidad.getText();
         item[8]=txt_Cantidad.getText();
-        item[9]=jcb_tipoPedidos.getSelectedItem().toString();
-        item[10]=date;
-        item[11]=jcb_Pedidos.getSelectedItem().toString();
-        item[12]=jcb_Solicita.getSelectedItem().toString();
+        item[9]= Integer.toString(valor);
+        item[10]=jcb_tipoPedidos.getSelectedItem().toString();
+        item[11]=date;
+        item[12]=jcb_Pedidos.getSelectedItem().toString();
+        item[13]=jcb_Solicita.getSelectedItem().toString();
         modelo.addRow(item);
         jTable1.setModel(modelo);
         
               
     }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            
+                
+        if (jTable1.getSelectedRow()>=0) {
+            int rpt = JOptionPane.showConfirmDialog(this, "Deseas eliminar este elemento","SISTEMA",JOptionPane.INFORMATION_MESSAGE);
+            if (rpt==JOptionPane.YES_OPTION) {
+                modelo.removeRow(jTable1.getSelectedRow());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Seleccione la fila que desea eliminar","SISTEMA",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_EliminarActionPerformed
+
+    private void btn_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImprimirActionPerformed
+        try {
+            jTable1.print(); // Imprime el jTable
+        } catch (PrinterException ex) { }
+    
+    }//GEN-LAST:event_btn_ImprimirActionPerformed
+
+    private void btn_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarActionPerformed
+        this.enviar();
+    }//GEN-LAST:event_btn_EnviarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
