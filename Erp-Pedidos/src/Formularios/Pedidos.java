@@ -313,8 +313,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
                         .addComponent(btn_Imprimir)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Enviar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -8,6 +8,7 @@ import clases.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/proceso-de-trabajo.png")).getImage());
     }
     public void validar_usuario(){
     

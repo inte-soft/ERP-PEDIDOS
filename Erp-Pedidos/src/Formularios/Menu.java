@@ -4,6 +4,7 @@
  */
 package Formularios;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -12,11 +13,9 @@ import javax.swing.JFrame;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/proceso-de-trabajo.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -202,11 +201,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_IngenieriaMouseClicked
 
     private void lb_ComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ComprasMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_lb_ComprasMouseClicked
 
     private void lb_AlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_AlmacenMouseClicked
-        // TODO add your handling code here:
+        //Creacion de objeto para llamar la actividad ventas
+        Almacen almacen = new Almacen();
+        jd_ventanaPrincipal.add(almacen);
+        almacen.show();
     }//GEN-LAST:event_lb_AlmacenMouseClicked
 
     private void lb_ReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ReporteMouseClicked
