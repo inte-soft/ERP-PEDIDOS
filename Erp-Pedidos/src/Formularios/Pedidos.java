@@ -31,7 +31,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
             
             try{
                 con=conexion.obtenerconexion();
-                String sql = "select * from MAESTRO where CODIGO like '%"+txt_Codigo.getText() + "%'";
+                String sql = "select * from MAESTRO where CODIGO like '%"+txt_Codigo.getText() + "'";
                 pst = con.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while (rs.next()){
@@ -388,7 +388,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         String dia = Integer.toString(fecha.get(Calendar.DAY_OF_MONTH));
         String mes = Integer.toString(fecha.get(Calendar.MONTH) + 1);
         String year = Integer.toString(fecha.get(Calendar.YEAR));
-        String date = (year + "-" + mes+ "-" + dia);
+        String date = (year+ "/" + mes+ "/" + dia);
         
         String []item=new String[14];
         item[0]=txt_ot.getText();

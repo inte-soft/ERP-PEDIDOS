@@ -4,11 +4,90 @@
  */
 package Formularios;
 
+import clases.conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Inte-Soft
  */
 public class Almacen extends javax.swing.JInternalFrame {
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
+    public void buscar() {
+        String sql = "";
+        Date fecha1=jDateChooser1.getDate();
+        Date fecha2=jDateChooser2.getDate();
+        String eFechas;
+        if (fecha1!=null || fecha2!=null ) {
+            eFechas= " AND FECHA BETWEEN #"+fecha1.getDate()+"-"+fecha1.getMonth()+"-"+fecha1.getYear()+"# AND #"+fecha2.getDate()+"-"+fecha2.getMonth()+"-"+fecha2.getYear()+"#";
+        } else {
+            eFechas="";
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabla_Almacen.getModel();
+        String registros[]= new String[8];
+        switch (cb_buscar.getSelectedItem().toString()) {
+
+            case "Codigo":
+
+                sql = "select * not in(CODIGO),SUM(CANTIDAD) from PEDIDOS where CODIGO like '%" + txtcodigoAlmacen.getText() + "'"+eFechas+" GROUP BY CODIGO";
+
+                break;
+
+            case "Descripcion":
+
+                sql = "select * not in(CODIGO),SUM(CANTIDAD) from PEDIDOS where DESCRIPCION like '%" + txtcodigoAlmacen.getText() + "%'"+eFechas+" GROUP BY CODIGO";
+
+                break;
+            case "OT":
+
+                sql = "select * not in(CODIGO),SUM(CANTIDAD) from PEDIDOS where OT like '%" + txtcodigoAlmacen.getText() + "'"+eFechas+" GROUP BY CODIGO";
+
+                break;
+            case "Seleccione":
+
+                sql = "select OT, CODIGO, DESCRIPCION, REFERENCIA, MARCA, UNIDAD, SUM(CANTIDAD) AS CANTIDAD, SUM(VALOR) AS VALOR from PEDIDOS where OT like '%" + txtcodigoAlmacen.getText() + "%'"+eFechas+"GROUP BY OT, DESCRIPCION, REFERENCIA, UNIDAD, CODIGO, MARCA";
+
+                break;
+            default:
+                sql = "select * from PEDIDOS";
+        }
+        
+
+        try{
+            con = conexion.obtenerconexion();
+
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while (rs.next()) {
+
+                registros[0] = rs.getString("OT");
+                registros[1] = rs.getString("CODIGO");
+                registros[2] = rs.getString("DESCRIPCION");
+                registros[3] = rs.getString("REFERENCIA");
+                registros[4] = rs.getString("MARCA");
+                registros[5] = rs.getString("UNIDAD");
+                registros[6] = rs.getString("CANTIDAD");
+                registros[7] = rs.getString("VALOR");
+                modelo.addRow(registros);
+                             
+                
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
 
     /**
      * Creates new form Almacen
@@ -31,13 +110,13 @@ public class Almacen extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        calendario_desde = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        calendario_hasta = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_Almacen = new javax.swing.JTable();
         btn_Buscar = new javax.swing.JButton();
         btn_Limpiar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setIconifiable(true);
@@ -46,6 +125,12 @@ public class Almacen extends javax.swing.JInternalFrame {
         setTitle("Almacen");
 
         cb_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Codigo", "Descripcion", "OT" }));
+
+        txtcodigoAlmacen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcodigoAlmacenKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Buscar por:");
 
@@ -60,12 +145,17 @@ public class Almacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "OT", "ITEM", "CODIGO", "DESCRIPCION", "TIPO", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "VALOR", "ADICIONAL_INICIAL", "FECHA", "OPERACION", "DEPARTAMENTO"
+                "OT", "CODIGO", "DESCRIPCION", "REFERENCIA", "MARCA", "UNIDAD", "CANTIDAD", "VALOR"
             }
         ));
         jScrollPane2.setViewportView(tabla_Almacen);
 
         btn_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/enviar-mensaje.png"))); // NOI18N
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
 
         btn_Limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
 
@@ -84,20 +174,20 @@ public class Almacen extends javax.swing.JInternalFrame {
                         .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
-                        .addGap(14, 14, 14)
-                        .addComponent(calendario_desde, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(calendario_hasta, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtcodigoAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Buscar)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Limpiar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1306, Short.MAX_VALUE)
+                .addContainerGap(281, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,8 +199,8 @@ public class Almacen extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel3)
                         .addComponent(jLabel4))
-                    .addComponent(calendario_desde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendario_hasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -130,13 +220,21 @@ public class Almacen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+
+    private void txtcodigoAlmacenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoAlmacenKeyPressed
+      this.buscar();
+    }//GEN-LAST:event_txtcodigoAlmacenKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Limpiar;
-    private com.toedter.calendar.JDateChooser calendario_desde;
-    private com.toedter.calendar.JDateChooser calendario_hasta;
     private javax.swing.JComboBox<String> cb_buscar;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
