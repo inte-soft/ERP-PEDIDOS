@@ -1,5 +1,5 @@
 
-package clases;
+package clases;// comentario
 
 import java.sql.*;
 import java.sql.DriverManager;
