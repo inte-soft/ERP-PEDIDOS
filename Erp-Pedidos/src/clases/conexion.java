@@ -13,7 +13,7 @@ public class conexion {
               try{
                   if (con==null){
                       Class.forName(driver);
-                      con = DriverManager.getConnection(url);
+                      con = DriverManager.getConnection(url);// prueba de la rama
                       
                   }
               }catch(Exception ex){
