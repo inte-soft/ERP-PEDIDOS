@@ -24,9 +24,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     ResultSet rs = null;
     PreparedStatement pst = null;
     int valor =0;
-    
-    
-    
+     
      public void buscar(){
             
             try{
@@ -407,15 +405,13 @@ public class Pedidos extends javax.swing.JInternalFrame {
         item[13]=jcb_Solicita.getSelectedItem().toString();
         modelo.addRow(item);
         jTable1.setModel(modelo);
-        
-              
+                    
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            
-                
+                     
         if (jTable1.getSelectedRow()>=0) {
             int rpt = JOptionPane.showConfirmDialog(this, "Deseas eliminar este elemento","SISTEMA",JOptionPane.INFORMATION_MESSAGE);
             if (rpt==JOptionPane.YES_OPTION) {

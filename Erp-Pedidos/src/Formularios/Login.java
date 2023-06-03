@@ -42,8 +42,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "usuario o contraseña incorrecta, intentalo de nuevo");
                     
                 }
-                
-                
+                              
             }catch(Exception ex){
                 System.out.println(ex);
             }

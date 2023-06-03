@@ -30,7 +30,8 @@ public class leerexcel {
     public static void main (String[] args) throws IOException{
         try{
             List cellData = new ArrayList();
-            FileInputStream f = new FileInputStream("C:\\Users\\alejo\\OneDrive\\Documents\\NetBeansProjects\\ERP-PEDIDOS\\Erp-Pedidos\\MAESTRO DE EQUIPOS V2.xlsx");
+            FileInputStream f = new FileInputStream("C:C:\\Users\\Inte-Soft\\OneDrive - "
+                    + "SENA\\PROYECTOS\\ERP-PEDIDOS\\Erp-Pedidos\\MAESTRO DE EQUIPOS V2.xlsx");
             XSSFWorkbook libro= new XSSFWorkbook(f);
             XSSFSheet hoja = libro.getSheetAt(0);
             int rows = hoja.getLastRowNum();

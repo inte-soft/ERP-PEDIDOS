@@ -30,110 +30,38 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jd_ventanaPrincipal = new javax.swing.JDesktopPane();
-        jPanel1 = new javax.swing.JPanel();
-        lb_Comercial = new javax.swing.JLabel();
-        lb_Ingenieria = new javax.swing.JLabel();
-        lb_Compras = new javax.swing.JLabel();
-        lb_Almacen = new javax.swing.JLabel();
-        lb_Reporte = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jmComercial = new javax.swing.JMenu();
+        jmIngenieria = new javax.swing.JMenu();
+        jmCompras = new javax.swing.JMenu();
+        jmAlmacen = new javax.swing.JMenu();
+        jmReportes = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jmAyuda = new javax.swing.JMenu();
+        jAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("IPA");
 
         javax.swing.GroupLayout jd_ventanaPrincipalLayout = new javax.swing.GroupLayout(jd_ventanaPrincipal);
         jd_ventanaPrincipal.setLayout(jd_ventanaPrincipalLayout);
         jd_ventanaPrincipalLayout.setHorizontalGroup(
             jd_ventanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1055, Short.MAX_VALUE)
+            .addGap(0, 1193, Short.MAX_VALUE)
         );
         jd_ventanaPrincipalLayout.setVerticalGroup(
             jd_ventanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
-        lb_Comercial.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lb_Comercial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/adquisitivo.png"))); // NOI18N
-        lb_Comercial.setText("Comercial");
-        lb_Comercial.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_ComercialMouseClicked(evt);
-            }
-        });
-
-        lb_Ingenieria.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lb_Ingenieria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/prototipo.png"))); // NOI18N
-        lb_Ingenieria.setText("Ingenieria");
-        lb_Ingenieria.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_IngenieriaMouseClicked(evt);
-            }
-        });
-
-        lb_Compras.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lb_Compras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bolsa-de-la-compra.png"))); // NOI18N
-        lb_Compras.setText("Compras");
-        lb_Compras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_ComprasMouseClicked(evt);
-            }
-        });
-
-        lb_Almacen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lb_Almacen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cepo.png"))); // NOI18N
-        lb_Almacen.setText("Almacen");
-        lb_Almacen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_AlmacenMouseClicked(evt);
-            }
-        });
-
-        lb_Reporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lb_Reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte-de-negocios.png"))); // NOI18N
-        lb_Reporte.setText("Reportes");
-        lb_Reporte.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_ReporteMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_Comercial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Ingenieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Compras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lb_Comercial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lb_Ingenieria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lb_Compras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lb_Almacen)
-                .addGap(12, 12, 12)
-                .addComponent(lb_Reporte)
-                .addContainerGap(248, Short.MAX_VALUE))
-        );
-
+        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/carpeta.png"))); // NOI18N
         jMenu1.setText("Archivo");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -146,6 +74,43 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jmComercial.setForeground(new java.awt.Color(0, 0, 0));
+        jmComercial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/adquisitivo (1).png"))); // NOI18N
+        jmComercial.setText("Comercial");
+        jMenuBar1.add(jmComercial);
+
+        jmIngenieria.setForeground(new java.awt.Color(0, 0, 0));
+        jmIngenieria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/prototipo (1).png"))); // NOI18N
+        jmIngenieria.setText("Ingenieria");
+        jmIngenieria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmIngenieriaMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jmIngenieria);
+
+        jmCompras.setForeground(new java.awt.Color(0, 0, 0));
+        jmCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/bolsa-de-la-compra (1).png"))); // NOI18N
+        jmCompras.setText("Compras");
+        jMenuBar1.add(jmCompras);
+
+        jmAlmacen.setForeground(new java.awt.Color(0, 0, 0));
+        jmAlmacen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/almacen.png"))); // NOI18N
+        jmAlmacen.setText("Almacen");
+        jmAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAlmacenMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jmAlmacen);
+
+        jmReportes.setForeground(new java.awt.Color(0, 0, 0));
+        jmReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/reporte-de-negocios (1).png"))); // NOI18N
+        jmReportes.setText("Reportes");
+        jMenuBar1.add(jmReportes);
+
+        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/panel-de-administrador.png"))); // NOI18N
         jMenu2.setText("Administrar");
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -154,6 +119,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu4.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/configuracion.png"))); // NOI18N
         jMenu4.setText("Configuracion");
 
         jMenuItem4.setText("Conectar BD");
@@ -161,12 +128,19 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setText("Ayuda");
+        jmAyuda.setForeground(new java.awt.Color(0, 0, 0));
+        jmAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenesNuevas/ayuda.png"))); // NOI18N
+        jmAyuda.setText("Ayuda");
+        jmAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAyudaMouseClicked(evt);
+            }
+        });
 
-        jMenuItem5.setText("Acerca de");
-        jMenu3.add(jMenuItem5);
+        jAyuda.setText("Acerca de");
+        jmAyuda.add(jAyuda);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jmAyuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -174,46 +148,37 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jd_ventanaPrincipal))
+            .addComponent(jd_ventanaPrincipal, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jd_ventanaPrincipal)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lb_ComercialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ComercialMouseClicked
-        
-    }//GEN-LAST:event_lb_ComercialMouseClicked
-
-    private void lb_IngenieriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_IngenieriaMouseClicked
-        //Creacion de objeto para llamar la actividad ventas
+    private void jmIngenieriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmIngenieriaMouseClicked
         Pedidos pedido = new Pedidos();
         jd_ventanaPrincipal.add(pedido);
         pedido.show();
-    }//GEN-LAST:event_lb_IngenieriaMouseClicked
+    }//GEN-LAST:event_jmIngenieriaMouseClicked
 
-    private void lb_ComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ComprasMouseClicked
-        
-    }//GEN-LAST:event_lb_ComprasMouseClicked
-
-    private void lb_AlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_AlmacenMouseClicked
-        //Creacion de objeto para llamar la actividad ventas
+    private void jmAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlmacenMouseClicked
         Almacen almacen = new Almacen();
         jd_ventanaPrincipal.add(almacen);
         almacen.show();
-    }//GEN-LAST:event_lb_AlmacenMouseClicked
+    }//GEN-LAST:event_jmAlmacenMouseClicked
 
-    private void lb_ReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ReporteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lb_ReporteMouseClicked
+    private void jmAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAyudaMouseClicked
+        Ayuda ayuda = new Ayuda();
+        jd_ventanaPrincipal.add(ayuda);
+        ayuda.show();
+    }//GEN-LAST:event_jmAyudaMouseClicked
 
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -250,22 +215,21 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jAyuda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JDesktopPane jd_ventanaPrincipal;
-    private javax.swing.JLabel lb_Almacen;
-    private javax.swing.JLabel lb_Comercial;
-    private javax.swing.JLabel lb_Compras;
-    private javax.swing.JLabel lb_Ingenieria;
-    private javax.swing.JLabel lb_Reporte;
+    private javax.swing.JMenu jmAlmacen;
+    private javax.swing.JMenu jmAyuda;
+    private javax.swing.JMenu jmComercial;
+    private javax.swing.JMenu jmCompras;
+    private javax.swing.JMenu jmIngenieria;
+    private javax.swing.JMenu jmReportes;
     // End of variables declaration//GEN-END:variables
 }
