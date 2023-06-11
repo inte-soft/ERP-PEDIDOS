@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles.dao;
 
 import com.inte_soft.gestionconsumibles.entity.Master;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,24 +30,38 @@ public class MasterDao {
         entityManagerFactory.close();
     }
 
-    public void testConnection() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        // Realiza una consulta de prueba
-        Master master = entityManager.find(Master.class, "00001");
-        System.out.println("ID: " + master.getCodigo());
-      
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public static void main(String[] args) {
-        MasterDao dao = new MasterDao();
-        dao.testConnection();
-        dao.close();
-    }
+   public List<Master> getAll(){
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       
+       List<Master> master = entityManager.createQuery
+        ("SELECT m FROM Master m", Master.class)
+               .getResultList();
+       
+       entityManager.getTransaction().commit();
+       entityManager.close();
+       return master;
+   }
+   
+   public void updateMaster(Master master){
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       
+       entityManager.merge(master);
+       
+       entityManager.getTransaction().commit();
+       entityManager.close();
+   }
+   
+   public void createMaster(Master master){
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       
+       entityManager.persist(master);
+       
+       entityManager.getTransaction().commit();
+       entityManager.close();
+   }
 }
     
 
