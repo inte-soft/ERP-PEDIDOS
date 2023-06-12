@@ -11,7 +11,7 @@ package com.inte_soft.gestionconsumibles.service;
 public interface MasterService {
     
     public void getAll();
-    public void updatemaster();
+    public void updatemaster(String string);
     public void createMaster(String string);
     
 }

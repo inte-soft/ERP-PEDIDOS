@@ -29,6 +29,15 @@ public class MasterDao {
     public void close() {
         entityManagerFactory.close();
     }
+    
+    public Master findById(String codigo){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       Master master = entityManager.find(Master.class, codigo);
+       entityManager.getTransaction().commit();
+       entityManager.close();
+       return master;
+    }
 
    public List<Master> getAll(){
        EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -43,14 +52,17 @@ public class MasterDao {
        return master;
    }
    
-   public void updateMaster(Master master){
+   public void merge(Master master){
        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       
        entityManager.getTransaction().begin();
        
        entityManager.merge(master);
        
        entityManager.getTransaction().commit();
+       
        entityManager.close();
+       
    }
    
    public void createMaster(Master master){
