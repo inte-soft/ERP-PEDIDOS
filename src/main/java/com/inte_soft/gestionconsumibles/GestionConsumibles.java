@@ -4,6 +4,8 @@
 
 package com.inte_soft.gestionconsumibles;
 
+import com.inte_soft.gestionconsumibles.serviceImplement.MasterServiceImplement;
+
 /**
  *
  * @author Inte-Soft
@@ -11,6 +13,8 @@ package com.inte_soft.gestionconsumibles;
 public class GestionConsumibles {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+      MasterServiceImplement masterServiceImplement = new MasterServiceImplement(); 
+      
+      masterServiceImplement.createMaster("C:\\Users\\alejo\\Downloads\\LISTADO MAESTRO 1.xlsx");
     }
 }

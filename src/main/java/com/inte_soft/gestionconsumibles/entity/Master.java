@@ -34,7 +34,9 @@ public class Master {
     public Master() {
     }
 
-    public Master(String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, String precio_lista, String fecha_actualizacion, String descuento_basico, String descuento_proyecto, String precio_descuento, String precio_descuento_proyecto, String precio_ultima_compra) {
+    public Master(String codigo, String descripcion, String tipo, String referencia, String marca, String unidad,
+            String precio_lista, String fecha_actualizacion, String descuento_basico, String descuento_proyecto,
+            String precio_descuento, String precio_descuento_proyecto, String precio_ultima_compra) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo = tipo;
