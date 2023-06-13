@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "master")
-public class Master {
+public class Master implements java.io.Serializable {
     
     @Id
     private String codigo;
