@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pedido_consumibles")
-public class Usuario implements java.io.Serializable {
+public class Usuarios implements java.io.Serializable {
     
     @Id
     private int idUsuario;
@@ -28,10 +28,10 @@ public class Usuario implements java.io.Serializable {
     private String apellido;
     private AreaCompañia areaCompañia;
 
-    public Usuario() {
+    public Usuarios() {
     }
 
-    public Usuario(int idUsuario, String usuario, String contraseña, String nombre, String apellido, AreaCompañia areaCompañia) {
+    public Usuarios(int idUsuario, String usuario, String contraseña, String nombre, String apellido, AreaCompañia areaCompañia) {
         this.idUsuario = idUsuario;
         this.usuario = usuario;
         this.contraseña = contraseña;

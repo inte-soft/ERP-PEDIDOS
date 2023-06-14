@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
 public class MasterDao {
     
     @PersistenceContext
-    final private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
     public MasterDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");

@@ -20,13 +20,13 @@ import javax.persistence.Table;
 public class Pedidos  implements java.io.Serializable{
     @Id
     private int idPedido;
-    private Usuario usuario;
+    private Usuarios usuario;
     private AreaCompañia areaCompañia;
 
     public Pedidos() {
     }
 
-    public Pedidos(int idPedido, Usuario usuario, AreaCompañia areaCompañia) {
+    public Pedidos(int idPedido, Usuarios usuario, AreaCompañia areaCompañia) {
         this.idPedido = idPedido;
         this.usuario = usuario;
         this.areaCompañia = areaCompañia;
@@ -41,11 +41,11 @@ public class Pedidos  implements java.io.Serializable{
     }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USUARIO")
-    public Usuario getUsuario() {
+    public Usuarios getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 

@@ -4,8 +4,11 @@
 
 package com.inte_soft.gestionconsumibles;
 
-import com.inte_soft.gestionconsumibles.serviceImplement.MasterServiceImplement;
-import static java.time.Clock.system;
+import com.inte_soft.gestionconsumibles.formularios.Login;
+import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -13,15 +16,24 @@ import static java.time.Clock.system;
  */
 public class GestionConsumibles {
 
-    public static void main(String[] args) {
-     /*MasterServiceImplement masterServiceImplement = new MasterServiceImplement(); 
-      
-      masterServiceImplement.createMaster("C:\\Users\\alejo\\Downloads\\LISTADO MAESTRO 1.xlsx");
     
-    MasterServiceImplement masterServiceImplement = new MasterServiceImplement(); 
-      
-      masterServiceImplement.updatemaster("C:\\Users\\alejo\\Downloads\\LISTADO MAESTRO 1.xlsx");
-    }*/
-    System.out.println("hola mundo");
-}
+    public static void main(String[] args) {
+        SplashScreen splash = new SplashScreen();
+        splash.setVisible(true);
+
+        try {
+            Thread.sleep(2000); // Pausa de 2 segundos (ajusta el tiempo según tus necesidades)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        splash.setVisible(false);
+
+        // Crear y mostrar la ventana principal de la aplicación
+        SwingUtilities.invokeLater(() -> {
+            JFrame loginFrame = new Login();
+            
+            loginFrame.setVisible(true);
+        });
+    }
 }
