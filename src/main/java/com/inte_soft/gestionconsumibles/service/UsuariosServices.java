@@ -4,12 +4,12 @@
  */
 package com.inte_soft.gestionconsumibles.service;
 
+import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
+
 /**
  *
  * @author alejo
  */
-public interface UsuariosService {
-    
-    
-    
+public interface UsuariosServices {
+    public String CreateUser(UsuariosDto usuariosDto);
 }

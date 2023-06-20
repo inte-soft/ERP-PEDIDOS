@@ -8,6 +8,7 @@ package com.inte_soft.gestionconsumibles.service;
  *
  * @author alejo
  */
+
 public interface MasterService {
     
     public void getAll();

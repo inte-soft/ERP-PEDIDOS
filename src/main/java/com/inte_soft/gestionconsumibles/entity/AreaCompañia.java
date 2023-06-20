@@ -31,7 +31,7 @@ public class AreaCompañia implements java.io.Serializable {
     
     @Id
     @Column(name = "ID_AREA")
-    public int getAreaCompañia() {
+    public int getAreaCompañia(int idAreaCompañia) {
         return areaCompañia;
     }
 
