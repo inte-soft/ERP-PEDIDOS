@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles;
 
 import com.inte_soft.gestionconsumibles.formularios.Login;
+import com.inte_soft.gestionconsumibles.formularios.Principal;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -19,6 +20,7 @@ public class GestionConsumibles {
     
     public static void main(String[] args) {
         SplashScreen splash = new SplashScreen();
+        Login login = new Login();
         splash.setVisible(true);
 
         try {
@@ -29,11 +31,14 @@ public class GestionConsumibles {
 
         splash.setVisible(false);
 
-        // Crear y mostrar la ventana principal de la aplicación
+        //Crear y mostrar la ventana principal de la aplicación
         SwingUtilities.invokeLater(() -> {
-            JFrame loginFrame = new Login();
-            
-            loginFrame.setVisible(true);
+            JFrame ventanaPrincipal = new Principal();
+            ventanaPrincipal.setVisible(true);
+           
+            ventanaPrincipal.add(login);
+            login.setVisible(true);
         });
+        
     }
 }
