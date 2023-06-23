@@ -4,6 +4,7 @@
 
 package com.inte_soft.gestionconsumibles;
 
+
 import com.inte_soft.gestionconsumibles.formularios.Login;
 import com.inte_soft.gestionconsumibles.formularios.Principal;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
@@ -33,12 +34,9 @@ public class GestionConsumibles {
 
         //Crear y mostrar la ventana principal de la aplicación
         SwingUtilities.invokeLater(() -> {
-            JFrame ventanaPrincipal = new Principal();
-            ventanaPrincipal.setVisible(true);
-           
-            ventanaPrincipal.add(login);
+            
             login.setVisible(true);
-        });
-        
+                       
+        });       
     }
 }

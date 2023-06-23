@@ -4,17 +4,23 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+
 /**
  *
- * @author alejo
+ * @author Inte-Soft
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -26,19 +32,33 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        jPopupMenu3 = new javax.swing.JPopupMenu();
-        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmLogin = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Administrar");
-        jMenuBar1.add(jMenu1);
+        jmLogin.setText("Archivo");
+        jmLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmLoginMouseClicked(evt);
+            }
+        });
 
-        jMenu2.setText("Ayuda");
+        jMenuItem1.setText("Gestionar Usuarios");
+        jmLogin.add(jMenuItem1);
+
+        jMenuBar1.add(jmLogin);
+
+        jMenu3.setText("Ingenieria");
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Almacen");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -47,15 +67,20 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1193, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    private void jmLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmLoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -95,9 +120,9 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JPopupMenu jPopupMenu3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jmLogin;
     // End of variables declaration//GEN-END:variables
 }
