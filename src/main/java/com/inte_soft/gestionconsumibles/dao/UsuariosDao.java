@@ -33,7 +33,7 @@ public class UsuariosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<Usuarios> usuariosList = entityManager
-                .createQuery("SELECT u FROM u",Usuarios.class)
+                .createQuery("SELECT u FROM Usuarios u",Usuarios.class)
                 .getResultList();
         
         entityManager.getTransaction().commit();

@@ -5,7 +5,10 @@
 package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
+import java.awt.event.KeyEvent;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -56,6 +59,11 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyReleased(evt);
             }
         });
 
@@ -147,15 +155,21 @@ public class Login extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         usuariosController = new UsuariosController();
         if(usuariosController.login(txtUsuario.getText(),jPasswordField1.getText())){
-             Principal principal = new Principal();
+            Principal principal = new Principal();
             principal.setVisible(true);
-            Login login = new Login();
-            login.setVisible(false);
+            this.dispose();
+            
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
        
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        jButton1MouseClicked(null);
+    }
+    }//GEN-LAST:event_txtUsuarioKeyReleased
 
     /**
      * @param args the command line arguments

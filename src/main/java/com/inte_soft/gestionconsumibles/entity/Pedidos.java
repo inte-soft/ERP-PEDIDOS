@@ -21,12 +21,12 @@ public class Pedidos  implements java.io.Serializable{
     @Id
     private int idPedido;
     private Usuarios usuario;
-    private AreaCompañia areaCompañia;
+    private AreaCompania areaCompañia;
 
     public Pedidos() {
     }
 
-    public Pedidos(int idPedido, Usuarios usuario, AreaCompañia areaCompañia) {
+    public Pedidos(int idPedido, Usuarios usuario, AreaCompania areaCompañia) {
         this.idPedido = idPedido;
         this.usuario = usuario;
         this.areaCompañia = areaCompañia;
@@ -49,11 +49,11 @@ public class Pedidos  implements java.io.Serializable{
         this.usuario = usuario;
     }
 
-    public AreaCompañia getAreaCompañia() {
+    public AreaCompania getAreaCompañia() {
         return areaCompañia;
     }
 
-    public void setAreaCompañia(AreaCompañia areaCompañia) {
+    public void setAreaCompañia(AreaCompania areaCompañia) {
         this.areaCompañia = areaCompañia;
     }
     

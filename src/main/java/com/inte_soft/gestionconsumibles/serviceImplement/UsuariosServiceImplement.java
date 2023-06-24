@@ -32,7 +32,7 @@ public class UsuariosServiceImplement implements UsuariosServices{
         usuarios.setContraseña(usuariosDto.getContraseña());
         usuarios.setNombres(usuariosDto.getNombre());
         usuarios.setApellidos(usuariosDto.getContraseña());
-        usuarios.setAreaCompañia(areaCompañiaDao.getById(usuariosDto.getIdAreaCompañia()));
+        usuarios.setAreaCompania(areaCompañiaDao.getById(usuariosDto.getIdAreaCompañia()));
         usuarios.setIdUsuario(usuariosDto.getIdUsuario());
         
         usuariosDao = new UsuariosDao();
@@ -62,7 +62,7 @@ public class UsuariosServiceImplement implements UsuariosServices{
             usuariosDto.setContraseña(user.getContraseña());
             usuariosDto.setNombre(user.getNombres());
             usuariosDto.setApellido(user.getApellidos());
-            usuariosDto.setIdAreaCompañia(user.getAreaCompañia().getNombreArea());
+            usuariosDto.setIdAreaCompañia(user.getAreaCompania().getNombreArea());
             usuariosDto.setpAlmacen(user.getpAlmacen());
             usuariosDto.setpIngenieria(user.getpIngenieria());
             usuariosDto.setpAdminUser(user.getpAdminUser());

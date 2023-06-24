@@ -4,7 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.dao;
 
-import com.inte_soft.gestionconsumibles.entity.AreaCompañia;
+import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,11 +27,11 @@ public class AreaCompañiaDao {
         entityManagerFactory.close();
     }
     
-    public AreaCompañia getById(String idArea){
+    public AreaCompania getById(String idArea){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        AreaCompañia areaCompañia = entityManager
-                .find(AreaCompañia.class, "idArea");
+        AreaCompania areaCompañia = entityManager
+                .find(AreaCompania.class, "idArea");
         entityManager.getTransaction().commit();
         entityManager.close();
         return areaCompañia;

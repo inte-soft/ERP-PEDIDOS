@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -13,14 +14,17 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
     
-    
+    private JDesktopPane escritorio;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        escritorio = new JDesktopPane();
+        this.setContentPane(escritorio);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -44,13 +48,13 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jmLogin.setText("Archivo");
-        jmLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmLoginMouseClicked(evt);
-            }
-        });
 
         jMenuItem1.setText("Gestionar Usuarios");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jmLogin.add(jMenuItem1);
 
         jMenuBar1.add(jmLogin);
@@ -77,11 +81,16 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void jmLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmLoginMouseClicked
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        GestionUsuarios gestionUsuarios = new GestionUsuarios();
+        escritorio.add(gestionUsuarios);
+        gestionUsuarios.setVisible(true);
+        gestionUsuarios.loadUserData();
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -115,6 +124,11 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+    }
+     private void maximizeFrame() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setLocationRelativeTo(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

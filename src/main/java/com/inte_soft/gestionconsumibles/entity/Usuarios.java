@@ -26,7 +26,7 @@ public class Usuarios implements java.io.Serializable {
     private String contraseña;
     private String nombres;
     private String apellidos;
-    private AreaCompañia areaCompañia;
+    private AreaCompania areaCompania;
     private boolean pAlmacen;
     private boolean pIngenieria;
     private boolean pAdminUser;
@@ -39,12 +39,12 @@ public class Usuarios implements java.io.Serializable {
     public Usuarios() {
     }
 
-    public Usuarios(String usuario, String contraseña, String nombre, String apellido, AreaCompañia areaCompañia, boolean pAlmacen, boolean pIngenieria, boolean pAdminUser, boolean pCompras, boolean pComercial, boolean pProduccion) {
+    public Usuarios(String usuario, String contraseña, String nombre, String apellido, AreaCompania areaCompañia, boolean pAlmacen, boolean pIngenieria, boolean pAdminUser, boolean pCompras, boolean pComercial, boolean pProduccion) {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.nombres = nombre;
         this.apellidos = apellido;
-        this.areaCompañia = areaCompañia;
+        this.areaCompania = areaCompañia;
         this.pAlmacen = pAlmacen;
         this.pIngenieria = pIngenieria;
         this.pAdminUser = pAdminUser;
@@ -128,15 +128,15 @@ public class Usuarios implements java.io.Serializable {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_AREA")
-    public AreaCompañia getAreaCompañia() {
-        return areaCompañia;
+    public AreaCompania getAreaCompania() {
+        return areaCompania;
     }
 
     @Column(name = "ID_AREA")
-    public void setAreaCompañia(AreaCompañia areaCompañia) {
-        this.areaCompañia = areaCompañia;
+    public void setAreaCompania(AreaCompania areaCompania) {
+        this.areaCompania = areaCompania;
     }
  
     @Column(name = "P_COMPRAS")

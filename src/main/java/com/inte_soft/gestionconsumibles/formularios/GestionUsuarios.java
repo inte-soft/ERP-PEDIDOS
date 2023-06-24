@@ -14,13 +14,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author alejo
  */
-public class GestionUsuarios extends javax.swing.JFrame {
+public class GestionUsuarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionUsuarios
      */
     public GestionUsuarios() {
+        
         initComponents();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,18 +36,18 @@ public class GestionUsuarios extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableUser = new javax.swing.JTable();
+        butonAddUser = new javax.swing.JButton();
+        butonDeleteUser = new javax.swing.JButton();
+        butonModifyUser = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tableUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nombres", "Apellidos", "Area", "Almacen", "Ingenieria", "Admin User", "Compras", "Comercial", "Produccion"
@@ -60,10 +63,31 @@ public class GestionUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableUser);
 
+        butonAddUser.setText("Agregar");
+        butonAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butonAddUserMouseClicked(evt);
+            }
+        });
+        butonAddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butonAddUserActionPerformed(evt);
+            }
+        });
+
+        butonDeleteUser.setText("Eliminar");
+
+        butonModifyUser.setText("Modificar");
+
         jMenu1.setText("Menu");
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -73,20 +97,50 @@ public class GestionUsuarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(butonAddUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(butonModifyUser)
+                        .addGap(14, 14, 14)
+                        .addComponent(butonDeleteUser)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butonAddUser)
+                    .addComponent(butonDeleteUser)
+                    .addComponent(butonModifyUser))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void butonAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonAddUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butonAddUserActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void butonAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butonAddUserMouseClicked
+        User user = new User();
+        user.setModal(true);
+        user.setVisible(true);
+    }//GEN-LAST:event_butonAddUserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,13 +172,14 @@ public class GestionUsuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionUsuarios().setVisible(true); 
-                new GestionUsuarios().loadUserData();
+                GestionUsuarios gestionUsuarios = new GestionUsuarios();
+                gestionUsuarios.setVisible(true); 
+                gestionUsuarios.loadUserData();
             }
         });
         
     }
-    private void loadUserData(){        
+    public void loadUserData(){        
                 DefaultTableModel model =  (DefaultTableModel) tableUser.getModel();
                 UsuariosController usuariosController = new UsuariosController();
                 List<UsuariosDto> listUsuariosDto = usuariosController.getAllUser();
@@ -145,6 +200,9 @@ public class GestionUsuarios extends javax.swing.JFrame {
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butonAddUser;
+    private javax.swing.JButton butonDeleteUser;
+    private javax.swing.JButton butonModifyUser;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
