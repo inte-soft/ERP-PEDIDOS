@@ -4,12 +4,16 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.UsuariosController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Inte-Soft
  */
 public class Login extends javax.swing.JFrame {
-
+    private UsuariosController usuariosController;
+    
     /**
      * Creates new form Login
      */
@@ -141,11 +145,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        Login login = new Login();
-        login.setVisible(false);
+        usuariosController = new UsuariosController();
+        if(usuariosController.login(txtUsuario.toString(),jPasswordField1.toString())){
+             Principal principal = new Principal();
+            principal.setVisible(true);
+            Login login = new Login();
+            login.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+       
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**

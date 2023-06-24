@@ -5,11 +5,13 @@
 package com.inte_soft.gestionconsumibles.service;
 
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 
 /**
  *
  * @author alejo
  */
 public interface UsuariosServices {
-    public String CreateUser(UsuariosDto usuariosDto);
+    public String createUser(UsuariosDto usuariosDto);
+    public Usuarios getPassword(String user);
 }

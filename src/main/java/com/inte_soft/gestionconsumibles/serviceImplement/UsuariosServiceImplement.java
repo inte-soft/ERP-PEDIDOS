@@ -21,8 +21,8 @@ public class UsuariosServiceImplement implements UsuariosServices{
     private UsuariosDao usuariosDao;
     
     @Override
-    public String CreateUser(UsuariosDto usuariosDto) {
-     Usuarios usuarios = new Usuarios();
+    public String createUser(UsuariosDto usuariosDto) {
+        Usuarios usuarios = new Usuarios();
         AreaCompañiaDao areaCompañiaDao = new AreaCompañiaDao();
         usuarios.setIdUsuario(usuariosDto.getIdUsuario());
         usuarios.setUsuario(usuariosDto.getUsuario());
@@ -36,5 +36,15 @@ public class UsuariosServiceImplement implements UsuariosServices{
         usuariosDao.crate(usuarios);
         return "user create succeful";
        
-     }
+    }
+
+    @Override
+    public Usuarios getPassword(String user) {
+     usuariosDao = new UsuariosDao();
+     Usuarios usuarios = usuariosDao.getByUser(user);
+     
+     return usuarios;
+    }
+    
+    
 }
