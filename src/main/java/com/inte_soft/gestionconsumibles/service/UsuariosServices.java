@@ -6,12 +6,15 @@ package com.inte_soft.gestionconsumibles.service;
 
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import java.util.List;
 
 /**
  *
  * @author alejo
  */
+
 public interface UsuariosServices {
     public String createUser(UsuariosDto usuariosDto);
     public Usuarios getPassword(String user);
+    public List<UsuariosDto> getAllUsers();
 }

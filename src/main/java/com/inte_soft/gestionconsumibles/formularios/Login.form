@@ -53,7 +53,7 @@
                       <Component id="txtUsuario" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,6 +153,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\alejo\OneDrive\Documents\NetBeansProjects\gestion-consumibles-main\src\main\java\com\inte_soft\gestionconsumibles\formularios\imagenes\login\usuario.png"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

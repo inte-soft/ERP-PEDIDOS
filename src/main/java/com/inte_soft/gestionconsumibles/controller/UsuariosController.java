@@ -4,8 +4,12 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
+
+import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
+import java.util.List;
+import com.inte_soft.gestionconsumibles.serviceImplement.UsuariosServiceImplement;
 
 /**
  *
@@ -14,6 +18,10 @@ import com.inte_soft.gestionconsumibles.service.UsuariosServices;
 public class UsuariosController {
     
    private UsuariosServices usuariosServices;
+   
+   public UsuariosController() {
+       usuariosServices = new UsuariosServiceImplement();
+   }
    
    public boolean login(String user, String password){
        Usuarios usuario = usuariosServices.getPassword(user);
@@ -24,7 +32,7 @@ public class UsuariosController {
        return ingreso;
    }
    
-   public void getAllUser(){
-       
+   public List<UsuariosDto> getAllUser(){
+        return  usuariosServices.getAllUsers();
    }
 }

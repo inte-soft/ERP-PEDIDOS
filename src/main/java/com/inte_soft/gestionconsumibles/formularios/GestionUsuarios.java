@@ -4,12 +4,17 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.UsuariosController;
+import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author alejo
  */
 public class GestionUsuarios extends javax.swing.JFrame {
-
     /**
      * Creates new form GestionUsuarios
      */
@@ -27,25 +32,33 @@ public class GestionUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableUser = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombres", "Apellidos", "Area"
+                "Nombres", "Apellidos", "Area", "Almacen", "Ingenieria", "Admin User", "Compras", "Comercial", "Produccion"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableUser);
 
         jMenu1.setText("Menu");
         jMenuBar1.add(jMenu1);
@@ -60,16 +73,16 @@ public class GestionUsuarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,16 +118,37 @@ public class GestionUsuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionUsuarios().setVisible(true);
+                new GestionUsuarios().setVisible(true); 
+                new GestionUsuarios().loadUserData();
             }
         });
+        
     }
+    private void loadUserData(){        
+                DefaultTableModel model =  (DefaultTableModel) tableUser.getModel();
+                UsuariosController usuariosController = new UsuariosController();
+                List<UsuariosDto> listUsuariosDto = usuariosController.getAllUser();
+                for(UsuariosDto usuarios: listUsuariosDto ){
+                    Object[] rowData = {
+                        usuarios.getNombre(),
+                        usuarios.getApellido(),
+                        usuarios.getIdAreaCompañia(),
+                        usuarios.getpAlmacen(),
+                        usuarios.getpIngenieria(),
+                        usuarios.getpAdminUser(),
+                        usuarios.getpCompras(),
+                        usuarios.getpComercial(),
+                        usuarios.getpProduccion()
+                    };
+                    model.addRow(rowData);
+                }
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableUser;
     // End of variables declaration//GEN-END:variables
 }
