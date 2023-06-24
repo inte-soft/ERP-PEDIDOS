@@ -17,39 +17,56 @@ import javax.persistence.Table;
  * @author alejo
  */
 @Entity
-@Table(name = "pedido_consumibles")
+@Table(name = "usuarios")
 public class Usuarios implements java.io.Serializable {
     
     @Id
     private int idUsuario;
     private String usuario;
     private String contraseña;
-    private String nombre;
-    private String apellido;
+    private String nombres;
+    private String apellidos;
     private AreaCompañia areaCompañia;
+    private boolean pAlmacen;
+    private boolean pIngenieria;
+    private boolean pAdminUser;
+    private boolean pCompras;
+    private boolean pComercial;
+    private boolean pProduccion;
+    
+    
 
     public Usuarios() {
     }
 
-    public Usuarios(int idUsuario, String usuario, String contraseña, String nombre, String apellido, AreaCompañia areaCompañia) {
-        this.idUsuario = idUsuario;
+    public Usuarios(String usuario, String contraseña, String nombre, String apellido, AreaCompañia areaCompañia, boolean pAlmacen, boolean pIngenieria, boolean pAdminUser, boolean pCompras, boolean pComercial, boolean pProduccion) {
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombres = nombre;
+        this.apellidos = apellido;
         this.areaCompañia = areaCompañia;
+        this.pAlmacen = pAlmacen;
+        this.pIngenieria = pIngenieria;
+        this.pAdminUser = pAdminUser;
+        this.pCompras = pCompras;
+        this.pComercial = pComercial;
+        this.pProduccion = pProduccion;
     }
+
+    
     
     @Id
     @Column(name = "ID_USUARIO")
     public int getIdUsuario() {
         return idUsuario;
     }
-
+    
+    
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
+    @Column(name = "USUARIO")
     public String getUsuario() {
         return usuario;
     }
@@ -57,29 +74,59 @@ public class Usuarios implements java.io.Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+    
+    @Column(name = "P_ALMACEN")
+    public void setpAlmacen(boolean pAlmacen) {
+        this.pAlmacen = pAlmacen;
+    }
+    
+    @Column(name = "P_INGENIERIA")
+    public void setpIngenieria(boolean pIngenieria) {
+        this.pIngenieria = pIngenieria;
+    }
 
+    @Column(name = "P_ADMIN_USER")
+    public void setpAdminUser(boolean pAdminUser) {
+        this.pAdminUser = pAdminUser;
+    }
+
+    @Column(name = "P_COMERCIAL")
+    public void setpComercial(boolean pComercial) {
+        this.pComercial = pComercial;
+    }
+
+    @Column(name = "P_PRODUCCION")
+    public void setpProduccion(boolean pProduccion) {
+        this.pProduccion = pProduccion;
+    }
+    
+    @Column(name = "CONTRASEÑA")
     public String getContraseña() {
         return contraseña;
     }
 
+    @Column(name = "CONTRASEÑA")
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
-    public String getNombre() {
-        return nombre;
+    @Column(name = "NOMBRES")
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    @Column(name = "NOMBRES")
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+    @Column(name = "APELLIDOS")
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    @Column(name = "APELLIDOS")
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_AREA")
@@ -87,9 +134,45 @@ public class Usuarios implements java.io.Serializable {
         return areaCompañia;
     }
 
+    @Column(name = "ID_AREA")
     public void setAreaCompañia(AreaCompañia areaCompañia) {
         this.areaCompañia = areaCompañia;
     }
+ 
+    @Column(name = "P_COMPRAS")
+    public void setpCompras(boolean pCompras) {
+        this.pCompras = pCompras;
+    }
+
+    @Column(name = "P_ALMACEN")
+    public boolean getpAlmacen() {
+        return pAlmacen;
+    }
+
+    @Column(name = "P_INGENIERIA")
+    public boolean getpIngenieria() {
+        return pIngenieria;
+    }
+    @Column(name = "P_ADMIN_USER")
+    public boolean getpAdminUser() {
+        return pAdminUser;
+    }
+
+    @Column(name = "P_COMERCIAL")
+    public boolean getpComercial() {
+        return pComercial;
+    }
+
+    @Column(name = "P_PRODUCCION")
+    public boolean getpProduccion() {
+        return pProduccion;
+    }
+    @Column(name = "P_COMPRAS")
+    public boolean getpCompras() {
+        return pCompras;
+    }
+
+    
     
     
 }

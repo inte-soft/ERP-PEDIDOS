@@ -20,7 +20,7 @@ public class UsuariosDao {
     private EntityManagerFactory entityManagerFactory;
     
     public UsuariosDao (){
-        entityManagerFactory = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
     
     public void close(){
@@ -55,8 +55,8 @@ public class UsuariosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Usuarios usuario = entityManager
-                .createQuery("SELECT u FROM u WHERE u.usuario = :user", Usuarios.class)
-                .setParameter("usuario", user)
+                .createQuery("SELECT u FROM Usuarios u WHERE u.usuario = :user", Usuarios.class)
+                .setParameter("user", user)
                 .getSingleResult();
         entityManager.getTransaction().commit();
         entityManager.close();

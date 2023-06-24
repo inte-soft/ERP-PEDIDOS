@@ -77,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Salir");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usuario.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\alejo\\OneDrive\\Documents\\NetBeansProjects\\gestion-consumibles-main\\src\\main\\java\\com\\inte_soft\\gestionconsumibles\\formularios\\imagenes\\login\\usuario.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +105,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +146,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         usuariosController = new UsuariosController();
-        if(usuariosController.login(txtUsuario.toString(),jPasswordField1.toString())){
+        if(usuariosController.login(txtUsuario.getText(),jPasswordField1.getText())){
              Principal principal = new Principal();
             principal.setVisible(true);
             Login login = new Login();
