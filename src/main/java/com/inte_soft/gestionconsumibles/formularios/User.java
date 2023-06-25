@@ -8,7 +8,9 @@ import com.inte_soft.gestionconsumibles.controller.AreaCompaniaController;
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.AdvertenciaModal;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -89,7 +91,7 @@ public class User extends javax.swing.JDialog {
         pCompras = new javax.swing.JCheckBox();
         pComercial = new javax.swing.JCheckBox();
         pProduccion = new javax.swing.JCheckBox();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        ejecutar = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         password = new javax.swing.JPasswordField();
 
@@ -118,14 +120,19 @@ public class User extends javax.swing.JDialog {
 
         jLabel11.setText("Permiso Produccion");
 
-        jToggleButton1.setText("Guardar");
-        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        ejecutar.setText("Guardar");
+        ejecutar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jToggleButton1MouseReleased(evt);
+                ejecutarMouseReleased(evt);
             }
         });
 
         jToggleButton2.setText("Salir");
+        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,7 +142,7 @@ public class User extends javax.swing.JDialog {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton1)
+                        .addComponent(ejecutar)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -217,7 +224,7 @@ public class User extends javax.swing.JDialog {
                     .addComponent(pProduccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
+                    .addComponent(ejecutar)
                     .addComponent(jToggleButton2))
                 .addContainerGap())
         );
@@ -225,7 +232,7 @@ public class User extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseReleased
+    private void ejecutarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ejecutarMouseReleased
         UsuariosController usuariosController = new UsuariosController();
         UsuariosDto usuariosDto = new UsuariosDto();
         
@@ -243,24 +250,31 @@ public class User extends javax.swing.JDialog {
         usuariosDto.setpCompras(this.pCompras.isSelected());
         usuariosDto.setpProduccion(this.pProduccion.isSelected());
         if (!modifyFlag){
-            usuariosController.createUser(usuariosDto);
+            usuariosController.createUser(usuariosDto,this);
+            this.dispose();
         }else{
             usuariosDto.setIdUsuario(this.id);
-            usuariosController.modifyUser(usuariosDto);
+            usuariosController.modifyUser(usuariosDto, this);
+            this.dispose();
         }
         
         }else{
-            JOptionPane.getRootFrame().setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(null, "Tiene campos pendientes por diligenciar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            
+            AdvertenciaModal advertenciaModal = new AdvertenciaModal();
+            advertenciaModal.advertenciaModal(this,"Tiene campos pendientes por diligenciar", "Advertencia");
+            
            
         }
-        this.dispose();
+        
         gestionUsuarios.loadUserData();
         
-        
-        
-        
-    }//GEN-LAST:event_jToggleButton1MouseReleased
+    }//GEN-LAST:event_ejecutarMouseReleased
+
+    
+    
+    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+         System.exit(0);
+    }//GEN-LAST:event_jToggleButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,9 +318,11 @@ public class User extends javax.swing.JDialog {
             this.areas.addItem(area);
         }
     }
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> areas;
+    private javax.swing.JToggleButton ejecutar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -318,7 +334,6 @@ public class User extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JTextField lastName;
     private javax.swing.JTextField name;

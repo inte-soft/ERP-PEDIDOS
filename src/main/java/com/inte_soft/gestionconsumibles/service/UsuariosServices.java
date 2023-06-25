@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles.service;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.util.List;
+import javax.swing.JDialog;
 
 /**
  *
@@ -14,13 +15,13 @@ import java.util.List;
  */
 
 public interface UsuariosServices {
-    public boolean validateUser (String User);
-    public void createUser(UsuariosDto usuariosDto);
+    public boolean validateUser (String User, JDialog modal);
+    public void createUser(UsuariosDto usuariosDto, JDialog modal);
     public Usuarios getPassword(String user);
     public List<UsuariosDto> getAllUsers();
     public Usuarios getById(int user);
 
-    public void modifyUser(UsuariosDto usuariosDto);
+    public void modifyUser(UsuariosDto usuariosDto, JDialog modal);
 
     public void deleteUser(int id);
 }

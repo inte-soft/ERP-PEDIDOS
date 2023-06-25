@@ -8,11 +8,12 @@ import com.inte_soft.gestionconsumibles.dao.AreaCompaniaDao;
 import com.inte_soft.gestionconsumibles.dao.UsuariosDao;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
-import com.inte_soft.gestionconsumibles.formularios.User;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
+import com.inte_soft.gestionconsumibles.util.AdvertenciaModal;
+import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 
@@ -27,7 +28,7 @@ public class UsuariosServiceImplement implements UsuariosServices{
     private UsuariosDto usuariosDto;
     
     @Override
-    public void createUser(UsuariosDto usuariosDto) {
+    public void createUser(UsuariosDto usuariosDto, JDialog modal) {
         AreaCompaniaDao areaCompaniaDao = new AreaCompaniaDao();
         Usuarios usuarios = new Usuarios();
         
@@ -50,9 +51,9 @@ public class UsuariosServiceImplement implements UsuariosServices{
             usuariosDao.create(usuarios);
         }catch(Exception e){
            
-             e.printStackTrace(); // Imprime la traza de la excepción en la consola
-            JOptionPane.showMessageDialog(null, "Error al crear el usuario. Consulta la consola para obtener más detalles.", "Error", JOptionPane.ERROR_MESSAGE);
-            
+            e.printStackTrace();
+            AdvertenciaModal advertenciaModal = new AdvertenciaModal();
+            advertenciaModal.advertenciaModal(modal,"Error al crear el usuario. Consulta la consola para obtener más detalles", "Error");
             
         }
         
@@ -97,7 +98,7 @@ public class UsuariosServiceImplement implements UsuariosServices{
     }
 
     @Override
-    public boolean validateUser(String user) {
+    public boolean validateUser(String user, JDialog modal) {
         usuariosDao = new UsuariosDao();
         List<Usuarios> usuariosList = usuariosDao.getAll();
         for(Usuarios usuarios : usuariosList){
@@ -119,7 +120,7 @@ public class UsuariosServiceImplement implements UsuariosServices{
     }
 
     @Override
-    public void modifyUser(UsuariosDto usuariosDto) {
+    public void modifyUser(UsuariosDto usuariosDto, JDialog modal) {
         AreaCompaniaDao areaCompaniaDao = new AreaCompaniaDao();
         Usuarios usuarios = new Usuarios();
         try{
@@ -141,8 +142,9 @@ public class UsuariosServiceImplement implements UsuariosServices{
             usuariosDao = new UsuariosDao();
             usuariosDao.update(usuarios);
         }catch(Exception e){
-           
-            JOptionPane.showMessageDialog(null, e, "Advertencia", JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+            AdvertenciaModal advertenciaModal = new AdvertenciaModal();
+            advertenciaModal.advertenciaModal(modal,"No se puede modificar el usuario", "Error");;
             
             
         }

@@ -163,6 +163,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        char[] password = this.jPasswordField1.getPassword();
+        if(this.txtUsuario.getText().isEmpty() || password.length == 0){
+            JOptionPane.showMessageDialog(null, "Introduzca usuario y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }else{
         usuariosController = new UsuariosController();
         if(usuariosController.login(txtUsuario.getText(),jPasswordField1.getText())){
             Principal principal = new Principal();
@@ -171,6 +175,7 @@ public class Login extends javax.swing.JFrame {
             
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
         }
        
     }//GEN-LAST:event_jButton1MouseClicked

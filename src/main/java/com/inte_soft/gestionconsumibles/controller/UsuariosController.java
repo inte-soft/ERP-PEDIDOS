@@ -10,7 +10,8 @@ import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
 import java.util.List;
 import com.inte_soft.gestionconsumibles.serviceImplement.UsuariosServiceImplement;
-import javax.swing.JOptionPane;
+import com.inte_soft.gestionconsumibles.util.AdvertenciaModal;
+import javax.swing.JDialog;
 
 /**
  *
@@ -36,11 +37,14 @@ public class UsuariosController {
    public List<UsuariosDto> getAllUser(){
         return  usuariosServices.getAllUsers();
    }
-   public void createUser(UsuariosDto usuario){
-       if (!usuariosServices.validateUser(usuario.getUsuario().toString())){
-           usuariosServices.createUser(usuario);
+   public void createUser(UsuariosDto usuario, JDialog modal){
+       
+       if (!usuariosServices.validateUser(usuario.getUsuario().toString(), modal)){
+           usuariosServices.createUser(usuario, modal);
        }else{
-           JOptionPane.showMessageDialog(null, "Usuario ya existe", "Advertencia", JOptionPane.WARNING_MESSAGE);
+           AdvertenciaModal advertenciaModal = new AdvertenciaModal();
+           advertenciaModal.advertenciaModal(modal,"Usuario ya existe", "Advertencia");
+           
        }
        
    }
@@ -49,8 +53,8 @@ public class UsuariosController {
         return usuariosServices.getById( id);
     }
 
-    public void modifyUser(UsuariosDto usuariosDto) {
-        usuariosServices.modifyUser(usuariosDto);
+    public void modifyUser(UsuariosDto usuariosDto, JDialog modal) {
+        usuariosServices.modifyUser(usuariosDto,  modal);
     }
 
     public void deleteUser(int id) {
