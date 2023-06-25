@@ -82,14 +82,16 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.openGestionUsuarios();
         
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
         gestionUsuarios.setVisible(true);
         gestionUsuarios.loadUserData();
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    }
     
     /**
      * @param args the command line arguments
@@ -140,3 +142,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jmLogin;
     // End of variables declaration//GEN-END:variables
 }
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
@@ -20,13 +20,9 @@
       </SubComponents>
     </Menu>
   </NonVisualComponents>
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
-  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -89,21 +85,22 @@
         <Component class="javax.swing.JTable" name="tableUser">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="0">
-                <Column editable="true" title="Nombres" type="java.lang.Object"/>
-                <Column editable="true" title="Apellidos" type="java.lang.Object"/>
-                <Column editable="true" title="Area" type="java.lang.Object"/>
-                <Column editable="true" title="Almacen" type="java.lang.Boolean"/>
-                <Column editable="true" title="Ingenieria" type="java.lang.Boolean"/>
-                <Column editable="true" title="Admin User" type="java.lang.Boolean"/>
-                <Column editable="true" title="Compras" type="java.lang.Boolean"/>
-                <Column editable="true" title="Comercial" type="java.lang.Boolean"/>
-                <Column editable="true" title="Produccion" type="java.lang.Boolean"/>
+              <Table columnCount="10" rowCount="0">
+                <Column editable="false" title="Id" type="java.lang.Object"/>
+                <Column editable="false" title="Nombres" type="java.lang.Object"/>
+                <Column editable="false" title="Apellidos" type="java.lang.Object"/>
+                <Column editable="false" title="Area" type="java.lang.Object"/>
+                <Column editable="false" title="Almacen" type="java.lang.Boolean"/>
+                <Column editable="false" title="Ingenieria" type="java.lang.Boolean"/>
+                <Column editable="false" title="Admin User" type="java.lang.Boolean"/>
+                <Column editable="false" title="Compras" type="java.lang.Boolean"/>
+                <Column editable="false" title="Comercial" type="java.lang.Boolean"/>
+                <Column editable="false" title="Produccion" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="0" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -144,6 +141,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -170,11 +172,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butonDeleteUserMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="butonModifyUser">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butonModifyUserMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

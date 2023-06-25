@@ -6,6 +6,8 @@ package com.inte_soft.gestionconsumibles.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,22 +20,23 @@ import javax.persistence.Table;
 public class AreaCompania implements java.io.Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_AREA")
-    private int idArea;
+    private Integer idArea;
     @Column(name = "NOMBRE_AREA")
     private String nombreArea;
 
     public AreaCompania() {
     }
 
-    public AreaCompania(int areaCompañia, String nombreArea) {
-        this.idArea = areaCompañia;
+    public AreaCompania(int areaCompania, String nombreArea) {
+        this.idArea = areaCompania;
         this.nombreArea = nombreArea;
     }
     
     @Id
     @Column(name = "ID_AREA")
-    public int getAreaCompañia(int idAreaCompañia) {
+    public Integer getAreaCompania() {
         return idArea;
     }
 
@@ -42,7 +45,7 @@ public class AreaCompania implements java.io.Serializable {
         return nombreArea;
     }
     @Column(name = "ID_AREA")
-    public void setIdArea(int idArea) {
+    public void setAreaCompania(Integer idArea) {
         this.idArea = idArea;
     }
     @Column(name = "NOMBRE_AREA")

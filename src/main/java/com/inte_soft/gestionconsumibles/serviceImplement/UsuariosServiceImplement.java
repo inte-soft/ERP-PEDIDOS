@@ -4,13 +4,16 @@
  */
 package com.inte_soft.gestionconsumibles.serviceImplement;
 
-import com.inte_soft.gestionconsumibles.dao.AreaCompañiaDao;
+import com.inte_soft.gestionconsumibles.dao.AreaCompaniaDao;
 import com.inte_soft.gestionconsumibles.dao.UsuariosDao;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.formularios.User;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -24,20 +27,37 @@ public class UsuariosServiceImplement implements UsuariosServices{
     private UsuariosDto usuariosDto;
     
     @Override
-    public String createUser(UsuariosDto usuariosDto) {
+    public void createUser(UsuariosDto usuariosDto) {
+        AreaCompaniaDao areaCompaniaDao = new AreaCompaniaDao();
         Usuarios usuarios = new Usuarios();
-        AreaCompañiaDao areaCompañiaDao = new AreaCompañiaDao();
-        usuarios.setIdUsuario(usuariosDto.getIdUsuario());
-        usuarios.setUsuario(usuariosDto.getUsuario());
-        usuarios.setContraseña(usuariosDto.getContraseña());
-        usuarios.setNombres(usuariosDto.getNombre());
-        usuarios.setApellidos(usuariosDto.getContraseña());
-        usuarios.setAreaCompania(areaCompañiaDao.getById(usuariosDto.getIdAreaCompañia()));
-        usuarios.setIdUsuario(usuariosDto.getIdUsuario());
         
-        usuariosDao = new UsuariosDao();
-        usuariosDao.crate(usuarios);
-        return "user create succeful";
+        try{
+            Integer area = areaCompaniaDao.getByNombreArea(usuariosDto.getIdAreaCompañia()).getAreaCompania();
+            usuarios.setUsuario(usuariosDto.getUsuario());
+            usuarios.setContraseña(usuariosDto.getContraseña());
+            usuarios.setNombres(usuariosDto.getNombre());
+            usuarios.setApellidos(usuariosDto.getApellido());
+            usuarios.setAreaCompania(areaCompaniaDao.getById(area));
+            usuarios.setpAlmacen(usuariosDto.getpAlmacen());
+            usuarios.setpIngenieria(usuariosDto.getpIngenieria());
+            usuarios.setpAdminUser(usuariosDto.getpAdminUser());
+            usuarios.setpCompras(usuariosDto.getpCompras());
+            usuarios.setpComercial(usuariosDto.getpComercial());
+            usuarios.setpProduccion(usuariosDto.getpProduccion());
+            
+
+            usuariosDao = new UsuariosDao();
+            usuariosDao.create(usuarios);
+        }catch(Exception e){
+           
+             e.printStackTrace(); // Imprime la traza de la excepción en la consola
+            JOptionPane.showMessageDialog(null, "Error al crear el usuario. Consulta la consola para obtener más detalles.", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            
+        }
+        
+        
+        
        
     }
 
@@ -74,6 +94,65 @@ public class UsuariosServiceImplement implements UsuariosServices{
           
         }
         return usuariosDtoList;
+    }
+
+    @Override
+    public boolean validateUser(String user) {
+        usuariosDao = new UsuariosDao();
+        List<Usuarios> usuariosList = usuariosDao.getAll();
+        for(Usuarios usuarios : usuariosList){
+            
+          if(user.equals(usuarios.getUsuario().toString())){
+              return true;
+          }
+            
+        }
+        
+       return false; 
+        
+    }
+
+    @Override
+    public Usuarios getById(int id) {
+        usuariosDao = new UsuariosDao();
+        return usuariosDao.getById(id);
+    }
+
+    @Override
+    public void modifyUser(UsuariosDto usuariosDto) {
+        AreaCompaniaDao areaCompaniaDao = new AreaCompaniaDao();
+        Usuarios usuarios = new Usuarios();
+        try{
+            Integer area = areaCompaniaDao.getByNombreArea(usuariosDto.getIdAreaCompañia()).getAreaCompania();
+            usuarios.setIdUsuario(usuariosDto.getIdUsuario());
+            usuarios.setUsuario(usuariosDto.getUsuario());
+            usuarios.setContraseña(usuariosDto.getContraseña());
+            usuarios.setNombres(usuariosDto.getNombre());
+            usuarios.setApellidos(usuariosDto.getApellido());
+            usuarios.setAreaCompania(areaCompaniaDao.getById(area));
+            usuarios.setpAlmacen(usuariosDto.getpAlmacen());
+            usuarios.setpIngenieria(usuariosDto.getpIngenieria());
+            usuarios.setpAdminUser(usuariosDto.getpAdminUser());
+            usuarios.setpCompras(usuariosDto.getpCompras());
+            usuarios.setpComercial(usuariosDto.getpComercial());
+            usuarios.setpProduccion(usuariosDto.getpProduccion());
+            
+
+            usuariosDao = new UsuariosDao();
+            usuariosDao.update(usuarios);
+        }catch(Exception e){
+           
+            JOptionPane.showMessageDialog(null, e, "Advertencia", JOptionPane.WARNING_MESSAGE);
+            
+            
+        }
+        
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        usuariosDao = new UsuariosDao();
+            usuariosDao.delete(id);
     }
     
     

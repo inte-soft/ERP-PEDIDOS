@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,26 +42,35 @@ public class UsuariosDao {
         return usuariosList;  
     } 
     
-    public Usuarios getById (String idUsuario){
+    public Usuarios getById (int idUsuario){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Usuarios usuarios = entityManager
-                .find(Usuarios.class,"idUsuario");
+                .find(Usuarios.class,idUsuario);
         entityManager.getTransaction().commit();
         entityManager.close();
         return usuarios;
     }
     
     public Usuarios getByUser (String user){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Usuarios usuario = entityManager
-                .createQuery("SELECT u FROM Usuarios u WHERE u.usuario = :user", Usuarios.class)
-                .setParameter("user", user)
-                .getSingleResult();
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return usuario;    
+       try{
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+            Usuarios usuario = entityManager
+                    .createQuery("SELECT u FROM Usuarios u WHERE u.usuario = :user", Usuarios.class)
+                    .setParameter("user", user)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            return usuario; 
+       }catch(Exception e){
+           e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Usuario no encontrado" + e, "Advertencia", JOptionPane.WARNING_MESSAGE);
+           JOptionPane.getRootFrame().setAlwaysOnTop(true);
+           Usuarios usuario = null;
+           return usuario;
+       }
+            
     }
     
     public void update (Usuarios usuarios){
@@ -71,11 +81,30 @@ public class UsuariosDao {
         entityManager.close();
     }
     
-    public void crate (Usuarios usuarios){
+    public void create (Usuarios usuarios){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(usuarios);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
+
+    public void getUserString() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void delete(int id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Usuarios usuarios = entityManager.find(Usuarios.class, id);
+
+        if (usuarios != null) {
+            entityManager.remove(usuarios);
+            entityManager.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+        entityManager.close();}
 }

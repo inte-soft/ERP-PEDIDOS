@@ -10,6 +10,7 @@ import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
 import java.util.List;
 import com.inte_soft.gestionconsumibles.serviceImplement.UsuariosServiceImplement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,4 +36,24 @@ public class UsuariosController {
    public List<UsuariosDto> getAllUser(){
         return  usuariosServices.getAllUsers();
    }
+   public void createUser(UsuariosDto usuario){
+       if (!usuariosServices.validateUser(usuario.getUsuario().toString())){
+           usuariosServices.createUser(usuario);
+       }else{
+           JOptionPane.showMessageDialog(null, "Usuario ya existe", "Advertencia", JOptionPane.WARNING_MESSAGE);
+       }
+       
+   }
+
+    public Usuarios getById(int id) {
+        return usuariosServices.getById( id);
+    }
+
+    public void modifyUser(UsuariosDto usuariosDto) {
+        usuariosServices.modifyUser(usuariosDto);
+    }
+
+    public void deleteUser(int id) {
+        usuariosServices.deleteUser(id);
+    }
 }

@@ -68,6 +68,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jPasswordField1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyReleased(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Entrar");
@@ -84,6 +89,11 @@ public class Login extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Salir");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\alejo\\OneDrive\\Documents\\NetBeansProjects\\gestion-consumibles-main\\src\\main\\java\\com\\inte_soft\\gestionconsumibles\\formularios\\imagenes\\login\\usuario.png")); // NOI18N
 
@@ -170,6 +180,16 @@ public class Login extends javax.swing.JFrame {
         jButton1MouseClicked(null);
     }
     }//GEN-LAST:event_txtUsuarioKeyReleased
+
+    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        jButton1MouseClicked(null);
+        }
+    }//GEN-LAST:event_jPasswordField1KeyReleased
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+      System.exit(0);
+    }//GEN-LAST:event_jButton2MouseReleased
 
     /**
      * @param args the command line arguments

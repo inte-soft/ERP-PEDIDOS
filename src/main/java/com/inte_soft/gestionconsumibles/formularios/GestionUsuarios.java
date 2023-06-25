@@ -6,7 +6,9 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,25 +45,35 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         tableUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombres", "Apellidos", "Area", "Almacen", "Ingenieria", "Admin User", "Compras", "Comercial", "Produccion"
+                "Id", "Nombres", "Apellidos", "Area", "Almacen", "Ingenieria", "Admin User", "Compras", "Comercial", "Produccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(tableUser);
+        if (tableUser.getColumnModel().getColumnCount() > 0) {
+            tableUser.getColumnModel().getColumn(0).setResizable(false);
+            tableUser.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tableUser.getColumnModel().getColumn(9).setResizable(false);
+        }
 
         butonAddUser.setText("Agregar");
         butonAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,8 +88,18 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
         });
 
         butonDeleteUser.setText("Eliminar");
+        butonDeleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butonDeleteUserMouseClicked(evt);
+            }
+        });
 
         butonModifyUser.setText("Modificar");
+        butonModifyUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butonModifyUserMouseClicked(evt);
+            }
+        });
 
         jMenu1.setText("Menu");
         jMenuBar1.add(jMenu1);
@@ -137,10 +159,45 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void butonAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butonAddUserMouseClicked
-        User user = new User();
+
+        User user = new User(this);
         user.setModal(true);
         user.setVisible(true);
+        
+    
     }//GEN-LAST:event_butonAddUserMouseClicked
+
+    private void butonModifyUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butonModifyUserMouseClicked
+        int rowIndex = this.tableUser.getSelectedRow();
+        if(rowIndex >=0 ){
+           UsuariosController usuariosController = new UsuariosController();
+            Usuarios usuario = usuariosController.getById((int) this.tableUser.getValueAt(rowIndex, 0));
+            User user = new User(usuario,this);
+            user.setModal(true);
+            user.setVisible(true);
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha selecionado ningun usuario para modificar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_butonModifyUserMouseClicked
+
+    private void butonDeleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butonDeleteUserMouseClicked
+        int rowIndex = this.tableUser.getSelectedRow();
+        if(rowIndex >=0 ){
+            int option = JOptionPane.showOptionDialog(null, "Esta seguro que desea eliminar el usuario", "Confirmar",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if(option == JOptionPane.OK_OPTION){
+            UsuariosController usuariosController = new UsuariosController();
+            usuariosController.deleteUser((int) this.tableUser.getValueAt(rowIndex, 0));
+            
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha selecionado ningun usuario para eliminar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+        this.loadUserData();
+    }//GEN-LAST:event_butonDeleteUserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -183,8 +240,10 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
                 DefaultTableModel model =  (DefaultTableModel) tableUser.getModel();
                 UsuariosController usuariosController = new UsuariosController();
                 List<UsuariosDto> listUsuariosDto = usuariosController.getAllUser();
+                model.setRowCount(0);
                 for(UsuariosDto usuarios: listUsuariosDto ){
                     Object[] rowData = {
+                        usuarios.getIdUsuario(),
                         usuarios.getNombre(),
                         usuarios.getApellido(),
                         usuarios.getIdAreaCompañia(),

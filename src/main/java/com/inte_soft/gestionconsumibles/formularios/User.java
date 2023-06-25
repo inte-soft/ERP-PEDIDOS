@@ -4,17 +4,59 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.AreaCompaniaController;
+import com.inte_soft.gestionconsumibles.controller.UsuariosController;
+import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alejo
  */
 public class User extends javax.swing.JDialog {
-
+    private GestionUsuarios gestionUsuarios;
+    private int id;
+    private boolean modifyFlag= false;
     /**
      * Creates new form User
      */
     public User() {
         initComponents();
+        this.setComboBox();
+        
+    }
+    public User(GestionUsuarios gestionUsuarios) {
+        initComponents();
+        this.setComboBox();
+        this.gestionUsuarios = gestionUsuarios;
+    }
+    public User(Usuarios user,GestionUsuarios gestionUsuarios) {
+        this.gestionUsuarios = gestionUsuarios;
+        initComponents();
+        this.setComboBox();
+        this.id = (user.getIdUsuario());
+        this.name.setText(user.getNombres());
+        this.lastName.setText(user.getApellidos());
+        this.user.setText(user.getUsuario());
+        this.password.setText(user.getContraseña());
+        for (int i = 0; i < this.areas.getItemCount(); i++) {
+            String item = this.areas.getItemAt(i);
+            if (item.equals(user.getAreaCompania().getNombreArea())) {
+                this.areas.setSelectedItem(item);
+                break;
+            }
+        }
+        this.pAdminUser.setSelected(user.getpAdminUser());
+        this.pAlmacen.setSelected(user.getpAlmacen());
+        this.pIngenieria.setSelected(user.getpIngenieria());
+        this.pComercial.setSelected(user.getpComercial());
+        this.pCompras.setSelected(user.getpCompras());
+        this.pProduccion.setSelected(user.getpProduccion());
+        this.modifyFlag = true;
+        
+       
     }
 
     /**
@@ -40,8 +82,7 @@ public class User extends javax.swing.JDialog {
         name = new javax.swing.JTextField();
         lastName = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        areas = new javax.swing.JComboBox<>();
         pAlmacen = new javax.swing.JCheckBox();
         pIngenieria = new javax.swing.JCheckBox();
         pAdminUser = new javax.swing.JCheckBox();
@@ -50,6 +91,7 @@ public class User extends javax.swing.JDialog {
         pProduccion = new javax.swing.JCheckBox();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -76,9 +118,12 @@ public class User extends javax.swing.JDialog {
 
         jLabel11.setText("Permiso Produccion");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jToggleButton1.setText("Guardar");
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseReleased(evt);
+            }
+        });
 
         jToggleButton2.setText("Salir");
 
@@ -118,8 +163,8 @@ public class User extends javax.swing.JDialog {
                             .addComponent(name)
                             .addComponent(lastName)
                             .addComponent(user)
-                            .addComponent(password)
-                            .addComponent(jComboBox1, 0, 126, Short.MAX_VALUE))
+                            .addComponent(areas, 0, 126, Short.MAX_VALUE)
+                            .addComponent(password))
                         .addGap(32, 32, 32))))
         );
         layout.setVerticalGroup(
@@ -146,7 +191,7 @@ public class User extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(areas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -179,6 +224,43 @@ public class User extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jToggleButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseReleased
+        UsuariosController usuariosController = new UsuariosController();
+        UsuariosDto usuariosDto = new UsuariosDto();
+        
+        if(!(this.name.getText().trim().isEmpty() || this.lastName.getText().trim().isEmpty()
+                || this.user.getText().trim().isEmpty() || this.password.getText().trim().isEmpty())){
+        usuariosDto.setNombre(this.name.getText());
+        usuariosDto.setApellido(this.lastName.getText());
+        usuariosDto.setUsuario(this.user.getText());
+        usuariosDto.setContraseña(this.password.getText());
+        usuariosDto.setIdAreaCompañia(this.areas.getSelectedItem().toString());
+        usuariosDto.setpAlmacen(this.pAlmacen.isSelected());
+        usuariosDto.setpIngenieria(this.pIngenieria.isSelected());
+        usuariosDto.setpAdminUser(this.pAdminUser.isSelected());
+        usuariosDto.setpComercial(this.pComercial.isSelected());
+        usuariosDto.setpCompras(this.pCompras.isSelected());
+        usuariosDto.setpProduccion(this.pProduccion.isSelected());
+        if (!modifyFlag){
+            usuariosController.createUser(usuariosDto);
+        }else{
+            usuariosDto.setIdUsuario(this.id);
+            usuariosController.modifyUser(usuariosDto);
+        }
+        
+        }else{
+            JOptionPane.getRootFrame().setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(null, "Tiene campos pendientes por diligenciar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+           
+        }
+        this.dispose();
+        gestionUsuarios.loadUserData();
+        
+        
+        
+        
+    }//GEN-LAST:event_jToggleButton1MouseReleased
 
     /**
      * @param args the command line arguments
@@ -213,10 +295,18 @@ public class User extends javax.swing.JDialog {
                 new User().setVisible(true);
             }
         });
+ 
+    }
+    public void setComboBox(){
+        AreaCompaniaController areaCompaniaController = new AreaCompaniaController();
+        List<String> listNameAreas = areaCompaniaController.getAll();
+        for(String area : listNameAreas){
+            this.areas.addItem(area);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> areas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -238,7 +328,7 @@ public class User extends javax.swing.JDialog {
     private javax.swing.JCheckBox pCompras;
     private javax.swing.JCheckBox pIngenieria;
     private javax.swing.JCheckBox pProduccion;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

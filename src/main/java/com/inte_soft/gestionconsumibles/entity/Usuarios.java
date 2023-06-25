@@ -7,10 +7,13 @@ package com.inte_soft.gestionconsumibles.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 /**
  *
@@ -21,17 +24,31 @@ import javax.persistence.Table;
 public class Usuarios implements java.io.Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_USUARIO")
     private int idUsuario;
+    @Column(name = "USUARIO")
     private String usuario;
+    @Column(name = "CONTRASEÑA")
     private String contraseña;
+    @Column(name = "NOMBRES")
     private String nombres;
+    @Column(name = "APELLIDOS")
     private String apellidos;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_AREA")
     private AreaCompania areaCompania;
+    @Column(name = "P_ALMACEN")
     private boolean pAlmacen;
+    @Column(name = "P_INGENIERIA")
     private boolean pIngenieria;
+    @Column(name = "P_ADMIN_USER")
     private boolean pAdminUser;
+    @Column(name = "P_COMPRAS")
     private boolean pCompras;
+    @Column(name = "P_COMERCIAL")
     private boolean pComercial;
+    @Column(name = "P_PRODUCCION")
     private boolean pProduccion;
     
     
@@ -55,8 +72,7 @@ public class Usuarios implements java.io.Serializable {
 
     
     
-    @Id
-    @Column(name = "ID_USUARIO")
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -66,7 +82,7 @@ public class Usuarios implements java.io.Serializable {
         this.idUsuario = idUsuario;
     }
 
-    @Column(name = "USUARIO")
+    
     public String getUsuario() {
         return usuario;
     }
@@ -75,99 +91,88 @@ public class Usuarios implements java.io.Serializable {
         this.usuario = usuario;
     }
     
-    @Column(name = "P_ALMACEN")
+    
     public void setpAlmacen(boolean pAlmacen) {
         this.pAlmacen = pAlmacen;
     }
     
-    @Column(name = "P_INGENIERIA")
+    
     public void setpIngenieria(boolean pIngenieria) {
         this.pIngenieria = pIngenieria;
     }
 
-    @Column(name = "P_ADMIN_USER")
+    
     public void setpAdminUser(boolean pAdminUser) {
         this.pAdminUser = pAdminUser;
     }
 
-    @Column(name = "P_COMERCIAL")
+    
     public void setpComercial(boolean pComercial) {
         this.pComercial = pComercial;
     }
 
-    @Column(name = "P_PRODUCCION")
+    
     public void setpProduccion(boolean pProduccion) {
         this.pProduccion = pProduccion;
     }
     
-    @Column(name = "CONTRASEÑA")
+    
     public String getContraseña() {
         return contraseña;
     }
 
-    @Column(name = "CONTRASEÑA")
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
-    @Column(name = "NOMBRES")
     public String getNombres() {
         return nombres;
     }
 
-    @Column(name = "NOMBRES")
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
-    @Column(name = "APELLIDOS")
+    
     public String getApellidos() {
         return apellidos;
     }
 
-    @Column(name = "APELLIDOS")
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_AREA")
+    
     public AreaCompania getAreaCompania() {
         return areaCompania;
     }
 
-    @Column(name = "ID_AREA")
     public void setAreaCompania(AreaCompania areaCompania) {
         this.areaCompania = areaCompania;
     }
- 
-    @Column(name = "P_COMPRAS")
+
     public void setpCompras(boolean pCompras) {
         this.pCompras = pCompras;
     }
 
-    @Column(name = "P_ALMACEN")
     public boolean getpAlmacen() {
         return pAlmacen;
     }
 
-    @Column(name = "P_INGENIERIA")
     public boolean getpIngenieria() {
         return pIngenieria;
     }
-    @Column(name = "P_ADMIN_USER")
+
     public boolean getpAdminUser() {
         return pAdminUser;
     }
 
-    @Column(name = "P_COMERCIAL")
     public boolean getpComercial() {
         return pComercial;
     }
 
-    @Column(name = "P_PRODUCCION")
     public boolean getpProduccion() {
         return pProduccion;
     }
-    @Column(name = "P_COMPRAS")
+    
     public boolean getpCompras() {
         return pCompras;
     }

@@ -14,7 +14,13 @@ import java.util.List;
  */
 
 public interface UsuariosServices {
-    public String createUser(UsuariosDto usuariosDto);
+    public boolean validateUser (String User);
+    public void createUser(UsuariosDto usuariosDto);
     public Usuarios getPassword(String user);
     public List<UsuariosDto> getAllUsers();
+    public Usuarios getById(int user);
+
+    public void modifyUser(UsuariosDto usuariosDto);
+
+    public void deleteUser(int id);
 }
