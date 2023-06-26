@@ -60,6 +60,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jmLogin);
 
         jMenu3.setText("Ingenieria");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Almacen");
@@ -86,6 +91,12 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        gestionConsumibles gestionconsumibles = new gestionConsumibles();
+        escritorio.add(gestionconsumibles);
+        gestionconsumibles.setVisible(true);
+    }//GEN-LAST:event_jMenu3MouseClicked
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);

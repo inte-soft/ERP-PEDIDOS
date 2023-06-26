@@ -6,12 +6,10 @@ package com.inte_soft.gestionconsumibles;
 
 
 import com.inte_soft.gestionconsumibles.formularios.Login;
-import com.inte_soft.gestionconsumibles.formularios.Principal;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 

@@ -39,7 +39,7 @@ public class UsuariosController {
    }
    public void createUser(UsuariosDto usuario, JDialog modal){
        
-       if (!usuariosServices.validateUser(usuario.getUsuario().toString(), modal)){
+       if (!usuariosServices.validateUser(usuario.getUsuario(), modal)){
            usuariosServices.createUser(usuario, modal);
        }else{
            AdvertenciaModal advertenciaModal = new AdvertenciaModal();
