@@ -18,7 +18,6 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    //clase principal
     public Principal() {
         initComponents();
         escritorio = new JDesktopPane();
@@ -61,11 +60,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jmLogin);
 
         jMenu3.setText("Ingenieria");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
-            }
-        });
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Almacen");
@@ -91,22 +85,12 @@ public class Principal extends javax.swing.JFrame {
         this.openGestionUsuarios();
         
         
-    }                                          
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
         gestionUsuarios.setVisible(true);
         gestionUsuarios.loadUserData();
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        // TODO add your handling code here:
-        gestionConsumibles gestionconsumibles = new gestionConsumibles();
-        escritorio.add(gestionconsumibles);
-        gestionconsumibles.setVisible(true);
-    }//GEN-LAST:event_jMenu3MouseClicked
-
     }
     
     /**

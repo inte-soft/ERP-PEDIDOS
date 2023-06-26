@@ -273,7 +273,7 @@ public class User extends javax.swing.JDialog {
     
     
     private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
-         System.exit(0);
+         this.dispose();
     }//GEN-LAST:event_jToggleButton2MouseClicked
 
     /**

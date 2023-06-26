@@ -6,9 +6,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
 import java.awt.event.KeyEvent;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 /**
  *
