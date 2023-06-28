@@ -8,11 +8,7 @@ package com.inte_soft.gestionconsumibles.service;
  *
  * @author alejo
  */
-
-public interface MasterService {
-    
+public interface TConsumiblesEService {
     public void getAll();
-    public void updateMaster(String string);
-    public void createMaster(String string);
-    
+    public void create(String string);
 }

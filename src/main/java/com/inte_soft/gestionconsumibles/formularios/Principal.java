@@ -4,9 +4,14 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.MasterController;
+import com.inte_soft.gestionconsumibles.util.SplashProceso;
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,11 +19,16 @@ import javax.swing.SwingUtilities;
  */
 public class Principal extends javax.swing.JFrame {
     
-    private JDesktopPane escritorio;
+    
     /**
      * Creates new form Principal
      */
+    
+    private JDesktopPane escritorio;
+    private JProgressBar jProgressBar;
+    private  MasterController masterController;
     public Principal() {
+        jProgressBar = new JProgressBar(0, 100);
         initComponents();
         escritorio = new JDesktopPane();
         this.setContentPane(escritorio);
@@ -40,14 +50,20 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmLogin = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        actualizarMaestro = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jmLogin.setText("Archivo");
+        jmLogin.setText("Administrar");
 
         jMenuItem1.setText("Gestionar Usuarios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,9 +73,39 @@ public class Principal extends javax.swing.JFrame {
         });
         jmLogin.add(jMenuItem1);
 
+        actualizarMaestro.setText("Actualizar Maestro");
+        actualizarMaestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarMaestroActionPerformed(evt);
+            }
+        });
+        jmLogin.add(actualizarMaestro);
+
         jMenuBar1.add(jmLogin);
 
         jMenu3.setText("Ingenieria");
+
+        jMenuItem2.setText("Pedido Consummibles Electricos");
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Pedido Consumibles mecanicos");
+        jMenu3.add(jMenuItem3);
+
+        jMenu4.setText("Administrar");
+
+        jMenuItem5.setText("Cargar Tipico Electrico");
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem5MouseClicked(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuItem4.setText("Cargar Tipico Mecanico");
+        jMenu4.add(jMenuItem4);
+
+        jMenu3.add(jMenu4);
+
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Almacen");
@@ -86,6 +132,61 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void actualizarMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarMaestroActionPerformed
+
+        String filePath = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("xls & xlsm", "xlsx", "xlsm");
+        jFileChooser.setFileFilter(fileNameExtensionFilter);
+        SplashProceso splashProceso = new SplashProceso("Procesando...");
+        int respuesta = jFileChooser.showOpenDialog(this);
+        
+        if(respuesta==JFileChooser.APPROVE_OPTION){
+            
+            filePath = jFileChooser.getSelectedFile().getPath();
+            final String finalFilePath = filePath;
+             masterController = new MasterController();
+            splashProceso.mostrarSplash();
+            this.setEnabled(false);
+            Thread thread = new Thread(() -> {
+                masterController.updateMaster(finalFilePath);
+                splashProceso.cerrarSplash();
+            
+        });
+        thread.start();
+        this.setEnabled(true);
+           
+            
+        }
+    }//GEN-LAST:event_actualizarMaestroActionPerformed
+
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+        String filePath = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("xls & xlsm", "xlsx", "xlsm");
+        jFileChooser.setFileFilter(fileNameExtensionFilter);
+        SplashProceso splashProceso = new SplashProceso("Procesando...");
+        int respuesta = jFileChooser.showOpenDialog(this);
+        
+        if(respuesta==JFileChooser.APPROVE_OPTION){
+            
+            filePath = jFileChooser.getSelectedFile().getPath();
+            final String finalFilePath = filePath;
+             masterController = new MasterController();
+            splashProceso.mostrarSplash();
+            this.setEnabled(false);
+            Thread thread = new Thread(() -> {
+                masterController.updateMaster(finalFilePath);
+                splashProceso.cerrarSplash();
+            
+        });
+        thread.start();
+        this.setEnabled(true);
+           
+            
+        }
+    }//GEN-LAST:event_jMenuItem5MouseClicked
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
@@ -134,11 +235,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem actualizarMaestro;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmLogin;
     // End of variables declaration//GEN-END:variables
 }

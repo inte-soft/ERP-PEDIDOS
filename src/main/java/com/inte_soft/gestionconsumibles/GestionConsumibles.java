@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles;
 
 import com.inte_soft.gestionconsumibles.formularios.Login;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
+import com.inte_soft.gestionconsumibles.util.SplashProceso;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

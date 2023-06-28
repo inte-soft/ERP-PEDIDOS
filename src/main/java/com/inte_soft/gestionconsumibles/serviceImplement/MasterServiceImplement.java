@@ -31,7 +31,7 @@ public class MasterServiceImplement implements MasterService {
     }
 
     @Override
-    public void updatemaster(String string) {
+    public void updateMaster(String string) {
          String excelFilePath = string;
         
         try(FileInputStream fileInpuStream = new FileInputStream(new File(excelFilePath));
