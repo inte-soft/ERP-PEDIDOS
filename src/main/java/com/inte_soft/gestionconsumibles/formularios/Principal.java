@@ -5,6 +5,8 @@
 package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.MasterController;
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.util.SplashProceso;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
@@ -26,7 +28,9 @@ public class Principal extends javax.swing.JFrame {
     
     private JDesktopPane escritorio;
     private JProgressBar jProgressBar;
-    private  MasterController masterController;
+    private MasterController masterController;
+    private TConsumiblesEController consumiblesEController;
+    private TConsumiblesMController consumiblesMController;
     public Principal() {
         jProgressBar = new JProgressBar(0, 100);
         initComponents();
@@ -52,11 +56,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         actualizarMaestro = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        cElectricos = new javax.swing.JMenuItem();
+        cMecanicos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        cargarCElectricos = new javax.swing.JMenuItem();
+        cargarCMecanicos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -85,24 +89,44 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu3.setText("Ingenieria");
 
-        jMenuItem2.setText("Pedido Consummibles Electricos");
-        jMenu3.add(jMenuItem2);
+        cElectricos.setText("Pedido Consummibles Electricos");
+        cElectricos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cElectricosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(cElectricos);
 
-        jMenuItem3.setText("Pedido Consumibles mecanicos");
-        jMenu3.add(jMenuItem3);
+        cMecanicos.setText("Pedido Consumibles mecanicos");
+        cMecanicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cMecanicosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(cMecanicos);
 
         jMenu4.setText("Administrar");
 
-        jMenuItem5.setText("Cargar Tipico Electrico");
-        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+        cargarCElectricos.setText("Cargar Tipico Electrico");
+        cargarCElectricos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem5MouseClicked(evt);
+                cargarCElectricosMouseClicked(evt);
             }
         });
-        jMenu4.add(jMenuItem5);
+        cargarCElectricos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarCElectricosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(cargarCElectricos);
 
-        jMenuItem4.setText("Cargar Tipico Mecanico");
-        jMenu4.add(jMenuItem4);
+        cargarCMecanicos.setText("Cargar Tipico Mecanico");
+        cargarCMecanicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarCMecanicosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(cargarCMecanicos);
 
         jMenu3.add(jMenu4);
 
@@ -161,7 +185,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_actualizarMaestroActionPerformed
 
-    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+    private void cargarCElectricosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarCElectricosMouseClicked
         String filePath = "";
         JFileChooser jFileChooser = new JFileChooser();
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("xls & xlsm", "xlsx", "xlsm");
@@ -186,7 +210,75 @@ public class Principal extends javax.swing.JFrame {
            
             
         }
-    }//GEN-LAST:event_jMenuItem5MouseClicked
+    }//GEN-LAST:event_cargarCElectricosMouseClicked
+
+    private void cElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cElectricosActionPerformed
+        GestionConsumibles gestionConsumibles = new GestionConsumibles();
+        escritorio.add(gestionConsumibles);
+        gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS");
+        gestionConsumibles.setVisible(true);
+    }//GEN-LAST:event_cElectricosActionPerformed
+
+    private void cargarCElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarCElectricosActionPerformed
+        String filePath = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("xls & xlsm", "xlsx", "xlsm");
+        jFileChooser.setFileFilter(fileNameExtensionFilter);
+        SplashProceso splashProceso = new SplashProceso("Procesando...");
+        int respuesta = jFileChooser.showOpenDialog(this);
+        
+        if(respuesta==JFileChooser.APPROVE_OPTION){
+            
+            filePath = jFileChooser.getSelectedFile().getPath();
+            final String finalFilePath = filePath;
+            consumiblesEController = new TConsumiblesEController();
+            splashProceso.mostrarSplash();
+            this.setEnabled(false);
+            Thread thread = new Thread(() -> {
+                consumiblesEController.create(finalFilePath);
+                splashProceso.cerrarSplash();
+            
+        });
+        thread.start();
+        this.setEnabled(true);
+           
+            
+        }
+    }//GEN-LAST:event_cargarCElectricosActionPerformed
+
+    private void cargarCMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarCMecanicosActionPerformed
+        String filePath = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("xls & xlsm", "xlsx", "xlsm");
+        jFileChooser.setFileFilter(fileNameExtensionFilter);
+        SplashProceso splashProceso = new SplashProceso("Procesando...");
+        int respuesta = jFileChooser.showOpenDialog(this);
+        
+        if(respuesta==JFileChooser.APPROVE_OPTION){
+            
+            filePath = jFileChooser.getSelectedFile().getPath();
+            final String finalFilePath = filePath;
+            consumiblesMController = new TConsumiblesMController();
+            splashProceso.mostrarSplash();
+            this.setEnabled(false);
+            Thread thread = new Thread(() -> {
+                consumiblesMController.create(finalFilePath);
+                splashProceso.cerrarSplash();
+            
+        });
+        thread.start();
+        this.setEnabled(true);
+           
+            
+        }
+    }//GEN-LAST:event_cargarCMecanicosActionPerformed
+
+    private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
+        GestionConsumibles gestionConsumibles = new GestionConsumibles();
+        escritorio.add(gestionConsumibles);
+        gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
+        gestionConsumibles.setVisible(true);
+    }//GEN-LAST:event_cMecanicosActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
@@ -236,16 +328,16 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem actualizarMaestro;
+    private javax.swing.JMenuItem cElectricos;
+    private javax.swing.JMenuItem cMecanicos;
+    private javax.swing.JMenuItem cargarCElectricos;
+    private javax.swing.JMenuItem cargarCMecanicos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmLogin;
     // End of variables declaration//GEN-END:variables
 }

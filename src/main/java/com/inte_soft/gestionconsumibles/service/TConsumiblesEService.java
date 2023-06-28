@@ -4,11 +4,14 @@
  */
 package com.inte_soft.gestionconsumibles.service;
 
+import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
+import java.util.List;
+
 /**
  *
  * @author alejo
  */
 public interface TConsumiblesEService {
-    public void getAll();
+    public List<TipicoConsumiblesElectricos> getAll();
     public void create(String string);
 }

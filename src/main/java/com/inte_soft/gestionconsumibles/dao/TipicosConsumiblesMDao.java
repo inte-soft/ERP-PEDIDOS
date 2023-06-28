@@ -15,11 +15,11 @@ import javax.persistence.PersistenceContext;
  *
  * @author alejo
  */
-public class TipicoConsumiblesMDao {
+public class TipicosConsumiblesMDao {
    @PersistenceContext
     private EntityManagerFactory entityManagerFactory;
 
-    public TipicoConsumiblesMDao() {
+    public TipicosConsumiblesMDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
    
@@ -52,5 +52,14 @@ public class TipicoConsumiblesMDao {
 
         entityManager.close();
         entityManagerFactory.close();
+    }
+    public TipicoConsumiblesMecanicos findById(String id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       TipicoConsumiblesMecanicos tipicoConsumiblesMecanicos = entityManager.find(
+               TipicoConsumiblesMecanicos.class, id);
+       entityManager.getTransaction().commit();
+       entityManager.close();
+       return tipicoConsumiblesMecanicos;
     }
 }

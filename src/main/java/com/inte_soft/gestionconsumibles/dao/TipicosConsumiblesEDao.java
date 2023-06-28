@@ -53,4 +53,13 @@ public class TipicosConsumiblesEDao {
         entityManager.close();
         entityManagerFactory.close();
     }
+     public TipicoConsumiblesElectricos findById(String id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       TipicoConsumiblesElectricos tipicoConsumiblesElectricos = entityManager.find(
+               TipicoConsumiblesElectricos.class, id);
+       entityManager.getTransaction().commit();
+       entityManager.close();
+       return tipicoConsumiblesElectricos;
+    }
 }
