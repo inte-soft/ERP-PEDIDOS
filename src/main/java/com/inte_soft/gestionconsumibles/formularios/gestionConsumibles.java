@@ -58,8 +58,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         lbOt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbOt.setText("OT:");
 
-        cbSeleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Consumibles Electricos", "Consumibles Mecanicos" }));
-
         jLabel1.setText("PEDIDO:");
 
         lbtipoPedido.setText("TIPO PEDIDO:");
@@ -102,7 +100,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
                 .addComponent(btnGestionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,4 +147,8 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbtipoPedido;
     private javax.swing.JTextField txtOt;
     // End of variables declaration//GEN-END:variables
+
+    void tipoConsumibles(String tipo) {
+        this.cbSeleccion.addItem(tipo);
+    }
 }
