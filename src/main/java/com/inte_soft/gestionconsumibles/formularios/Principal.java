@@ -213,7 +213,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCElectricosMouseClicked
 
     private void cElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cElectricosActionPerformed
-        GestionConsumibles gestionConsumibles = new GestionConsumibles();
+        GestionConsumibles gestionConsumibles = new GestionConsumibles(this);
         escritorio.add(gestionConsumibles);
         gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS");
         gestionConsumibles.setVisible(true);
@@ -274,7 +274,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCMecanicosActionPerformed
 
     private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
-        GestionConsumibles gestionConsumibles = new GestionConsumibles();
+        GestionConsumibles gestionConsumibles = new GestionConsumibles(this);
         escritorio.add(gestionConsumibles);
         gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
         gestionConsumibles.setVisible(true);
