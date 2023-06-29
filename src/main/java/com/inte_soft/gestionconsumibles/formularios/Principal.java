@@ -276,7 +276,7 @@ public class Principal extends javax.swing.JFrame {
     private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
         gestionConsumibles gestionConsumibles = new gestionConsumibles();
         escritorio.add(gestionConsumibles);
-        gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS");
+        gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
         gestionConsumibles.setVisible(true);
     }//GEN-LAST:event_cMecanicosActionPerformed
     public void openGestionUsuarios(){

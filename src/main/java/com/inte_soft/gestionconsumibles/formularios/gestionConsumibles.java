@@ -4,7 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
-import javax.swing.JFrame;
+
 
 /**
  *
@@ -15,6 +15,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     /**
      * Creates new form gestionConsumibles
      */
+    
     public gestionConsumibles() {
         initComponents();
     }
@@ -38,6 +39,9 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         cbSeleccion1 = new javax.swing.JComboBox<>();
         btnGestionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        close = new javax.swing.JButton();
+        lbOt1 = new javax.swing.JLabel();
+        item = new javax.swing.JTextField();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -50,9 +54,17 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Ot", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad", "Valor", "Inicial y/o Adicional", "Fecha", "Operación", "Revisado"
+                "Ot", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad", "Inicial y/o Adicional", "Operación"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         lbOt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -65,11 +77,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         cbSeleccion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Pedido Inicial", "Pedido Adicional" }));
 
         btnGestionar.setText("Gestionar");
-        btnGestionar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGestionarMouseClicked(evt);
-            }
-        });
         btnGestionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionarActionPerformed(evt);
@@ -77,6 +84,16 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Enviar Pedido");
+
+        close.setText("Close");
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
+
+        lbOt1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbOt1.setText("ITEM:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,18 +106,24 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtOt, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbOt1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbtipoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbSeleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGestionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(close)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +132,15 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbOt)
                     .addComponent(txtOt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addComponent(cbSeleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbtipoPedido)
-                    .addComponent(cbSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGestionar)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(close)
+                    .addComponent(lbOt1)
+                    .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(cbSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbtipoPedido))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
         );
@@ -123,27 +149,31 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
-        // TODO add your handling code here:
+        Consumibles consumibles = new Consumibles(this.cbSeleccion.getSelectedItem().toString(),this.item.getText());
+        consumibles.setModal(true);
+        consumibles.setVisible(true);
+        this.txtOt.setEditable(false);
+        this.cbSeleccion1.setEnabled(false);
         
     }//GEN-LAST:event_btnGestionarActionPerformed
 
-    private void btnGestionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionarMouseClicked
-        // TODO add your handling code here:
-        Consumibles consumibles = new Consumibles();
-        consumibles.setModal(true);
-        consumibles.setVisible(true);
-    }//GEN-LAST:event_btnGestionarMouseClicked
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_closeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGestionar;
     private javax.swing.JComboBox<String> cbSeleccion;
     private javax.swing.JComboBox<String> cbSeleccion1;
+    private javax.swing.JButton close;
+    private javax.swing.JTextField item;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbOt;
+    private javax.swing.JLabel lbOt1;
     private javax.swing.JLabel lbtipoPedido;
     private javax.swing.JTextField txtOt;
     // End of variables declaration//GEN-END:variables

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class TipicoConsumiblesElectricos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_CONSUMIBLE_M")
+    @Column(name = "ID_CONSUMIBLE_E")
     private int idConsumibleE;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CODIGO")

@@ -42,15 +42,13 @@ public class TConsumiblesEServiceImplement implements  TConsumiblesEService{
             Workbook workbook = new XSSFWorkbook(fileInpuStream)){
             
             Sheet sheet = (Sheet) workbook.getSheetAt(0);
-            TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
             for(Row row :sheet){
-                Optional <TipicoConsumiblesElectricos> currenttipicosOptional = Optional.ofNullable(
-                        tipicosConsumiblesEDao.findById(row.getCell(0).toString()));
-                if(currenttipicosOptional.isPresent()){
-                tipicoConsumiblesElectricos.setMaster(masterDao.findById(row.getCell(0).toString()));
-                
+                 TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
+                Master master = masterDao.findById(row.getCell(0).toString());
+                tipicoConsumiblesElectricos.setMaster(master);
+                tipicosConsumiblesEDao = new TipicosConsumiblesEDao();
                 tipicosConsumiblesEDao.create(tipicoConsumiblesElectricos);
-                }
+                
                   
             }
                 

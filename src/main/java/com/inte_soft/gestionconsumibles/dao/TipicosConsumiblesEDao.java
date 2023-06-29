@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.dao;
 
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author alejo
- */
+ */@Stateless
 public class TipicosConsumiblesEDao {
     @PersistenceContext
     private EntityManagerFactory entityManagerFactory;
@@ -54,7 +55,7 @@ public class TipicosConsumiblesEDao {
         entityManagerFactory.close();
     }
      public TipicoConsumiblesElectricos findById(String id){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
        entityManager.getTransaction().begin();
        TipicoConsumiblesElectricos tipicoConsumiblesElectricos = entityManager.find(
                TipicoConsumiblesElectricos.class, id);

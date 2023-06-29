@@ -4,6 +4,13 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
+import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
+import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Inte-Soft
@@ -13,9 +20,19 @@ public class Consumibles extends javax.swing.JDialog {
     /**
      * Creates new form consumibles
      */
+    private String tipoConsumibles;
+    private String item;
+    public Consumibles(String tipoConsumibles, String item) {
+        initComponents();
+        this.tipoConsumibles = tipoConsumibles;
+        this.item = item;
+        this.loadConsumibles(this.tipoConsumibles, this.item);
+    }
+
     public Consumibles() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,6 +147,46 @@ public class Consumibles extends javax.swing.JDialog {
             }
         });
     }
+    
+    public void loadConsumibles(String tipoConsumible, String item){        
+        DefaultTableModel model =  (DefaultTableModel) tbListadoConsumibles.getModel();
+        if (tipoConsumible == "CONSUMIBLES ELECTRICOS") {
+            TConsumiblesEController cosnumiblesE = new TConsumiblesEController();
+            List<TipicoConsumiblesElectricos> listConsumiblesElectricos = cosnumiblesE.getAll();
+            model.setRowCount(0);
+            for(TipicoConsumiblesElectricos consumiblesElectricos: listConsumiblesElectricos ){
+                Object[] rowData = {
+                    item,
+                    consumiblesElectricos.getMaster().getCodigo(),
+                    consumiblesElectricos.getMaster().getDescripcion(),
+                    consumiblesElectricos.getMaster().getMarca(),
+                    consumiblesElectricos.getMaster().getTipo(),
+                    consumiblesElectricos.getMaster().getReferencia(),
+                    consumiblesElectricos.getMaster().getUnidad(),
+                };
+                model.addRow(rowData);
+            }
+                
+        }else if(tipoConsumible == "CONSUMIBLES MECANICOS") {
+            TConsumiblesMController cosnumiblesM = new TConsumiblesMController();
+            List<TipicoConsumiblesMecanicos> listConsumiblesMecanicos = cosnumiblesM.getAll();
+            model.setRowCount(0);
+            for(TipicoConsumiblesMecanicos consumiblesMecanicos: listConsumiblesMecanicos ){
+                Object[] rowData = {
+                    item,
+                    consumiblesMecanicos.getMaster().getCodigo(),
+                    consumiblesMecanicos.getMaster().getDescripcion(),
+                    consumiblesMecanicos.getMaster().getMarca(),
+                    consumiblesMecanicos.getMaster().getTipo(),
+                    consumiblesMecanicos.getMaster().getReferencia(),
+                    consumiblesMecanicos.getMaster().getUnidad(),
+                };
+                model.addRow(rowData);
+            }
+        }
+    }
+           
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
