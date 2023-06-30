@@ -4,18 +4,12 @@
  */
 package com.inte_soft.gestionconsumibles.service;
 
-import com.inte_soft.gestionconsumibles.entity.Master;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
 
 /**
  *
  * @author alejo
  */
-
-public interface MasterService {
-    
-    public void getAll();
-    public void updateMaster(String string);
-    public void createMaster(String string);
-    public Master getByCode(String string);
-    
+public interface PedidosServices {
+    public Pedidos getAllPedidos();
 }

@@ -25,13 +25,10 @@ public class UsuariosController {
        usuariosServices = new UsuariosServiceImplement();
    }
    
-   public boolean login(String user, String password){
+   public Usuarios login(String user){
        Usuarios usuario = usuariosServices.getPassword(user);
-       boolean ingreso = false;
-       if(usuario.getContraseña().equals(password)){
-           ingreso= true;
-       }
-       return ingreso;
+      
+       return  usuario;
    }
    
    public List<UsuariosDto> getAllUser(){

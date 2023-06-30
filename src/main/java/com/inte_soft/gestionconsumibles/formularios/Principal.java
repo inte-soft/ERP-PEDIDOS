@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.MasterController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.SplashProceso;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
@@ -31,6 +32,18 @@ public class Principal extends javax.swing.JFrame {
     private MasterController masterController;
     private TConsumiblesEController consumiblesEController;
     private TConsumiblesMController consumiblesMController;
+    private Usuarios usuarios;
+    public Principal(Usuarios usuarios ) {
+        jProgressBar = new JProgressBar(0, 100);
+        initComponents();
+        escritorio = new JDesktopPane();
+        this.setContentPane(escritorio);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        this.usuarios=usuarios;
+        
+    }
+
     public Principal() {
         jProgressBar = new JProgressBar(0, 100);
         initComponents();
@@ -38,8 +51,8 @@ public class Principal extends javax.swing.JFrame {
         this.setContentPane(escritorio);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
-        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,9 +226,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCElectricosMouseClicked
 
     private void cElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cElectricosActionPerformed
-        gestionConsumibles gestionConsumibles = new gestionConsumibles();
+        gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios);
         escritorio.add(gestionConsumibles);
-        gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS");
+        gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS" );
         gestionConsumibles.setVisible(true);
     }//GEN-LAST:event_cElectricosActionPerformed
 
@@ -274,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCMecanicosActionPerformed
 
     private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
-        gestionConsumibles gestionConsumibles = new gestionConsumibles();
+        gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios);
         escritorio.add(gestionConsumibles);
         gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
         gestionConsumibles.setVisible(true);

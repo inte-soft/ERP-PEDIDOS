@@ -5,8 +5,8 @@
 package com.inte_soft.gestionconsumibles.serviceImplement;
 
 import com.inte_soft.gestionconsumibles.dao.MasterDao;
-import com.inte_soft.gestionconsumibles.dao.TipicosConsumiblesEDao;
 import com.inte_soft.gestionconsumibles.dao.TipicosConsumiblesMDao;
+import com.inte_soft.gestionconsumibles.entity.Master;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import com.inte_soft.gestionconsumibles.service.TConsumiblesMService;
 import java.io.File;
@@ -14,7 +14,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,13 +31,13 @@ public class TConsumiblesMServiceImplement implements TConsumiblesMService{
     @Override
     public List<TipicoConsumiblesMecanicos> getAll() {
         tipicosConsumiblesMDao = new TipicosConsumiblesMDao();
-        List<TipicoConsumiblesMecanicos> tipicoConsumiblesElectricoses = tipicosConsumiblesMDao.getAll();
+        List<TipicoConsumiblesMecanicos> tipicoConsumiblesMecanicoses = tipicosConsumiblesMDao.getAll();
         List<TipicoConsumiblesMecanicos> tceslist = new ArrayList();
         
-        for(TipicoConsumiblesMecanicos consumiblesElectricos : tipicoConsumiblesElectricoses){
-            TipicoConsumiblesMecanicos tipicoConsumiblesElectricos = new TipicoConsumiblesMecanicos();
-            tipicoConsumiblesElectricos.setMaster(consumiblesElectricos.getMaster());
-            tceslist.add(tipicoConsumiblesElectricos);
+        for(TipicoConsumiblesMecanicos consumiblesMecanicos : tipicoConsumiblesMecanicoses){
+            TipicoConsumiblesMecanicos tipicoConsumiblesMecanicos = new TipicoConsumiblesMecanicos();
+            tipicoConsumiblesMecanicos.setMaster(consumiblesMecanicos.getMaster());
+            tceslist.add(tipicoConsumiblesMecanicos);
           
         }
         return tceslist;
@@ -46,23 +45,22 @@ public class TConsumiblesMServiceImplement implements TConsumiblesMService{
 
     @Override
     public void create(String string) {
-            String excelFilePath = string;
-        masterDao = new MasterDao();
-        TipicosConsumiblesMDao tipicosConsumiblesMDao = new TipicosConsumiblesMDao();
+          String excelFilePath = string;
+        
+        tipicosConsumiblesMDao = new TipicosConsumiblesMDao();
         tipicosConsumiblesMDao.deleteAll();
         try(FileInputStream fileInpuStream = new FileInputStream(new File(excelFilePath));
             Workbook workbook = new XSSFWorkbook(fileInpuStream)){
             
             Sheet sheet = (Sheet) workbook.getSheetAt(0);
-            TipicoConsumiblesMecanicos tipicoConsumiblesMecanicos = new TipicoConsumiblesMecanicos();
             for(Row row :sheet){
-                Optional <TipicoConsumiblesMecanicos> currenttipicosOptional = Optional.ofNullable(
-                        tipicosConsumiblesMDao.findById(row.getCell(0).toString()));
-                if(currenttipicosOptional.isPresent()){
-                tipicoConsumiblesMecanicos.setMaster(masterDao.findById(row.getCell(0).toString()));
-                
+                TipicoConsumiblesMecanicos tipicoConsumiblesMecanicos = new TipicoConsumiblesMecanicos();
+                masterDao = new MasterDao();
+                Master master = masterDao.findById(row.getCell(0).toString());
+                tipicoConsumiblesMecanicos.setMaster(master);
+                tipicosConsumiblesMDao = new TipicosConsumiblesMDao();
                 tipicosConsumiblesMDao.create(tipicoConsumiblesMecanicos);
-                }
+                
                   
             }
                 
@@ -70,6 +68,7 @@ public class TConsumiblesMServiceImplement implements TConsumiblesMService{
             } catch (IOException ex) {
             Logger.getLogger(MasterServiceImplement.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }}
+    }
+}
     
 

@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * @author alejo
  */
 @Entity
-@Table(name = "tipico_consumibles_electricos")
+@Table(name = "tipico_consumibles_mecanicos")
 public class TipicoConsumiblesMecanicos {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

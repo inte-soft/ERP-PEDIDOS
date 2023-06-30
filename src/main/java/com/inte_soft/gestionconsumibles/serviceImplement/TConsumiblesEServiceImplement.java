@@ -35,7 +35,6 @@ public class TConsumiblesEServiceImplement implements  TConsumiblesEService{
     @Override
     public void create(String string) {
         String excelFilePath = string;
-        masterDao = new MasterDao();
         tipicosConsumiblesEDao = new TipicosConsumiblesEDao();
         tipicosConsumiblesEDao.deleteAll();
         try(FileInputStream fileInpuStream = new FileInputStream(new File(excelFilePath));
@@ -43,7 +42,8 @@ public class TConsumiblesEServiceImplement implements  TConsumiblesEService{
             
             Sheet sheet = (Sheet) workbook.getSheetAt(0);
             for(Row row :sheet){
-                 TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
+                TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
+                masterDao = new MasterDao();
                 Master master = masterDao.findById(row.getCell(0).toString());
                 tipicoConsumiblesElectricos.setMaster(master);
                 tipicosConsumiblesEDao = new TipicosConsumiblesEDao();

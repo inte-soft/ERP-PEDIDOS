@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -166,8 +167,11 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Introduzca usuario y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }else{
         usuariosController = new UsuariosController();
-        if(usuariosController.login(txtUsuario.getText(),jPasswordField1.getText())){
-            Principal principal = new Principal();
+        Usuarios usuario = usuariosController.login(txtUsuario.getText());
+        
+       if(usuario.getContraseña().equals(new  String(password))){
+        
+            Principal principal = new Principal(usuario);
             principal.setVisible(true);
             this.dispose();
             

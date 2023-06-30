@@ -50,15 +50,28 @@ public class MasterServiceImplement implements MasterService {
                 master.setReferencia(row.getCell(3).toString());
                 master.setMarca(row.getCell(4).toString());
                 master.setUnidad(row.getCell(5).toString());
-                master.setPrecio_lista(row.getCell(6).toString());
+                master.setPrecio_lista(row.getCell(6).getNumericCellValue());
                 master.setFecha_actualizacion(row.getCell(7).toString());
-                master.setDescuento_basico(row.getCell(8).toString());
-                master.setDescuento_proyecto(row.getCell(9).toString());
-                master.setPrecio_descuento(row.getCell(10).toString());
-                master.setPrecio_descuento_proyecto(row.getCell(11).toString());
-                master.setPrecio_ultima_compra(row.getCell(12).toString());
+                master.setDescuento_basico(row.getCell(8).getNumericCellValue());
+                master.setDescuento_proyecto(row.getCell(9).getNumericCellValue());
+                master.setPrecio_ultima_compra(row.getCell(10).getNumericCellValue());
                     
                 masterDao.merge(master);
+                }else{
+                master.setCodigo(row.getCell(0).toString());
+                master.setDescripcion(row.getCell(1).toString());
+                master.setTipo(row.getCell(2).toString());
+                master.setReferencia(row.getCell(3).toString());
+                master.setMarca(row.getCell(4).toString());
+                master.setUnidad(row.getCell(5).toString());
+                master.setPrecio_lista(row.getCell(6).getNumericCellValue());
+                master.setFecha_actualizacion(row.getCell(7).toString());
+                master.setDescuento_basico(row.getCell(8).getNumericCellValue());
+                master.setDescuento_proyecto(row.getCell(9).getNumericCellValue());
+                master.setPrecio_ultima_compra(row.getCell(10).getNumericCellValue());
+                    
+                masterDao.createMaster(master);
+                    
                 }
                   
             }
@@ -89,13 +102,11 @@ public class MasterServiceImplement implements MasterService {
                 master.setReferencia(row.getCell(3).toString());
                 master.setMarca(row.getCell(4).toString());
                 master.setUnidad(row.getCell(5).toString());
-                master.setPrecio_lista(row.getCell(6).toString());
+                master.setPrecio_lista(row.getCell(6).getNumericCellValue());
                 master.setFecha_actualizacion(row.getCell(7).toString());
-                master.setDescuento_basico(row.getCell(8).toString());
-                master.setDescuento_proyecto(row.getCell(9).toString());
-                master.setPrecio_descuento(row.getCell(10).toString());
-                master.setPrecio_descuento_proyecto(row.getCell(11).toString());
-                master.setPrecio_ultima_compra(row.getCell(12).toString());
+                master.setDescuento_basico(row.getCell(8).getNumericCellValue());
+                master.setDescuento_proyecto(row.getCell(9).getNumericCellValue());
+                master.setPrecio_ultima_compra(row.getCell(12).getNumericCellValue());
                     
                 masterDao.createMaster(master);
                   
@@ -107,5 +118,21 @@ public class MasterServiceImplement implements MasterService {
             }
      
         }
+
+    @Override
+    public Master getByCode(String string) {
+        MasterDao masterDao = new MasterDao();
+        Master master = new Master();
+        Optional <Master> currentMaster = Optional.ofNullable(
+                        masterDao.findById(string));
+        
+        if (currentMaster.isPresent()) {
+            
+            return masterDao.findById(string);
+        }else{
+            return master;
+        }
+
+    }
     
 }

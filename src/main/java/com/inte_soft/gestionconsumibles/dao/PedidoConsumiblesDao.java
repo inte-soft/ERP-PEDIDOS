@@ -21,7 +21,7 @@ public class PedidoConsumiblesDao {
     private final EntityManagerFactory entityManagerFactory;
     
     public PedidoConsumiblesDao(){
-        entityManagerFactory = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         
     }
     
@@ -41,5 +41,14 @@ public class PedidoConsumiblesDao {
         entityManager.close();
         return pedidoConsumiblesList;
     }
+    
+    public void createPedido(PedidoConsumibles pedidoConsumibles){
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       entityManager.getTransaction().begin();
+       entityManager.persist(pedidoConsumibles);
+       entityManager.getTransaction().commit();
+       entityManager.close();
+       
+   }
     
 }

@@ -11,6 +11,7 @@ import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author Inte-Soft
@@ -22,10 +23,12 @@ public class Consumibles extends javax.swing.JDialog {
      */
     private String tipoConsumibles;
     private String item;
-    public Consumibles(String tipoConsumibles, String item) {
+    private gestionConsumibles gConsumibles;
+    public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles) {
         initComponents();
         this.tipoConsumibles = tipoConsumibles;
         this.item = item;
+        this.gConsumibles = gConsumibles;
         this.loadConsumibles(this.tipoConsumibles, this.item);
     }
 
@@ -58,7 +61,7 @@ public class Consumibles extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Codigo", "Descripción", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
+                "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -73,6 +76,11 @@ public class Consumibles extends javax.swing.JDialog {
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton2.setText("Subir Pedido");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("LISTADO CONSUMIBLES");
@@ -111,6 +119,33 @@ public class Consumibles extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (this.tbListadoConsumibles.isEditing()) {
+                    this.tbListadoConsumibles.getCellEditor().stopCellEditing();
+                }
+        for (int i = 0; i < this.tbListadoConsumibles.getRowCount(); i++) {
+            if (this.tbListadoConsumibles.getValueAt(i, 7) != null ) {
+                    Object[] row = new Object[8];
+                    row[0] = this.tbListadoConsumibles.getValueAt(i, 0);
+                    row[1] = this.tbListadoConsumibles.getValueAt(i, 1);
+                    row[2] = this.tbListadoConsumibles.getValueAt(i, 2);
+                    row[3] = this.tbListadoConsumibles.getValueAt(i, 3);
+                    row[4] = this.tbListadoConsumibles.getValueAt(i, 4);
+                    row[5] = this.tbListadoConsumibles.getValueAt(i, 5);
+                    row[6] = this.tbListadoConsumibles.getValueAt(i, 6);
+                    row[7] = this.tbListadoConsumibles.getValueAt(i, 7);
+                    
+                    
+                    gConsumibles.addConsumiblesPedido(row);
+                
+                
+                
+            }
+            
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,9 +194,9 @@ public class Consumibles extends javax.swing.JDialog {
                     item,
                     consumiblesElectricos.getMaster().getCodigo(),
                     consumiblesElectricos.getMaster().getDescripcion(),
-                    consumiblesElectricos.getMaster().getMarca(),
                     consumiblesElectricos.getMaster().getTipo(),
                     consumiblesElectricos.getMaster().getReferencia(),
+                    consumiblesElectricos.getMaster().getMarca(),
                     consumiblesElectricos.getMaster().getUnidad(),
                 };
                 model.addRow(rowData);

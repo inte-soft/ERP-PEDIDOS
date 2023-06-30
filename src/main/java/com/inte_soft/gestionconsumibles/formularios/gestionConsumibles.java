@@ -4,6 +4,13 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
+import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -15,9 +22,10 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     /**
      * Creates new form gestionConsumibles
      */
-    
-    public gestionConsumibles() {
+    Usuarios usuarios;
+    public gestionConsumibles(Usuarios usuarios) {
         initComponents();
+        this.usuarios = usuarios;
     }
 
     /**
@@ -84,6 +92,11 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Enviar Pedido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         close.setText("Close");
         close.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +162,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
-        Consumibles consumibles = new Consumibles(this.cbSeleccion.getSelectedItem().toString(),this.item.getText());
+        Consumibles consumibles = new Consumibles(this.cbSeleccion.getSelectedItem().toString(),this.item.getText(), this);
         consumibles.setModal(true);
         consumibles.setVisible(true);
         this.txtOt.setEditable(false);
@@ -161,6 +174,35 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_closeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        List<PedidoConsumibles> listPedidoConsumibleses = new ArrayList<>();
+        if (this.jTable1.isEditing()) {
+                    this.jTable1.getCellEditor().stopCellEditing();
+                }
+        for (int i = 0; i < this.jTable1.getRowCount(); i++) {
+            PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
+            
+            pedidoConsumibles.setOt(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
+            pedidoConsumibles.setItem(jTable1.getValueAt(i, 1).toString());
+            pedidoConsumibles.setCodigo(jTable1.getValueAt(i, 2).toString());
+            pedidoConsumibles.setDescripcion(jTable1.getValueAt(i, 3).toString());
+            pedidoConsumibles.setTipo(jTable1.getValueAt(i, 4).toString());
+            pedidoConsumibles.setReferencia(jTable1.getValueAt(i, 5).toString());
+            pedidoConsumibles.setMarca(jTable1.getValueAt(i, 6).toString());
+            pedidoConsumibles.setUnidad(jTable1.getValueAt(i, 7).toString());
+            pedidoConsumibles.setCantidad(Integer.parseInt(jTable1.getValueAt(i, 8).toString()));
+                
+           listPedidoConsumibleses.add(pedidoConsumibles);
+            
+        }
+        pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
+                this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
+                this.cbSeleccion1.getSelectedItem().toString());
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGestionar;
@@ -180,5 +222,21 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
 
     void tipoConsumibles(String tipo) {
         this.cbSeleccion.addItem(tipo);
+    }
+    public void addConsumiblesPedido(Object[] row2){
+        DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
+        Object[] row = new Object[jTable1.getColumnCount()];
+        row[0] = this.txtOt.getText();
+        row[1] = row2[0];
+        row[2] = row2[1];
+        row[3] = row2[2];
+        row[4] = row2[3];
+        row[5] = row2[4];
+        row[6] = row2[5];
+        row[7] = row2[6];
+        row[8] = row2[7];
+        row[9] = this.cbSeleccion1.getSelectedItem();
+        row[10] = this.cbSeleccion.getSelectedItem();
+        model.addRow(row);
     }
 }

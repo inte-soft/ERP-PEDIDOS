@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,31 +22,42 @@ import javax.persistence.Table;
  * @author alejo
  */
 @Entity
-@Table(name = "PEDIDO_CONSUMIBLES")
+@Table(name = "PEDIDOS_CONSUMIBLES")
 public class PedidoConsumibles implements java.io.Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_PEDIDO_CONSUMIBLES")
     private BigInteger  idPedidoConsumibles;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PEDIDO")
     private Pedidos pedidos;
+    @Column(name = "OT")
     private int ot;
-    private int item;
-    private Integer codigo;
+    @Column(name = "ITEM")
+    private String item;
+    @Column(name = "CODIGO")
+    private String codigo;
+    @Column(name = "DESCRIPCION")
     private String descripcion;
+    @Column(name = "TIPO")
     private String tipo;
+    @Column(name = "REFERENCIA")
     private String referencia;
+    @Column(name = "MARCA")
     private String marca;
+    @Column(name = "UNIDAD")
     private String unidad;
-    private String cantidad;
-    private Integer valor;
-    private String inicial_adicional;
-    private Date fecha;
-    private String operation;
+    @Column(name = "CANTIDAD")
+    private int cantidad;
+    @Column(name = "VALOR")
+    private double valor;
+
 
     public PedidoConsumibles() {
     }
 
-    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, int ot, int item, Integer codigo, String descripcion, String tipo, String referencia, String marca, String unidad, String cantidad, Integer valor, String inicial_adicional, Date fecha, String operation) {
-        this.idPedidoConsumibles = idPedidoConsumibles;
+    public PedidoConsumibles(Pedidos pedidos, int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, int cantidad, double valor) {
         this.pedidos = pedidos;
         this.ot = ot;
         this.item = item;
@@ -56,27 +69,21 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.unidad = unidad;
         this.cantidad = cantidad;
         this.valor = valor;
-        this.inicial_adicional = inicial_adicional;
-        this.fecha = fecha;
-        this.operation = operation;
     }
-    
-    @Id
-    @Column(name= "ID_PEDIDO_CONSUMIBLES", unique = true, nullable = false)
+
     public BigInteger getIdPedidoConsumibles() {
         return idPedidoConsumibles;
     }
-    
+
     public void setIdPedidoConsumibles(BigInteger idPedidoConsumibles) {
         this.idPedidoConsumibles = idPedidoConsumibles;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PEDIDO")
-    public Pedidos getId_pedido() {
+
+    public Pedidos getPedidos() {
         return pedidos;
     }
 
-    public void setId_pedido(Pedidos pedidos) {
+    public void setPedidos(Pedidos pedidos) {
         this.pedidos = pedidos;
     }
 
@@ -88,19 +95,19 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.ot = ot;
     }
 
-    public int getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(int item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -144,47 +151,23 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.unidad = unidad;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Integer getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
-
-    public String getInicial_adicional() {
-        return inicial_adicional;
-    }
-
-    public void setInicial_adicional(String inicial_adicional) {
-        this.inicial_adicional = inicial_adicional;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
     
     
-    
+   
     
 }
