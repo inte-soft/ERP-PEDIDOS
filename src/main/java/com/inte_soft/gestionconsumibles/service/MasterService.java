@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles.service;
 
 import com.inte_soft.gestionconsumibles.entity.Master;
+import java.util.List;
 
 /**
  *
@@ -14,8 +15,9 @@ import com.inte_soft.gestionconsumibles.entity.Master;
 public interface MasterService {
     
     public void getAll();
-    public void updateMaster(String string);
-    public void createMaster(String string);
-    public Master getByCode(String string);
+    public void updateMaster(String filepath);
+    public void createMaster(String filepath);
+    public Master getByCode(String code);
+    public List<Object[]> filteredSearch (String codigo, String descripcion, String referencia);
     
 }

@@ -11,6 +11,7 @@ import com.inte_soft.gestionconsumibles.util.EvaluateCell;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,6 +134,12 @@ public class MasterServiceImplement implements MasterService {
             return master;
         }
 
+    }
+
+    @Override
+    public List<Object[]> filteredSearch(String codigo, String descripcion, String referencia) {
+        MasterDao masterDao = new MasterDao();
+        return masterDao.filteredSearch(codigo, descripcion, referencia);
     }
     
 }

@@ -6,9 +6,12 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
+import com.inte_soft.gestionconsumibles.entity.Master;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
+import java.awt.Frame;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -51,6 +54,7 @@ public class Consumibles extends javax.swing.JDialog {
         tbListadoConsumibles = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -85,6 +89,13 @@ public class Consumibles extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("LISTADO CONSUMIBLES");
 
+        jButton3.setText("Agregar Consumible");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +105,9 @@ public class Consumibles extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jButton2)
-                        .addGap(0, 583, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -102,7 +115,7 @@ public class Consumibles extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(246, 246, 246)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +125,9 @@ public class Consumibles extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -146,6 +161,11 @@ public class Consumibles extends javax.swing.JDialog {
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        AgregarConsumible agregarConsumible = new AgregarConsumible(new Frame(), true, this.tbListadoConsumibles);
+        agregarConsumible.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,12 +240,16 @@ public class Consumibles extends javax.swing.JDialog {
             }
         }
     }
+    public  JTable getTable(){
+        return this.tbListadoConsumibles;
+    }
            
      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListadoConsumibles;
