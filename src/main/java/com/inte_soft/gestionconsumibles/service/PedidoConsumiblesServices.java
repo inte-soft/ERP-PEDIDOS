@@ -17,6 +17,6 @@ import java.util.List;
  * @author alejo
  */
 public interface PedidoConsumiblesServices {
-   public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona , String Operacion);
+   public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona , String Operacion, String ot);
     
 }

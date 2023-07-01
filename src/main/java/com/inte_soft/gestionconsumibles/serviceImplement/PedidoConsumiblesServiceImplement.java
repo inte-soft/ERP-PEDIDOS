@@ -21,10 +21,11 @@ import java.util.List;
 public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServices{
     private PedidoConsumiblesDao pedidoConsumiblesDao;
     @Override
-    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion) {
+    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion, String ot) {
         MasterDao masterDao = new MasterDao();
         PedidosDao pedidosDao = new PedidosDao();
         Pedidos pedidos = new Pedidos();
+        pedidos.setOt(Integer.parseInt(ot));
         pedidos.setPersona(persona);
         pedidos.setArea(area);
         pedidos.setOperacion(Operacion);
@@ -35,7 +36,6 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
             try{
             PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
             pedidoConsumibles.setPedidos(pedidosPersist);
-            pedidoConsumibles.setOt(pc.getOt());
             pedidoConsumibles.setItem(pc.getItem());
             pedidoConsumibles.setCodigo(pc.getCodigo());
             pedidoConsumibles.setDescripcion(pc.getDescripcion());

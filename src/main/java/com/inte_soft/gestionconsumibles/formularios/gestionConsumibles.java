@@ -183,7 +183,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.jTable1.getRowCount(); i++) {
             PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
             
-            pedidoConsumibles.setOt(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
             pedidoConsumibles.setItem(jTable1.getValueAt(i, 1).toString());
             pedidoConsumibles.setCodigo(jTable1.getValueAt(i, 2).toString());
             pedidoConsumibles.setDescripcion(jTable1.getValueAt(i, 3).toString());
@@ -198,7 +197,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         }
         pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
                 this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
-                this.cbSeleccion1.getSelectedItem().toString());
+                this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     

@@ -21,8 +21,8 @@ public class PedidoConsumiblesController {
         pedidoConsumiblesServices = new PedidoConsumiblesServiceImplement();
     }
     
-    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion){
-        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion);
+    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion, String ot){
+        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot);
     }
     
 }

@@ -32,8 +32,6 @@ public class PedidoConsumibles implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PEDIDO")
     private Pedidos pedidos;
-    @Column(name = "OT")
-    private int ot;
     @Column(name = "ITEM")
     private String item;
     @Column(name = "CODIGO")
@@ -59,7 +57,6 @@ public class PedidoConsumibles implements java.io.Serializable {
 
     public PedidoConsumibles(Pedidos pedidos, int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, int cantidad, double valor) {
         this.pedidos = pedidos;
-        this.ot = ot;
         this.item = item;
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -85,14 +82,6 @@ public class PedidoConsumibles implements java.io.Serializable {
 
     public void setPedidos(Pedidos pedidos) {
         this.pedidos = pedidos;
-    }
-
-    public int getOt() {
-        return ot;
-    }
-
-    public void setOt(int ot) {
-        this.ot = ot;
     }
 
     public String getItem() {

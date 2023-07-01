@@ -27,6 +27,8 @@ public class Pedidos  implements java.io.Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PEDIDO")
     private int idPedido;
+    @Column(name = "OT")
+    private int ot;
     @Column(name = "PERSONA_ELABORA")
     private String persona;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,8 +45,9 @@ public class Pedidos  implements java.io.Serializable{
     public Pedidos() {
     }
 
-    public Pedidos(String persona, AreaCompania area, Date fecha, String operacion, boolean revisado) {
+    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado) {
         this.persona = persona;
+        this.ot = ot;
         this.area = area;
         this.fecha = fecha;
         this.operacion = operacion;
@@ -57,6 +60,14 @@ public class Pedidos  implements java.io.Serializable{
 
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
+    }
+
+    public int getOt() {
+        return ot;
+    }
+
+    public void setOt(int ot) {
+        this.ot = ot;
     }
 
     public String getPersona() {
