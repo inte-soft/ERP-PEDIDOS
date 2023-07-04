@@ -146,6 +146,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Almacen");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -292,6 +297,12 @@ public class Principal extends javax.swing.JFrame {
         gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
         gestionConsumibles.setVisible(true);
     }//GEN-LAST:event_cMecanicosActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen();
+        escritorio.add(pedidosAlmacen);
+        pedidosAlmacen.setVisible(true);
+    }//GEN-LAST:event_jMenu2ActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
