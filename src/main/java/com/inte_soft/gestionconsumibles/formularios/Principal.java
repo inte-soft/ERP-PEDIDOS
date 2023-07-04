@@ -74,7 +74,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         cargarCElectricos = new javax.swing.JMenuItem();
         cargarCMecanicos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jAlmacen = new javax.swing.JMenu();
+        jMAlmacen = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -145,13 +146,17 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Almacen");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jAlmacen.setText("Almacen");
+
+        jMAlmacen.setText("Almacen");
+        jMAlmacen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                jMAlmacenActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jAlmacen.add(jMAlmacen);
+
+        jMenuBar1.add(jAlmacen);
 
         setJMenuBar(jMenuBar1);
 
@@ -298,11 +303,11 @@ public class Principal extends javax.swing.JFrame {
         gestionConsumibles.setVisible(true);
     }//GEN-LAST:event_cMecanicosActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void jMAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlmacenActionPerformed
         PedidosAlmacen pedidosAlmacen = new PedidosAlmacen();
         escritorio.add(pedidosAlmacen);
         pedidosAlmacen.setVisible(true);
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    }//GEN-LAST:event_jMAlmacenActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
@@ -356,8 +361,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cMecanicos;
     private javax.swing.JMenuItem cargarCElectricos;
     private javax.swing.JMenuItem cargarCMecanicos;
+    private javax.swing.JMenu jAlmacen;
+    private javax.swing.JMenuItem jMAlmacen;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
