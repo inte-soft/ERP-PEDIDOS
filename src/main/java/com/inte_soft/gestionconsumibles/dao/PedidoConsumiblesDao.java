@@ -4,12 +4,15 @@
  */
 package com.inte_soft.gestionconsumibles.dao;
 
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -51,4 +54,67 @@ public class PedidoConsumiblesDao {
        
    }
     
+    public List<ConsumiblesDto> filteredSearch(Integer ot, String descripcion) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+
+    String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDto(p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)) " +
+            "FROM PedidoConsumibles pc " +
+            "JOIN pc.pedidos p " +
+            "WHERE 1=1 ";
+
+    if (ot != null) {
+        queryString += "AND p.ot = :ot ";
+    }
+    if (descripcion != null && !descripcion.isEmpty()) {
+        queryString += "AND pc.descripcion LIKE :descripcion ";
+    }
+    
+    queryString += "GROUP BY p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+
+    TypedQuery<ConsumiblesDto> query = entityManager.createQuery(queryString, ConsumiblesDto.class);
+
+    if (ot != null) {
+        query.setParameter("ot", ot);
+    }
+    if (descripcion != null && !descripcion.isEmpty()) {
+        query.setParameter("descripcion", "%" + descripcion + "%");
+    }
+
+    List<ConsumiblesDto> resultList = query.getResultList();
+
+    entityManager.getTransaction().commit();
+    entityManager.close();
+
+    return resultList;
+}
+
+    public List<ConsumiblesDtoOt> filteredSearchByOt(Integer ot) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+
+    String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt(p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)) " +
+            "FROM PedidoConsumibles pc " +
+            "JOIN pc.pedidos p " +
+            "WHERE 1=1 ";
+
+    if (ot != null) {
+        queryString += "AND p.ot = :ot ";
+    }
+    
+    queryString += "GROUP BY p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+
+    TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
+
+    if (ot != null) {
+        query.setParameter("ot", ot);
+    }
+
+    List<ConsumiblesDtoOt> resultList = query.getResultList();
+
+    entityManager.getTransaction().commit();
+    entityManager.close();
+
+    return resultList;
+}
 }

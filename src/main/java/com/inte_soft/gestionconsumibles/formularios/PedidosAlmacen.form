@@ -166,15 +166,15 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="jTxtOt" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField2" min="-2" pref="239" max="-2" attributes="0"/>
+                              <Component id="jTxtDescripcion" min="-2" pref="239" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton2" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="jBDesplegar" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -188,11 +188,11 @@
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtOt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="jBDesplegar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane4" pref="476" max="32767" attributes="0"/>
@@ -216,9 +216,9 @@
                         <Column editable="false" title="OT" type="java.lang.Object"/>
                         <Column editable="false" title="Codigo" type="java.lang.Object"/>
                         <Column editable="false" title="Descripcion" type="java.lang.Object"/>
-                        <Column editable="false" title="Marca" type="java.lang.Object"/>
                         <Column editable="false" title="Tipo" type="java.lang.Object"/>
                         <Column editable="false" title="Referencia" type="java.lang.Object"/>
+                        <Column editable="false" title="Marca" type="java.lang.Object"/>
                         <Column editable="false" title="Unidad" type="java.lang.Object"/>
                         <Column editable="false" title="Cantidad" type="java.lang.Object"/>
                       </Table>
@@ -279,24 +279,30 @@
                 <Property name="text" type="java.lang.String" value="OT:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="jTxtOt">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descripcion:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="jTxtDescripcion">
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="jBDesplegar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Desplegar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDesplegarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

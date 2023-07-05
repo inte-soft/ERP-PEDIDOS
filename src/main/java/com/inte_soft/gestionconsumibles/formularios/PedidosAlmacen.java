@@ -4,6 +4,13 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Inte-Soft
@@ -36,11 +43,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTxtOt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTxtDescripcion = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBDesplegar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
@@ -113,7 +120,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "OT", "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
+                "OT", "Codigo", "Descripcion", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -131,8 +138,18 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jLabel2.setText("Descripcion:");
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Desplegar");
+        jBDesplegar.setText("Desplegar");
+        jBDesplegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDesplegarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,15 +162,15 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtOt, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBDesplegar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -163,11 +180,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtOt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBDesplegar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                 .addContainerGap())
@@ -253,9 +270,42 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbn_verPedidoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        DefaultTableModel model =  (DefaultTableModel) jTable4.getModel();
+        List<ConsumiblesDto> listConsumiblesDto = pedidoConsumiblesController.consumiblesPedidosSearch(
+                Integer.parseInt(this.jTxtOt.getText()), this.jTxtDescripcion.getText());
+        for (ConsumiblesDto consumiblesDto : listConsumiblesDto) {
+            Object[] rowData  = {
+                consumiblesDto.getOt(),
+                consumiblesDto.getCodigo(),
+                consumiblesDto.getDescripcion(),
+                consumiblesDto.getTipo(),
+                consumiblesDto.getReferencia(),
+                consumiblesDto.getMarca(),
+                consumiblesDto.getUnidad(),
+                consumiblesDto.getCantidad()
+            };
+                
+        
+            model.addRow(rowData);
+        
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jBDesplegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesplegarActionPerformed
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        int row = this.jTable4.getSelectedRow();
+        List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearchOt(
+                Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()));
+        Consumibles consumibles = new Consumibles("VISUALIZACION", listConsumiblesDtoOt);
+        consumibles.setVisible(true);
+        
+    }//GEN-LAST:event_jBDesplegarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBDesplegar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -269,8 +319,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTxtDescripcion;
+    private javax.swing.JTextField jTxtOt;
     private javax.swing.JButton tbn_verPedido;
     // End of variables declaration//GEN-END:variables
 }

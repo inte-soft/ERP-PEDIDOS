@@ -6,7 +6,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
-import com.inte_soft.gestionconsumibles.entity.Master;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import java.awt.Frame;
@@ -33,6 +33,15 @@ public class Consumibles extends javax.swing.JDialog {
         this.item = item;
         this.gConsumibles = gConsumibles;
         this.loadConsumibles(this.tipoConsumibles, this.item);
+    }
+    
+    public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts) {
+        initComponents();
+        if(visualizacion.equals("VISUALIZACION")){
+            jButton2.setVisible(false);
+            jButton3.setVisible(false);
+        }
+        this.loadDespliegue(listcConsumiblesDtoOts);
     }
 
     public Consumibles() {
@@ -238,6 +247,25 @@ public class Consumibles extends javax.swing.JDialog {
                 };
                 model.addRow(rowData);
             }
+        }
+    }
+    public void loadDespliegue(List<ConsumiblesDtoOt> listcConsumiblesDtoOts){
+        DefaultTableModel model =  (DefaultTableModel) tbListadoConsumibles.getModel();
+        for (ConsumiblesDtoOt consumiblesDto : listcConsumiblesDtoOts) {
+            Object[] rowData  = {
+                consumiblesDto.getItem(),
+                consumiblesDto.getCodigo(),
+                consumiblesDto.getDescripcion(),
+                consumiblesDto.getTipo(),
+                consumiblesDto.getReferencia(),
+                consumiblesDto.getMarca(),
+                consumiblesDto.getUnidad(),
+                consumiblesDto.getCantidad()
+            };
+                
+        
+            model.addRow(rowData);
+        
         }
     }
     public  JTable getTable(){

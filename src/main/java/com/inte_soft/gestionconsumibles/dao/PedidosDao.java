@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.dao;
 
 
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -46,4 +47,6 @@ public class PedidosDao {
        entityManager.close();
        return pedidos;
     }
+    
+  
 }

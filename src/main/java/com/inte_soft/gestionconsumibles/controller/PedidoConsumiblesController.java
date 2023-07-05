@@ -4,10 +4,11 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
-import com.inte_soft.gestionconsumibles.serviceImplement.MasterServiceImplement;
 import com.inte_soft.gestionconsumibles.serviceImplement.PedidoConsumiblesServiceImplement;
 import java.util.List;
 
@@ -25,4 +26,10 @@ public class PedidoConsumiblesController {
         pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot);
     }
     
+    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion){
+        return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion);
+    }
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearchOt(int ot){
+        return pedidoConsumiblesServices.consumiblesPedidosSearchByOt(ot);
+    }
 }
