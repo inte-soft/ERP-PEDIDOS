@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -48,5 +49,34 @@ public class PedidosDao {
        return pedidos;
     }
     
-  
+    public List<Pedidos> findWhitoutRevision(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT p " +
+                "FROM Pedidos p " +
+                "WHERE p.revisado = false ";
+
+        TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
+
+
+        List<Pedidos> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
+    }
+    
+    public void checkPedidos(Pedidos pedidos){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       
+        entityManager.getTransaction().begin();
+
+        entityManager.merge(pedidos);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+    }
 }

@@ -9,6 +9,7 @@ import com.inte_soft.gestionconsumibles.dao.PedidoConsumiblesDao;
 import com.inte_soft.gestionconsumibles.dao.PedidosDao;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
@@ -71,6 +72,12 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchByOt(int ot) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filteredSearchByOt(ot);
+    }
+
+    @Override
+    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.filterSearchByRev(listPedidos);
     }
     
 }

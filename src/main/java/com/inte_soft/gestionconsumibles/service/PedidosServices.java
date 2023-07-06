@@ -5,11 +5,15 @@
 package com.inte_soft.gestionconsumibles.service;
 
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import java.util.List;
 
 /**
  *
  * @author alejo
  */
 public interface PedidosServices {
-    public Pedidos getAllPedidos();
+    
+    public void checkPedidos(Pedidos pedidos);
+    
+    public List<Pedidos> findWhithoutRevison();
 }

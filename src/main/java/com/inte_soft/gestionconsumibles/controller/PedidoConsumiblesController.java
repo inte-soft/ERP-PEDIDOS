@@ -4,12 +4,19 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
+import com.inte_soft.gestionconsumibles.dao.PedidosDao;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
+import com.inte_soft.gestionconsumibles.service.PedidosServices;
 import com.inte_soft.gestionconsumibles.serviceImplement.PedidoConsumiblesServiceImplement;
+import com.inte_soft.gestionconsumibles.serviceImplement.PedidosServiceImplement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,8 +25,10 @@ import java.util.List;
  */
 public class PedidoConsumiblesController {
     private PedidoConsumiblesServices pedidoConsumiblesServices;
+    private PedidosServices pedidosServices; 
     public PedidoConsumiblesController() {
         pedidoConsumiblesServices = new PedidoConsumiblesServiceImplement();
+        pedidosServices = new PedidosServiceImplement();
     }
     
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion, String ot){
@@ -32,4 +41,16 @@ public class PedidoConsumiblesController {
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchOt(int ot){
         return pedidoConsumiblesServices.consumiblesPedidosSearchByOt(ot);
     }
+    
+    public HashMap consumiblesWhithoutCheck(){
+        HashMap<Integer,ArrayList<?>> map = new HashMap<>();
+        List<Pedidos> listPedidos = pedidosServices.findWhithoutRevison();
+        List<ConsumiblesDtoRev> listConsumiblesDtoRevs = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(listPedidos);
+        
+        map.put(1, new ArrayList<>(listPedidos));
+        map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
+        
+        return map;
+    }
+    
 }

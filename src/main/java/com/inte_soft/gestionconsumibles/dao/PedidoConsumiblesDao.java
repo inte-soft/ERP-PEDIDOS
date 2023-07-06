@@ -6,7 +6,9 @@ package com.inte_soft.gestionconsumibles.dao;
 
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -117,4 +119,42 @@ public class PedidoConsumiblesDao {
 
     return resultList;
 }
+    
+        public List<ConsumiblesDtoRev> filterSearchByRev(List<Pedidos> listPedidos) {
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev( pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)) " +
+                    "FROM PedidoConsumibles pc " +
+                    "JOIN pc.pedidos p " +
+                    "WHERE p.revisado = false ";
+
+            if (listPedidos != null && !listPedidos.isEmpty()) {
+                queryString += "AND p.idPedido IN (";
+                for (int i = 0; i < listPedidos.size(); i++) {
+                    queryString += ":idPedido" + i;
+                    if (i < listPedidos.size() - 1) {
+                        queryString += ",";
+                    }
+                }
+                queryString += ")";
+            }
+
+            queryString += "GROUP BY pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+
+            TypedQuery<ConsumiblesDtoRev> query = entityManager.createQuery(queryString, ConsumiblesDtoRev.class);
+
+            if (listPedidos != null && !listPedidos.isEmpty()) {
+                for (int i = 0; i < listPedidos.size(); i++) {
+                    query.setParameter("idPedido" + i, listPedidos.get(i).getIdPedido());
+                }
+            }
+
+            List<ConsumiblesDtoRev> resultList = query.getResultList();
+
+            entityManager.getTransaction().commit();
+            entityManager.close();
+
+            return resultList;
+        }
 }

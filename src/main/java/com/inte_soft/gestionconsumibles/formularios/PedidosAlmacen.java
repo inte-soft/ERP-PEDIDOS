@@ -7,7 +7,10 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,8 +24,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
      * Creates new form PedidosAlmacen
      * inicializar proyecto
      */
+    private HashMap<Integer, ArrayList<?>> map;
     public PedidosAlmacen() {
         initComponents();
+        map = new HashMap<>();
+        
     }
 
     /**
@@ -52,6 +58,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
+        jBActualizar = new javax.swing.JButton();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -197,11 +204,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "OT", "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
+                "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -217,24 +224,36 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        jBActualizar.setText("Actualizar");
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBActualizar)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                 .addContainerGap())
@@ -303,7 +322,30 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBDesplegarActionPerformed
 
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        DefaultTableModel model =  (DefaultTableModel) jTable6.getModel();
+        map = pedidoConsumiblesController.consumiblesWhithoutCheck();
+        ArrayList<ConsumiblesDtoRev> listConsumiblesDtoRevs = (ArrayList<ConsumiblesDtoRev>) map.get(2);
+        for (ConsumiblesDtoRev consumiblesDto : listConsumiblesDtoRevs) {
+            Object[] rowData  = {
+                consumiblesDto.getCodigo(),
+                consumiblesDto.getDescripcion(),
+                consumiblesDto.getTipo(),
+                consumiblesDto.getReferencia(),
+                consumiblesDto.getMarca(),
+                consumiblesDto.getUnidad(),
+                consumiblesDto.getCantidad()
+            };
+                
+        
+            model.addRow(rowData);
+        
+        }
+    }//GEN-LAST:event_jBActualizarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBDesplegar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
