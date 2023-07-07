@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
+import com.inte_soft.gestionconsumibles.controller.PedidosController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
@@ -281,6 +282,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private void jBExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportActionPerformed
         ExcelExporter excelExporter = new ExcelExporter();
         excelExporter.exportTable(this.jTable6);
+        List<Pedidos> listPedidos = (List<Pedidos>) this.map.get(1);
+        PedidosController pedidosController = new PedidosController();
+        pedidosController.applyCheck(listPedidos);
+        jBActualizarActionPerformed(null);
+        
         
     }//GEN-LAST:event_jBExportActionPerformed
 
@@ -328,6 +334,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         DefaultTableModel model =  (DefaultTableModel) jTable6.getModel();
+        model.setNumRows(0);
         map = pedidoConsumiblesController.consumiblesWhithoutCheck();
         ArrayList<ConsumiblesDtoRev> listConsumiblesDtoRevs = (ArrayList<ConsumiblesDtoRev>) map.get(2);
         for (ConsumiblesDtoRev consumiblesDto : listConsumiblesDtoRevs) {

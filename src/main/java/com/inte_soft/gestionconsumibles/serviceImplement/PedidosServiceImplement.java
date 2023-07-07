@@ -19,9 +19,14 @@ public class PedidosServiceImplement implements  PedidosServices{
     
 
     @Override
-    public void checkPedidos(Pedidos pedidos) {
-        pedidosDao = new PedidosDao();
-        pedidosDao.checkPedidos(pedidos);
+    public void checkPedidos(List<Pedidos> listPedidos) {
+        for (Pedidos pedidos : listPedidos) {
+            pedidos.setRevisado(true);
+            pedidosDao = new PedidosDao();
+            pedidosDao.checkPedidos(pedidos);
+        }
+        
+        
     }
 
     @Override

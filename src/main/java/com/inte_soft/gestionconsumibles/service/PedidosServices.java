@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface PedidosServices {
     
-    public void checkPedidos(Pedidos pedidos);
+    public void checkPedidos(List<Pedidos> listPedidos);
     
     public List<Pedidos> findWhithoutRevison();
 }
