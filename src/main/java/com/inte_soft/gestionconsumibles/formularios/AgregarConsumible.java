@@ -8,6 +8,7 @@ import com.inte_soft.gestionconsumibles.controller.MasterController;
 import com.inte_soft.gestionconsumibles.entity.Master;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -155,23 +156,28 @@ public class AgregarConsumible extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MasterController masterController = new MasterController();
-        int selectedRow = this.jTable1.getSelectedRow();
-        Master master = masterController.getByCode(this.jTable1.getValueAt(selectedRow, 0).toString());
-        Consumibles consumibles = new Consumibles();
+       int selectedRow = this.jTable1.getSelectedRow();
+        if( selectedRow >= 0){
+            MasterController masterController = new MasterController();
+            Master master = masterController.getByCode(this.jTable1.getValueAt(selectedRow, 0).toString());        
+            DefaultTableModel model =  (DefaultTableModel) this.jTable.getModel();
+            Object[] rowData = {
+                        model.getValueAt(0, 0),
+                        master.getCodigo(),
+                        master.getDescripcion(),
+                        master.getMarca(),
+                        master.getTipo(),
+                        master.getReferencia(),
+                        master.getUnidad(),
+                    };
+            model.addRow(rowData);
+            this.dispose();
+          
+        }else{
+             JOptionPane.showMessageDialog(null, "Seleccione un elemento para agregar" , "Advertencia", JOptionPane.WARNING_MESSAGE);
+           
+        }
         
-        DefaultTableModel model =  (DefaultTableModel) this.jTable.getModel();
-        Object[] rowData = {
-                    model.getValueAt(0, 0),
-                    master.getCodigo(),
-                    master.getDescripcion(),
-                    master.getMarca(),
-                    master.getTipo(),
-                    master.getReferencia(),
-                    master.getUnidad(),
-                };
-        model.addRow(rowData);
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

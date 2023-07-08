@@ -9,6 +9,7 @@ import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -162,11 +163,20 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
+        if(!txtOt.getText().isBlank()
+                && cbSeleccion1.getSelectedItem() != "Selecciona" 
+                && !item.getText().isBlank()){
         Consumibles consumibles = new Consumibles(this.cbSeleccion.getSelectedItem().toString(),this.item.getText(), this);
         consumibles.setModal(true);
         consumibles.setVisible(true);
         this.txtOt.setEditable(false);
         this.cbSeleccion1.setEnabled(false);
+        }else{
+            JOptionPane.showMessageDialog(null,
+                "Debe ingresar OT, Item y selecionar el tipo de pedido",
+                "Advertencia", JOptionPane.WARNING_MESSAGE);            
+        }   
+
         
     }//GEN-LAST:event_btnGestionarActionPerformed
 
