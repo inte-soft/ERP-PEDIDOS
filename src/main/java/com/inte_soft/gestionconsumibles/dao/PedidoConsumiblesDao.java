@@ -35,12 +35,12 @@ public class PedidoConsumiblesDao {
         entityManagerFactory.close();
     }
     
-    public List<PedidoConsumibles> findByIdPedido (String idpedido){
+    public List<PedidoConsumibles> findByIdPedido (int idPedido){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<PedidoConsumibles> pedidoConsumiblesList = entityManager
-                .createQuery("SELECT pc FROM pc WHERE pc.Pedido.idPedido = :idPedido", PedidoConsumibles.class)
-                .setParameter("idPedido", idpedido)
+                .createQuery("SELECT pc FROM PedidoConsumibles pc WHERE pc.pedidos.idPedido = :idPedido", PedidoConsumibles.class)
+                .setParameter("idPedido", idPedido)
                 .getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();

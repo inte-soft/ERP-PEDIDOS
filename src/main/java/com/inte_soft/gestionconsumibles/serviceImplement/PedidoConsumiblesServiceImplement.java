@@ -79,5 +79,11 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filterSearchByRev(listPedidos);
     }
+
+    @Override
+    public List<PedidoConsumibles> findByIdPedido(int idPedido) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.findByIdPedido(idPedido);
+    }
     
 }

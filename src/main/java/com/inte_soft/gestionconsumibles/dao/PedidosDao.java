@@ -49,7 +49,7 @@ public class PedidosDao {
        return pedidos;
     }
     
-    public List<Pedidos> findWhitoutRevision(){
+    public List<Pedidos> findWhithoutRevision(){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 

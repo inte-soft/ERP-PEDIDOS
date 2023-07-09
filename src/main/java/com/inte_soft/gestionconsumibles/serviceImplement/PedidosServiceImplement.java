@@ -32,7 +32,7 @@ public class PedidosServiceImplement implements  PedidosServices{
     @Override
     public List<Pedidos> findWhithoutRevison() {
         pedidosDao = new PedidosDao();
-        return pedidosDao.findWhitoutRevision();
+        return pedidosDao.findWhithoutRevision();
     }
     
 }

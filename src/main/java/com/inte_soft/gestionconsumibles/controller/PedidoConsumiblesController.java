@@ -4,7 +4,6 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
-import com.inte_soft.gestionconsumibles.dao.PedidosDao;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
@@ -51,6 +50,10 @@ public class PedidoConsumiblesController {
         map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
         
         return map;
+    }
+    
+    public List<PedidoConsumibles> findByIdPedido(int idPedido){
+        return pedidoConsumiblesServices.findByIdPedido(idPedido);
     }
     
 }

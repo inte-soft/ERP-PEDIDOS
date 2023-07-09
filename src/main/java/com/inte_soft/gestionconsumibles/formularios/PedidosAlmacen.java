@@ -9,6 +9,7 @@ import com.inte_soft.gestionconsumibles.controller.PedidosController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.util.ExcelExporter;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     public PedidosAlmacen() {
         initComponents();
         map = new HashMap<>();
-        
+        this.verPedidos();
     }
 
     /**
@@ -88,11 +89,6 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         tbn_verPedido.setText("Ver Pedido");
-        tbn_verPedido.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbn_verPedidoMouseClicked(evt);
-            }
-        });
         tbn_verPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbn_verPedidoActionPerformed(evt);
@@ -290,12 +286,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBExportActionPerformed
 
-    private void tbn_verPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbn_verPedidoMouseClicked
-      
-    }//GEN-LAST:event_tbn_verPedidoMouseClicked
-
     private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
-        // TODO add your handling code here:
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        int row = this.jTable1.getSelectedRow();
+        List<PedidoConsumibles> listPedidoConsumibleses = pedidoConsumiblesController.findByIdPedido(
+                Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
+        Consumibles consumibles = new Consumibles( listPedidoConsumibleses);
+        consumibles.setVisible(true);
     }//GEN-LAST:event_tbn_verPedidoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -353,7 +350,24 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         
         }
     }//GEN-LAST:event_jBActualizarActionPerformed
-
+    public void verPedidos(){
+        PedidosController pedidosController = new PedidosController();
+        DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
+        List<Pedidos> listPedidoses = pedidosController.listPedidosWhithoutRevision();
+        for (Pedidos pedidos : listPedidoses) {
+            Object[] rowData  = {
+                pedidos.getIdPedido(),
+                pedidos.getOt(),
+                pedidos.getFecha(),
+                pedidos.getPersona(),
+                pedidos.getOperacion()
+            };
+                
+        
+            model.addRow(rowData);
+        
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBDesplegar;

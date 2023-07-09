@@ -7,6 +7,8 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import java.awt.Frame;
@@ -43,6 +45,15 @@ public class Consumibles extends javax.swing.JDialog {
         }
         this.loadDespliegue(listcConsumiblesDtoOts);
     }
+    
+    public Consumibles( List<PedidoConsumibles> listPedidoConsumibleses) {
+        initComponents();
+        
+            jButton2.setVisible(false);
+            jButton3.setVisible(false);
+        
+        this.verPedido(listPedidoConsumibleses);
+    }
 
     public Consumibles() {
         initComponents();
@@ -71,7 +82,7 @@ public class Consumibles extends javax.swing.JDialog {
 
         tbListadoConsumibles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad"
@@ -282,4 +293,24 @@ public class Consumibles extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListadoConsumibles;
     // End of variables declaration//GEN-END:variables
+
+    private void verPedido(List<PedidoConsumibles> listPedidoConsumibleses) {
+        DefaultTableModel model =  (DefaultTableModel) tbListadoConsumibles.getModel();
+        for (PedidoConsumibles pedidoConsumibles : listPedidoConsumibleses) {
+            Object[] rowData  = {
+                pedidoConsumibles.getItem(),
+                pedidoConsumibles.getCodigo(),
+                pedidoConsumibles.getDescripcion(),
+                pedidoConsumibles.getTipo(),
+                pedidoConsumibles.getReferencia(),
+                pedidoConsumibles.getMarca(),
+                pedidoConsumibles.getUnidad(),
+                pedidoConsumibles.getCantidad()
+            };
+                
+        
+            model.addRow(rowData);
+        
+        }
+    }
 }

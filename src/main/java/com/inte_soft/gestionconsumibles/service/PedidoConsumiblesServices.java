@@ -29,4 +29,6 @@ public interface PedidoConsumiblesServices {
     
     public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos);
     
+    public List<PedidoConsumibles> findByIdPedido(int idPedido);
+    
 }

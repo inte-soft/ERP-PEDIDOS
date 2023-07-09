@@ -22,4 +22,9 @@ public class PedidosController {
     public void applyCheck(List<Pedidos> listPedidos){
         pedidosServices.checkPedidos(listPedidos);
     }
+    
+    public List<Pedidos> listPedidosWhithoutRevision (){
+        return pedidosServices.findWhithoutRevison();
+        
+    }
 }

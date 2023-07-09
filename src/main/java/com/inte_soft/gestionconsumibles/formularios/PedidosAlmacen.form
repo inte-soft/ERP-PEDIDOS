@@ -141,7 +141,6 @@
                 <Property name="text" type="java.lang.String" value="Ver Pedido"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbn_verPedidoMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbn_verPedidoActionPerformed"/>
               </Events>
             </Component>
