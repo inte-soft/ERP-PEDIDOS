@@ -9,13 +9,11 @@ import com.inte_soft.gestionconsumibles.formularios.Login;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Properties;
-import javax.enterprise.deploy.spi.exceptions.ConfigurationException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 
@@ -64,6 +62,8 @@ public class GestionConsumibles {
         emf.close(); // Pausa de 2 segundos (ajusta el tiempo según tus necesidades)
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No hay conexion con la base de datos", "Advertencia", 0);
+            
         }
 
         splash.setVisible(false);
