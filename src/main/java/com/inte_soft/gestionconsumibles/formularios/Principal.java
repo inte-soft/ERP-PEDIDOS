@@ -42,6 +42,30 @@ public class Principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.usuarios=usuarios;
         
+    if(!this.usuarios.getpAdminUser()){
+        this.jMAdministrar.setVisible(false);
+    }
+    
+    if(!this.usuarios.getpAlmacen()){
+        this.jAlmacen.setVisible(false);
+    }
+    
+    if(!this.usuarios.getpIngenieria()){
+        this.jMIngenieria.setVisible(false);
+    }
+    
+    if(!this.usuarios.getpProduccion()){
+        this.jMProduccion.setVisible(false);
+    }
+    
+    if(!this.usuarios.getpComercial()){
+        
+    }
+    
+    if(!this.usuarios.getpCompras()){
+    }
+    
+    
     }
 
     public Principal() {
@@ -65,10 +89,10 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jmLogin = new javax.swing.JMenu();
+        jMAdministrar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         actualizarMaestro = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMIngenieria = new javax.swing.JMenu();
         cElectricos = new javax.swing.JMenuItem();
         cMecanicos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -76,12 +100,14 @@ public class Principal extends javax.swing.JFrame {
         cargarCMecanicos = new javax.swing.JMenuItem();
         jAlmacen = new javax.swing.JMenu();
         jMAlmacen = new javax.swing.JMenuItem();
+        jMProduccion = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jmLogin.setText("Administrar");
+        jMAdministrar.setText("Administrar");
 
         jMenuItem1.setText("Gestionar Usuarios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jmLogin.add(jMenuItem1);
+        jMAdministrar.add(jMenuItem1);
 
         actualizarMaestro.setText("Actualizar Maestro");
         actualizarMaestro.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +123,11 @@ public class Principal extends javax.swing.JFrame {
                 actualizarMaestroActionPerformed(evt);
             }
         });
-        jmLogin.add(actualizarMaestro);
+        jMAdministrar.add(actualizarMaestro);
 
-        jMenuBar1.add(jmLogin);
+        jMenuBar1.add(jMAdministrar);
 
-        jMenu3.setText("Ingenieria");
+        jMIngenieria.setText("Ingenieria");
 
         cElectricos.setText("Pedido Consummibles Electricos");
         cElectricos.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
                 cElectricosActionPerformed(evt);
             }
         });
-        jMenu3.add(cElectricos);
+        jMIngenieria.add(cElectricos);
 
         cMecanicos.setText("Pedido Consumibles mecanicos");
         cMecanicos.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
                 cMecanicosActionPerformed(evt);
             }
         });
-        jMenu3.add(cMecanicos);
+        jMIngenieria.add(cMecanicos);
 
         jMenu4.setText("Administrar");
 
@@ -142,9 +168,9 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(cargarCMecanicos);
 
-        jMenu3.add(jMenu4);
+        jMIngenieria.add(jMenu4);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMIngenieria);
 
         jAlmacen.setText("Almacen");
 
@@ -157,6 +183,18 @@ public class Principal extends javax.swing.JFrame {
         jAlmacen.add(jMAlmacen);
 
         jMenuBar1.add(jAlmacen);
+
+        jMProduccion.setText("Produccion");
+
+        jMenuItem2.setText("Busqueda");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMProduccion.add(jMenuItem2);
+
+        jMenuBar1.add(jMProduccion);
 
         setJMenuBar(jMenuBar1);
 
@@ -304,10 +342,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cMecanicosActionPerformed
 
     private void jMAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlmacenActionPerformed
-        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen();
+        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Almacen");
         escritorio.add(pedidosAlmacen);
         pedidosAlmacen.setVisible(true);
     }//GEN-LAST:event_jMAlmacenActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Produccion");
+        escritorio.add(pedidosAlmacen);
+        pedidosAlmacen.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
@@ -362,13 +406,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cargarCElectricos;
     private javax.swing.JMenuItem cargarCMecanicos;
     private javax.swing.JMenu jAlmacen;
+    private javax.swing.JMenu jMAdministrar;
     private javax.swing.JMenuItem jMAlmacen;
+    private javax.swing.JMenu jMIngenieria;
+    private javax.swing.JMenu jMProduccion;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenu jmLogin;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
 

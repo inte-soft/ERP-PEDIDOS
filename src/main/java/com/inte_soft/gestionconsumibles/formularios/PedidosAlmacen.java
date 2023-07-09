@@ -28,10 +28,16 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
      * inicializar proyecto
      */
     private HashMap<Integer, ArrayList<?>> map;
-    public PedidosAlmacen() {
+    public PedidosAlmacen(String departamento) {
         initComponents();
         map = new HashMap<>();
         this.verPedidos();
+        if(departamento == "Produccion"){
+            
+            this.jTabbedPane1.removeTabAt(2);
+            this.jTabbedPane1.removeTabAt(0);
+            
+        }
     }
 
     /**
