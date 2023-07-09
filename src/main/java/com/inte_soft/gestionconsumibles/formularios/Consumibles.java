@@ -85,7 +85,7 @@ public class Consumibles extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad"
+                "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -97,6 +97,16 @@ public class Consumibles extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tbListadoConsumibles);
+        if (tbListadoConsumibles.getColumnModel().getColumnCount() > 0) {
+            tbListadoConsumibles.getColumnModel().getColumn(0).setResizable(false);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setResizable(false);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(6).setResizable(false);
+            tbListadoConsumibles.getColumnModel().getColumn(6).setPreferredWidth(10);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setPreferredWidth(20);
+        }
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton2.setText("Subir Pedido");
