@@ -42,8 +42,10 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
         butonDeleteUser = new javax.swing.JButton();
         butonModifyUser = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
 
         tableUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,18 +102,6 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
                 butonModifyUserMouseClicked(evt);
             }
         });
-
-        jMenu1.setText("Menu");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Salir");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,7 +132,7 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(butonAddUser)
                     .addComponent(butonDeleteUser)
                     .addComponent(butonModifyUser))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,12 +141,6 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
     private void butonAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonAddUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_butonAddUserActionPerformed
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-
-        this.dispose();
-        
-    }//GEN-LAST:event_jMenu2MouseClicked
 
     private void butonAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butonAddUserMouseClicked
 
@@ -262,8 +246,6 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton butonAddUser;
     private javax.swing.JButton butonDeleteUser;
     private javax.swing.JButton butonModifyUser;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableUser;

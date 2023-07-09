@@ -52,6 +52,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         lbOt1 = new javax.swing.JLabel();
         item = new javax.swing.JTextField();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);

@@ -69,6 +69,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jBExport = new javax.swing.JButton();
         jBActualizar = new javax.swing.JButton();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
