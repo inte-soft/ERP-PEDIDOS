@@ -30,12 +30,14 @@ public class PedidoConsumiblesController {
         pedidosServices = new PedidosServiceImplement();
     }
     
-    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion, String ot){
-        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot);
+    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
+            AreaCompania area, String persona, String Operacion, String ot, String tipoPedido){
+        
+        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot, tipoPedido);
     }
     
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion){
-        return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion);
+    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido){
+        return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchOt(int ot){
         return pedidoConsumiblesServices.consumiblesPedidosSearchByOt(ot);

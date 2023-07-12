@@ -56,7 +56,7 @@ public class PedidoConsumiblesDao {
        
    }
     
-    public List<ConsumiblesDto> filteredSearch(Integer ot, String descripcion) {
+    public List<ConsumiblesDto> filteredSearch(Integer ot, String descripcion, String tipoPedido) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
 
@@ -71,7 +71,9 @@ public class PedidoConsumiblesDao {
     if (descripcion != null && !descripcion.isEmpty()) {
         queryString += "AND pc.descripcion LIKE :descripcion ";
     }
-    
+    if (tipoPedido != null && !tipoPedido.isBlank()) {
+        queryString += "AND p.tipoPedido = :tipoPedido ";
+    }
     queryString += "GROUP BY p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
 
     TypedQuery<ConsumiblesDto> query = entityManager.createQuery(queryString, ConsumiblesDto.class);
@@ -81,6 +83,9 @@ public class PedidoConsumiblesDao {
     }
     if (descripcion != null && !descripcion.isEmpty()) {
         query.setParameter("descripcion", "%" + descripcion + "%");
+    }
+    if (tipoPedido != null && !tipoPedido.isBlank() ) {
+        query.setParameter("tipoPedido",  tipoPedido );
     }
 
     List<ConsumiblesDto> resultList = query.getResultList();

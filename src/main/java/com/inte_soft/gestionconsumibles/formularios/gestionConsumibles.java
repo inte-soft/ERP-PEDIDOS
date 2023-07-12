@@ -208,7 +208,8 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         }
         pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
                 this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
-                this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText());
+                this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText(),
+                this.cbSeleccion.getSelectedItem().toString());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     

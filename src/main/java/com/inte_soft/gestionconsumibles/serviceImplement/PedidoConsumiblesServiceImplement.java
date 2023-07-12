@@ -23,8 +23,10 @@ import java.util.List;
  */
 public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServices{
     private PedidoConsumiblesDao pedidoConsumiblesDao;
+    
     @Override
-    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona, String Operacion, String ot) {
+    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona,
+            String Operacion, String ot, String tipoPedido) {
         MasterDao masterDao = new MasterDao();
         PedidosDao pedidosDao = new PedidosDao();
         Pedidos pedidos = new Pedidos();
@@ -33,7 +35,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidos.setArea(area);
         pedidos.setOperacion(Operacion);
         pedidos.setFecha(new Date());
+        pedidos.setTipoPedido(tipoPedido);
         Pedidos pedidosPersist = pedidosDao.createPedido(pedidos);
+        
        
         for(PedidoConsumibles pc : pedidoConsumibleses){
             try{
@@ -63,9 +67,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion) {
+    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
-        return pedidoConsumiblesDao.filteredSearch(ot, descripcion);
+        return pedidoConsumiblesDao.filteredSearch(ot, descripcion, tipoPedido);
     }
 
     @Override

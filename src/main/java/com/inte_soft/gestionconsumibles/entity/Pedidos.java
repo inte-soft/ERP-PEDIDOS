@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -35,23 +36,27 @@ public class Pedidos  implements java.io.Serializable{
     @JoinColumn(name = "ID_AREA")
     private AreaCompania area;
     @Column(name = "FECHA")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @Column(name = "OPERACION")
     private String operacion;
     @Column(name = "REVISADO")
     private boolean revisado;
+    @Column(name = "TIPO_PEDIDO")
+    private String tipoPedido;
     
 
     public Pedidos() {
     }
 
-    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado) {
+    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido) {
         this.persona = persona;
         this.ot = ot;
         this.area = area;
         this.fecha = fecha;
         this.operacion = operacion;
         this.revisado = revisado;
+        this.tipoPedido = tipoPedido;
     }
 
     public int getIdPedido() {
@@ -108,6 +113,14 @@ public class Pedidos  implements java.io.Serializable{
 
     public void setRevisado(boolean revisado) {
         this.revisado = revisado;
+    }
+
+    public String getTipoPedido() {
+        return tipoPedido;
+    }
+
+    public void setTipoPedido(String tipoPedido) {
+        this.tipoPedido = tipoPedido;
     }
 
     

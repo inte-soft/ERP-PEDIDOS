@@ -21,9 +21,10 @@ import java.util.List;
  * @author alejo
  */
 public interface PedidoConsumiblesServices {
-   public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona , String Operacion, String ot);
+   public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
+           AreaCompania area, String persona , String Operacion, String ot, String tipoPedido);
 
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion);
+    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido);
     
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchByOt(int ot);
     
