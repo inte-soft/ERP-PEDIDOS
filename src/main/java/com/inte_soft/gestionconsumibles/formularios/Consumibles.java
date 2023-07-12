@@ -8,10 +8,11 @@ import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
+import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import java.awt.Frame;
+import java.awt.print.PrinterException;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -75,6 +76,7 @@ public class Consumibles extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jBImprimir = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -126,6 +128,13 @@ public class Consumibles extends javax.swing.JDialog {
             }
         });
 
+        jBImprimir.setText("Imprimir");
+        jBImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,6 +146,8 @@ public class Consumibles extends javax.swing.JDialog {
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBImprimir)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -157,7 +168,8 @@ public class Consumibles extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jBImprimir))
                 .addContainerGap())
         );
 
@@ -196,6 +208,14 @@ public class Consumibles extends javax.swing.JDialog {
         AgregarConsumible agregarConsumible = new AgregarConsumible(new Frame(), true, this.tbListadoConsumibles);
         agregarConsumible.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
+        try {
+            JTablePrinter.printTable(tbListadoConsumibles, "Table Print Job");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jBImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,6 +316,7 @@ public class Consumibles extends javax.swing.JDialog {
      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBImprimir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

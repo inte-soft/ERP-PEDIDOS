@@ -15,6 +15,7 @@ import com.inte_soft.gestionconsumibles.util.ExcelExporter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -69,6 +70,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jBExport = new javax.swing.JButton();
         jBActualizar = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -109,7 +111,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -121,7 +123,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -170,7 +172,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -198,7 +200,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBDesplegar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -244,7 +246,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +262,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -270,13 +272,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1164, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE))
         );
 
         pack();
@@ -294,15 +296,20 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExportActionPerformed
 
     private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         int row = this.jTable1.getSelectedRow();
+        if(row>=0){
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         List<PedidoConsumibles> listPedidoConsumibleses = pedidoConsumiblesController.findByIdPedido(
                 Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
         Consumibles consumibles = new Consumibles( listPedidoConsumibleses);
         consumibles.setVisible(true);
+        }else{
+            JOptionPane.showConfirmDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_tbn_verPedidoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(!this.jTxtOt.getText().isBlank() || !this.jTxtDescripcion.getText().isBlank()){
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         DefaultTableModel model =  (DefaultTableModel) jTable4.getModel();
         List<ConsumiblesDto> listConsumiblesDto = pedidoConsumiblesController.consumiblesPedidosSearch(
@@ -323,15 +330,23 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             model.addRow(rowData);
         
         }
+        }else{
+            JOptionPane.showConfirmDialog(null, "Debe diligenciar una OT o una Descripcion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jBDesplegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesplegarActionPerformed
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         int row = this.jTable4.getSelectedRow();
+        if(row>=0){
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearchOt(
                 Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()));
         Consumibles consumibles = new Consumibles("VISUALIZACION", listConsumiblesDtoOt);
         consumibles.setVisible(true);
+        }else{
+            JOptionPane.showConfirmDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
         
     }//GEN-LAST:event_jBDesplegarActionPerformed
 

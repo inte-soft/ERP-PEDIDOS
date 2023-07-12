@@ -15,7 +15,8 @@
            <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
-                <version>5.4.10.Final</version>
+                <version>5.6.14.Final</version>
+                <type>jar</type>
            </dependency>
            <dependency>
                 <groupId>org.hibernate</groupId>
@@ -58,6 +59,11 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>5.0.0</version>
             </dependency>
-           
+            <dependency>
+                <groupId>com.jtattoo</groupId>
+                <artifactId>JTattoo</artifactId>
+                <version>1.6.13</version>
+            </dependency>
+
     </dependencies>
 </project>

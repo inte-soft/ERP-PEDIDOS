@@ -8,7 +8,12 @@ import com.inte_soft.gestionconsumibles.controller.UsuariosController;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -213,6 +218,11 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(new MultiLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(GestionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 GestionUsuarios gestionUsuarios = new GestionUsuarios();
                 gestionUsuarios.setVisible(true); 
                 gestionUsuarios.loadUserData();
