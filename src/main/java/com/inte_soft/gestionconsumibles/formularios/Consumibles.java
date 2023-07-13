@@ -10,9 +10,10 @@ import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import java.awt.Frame;
-import java.awt.print.PrinterException;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,9 @@ public class Consumibles extends javax.swing.JDialog {
     private String tipoConsumibles;
     private String item;
     private gestionConsumibles gConsumibles;
+    private Usuarios usuario;
+    private String ot;
+    
     public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles) {
         initComponents();
         this.tipoConsumibles = tipoConsumibles;
@@ -38,20 +42,25 @@ public class Consumibles extends javax.swing.JDialog {
         this.loadConsumibles(this.tipoConsumibles, this.item);
     }
     
-    public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts) {
+    public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts, Usuarios usuario, String ot) {
         initComponents();
         if(visualizacion.equals("VISUALIZACION")){
             jButton2.setVisible(false);
             jButton3.setVisible(false);
+            this.usuario = usuario;
+            this.ot = ot;
         }
         this.loadDespliegue(listcConsumiblesDtoOts);
+        
     }
     
-    public Consumibles( List<PedidoConsumibles> listPedidoConsumibleses) {
+    public Consumibles( List<PedidoConsumibles> listPedidoConsumibleses, Usuarios usuario, String ot) {
         initComponents();
         
             jButton2.setVisible(false);
             jButton3.setVisible(false);
+            this.usuario = usuario;
+            this.ot = ot;
         
         this.verPedido(listPedidoConsumibleses);
     }
@@ -210,11 +219,11 @@ public class Consumibles extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
-        try {
-            JTablePrinter.printTable(tbListadoConsumibles, "Table Print Job");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Date fecha = new Date();
+        String header = "OT: " + this.ot + "     " + fecha;
+        String footer = "Elabora: " + this.usuario.getNombres() + " " + this.usuario.getApellidos();
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        jTablePrinter.printTable(tbListadoConsumibles, header, footer);
     }//GEN-LAST:event_jBImprimirActionPerformed
 
     /**

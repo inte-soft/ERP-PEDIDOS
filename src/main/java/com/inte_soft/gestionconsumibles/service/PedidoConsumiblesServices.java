@@ -26,7 +26,7 @@ public interface PedidoConsumiblesServices {
 
     public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido);
     
-    public List<ConsumiblesDtoOt> consumiblesPedidosSearchByOt(int ot);
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearchFilter(int ot, String tipoPedidoString);
     
     public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos);
     

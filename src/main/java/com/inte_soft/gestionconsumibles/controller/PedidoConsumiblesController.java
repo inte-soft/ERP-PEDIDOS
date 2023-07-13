@@ -39,9 +39,7 @@ public class PedidoConsumiblesController {
     public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido){
         return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
-    public List<ConsumiblesDtoOt> consumiblesPedidosSearchOt(int ot){
-        return pedidoConsumiblesServices.consumiblesPedidosSearchByOt(ot);
-    }
+    
     
     public HashMap consumiblesWhithoutCheck(){
         HashMap<Integer,ArrayList<?>> map = new HashMap<>();
@@ -56,6 +54,10 @@ public class PedidoConsumiblesController {
     
     public List<PedidoConsumibles> findByIdPedido(int idPedido){
         return pedidoConsumiblesServices.findByIdPedido(idPedido);
+    }
+
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearcFilter(int ot, String tipoPedido) {
+       return pedidoConsumiblesServices.consumiblesPedidosSearchFilter(ot, tipoPedido);
     }
     
 }

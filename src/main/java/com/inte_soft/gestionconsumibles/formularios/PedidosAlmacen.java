@@ -11,6 +11,7 @@ import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.ExcelExporter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +29,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
      * Creates new form PedidosAlmacen
      * inicializar proyecto
      */
+    private  Usuarios usuario;
     private HashMap<Integer, ArrayList<?>> map;
-    public PedidosAlmacen(String departamento) {
+    public PedidosAlmacen(String departamento, Usuarios usuario) {
         initComponents();
         map = new HashMap<>();
         this.verPedidos();
@@ -39,6 +41,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             this.jTabbedPane1.removeTabAt(0);
             
         }
+        this.usuario = usuario;
     }
 
     /**
@@ -311,12 +314,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         int row = this.jTable1.getSelectedRow();
         if(row>=0){
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        String ot = this.jTable1.getValueAt(row, 1).toString();
         List<PedidoConsumibles> listPedidoConsumibleses = pedidoConsumiblesController.findByIdPedido(
                 Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
-        Consumibles consumibles = new Consumibles( listPedidoConsumibleses);
+        Consumibles consumibles = new Consumibles( listPedidoConsumibleses,this.usuario,ot);
         consumibles.setVisible(true);
         }else{
-            JOptionPane.showConfirmDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_tbn_verPedidoActionPerformed
 
@@ -355,12 +359,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         int row = this.jTable4.getSelectedRow();
         if(row>=0){
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
-        List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearchOt(
-                Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()));
-        Consumibles consumibles = new Consumibles("VISUALIZACION", listConsumiblesDtoOt);
+        String ot = this.jTable4.getValueAt(row, 0).toString();
+        List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearcFilter(
+                Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()), this.jComboBox1.getSelectedItem().toString());
+        Consumibles consumibles = new Consumibles("VISUALIZACION",
+                listConsumiblesDtoOt, this.usuario, ot);
         consumibles.setVisible(true);
         }else{
-            JOptionPane.showConfirmDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_jBDesplegarActionPerformed

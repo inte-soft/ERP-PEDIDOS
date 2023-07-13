@@ -96,7 +96,7 @@ public class PedidoConsumiblesDao {
     return resultList;
 }
 
-    public List<ConsumiblesDtoOt> filteredSearchByOt(Integer ot) {
+    public List<ConsumiblesDtoOt> filteredSearchByOt(Integer ot, String tipoPedido) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
 
@@ -108,7 +108,9 @@ public class PedidoConsumiblesDao {
     if (ot != null) {
         queryString += "AND p.ot = :ot ";
     }
-    
+    if (tipoPedido != null && !tipoPedido.isBlank()) {
+        queryString += "AND p.tipoPedido = :tipoPedido ";
+    }
     queryString += "GROUP BY p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
 
     TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
@@ -116,7 +118,9 @@ public class PedidoConsumiblesDao {
     if (ot != null) {
         query.setParameter("ot", ot);
     }
-
+    if (tipoPedido != null && !tipoPedido.isBlank() ) {
+        query.setParameter("tipoPedido",  tipoPedido );
+    }
     List<ConsumiblesDtoOt> resultList = query.getResultList();
 
     entityManager.getTransaction().commit();

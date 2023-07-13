@@ -10,6 +10,7 @@ import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -23,7 +24,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     /**
      * Creates new form gestionConsumibles
      */
-    Usuarios usuarios;
+    private Usuarios usuarios;
     public gestionConsumibles(Usuarios usuarios) {
         initComponents();
         this.usuarios = usuarios;
@@ -180,11 +181,12 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
 
         
     }//GEN-LAST:event_btnGestionarActionPerformed
-
+    
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
         this.dispose();
     }//GEN-LAST:event_closeActionPerformed
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         List<PedidoConsumibles> listPedidoConsumibleses = new ArrayList<>();

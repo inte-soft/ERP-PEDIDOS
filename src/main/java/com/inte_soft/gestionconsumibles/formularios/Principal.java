@@ -356,13 +356,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cMecanicosActionPerformed
 
     private void jMAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlmacenActionPerformed
-        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Almacen");
+        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Almacen", this.usuarios);
         escritorio.add(pedidosAlmacen);
         pedidosAlmacen.setVisible(true);
     }//GEN-LAST:event_jMAlmacenActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Produccion");
+        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Produccion", this.usuarios);
         escritorio.add(pedidosAlmacen);
         pedidosAlmacen.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed

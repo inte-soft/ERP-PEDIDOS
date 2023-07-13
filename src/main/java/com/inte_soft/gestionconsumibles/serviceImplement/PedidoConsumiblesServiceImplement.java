@@ -72,11 +72,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         return pedidoConsumiblesDao.filteredSearch(ot, descripcion, tipoPedido);
     }
 
-    @Override
-    public List<ConsumiblesDtoOt> consumiblesPedidosSearchByOt(int ot) {
-        pedidoConsumiblesDao = new PedidoConsumiblesDao();
-        return pedidoConsumiblesDao.filteredSearchByOt(ot);
-    }
+    
 
     @Override
     public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos) {
@@ -88,6 +84,12 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     public List<PedidoConsumibles> findByIdPedido(int idPedido) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.findByIdPedido(idPedido);
+    }
+
+    @Override
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearchFilter(int ot, String tipoPedido) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.filteredSearchByOt(ot,tipoPedido);
     }
     
 }
