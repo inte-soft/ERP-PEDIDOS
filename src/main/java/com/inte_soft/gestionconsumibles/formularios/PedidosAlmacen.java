@@ -13,9 +13,12 @@ import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.ExcelExporter;
+import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,6 +72,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jBDesplegar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jBImprimir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
@@ -151,6 +155,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setMinWidth(25);
+            jTable4.getColumnModel().getColumn(1).setMinWidth(50);
+            jTable4.getColumnModel().getColumn(2).setMinWidth(300);
+            jTable4.getColumnModel().getColumn(6).setMinWidth(20);
+            jTable4.getColumnModel().getColumn(7).setMinWidth(5);
+        }
 
         jLabel1.setText("OT:");
 
@@ -173,6 +184,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jLabel3.setText("Tipo Pedido");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CONSUMIBLES ELECTRICOS", "CONSUMIBLES MECANICOS" }));
+
+        jBImprimir.setText("Imprimir");
+        jBImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,6 +216,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBDesplegar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -213,9 +233,10 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBDesplegar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -350,7 +371,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         
         }
         }else{
-            JOptionPane.showConfirmDialog(null, "Debe diligenciar una OT o una Descripcion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe diligenciar una OT o una Descripcion", "Advertencia", JOptionPane.WARNING_MESSAGE);
         
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -393,6 +414,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         
         }
     }//GEN-LAST:event_jBActualizarActionPerformed
+
+    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
+        Date fecha = new Date();
+        String header = "OT: " + this.jTable4.getValueAt(0, 0).toString() + "     " + fecha;
+        String footer = "Elabora: " + this.usuario.getNombres() + " " + this.usuario.getApellidos();
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        jTablePrinter.printTable(this.jTable4, header, footer);
+    }//GEN-LAST:event_jBImprimirActionPerformed
     public void verPedidos(){
         PedidosController pedidosController = new PedidosController();
         DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
@@ -415,6 +444,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBDesplegar;
     private javax.swing.JButton jBExport;
+    private javax.swing.JButton jBImprimir;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

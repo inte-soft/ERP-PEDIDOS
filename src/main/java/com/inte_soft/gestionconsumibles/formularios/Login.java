@@ -34,21 +34,13 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
                 
-        ImageIcon icono = new ImageIcon("/resources/logoIcono.png"); 
-        setIconImage(icono.getImage());
+        
        
         initComponents();
-          //URL url = getClass().getResource("/resources/logoIcono.png");
-//        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/com/inte_soft/gestionconsumibles/resources/usuario.png"));
-//        this.jbLogin.setIcon(imageIcon);
-            //setIconImage(new ImageIcon(getClass().getResource("/resources/logoIcono.png")).getImage());
+        
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
     }
-    
-//    @Override
-//    public Image getIconImage(){
-//        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("/resources/logoIcono.png"));
-//        return retValue;
-//    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -15,6 +15,8 @@ import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import java.awt.Frame;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +38,7 @@ public class Consumibles extends javax.swing.JDialog {
     
     public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
         this.tipoConsumibles = tipoConsumibles;
         this.item = item;
         this.gConsumibles = gConsumibles;
@@ -44,6 +47,7 @@ public class Consumibles extends javax.swing.JDialog {
     
     public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts, Usuarios usuario, String ot) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
         if(visualizacion.equals("VISUALIZACION")){
             jButton2.setVisible(false);
             jButton3.setVisible(false);
@@ -56,7 +60,7 @@ public class Consumibles extends javax.swing.JDialog {
     
     public Consumibles( List<PedidoConsumibles> listPedidoConsumibleses, Usuarios usuario, String ot) {
         initComponents();
-        
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
             jButton2.setVisible(false);
             jButton3.setVisible(false);
             this.usuario = usuario;
@@ -67,6 +71,7 @@ public class Consumibles extends javax.swing.JDialog {
 
     public Consumibles() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
     }
     
 
@@ -191,7 +196,16 @@ public class Consumibles extends javax.swing.JDialog {
                     this.tbListadoConsumibles.getCellEditor().stopCellEditing();
                 }
         for (int i = 0; i < this.tbListadoConsumibles.getRowCount(); i++) {
-            if (this.tbListadoConsumibles.getValueAt(i, 7) != null ) {
+            Object value = this.tbListadoConsumibles.getValueAt(i, 7);
+            if (value != null && value instanceof String && !value.equals("0")) {
+                String fieldValue = (String) value;
+                if (!fieldValue.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(null, "El campo debe contener solo números \n"+
+                           " " + this.tbListadoConsumibles.getValueAt(i, 1)+
+                           " " + this.tbListadoConsumibles.getValueAt(i, 2) +
+                           " este consumible no fue agregado", "Error de validación", JOptionPane.ERROR_MESSAGE);
+                    break;
+                }
                     Object[] row = new Object[8];
                     row[0] = this.tbListadoConsumibles.getValueAt(i, 0);
                     row[1] = this.tbListadoConsumibles.getValueAt(i, 1);

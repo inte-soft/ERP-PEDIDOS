@@ -9,6 +9,7 @@ import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.SplashProceso;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Usuarios usuarios ) {
         jProgressBar = new JProgressBar(0, 100);
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
         escritorio = new JDesktopPane();
         this.setContentPane(escritorio);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);

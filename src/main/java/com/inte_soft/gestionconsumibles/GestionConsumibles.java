@@ -39,8 +39,7 @@ public class GestionConsumibles {
     public static void main(String[] args) {
         try {
                     UIManager.setLookAndFeel(new NimbusLookAndFeel());
-//                    ImageIcon icono = new ImageIcon("/resources/usuario.png");
-//                    UIManager.put("Frame.icon",icono);
+                   
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }

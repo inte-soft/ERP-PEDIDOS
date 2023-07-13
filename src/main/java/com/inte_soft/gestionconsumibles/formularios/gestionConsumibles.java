@@ -27,6 +27,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     private Usuarios usuarios;
     public gestionConsumibles(Usuarios usuarios) {
         initComponents();
+        
         this.usuarios = usuarios;
     }
 
@@ -49,7 +50,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         cbSeleccion1 = new javax.swing.JComboBox<>();
         btnGestionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        close = new javax.swing.JButton();
         lbOt1 = new javax.swing.JLabel();
         item = new javax.swing.JTextField();
 
@@ -77,6 +77,9 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(8).setMaxWidth(50);
+        }
 
         lbOt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbOt.setText("OT:");
@@ -98,13 +101,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        close.setText("Close");
-        close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeActionPerformed(evt);
             }
         });
 
@@ -137,9 +133,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
                 .addComponent(btnGestionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(close)
-                .addGap(29, 29, 29))
+                .addGap(29, 214, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,14 +145,13 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
                     .addComponent(cbSeleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGestionar)
                     .addComponent(jButton1)
-                    .addComponent(close)
                     .addComponent(lbOt1)
                     .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(cbSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbtipoPedido))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,10 +175,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnGestionarActionPerformed
     
-    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_closeActionPerformed
-
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
@@ -221,7 +210,6 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGestionar;
     private javax.swing.JComboBox<String> cbSeleccion;
     private javax.swing.JComboBox<String> cbSeleccion1;
-    private javax.swing.JButton close;
     private javax.swing.JTextField item;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
