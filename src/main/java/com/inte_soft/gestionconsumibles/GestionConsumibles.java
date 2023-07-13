@@ -21,30 +21,29 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.multi.MultiLookAndFeel;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.plaf.synth.SynthLookAndFeel;
-
-
-
 
 /**
  *
  * @author Inte-Soft
  */
 public class GestionConsumibles {
-
     
     public static void main(String[] args) {
         try {
-                    UIManager.setLookAndFeel(new HiFiLookAndFeel());
+                    UIManager.setLookAndFeel(new NimbusLookAndFeel());
+//                    ImageIcon icono = new ImageIcon("/resources/usuario.png");
+//                    UIManager.put("Frame.icon",icono);
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
-        
         
         String configFile = "src\\config.properties";
           Properties properties = new Properties();
