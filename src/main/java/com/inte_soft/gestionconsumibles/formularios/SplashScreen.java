@@ -26,12 +26,12 @@ public class SplashScreen extends JWindow {
         setLocationRelativeTo(null);
         
         // Cargar la imagen de fondo del splash (ajusta la ruta según la ubicación de tu imagen en el proyecto)
-        splashImage = new ImageIcon("src\\main\\java\\com\\inte_soft\\gestionconsumibles\\formularios\\imagenes\\splashscreen\\logoNuevo.png").getImage();
+        splashImage = (new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoIcono.png"))).getImage();
         int newWidth = 300;  // Nuevo ancho de la imagen
         int newHeight = 300; // Nuevo alto de la imagen
         splashImage = splashImage.getScaledInstance(newWidth,
                 newHeight, Image.SCALE_SMOOTH);
-        splashImageCargando = new ImageIcon("src\\main\\java\\com\\inte_soft\\gestionconsumibles\\formularios\\imagenes\\splashscreen\\loading-green-loading.gif").getImage();
+        splashImageCargando = (new javax.swing.ImageIcon(getClass().getResource("/imagenes/loading-green-loading.gif"))).getImage();
         int newWidthCargando = 50;  // Nuevo ancho de la imagen
         int newHeightCargando = 50; // Nuevo alto de la imagen
         splashImageCargando = splashImageCargando.getScaledInstance(newWidthCargando,

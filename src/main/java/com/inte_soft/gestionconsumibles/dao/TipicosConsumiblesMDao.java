@@ -8,6 +8,7 @@ import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
@@ -22,7 +23,11 @@ public class TipicosConsumiblesMDao {
     public TipicosConsumiblesMDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
-   
+    
+    public void close() {
+        entityManagerFactory.close();
+    }
+    
     public List<TipicoConsumiblesMecanicos> getAll(){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -51,15 +56,46 @@ public class TipicosConsumiblesMDao {
         entityManager.getTransaction().commit();
 
         entityManager.close();
-        entityManagerFactory.close();
+        
     }
     public TipicoConsumiblesMecanicos findById(String id){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
        entityManager.getTransaction().begin();
        TipicoConsumiblesMecanicos tipicoConsumiblesMecanicos = entityManager.find(
                TipicoConsumiblesMecanicos.class, id);
        entityManager.getTransaction().commit();
        entityManager.close();
        return tipicoConsumiblesMecanicos;
+    }
+    
+    public void batchCreate(List<TipicoConsumiblesMecanicos> tipicoConsumiblesList) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+
+            int batchSize = 150; // Elige el tamaño del lote adecuado según tus necesidades.
+            int count = 0;
+
+            for (TipicoConsumiblesMecanicos tipicoConsumibles : tipicoConsumiblesList) {
+                entityManager.persist(tipicoConsumibles);
+                count++;
+
+                if (count % batchSize == 0) {
+                    entityManager.flush();
+                    entityManager.clear();
+                }
+            }
+
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
     }
 }

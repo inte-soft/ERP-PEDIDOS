@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -35,27 +36,43 @@ public class TConsumiblesEServiceImplement implements  TConsumiblesEService{
     @Override
     public void create(String string) {
         String excelFilePath = string;
-        tipicosConsumiblesEDao = new TipicosConsumiblesEDao();
-        tipicosConsumiblesEDao.deleteAll();
-        try(FileInputStream fileInpuStream = new FileInputStream(new File(excelFilePath));
-            Workbook workbook = new XSSFWorkbook(fileInpuStream)){
-            
-            Sheet sheet = (Sheet) workbook.getSheetAt(0);
-            for(Row row :sheet){
-                TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
-                masterDao = new MasterDao();
-                Master master = masterDao.findById(row.getCell(0).toString());
-                tipicoConsumiblesElectricos.setMaster(master);
-                tipicosConsumiblesEDao = new TipicosConsumiblesEDao();
-                tipicosConsumiblesEDao.create(tipicoConsumiblesElectricos);
-                
-                  
-            }
-                
-               
-            } catch (IOException ex) {
-            Logger.getLogger(MasterServiceImplement.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+           try (FileInputStream fileInputStream = new FileInputStream(new File(excelFilePath));
+                Workbook workbook = new XSSFWorkbook(fileInputStream)) {
+
+               Sheet sheet = workbook.getSheetAt(0);
+               List<TipicoConsumiblesElectricos> tipicoConsumiblesList = new ArrayList<>();
+
+                      tipicosConsumiblesEDao = new TipicosConsumiblesEDao();
+                      tipicosConsumiblesEDao.deleteAll();
+                      int count=0;
+               for (Row row : sheet) {
+                   count++;
+                   masterDao = new MasterDao();
+                   TipicoConsumiblesElectricos tipicoConsumiblesElectricos = new TipicoConsumiblesElectricos();
+                   Master master = masterDao.findById(row.getCell(0).toString());
+                   tipicoConsumiblesElectricos.setMaster(master);
+                   tipicoConsumiblesList.add(tipicoConsumiblesElectricos);
+                   masterDao.close();
+                   if (count==200) {
+                       count=0;
+                       TipicosConsumiblesEDao tipicosConsumiblesEDao2 = new TipicosConsumiblesEDao();
+                       tipicosConsumiblesEDao2.batchCreate(tipicoConsumiblesList);
+                       tipicoConsumiblesList.clear();
+                       tipicosConsumiblesEDao2.close();
+                       
+                   }
+               }
+               TipicosConsumiblesEDao tipicosConsumiblesEDao3 = new TipicosConsumiblesEDao();
+               tipicosConsumiblesEDao3.batchCreate(tipicoConsumiblesList);
+
+               masterDao.close();
+               tipicosConsumiblesEDao.close();
+
+           } catch (IOException ex) {
+               Logger.getLogger(MasterServiceImplement.class.getName()).log(Level.SEVERE, null, ex);
+               JOptionPane.showMessageDialog(null, "Dato no adecuado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+           }
     }
 
     @Override

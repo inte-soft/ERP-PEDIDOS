@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 19.0.2
+Main-Class: com.inte_soft.gestionconsumibles.GestionConsumibles
+

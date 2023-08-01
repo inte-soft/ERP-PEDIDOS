@@ -7,28 +7,24 @@ package com.inte_soft.gestionconsumibles;
 
 import com.inte_soft.gestionconsumibles.formularios.Login;
 import com.inte_soft.gestionconsumibles.formularios.SplashScreen;
-import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
-import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
-import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
-import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
-import com.jtattoo.plaf.luna.LunaLookAndFeel;
-import com.jtattoo.plaf.smart.SmartLookAndFeel;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import javax.swing.plaf.synth.SynthLookAndFeel;
+
 
 /**
  *
@@ -37,6 +33,19 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 public class GestionConsumibles {
     
     public static void main(String[] args) {
+            
+        String jarPath = GestionConsumibles.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String configFilePath = jarPath + "config.properties";
+        try {       
+            configFilePath = URLDecoder.decode(configFilePath, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(GestionConsumibles.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        File jarFile = new File(jarPath);
+        String parentDirectory = jarFile.getParent();
+        if (!(parentDirectory == null)){
+            configFilePath = parentDirectory + File.separator + "config.properties";
+        }
         try {
                     UIManager.setLookAndFeel(new NimbusLookAndFeel());
                    
@@ -44,9 +53,9 @@ public class GestionConsumibles {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
         
-        String configFile = "src\\config.properties";
-          Properties properties = new Properties();
-        try (FileInputStream input = new FileInputStream(configFile)) {
+        
+          Properties properties = new Properties();  
+        try (InputStream input = new FileInputStream(configFilePath)) {
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();
