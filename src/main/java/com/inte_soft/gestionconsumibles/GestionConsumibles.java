@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -34,7 +36,13 @@ public class GestionConsumibles {
     
     public static void main(String[] args) {
             
-        String jarPath = GestionConsumibles.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        URL jarUrl = GestionConsumibles.class.getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = "";
+        try {
+            jarPath = jarUrl.toURI().getPath();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(GestionConsumibles.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String configFilePath = jarPath + "config.properties";
         try {       
             configFilePath = URLDecoder.decode(configFilePath, "UTF-8");

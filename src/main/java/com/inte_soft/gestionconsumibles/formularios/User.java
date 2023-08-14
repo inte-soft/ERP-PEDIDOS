@@ -10,13 +10,12 @@ import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.AdvertenciaModal;
 import java.util.List;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author alejo
  */
+
 public class User extends javax.swing.JDialog {
     private GestionUsuarios gestionUsuarios;
     private int id;

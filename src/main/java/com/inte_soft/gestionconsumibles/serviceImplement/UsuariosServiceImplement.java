@@ -10,11 +10,9 @@ import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.service.UsuariosServices;
 import com.inte_soft.gestionconsumibles.util.AdvertenciaModal;
-import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 
 /**
