@@ -199,12 +199,12 @@ public class Consumibles extends javax.swing.JDialog {
             Object value = this.tbListadoConsumibles.getValueAt(i, 7);
             if (value != null && value instanceof String && !value.equals("0")) {
                 String fieldValue = (String) value;
-                if (!fieldValue.matches("\\d+")) {
+                if (!fieldValue.matches("\\d+(\\.\\d+)?")) {
                     JOptionPane.showMessageDialog(null, "El campo debe contener solo números \n"+
                            " " + this.tbListadoConsumibles.getValueAt(i, 1)+
                            " " + this.tbListadoConsumibles.getValueAt(i, 2) +
                            " este consumible no fue agregado", "Error de validación", JOptionPane.ERROR_MESSAGE);
-                    break;
+                    continue;
                 }
                     Object[] row = new Object[8];
                     row[0] = this.tbListadoConsumibles.getValueAt(i, 0);

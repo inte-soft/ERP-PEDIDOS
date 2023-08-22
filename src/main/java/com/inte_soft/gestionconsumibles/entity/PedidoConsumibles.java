@@ -47,7 +47,7 @@ public class PedidoConsumibles implements java.io.Serializable {
     @Column(name = "UNIDAD")
     private String unidad;
     @Column(name = "CANTIDAD")
-    private int cantidad;
+    private float cantidad;
     @Column(name = "VALOR")
     private double valor;
 
@@ -55,7 +55,7 @@ public class PedidoConsumibles implements java.io.Serializable {
     public PedidoConsumibles() {
     }
 
-    public PedidoConsumibles(Pedidos pedidos, int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, int cantidad, double valor) {
+    public PedidoConsumibles(Pedidos pedidos, int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor) {
         this.pedidos = pedidos;
         this.item = item;
         this.codigo = codigo;
@@ -140,11 +140,11 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.unidad = unidad;
     }
 
-    public int getCantidad() {
+    public float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
     }
 
