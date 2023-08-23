@@ -20,7 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -34,6 +36,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
      */
     private  Usuarios usuario;
     private HashMap<Integer, ArrayList<?>> map;
+    private DefaultTableModel model;
+    private TableRowSorter<DefaultTableModel> sorter;
     public PedidosAlmacen(String departamento, Usuarios usuario) {
         initComponents();
         map = new HashMap<>();
@@ -45,8 +49,16 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             
         }
         this.usuario = usuario;
+        modelarTabla();
     }
-
+    public void modelarTabla(){
+        this.model =  (DefaultTableModel) jTable1.getModel();
+        this.jTable1.setModel(model);
+        this.jTable1.setAutoCreateRowSorter(true);
+        sorter = new TableRowSorter<>(model);
+        this.jTable1.setRowSorter(sorter);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +73,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         tbn_verPedido = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextSearch = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -113,6 +128,21 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setText("Busqueda");
+
+        jTextSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextSearchKeyReleased(evt);
+            }
+        });
+
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,19 +150,30 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(35, 35, 35))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -423,6 +464,24 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         JTablePrinter jTablePrinter = new JTablePrinter();
         jTablePrinter.printTable(this.jTable4, header, footer);
     }//GEN-LAST:event_jBImprimirActionPerformed
+
+    private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
+        filter();
+    }//GEN-LAST:event_jTextSearchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        model.setNumRows(0);
+        this.verPedidos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void filter(){
+        try {
+            sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
+            
+        }catch(Exception e){
+            
+        }
+    }
     public void verPedidos(){
         PedidosController pedidosController = new PedidosController();
         DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
@@ -446,11 +505,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBDesplegar;
     private javax.swing.JButton jBExport;
     private javax.swing.JButton jBImprimir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -461,6 +522,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable6;
+    private javax.swing.JTextField jTextSearch;
     private javax.swing.JTextField jTxtDescripcion;
     private javax.swing.JTextField jTxtOt;
     private javax.swing.JButton tbn_verPedido;

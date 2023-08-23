@@ -17,12 +17,12 @@ public class ConsumiblesDtoRev {
     private String referencia;
     private String marca;
     private String unidad;
-    private long cantidad;
+    private double cantidad;
 
     public ConsumiblesDtoRev() {
     }
 
-    public ConsumiblesDtoRev(String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, long cantidad) {
+    public ConsumiblesDtoRev(String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo = tipo;
@@ -81,11 +81,11 @@ public class ConsumiblesDtoRev {
         this.unidad = unidad;
     }
 
-    public long getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(long cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 

@@ -18,7 +18,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import static org.apache.commons.math3.fitting.leastsquares.LeastSquaresFactory.model;
 
 
 /**
@@ -35,6 +38,8 @@ public class Consumibles extends javax.swing.JDialog {
     private gestionConsumibles gConsumibles;
     private Usuarios usuario;
     private String ot;
+    private DefaultTableModel model;
+    private TableRowSorter<DefaultTableModel> sorter;
     
     public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles) {
         initComponents();
@@ -43,6 +48,7 @@ public class Consumibles extends javax.swing.JDialog {
         this.item = item;
         this.gConsumibles = gConsumibles;
         this.loadConsumibles(this.tipoConsumibles, this.item);
+        modelarTabla();
     }
     
     public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts, Usuarios usuario, String ot) {
@@ -55,6 +61,7 @@ public class Consumibles extends javax.swing.JDialog {
             this.ot = ot;
         }
         this.loadDespliegue(listcConsumiblesDtoOts);
+        modelarTabla();
         
     }
     
@@ -67,11 +74,21 @@ public class Consumibles extends javax.swing.JDialog {
             this.ot = ot;
         
         this.verPedido(listPedidoConsumibleses);
+        modelarTabla();
     }
 
     public Consumibles() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
+        modelarTabla();
+    }
+    public void modelarTabla(){
+        this.model =  (DefaultTableModel) tbListadoConsumibles.getModel();
+        this.tbListadoConsumibles.setModel(model);
+        this.tbListadoConsumibles.setAutoCreateRowSorter(true);
+        sorter = new TableRowSorter<>(model);
+        this.tbListadoConsumibles.setRowSorter(sorter);
+        
     }
     
 
@@ -91,6 +108,8 @@ public class Consumibles extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jBImprimir = new javax.swing.JButton();
+        jTextSearch = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -149,6 +168,14 @@ public class Consumibles extends javax.swing.JDialog {
             }
         });
 
+        jTextSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextSearchKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Busqueda");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,19 +192,28 @@ public class Consumibles extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(246, 246, 246)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(261, 261, 261))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,6 +276,18 @@ public class Consumibles extends javax.swing.JDialog {
         jTablePrinter.printTable(tbListadoConsumibles, header, footer);
     }//GEN-LAST:event_jBImprimirActionPerformed
 
+    private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
+         filter();
+    }//GEN-LAST:event_jTextSearchKeyReleased
+    
+    private void filter(){
+        try {
+            sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
+            
+        }catch(Exception e){
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -344,7 +392,9 @@ public class Consumibles extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextSearch;
     private javax.swing.JTable tbListadoConsumibles;
     // End of variables declaration//GEN-END:variables
 

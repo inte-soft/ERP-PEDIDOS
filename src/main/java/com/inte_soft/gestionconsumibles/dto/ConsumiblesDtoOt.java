@@ -17,12 +17,12 @@ public class ConsumiblesDtoOt {
     private String referencia;
     private String marca;
     private String unidad;
-    private long cantidad;
+    private double cantidad;
 
     public ConsumiblesDtoOt() {
     }
 
-    public ConsumiblesDtoOt(int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, long cantidad) {
+    public ConsumiblesDtoOt(int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
         this.ot = ot;
         this.item = item;
         this.codigo = codigo;
@@ -98,11 +98,11 @@ public class ConsumiblesDtoOt {
         this.unidad = unidad;
     }
 
-    public long getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(long cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
     
