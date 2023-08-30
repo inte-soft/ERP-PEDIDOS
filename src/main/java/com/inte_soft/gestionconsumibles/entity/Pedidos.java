@@ -44,12 +44,14 @@ public class Pedidos  implements java.io.Serializable{
     private boolean revisado;
     @Column(name = "TIPO_PEDIDO")
     private String tipoPedido;
+    @Column(name = "VISTO")
+    private boolean visto;
     
 
     public Pedidos() {
     }
 
-    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido) {
+    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto) {
         this.persona = persona;
         this.ot = ot;
         this.area = area;
@@ -57,6 +59,7 @@ public class Pedidos  implements java.io.Serializable{
         this.operacion = operacion;
         this.revisado = revisado;
         this.tipoPedido = tipoPedido;
+        this.visto = visto;
     }
 
     public int getIdPedido() {
@@ -121,6 +124,14 @@ public class Pedidos  implements java.io.Serializable{
 
     public void setTipoPedido(String tipoPedido) {
         this.tipoPedido = tipoPedido;
+    }
+
+    public boolean isVisto() {
+        return visto;
+    }
+
+    public void setVisto(boolean visto) {
+        this.visto = visto;
     }
 
     

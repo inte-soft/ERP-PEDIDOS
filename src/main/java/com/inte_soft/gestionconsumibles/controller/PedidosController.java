@@ -27,4 +27,8 @@ public class PedidosController {
         return pedidosServices.findWhithoutRevison();
         
     }
+
+    public void updatePedido(Pedidos pedido) {
+       pedidosServices.updatePedido(pedido);
+    }
 }

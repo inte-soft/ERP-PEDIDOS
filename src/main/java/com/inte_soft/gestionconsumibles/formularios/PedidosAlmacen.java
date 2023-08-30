@@ -12,13 +12,18 @@ import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.CustomRowRenderer;
 import com.inte_soft.gestionconsumibles.util.ExcelExporter;
 import com.inte_soft.gestionconsumibles.util.JTablePrinter;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.ImageIcon;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -38,6 +43,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private HashMap<Integer, ArrayList<?>> map;
     private DefaultTableModel model;
     private TableRowSorter<DefaultTableModel> sorter;
+    private List<Pedidos> listPedidos;
     public PedidosAlmacen(String departamento, Usuarios usuario) {
         initComponents();
         map = new HashMap<>();
@@ -50,6 +56,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         }
         this.usuario = usuario;
         modelarTabla();
+        
+        Runnable tarea = () -> {
+       this.verPedidos();
+    };
+
+    // Programa la tarea para ejecutarse cada 5 minutos
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    scheduler.scheduleAtFixedRate(tarea, 0, 5, TimeUnit.MINUTES);
     }
     public void modelarTabla(){
         this.model =  (DefaultTableModel) jTable1.getModel();
@@ -108,11 +122,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -120,6 +134,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(5).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(0);
+        }
 
         tbn_verPedido.setText("Ver Pedido");
         tbn_verPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -382,9 +401,25 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
         Consumibles consumibles = new Consumibles( listPedidoConsumibleses,this.usuario,ot);
         consumibles.setVisible(true);
+        Pedidos pedido = new Pedidos();
+        PedidosController pedidosController = new PedidosController();
+        for(Pedidos pedidos : this.listPedidos){
+            int idList = pedidos.getIdPedido();
+            int id = Integer.parseInt(this.jTable1.getValueAt(row, 0).toString());
+            if(id == idList){
+            pedido = pedidos;
+            break;
+            }            
+        }
+        
+        pedido.setVisto(Boolean.TRUE);
+        pedidosController.updatePedido(pedido);
+        this.verPedidos();
+        
         }else{
             JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
+        
     }//GEN-LAST:event_tbn_verPedidoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -428,6 +463,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         Consumibles consumibles = new Consumibles("VISUALIZACION",
                 listConsumiblesDtoOt, this.usuario, ot);
         consumibles.setVisible(true);
+        
         }else{
             JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
@@ -485,19 +521,24 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     public void verPedidos(){
         PedidosController pedidosController = new PedidosController();
         DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
-        List<Pedidos> listPedidoses = pedidosController.listPedidosWhithoutRevision();
-        for (Pedidos pedidos : listPedidoses) {
+        this.listPedidos = pedidosController.listPedidosWhithoutRevision();
+        model.setNumRows(0);
+        // Crea una instancia de tu CustomCellRenderer
+        Font customFont = new Font("Arial", Font.BOLD, 14);
+        Color customColor = Color.BLUE;
+        CustomRowRenderer customRowRenderer = new CustomRowRenderer(customFont, customColor);
+        jTable1.setDefaultRenderer(Object.class, customRowRenderer);
+        for (Pedidos pedidos : this.listPedidos) {
             Object[] rowData  = {
                 pedidos.getIdPedido(),
                 pedidos.getOt(),
                 pedidos.getFecha(),
                 pedidos.getPersona(),
-                pedidos.getOperacion()
+                pedidos.getOperacion(),
+                pedidos.isVisto()
             };
-                
-        
             model.addRow(rowData);
-        
+            
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

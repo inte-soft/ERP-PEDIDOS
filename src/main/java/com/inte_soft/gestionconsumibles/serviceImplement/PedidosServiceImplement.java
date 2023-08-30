@@ -34,5 +34,11 @@ public class PedidosServiceImplement implements  PedidosServices{
         pedidosDao = new PedidosDao();
         return pedidosDao.findWhithoutRevision();
     }
+
+    @Override
+    public void updatePedido(Pedidos pedido) {
+        pedidosDao = new PedidosDao();
+        pedidosDao.merge(pedido);
+    }
     
 }

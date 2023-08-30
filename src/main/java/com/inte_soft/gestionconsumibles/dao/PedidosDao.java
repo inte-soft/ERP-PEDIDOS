@@ -79,4 +79,12 @@ public class PedidosDao {
 
         entityManager.close();
     }
+
+    public void merge(Pedidos pedido) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(pedido);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
 }
