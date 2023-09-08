@@ -20,15 +20,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author alejo
  */
 public class ExcelExporter {
-     public  void exportTable(JTable table) {
+
+    public void exportTable(JTable table) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar archivo Excel");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de Excel (*.xlsx)", "xlsx"));
-        
+
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-
+            // Verificar si el nombre del archivo tiene la extensión ".xlsx"
+            if (!filePath.endsWith(".xlsx")) {
+                filePath += ".xlsx"; // Agregar la extensión si no está presente
+            }
             try (Workbook workbook = new XSSFWorkbook()) {
                 Sheet sheet = workbook.createSheet("Sheet1");
                 Row headerRow = sheet.createRow(0);
