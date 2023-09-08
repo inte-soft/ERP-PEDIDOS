@@ -25,6 +25,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -41,7 +42,10 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
      */
     private  Usuarios usuario;
     private HashMap<Integer, ArrayList<?>> map;
-    private DefaultTableModel model;
+    private DefaultTableModel model1;
+    private DefaultTableModel model2;
+    private DefaultTableModel model4;
+    private DefaultTableModel model6;
     private TableRowSorter<DefaultTableModel> sorter;
     private List<Pedidos> listPedidos;
     public PedidosAlmacen(String departamento, Usuarios usuario) {
@@ -55,7 +59,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             
         }
         this.usuario = usuario;
-        modelarTabla();
+        this.model1 = modelarTabla(jTable1);
         
         Runnable tarea = () -> {
        this.verPedidos();
@@ -65,12 +69,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     scheduler.scheduleAtFixedRate(tarea, 0, 5, TimeUnit.MINUTES);
     }
-    public void modelarTabla(){
-        this.model =  (DefaultTableModel) jTable1.getModel();
-        this.jTable1.setModel(model);
-        this.jTable1.setAutoCreateRowSorter(true);
+    public DefaultTableModel modelarTabla(JTable jTable){
+        DefaultTableModel model =  (DefaultTableModel) jTable.getModel();
+        jTable.setModel(model);
+        jTable.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(model);
-        this.jTable1.setRowSorter(sorter);
+        jTable.setRowSorter(sorter);
+        return model;
         
     }
     /**
@@ -107,6 +112,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jTable6 = new javax.swing.JTable();
         jBExport = new javax.swing.JButton();
         jBActualizar = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jTextOtSearch = new javax.swing.JTextField();
+        jBSearch = new javax.swing.JButton();
+        jBExportByOt = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
@@ -346,7 +358,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBActualizar)))
                 .addContainerGap())
@@ -359,11 +371,74 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Revision", jPanel3);
+        jTabbedPane1.addTab("Revision Total", jPanel3);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel5.setText("OT");
+
+        jBSearch.setText("Buscar");
+        jBSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSearchActionPerformed(evt);
+            }
+        });
+
+        jBExportByOt.setText("Exportar a Excel");
+        jBExportByOt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExportByOtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1147, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextOtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBExportByOt)
+                        .addContainerGap())))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextOtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBSearch)))
+                    .addComponent(jBExportByOt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Revision OT", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -382,16 +457,19 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportActionPerformed
+        export(this.jTable6);
+    }//GEN-LAST:event_jBExportActionPerformed
+    private void export(JTable jTable){
         ExcelExporter excelExporter = new ExcelExporter();
-        excelExporter.exportTable(this.jTable6);
+        excelExporter.exportTable(jTable);
         List<Pedidos> listPedidos = (List<Pedidos>) this.map.get(1);
         PedidosController pedidosController = new PedidosController();
+        model2 = modelarTabla(jTable2);
+        model2.setRowCount(0);
+        model6 = modelarTabla(jTable6);
+        model6.setRowCount(0);
         pedidosController.applyCheck(listPedidos);
-        jBActualizarActionPerformed(null);
-        
-        
-    }//GEN-LAST:event_jBExportActionPerformed
-
+    }
     private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
         int row = this.jTable1.getSelectedRow();
         if(row>=0){
@@ -471,26 +549,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBDesplegarActionPerformed
 
     private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
-        DefaultTableModel model =  (DefaultTableModel) jTable6.getModel();
-        model.setNumRows(0);
-        map = pedidoConsumiblesController.consumiblesWhithoutCheck();
-        ArrayList<ConsumiblesDtoRev> listConsumiblesDtoRevs = (ArrayList<ConsumiblesDtoRev>) map.get(2);
-        for (ConsumiblesDtoRev consumiblesDto : listConsumiblesDtoRevs) {
-            Object[] rowData  = {
-                consumiblesDto.getCodigo(),
-                consumiblesDto.getDescripcion(),
-                consumiblesDto.getTipo(),
-                consumiblesDto.getReferencia(),
-                consumiblesDto.getMarca(),
-                consumiblesDto.getUnidad(),
-                consumiblesDto.getCantidad()
-            };
-                
-        
-            model.addRow(rowData);
-        
-        }
+        updatePedidosSinRevisar(this.jTable6, 0);
     }//GEN-LAST:event_jBActualizarActionPerformed
 
     private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
@@ -499,6 +558,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         String footer = "Elabora: " + this.usuario.getNombres() + " " + this.usuario.getApellidos();
         JTablePrinter jTablePrinter = new JTablePrinter();
         jTablePrinter.printTable(this.jTable4, header, footer);
+        
     }//GEN-LAST:event_jBImprimirActionPerformed
 
     private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
@@ -510,6 +570,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         model.setNumRows(0);
         this.verPedidos();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
+        updatePedidosSinRevisar(jTable2, Integer.parseInt(this.jTextOtSearch.getText()));
+    }//GEN-LAST:event_jBSearchActionPerformed
+
+    private void jBExportByOtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportByOtActionPerformed
+        export(this.jTable2);
+    }//GEN-LAST:event_jBExportByOtActionPerformed
     private void filter(){
         try {
             sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
@@ -521,7 +589,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     public void verPedidos(){
         PedidosController pedidosController = new PedidosController();
         DefaultTableModel model =  (DefaultTableModel) jTable1.getModel();
-        this.listPedidos = pedidosController.listPedidosWhithoutRevision();
+        this.listPedidos = pedidosController.listPedidosWhithoutRevision(0);
         model.setNumRows(0);
         // Crea una instancia de tu CustomCellRenderer
         Font customFont = new Font("Arial", Font.BOLD, 14);
@@ -541,11 +609,37 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             
         }
     }
+    
+    private void updatePedidosSinRevisar(JTable table, int ot){
+        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+        DefaultTableModel model =  (DefaultTableModel) table.getModel();
+        model.setNumRows(0);
+        map = pedidoConsumiblesController.consumiblesWhithoutCheck(ot);
+        ArrayList<ConsumiblesDtoRev> listConsumiblesDtoRevs = (ArrayList<ConsumiblesDtoRev>) map.get(2);
+        for (ConsumiblesDtoRev consumiblesDto : listConsumiblesDtoRevs) {
+            Object[] rowData  = {
+                
+                consumiblesDto.getCodigo(),
+                consumiblesDto.getDescripcion(),
+                consumiblesDto.getTipo(),
+                consumiblesDto.getReferencia(),
+                consumiblesDto.getMarca(),
+                consumiblesDto.getUnidad(),
+                consumiblesDto.getCantidad()
+            };
+                
+        
+            model.addRow(rowData);
+        
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBDesplegar;
     private javax.swing.JButton jBExport;
+    private javax.swing.JButton jBExportByOt;
     private javax.swing.JButton jBImprimir;
+    private javax.swing.JButton jBSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -553,16 +647,21 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable6;
+    private javax.swing.JTextField jTextOtSearch;
     private javax.swing.JTextField jTextSearch;
     private javax.swing.JTextField jTxtDescripcion;
     private javax.swing.JTextField jTxtOt;

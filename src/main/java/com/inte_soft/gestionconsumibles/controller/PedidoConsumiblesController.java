@@ -23,41 +23,44 @@ import java.util.List;
  * @author alejo
  */
 public class PedidoConsumiblesController {
+
     private PedidoConsumiblesServices pedidoConsumiblesServices;
-    private PedidosServices pedidosServices; 
+    private PedidosServices pedidosServices;
+
     public PedidoConsumiblesController() {
         pedidoConsumiblesServices = new PedidoConsumiblesServiceImplement();
         pedidosServices = new PedidosServiceImplement();
     }
-    
+
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
-            AreaCompania area, String persona, String Operacion, String ot, String tipoPedido){
-        
+            AreaCompania area, String persona, String Operacion, String ot, String tipoPedido) {
+
         pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot, tipoPedido);
     }
-    
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido){
+
+    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido) {
         return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
-    
-    
-    public HashMap consumiblesWhithoutCheck(){
-        HashMap<Integer,ArrayList<?>> map = new HashMap<>();
-        List<Pedidos> listPedidos = pedidosServices.findWhithoutRevison();
+
+    public HashMap consumiblesWhithoutCheck(int ot) {
+        HashMap<Integer, ArrayList<?>> map = new HashMap<>();
+        List<Pedidos> listPedidos = pedidosServices.findWhithoutRevison(ot);
         List<ConsumiblesDtoRev> listConsumiblesDtoRevs = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(listPedidos);
-        
+
         map.put(1, new ArrayList<>(listPedidos));
         map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
-        
+
         return map;
     }
-    
-    public List<PedidoConsumibles> findByIdPedido(int idPedido){
+
+
+
+    public List<PedidoConsumibles> findByIdPedido(int idPedido) {
         return pedidoConsumiblesServices.findByIdPedido(idPedido);
     }
 
     public List<ConsumiblesDtoOt> consumiblesPedidosSearcFilter(int ot, String tipoPedido) {
-       return pedidoConsumiblesServices.consumiblesPedidosSearchFilter(ot, tipoPedido);
+        return pedidoConsumiblesServices.consumiblesPedidosSearchFilter(ot, tipoPedido);
     }
-    
+
 }

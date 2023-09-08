@@ -49,16 +49,23 @@ public class PedidosDao {
        return pedidos;
     }
     
-    public List<Pedidos> findWhithoutRevision(){
+    
+    public List<Pedidos> findWhithoutRevision(int ot){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         String queryString = "SELECT p " +
                 "FROM Pedidos p " +
                 "WHERE p.revisado = false ";
+         if (ot != 0) {
+            queryString += "AND p.ot = :ot ";
+        }
 
         TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
-
+        
+         if (ot != 0) {
+            query.setParameter("ot", ot);
+        }
 
         List<Pedidos> resultList = query.getResultList();
 

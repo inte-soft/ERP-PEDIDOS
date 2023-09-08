@@ -30,9 +30,9 @@ public class PedidosServiceImplement implements  PedidosServices{
     }
 
     @Override
-    public List<Pedidos> findWhithoutRevison() {
+    public List<Pedidos> findWhithoutRevison(int ot) {
         pedidosDao = new PedidosDao();
-        return pedidosDao.findWhithoutRevision();
+        return pedidosDao.findWhithoutRevision(ot);
     }
 
     @Override

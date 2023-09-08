@@ -23,8 +23,8 @@ public class PedidosController {
         pedidosServices.checkPedidos(listPedidos);
     }
     
-    public List<Pedidos> listPedidosWhithoutRevision (){
-        return pedidosServices.findWhithoutRevison();
+    public List<Pedidos> listPedidosWhithoutRevision (int ot){
+        return pedidosServices.findWhithoutRevison(ot);
         
     }
 

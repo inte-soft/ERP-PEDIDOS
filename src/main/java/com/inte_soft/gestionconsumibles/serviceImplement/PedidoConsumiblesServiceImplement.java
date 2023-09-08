@@ -21,9 +21,10 @@ import java.util.List;
  *
  * @author alejo
  */
-public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServices{
+public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServices {
+
     private PedidoConsumiblesDao pedidoConsumiblesDao;
-    
+
     @Override
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona,
             String Operacion, String ot, String tipoPedido) {
@@ -37,33 +38,30 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidos.setFecha(new Date());
         pedidos.setTipoPedido(tipoPedido);
         Pedidos pedidosPersist = pedidosDao.createPedido(pedidos);
-        
-       
-        for(PedidoConsumibles pc : pedidoConsumibleses){
-            try{
-            PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
-            pedidoConsumibles.setPedidos(pedidosPersist);
-            pedidoConsumibles.setItem(pc.getItem());
-            pedidoConsumibles.setCodigo(pc.getCodigo());
-            pedidoConsumibles.setDescripcion(pc.getDescripcion());
-            pedidoConsumibles.setTipo(pc.getTipo());
-            pedidoConsumibles.setReferencia(pc.getReferencia());
-            pedidoConsumibles.setMarca(pc.getMarca());
-            pedidoConsumibles.setUnidad(pc.getUnidad());
-            pedidoConsumibles.setCantidad(pc.getCantidad());
-            pedidoConsumibles.setValor(masterDao.findById(pc.getCodigo()).getPrecio_descuento() * pc.getCantidad());
-           
-            
 
-            pedidoConsumiblesDao = new PedidoConsumiblesDao();
-            pedidoConsumiblesDao.createPedido(pedidoConsumibles);
-        }catch(Exception e){
-           
-            e.printStackTrace();
-            
+        for (PedidoConsumibles pc : pedidoConsumibleses) {
+            try {
+                PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
+                pedidoConsumibles.setPedidos(pedidosPersist);
+                pedidoConsumibles.setItem(pc.getItem());
+                pedidoConsumibles.setCodigo(pc.getCodigo());
+                pedidoConsumibles.setDescripcion(pc.getDescripcion());
+                pedidoConsumibles.setTipo(pc.getTipo());
+                pedidoConsumibles.setReferencia(pc.getReferencia());
+                pedidoConsumibles.setMarca(pc.getMarca());
+                pedidoConsumibles.setUnidad(pc.getUnidad());
+                pedidoConsumibles.setCantidad(pc.getCantidad());
+                pedidoConsumibles.setValor(masterDao.findById(pc.getCodigo()).getPrecio_descuento() * pc.getCantidad());
+
+                pedidoConsumiblesDao = new PedidoConsumiblesDao();
+                pedidoConsumiblesDao.createPedido(pedidoConsumibles);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
         }
-        }
-        
+
     }
 
     @Override
@@ -71,8 +69,6 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filteredSearch(ot, descripcion, tipoPedido);
     }
-
-    
 
     @Override
     public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos) {
@@ -89,7 +85,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     @Override
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchFilter(int ot, String tipoPedido) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
-        return pedidoConsumiblesDao.filteredSearchByOt(ot,tipoPedido);
+        return pedidoConsumiblesDao.filteredSearchByOt(ot, tipoPedido);
     }
-    
+
 }

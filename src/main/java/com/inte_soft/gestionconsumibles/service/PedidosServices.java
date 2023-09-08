@@ -15,7 +15,8 @@ public interface PedidosServices {
     
     public void checkPedidos(List<Pedidos> listPedidos);
     
-    public List<Pedidos> findWhithoutRevison();
+    public List<Pedidos> findWhithoutRevison(int ot);
 
     public void updatePedido(Pedidos pedido);
+
 }

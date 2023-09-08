@@ -36,7 +36,6 @@ public class Pedidos  implements java.io.Serializable{
     @JoinColumn(name = "ID_AREA")
     private AreaCompania area;
     @Column(name = "FECHA")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @Column(name = "OPERACION")
     private String operacion;
