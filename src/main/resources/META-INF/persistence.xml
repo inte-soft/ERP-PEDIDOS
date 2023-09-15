@@ -6,11 +6,27 @@
     <persistence-unit name="myPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="${config.database.url}" />
+            <property name="hibernate.connection.provider_class" value="com.zaxxer.hikari.hibernate.HikariConnectionProvider" />
+            <property name="hibernate.hikari.dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource" />
+            <property name="hibernate.hikari.dataSource.url" value="${config.database.url}" />
+            <property name="hibernate.hikari.dataSource.user" value="${config.database.username}" />
+            <property name="hibernate.hikari.dataSource.password" value="${config.database.password}" />
+            
+           <!-- <property name="javax.persistence.jdbc.url" value="${config.database.url}" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.user" value="${config.database.username}"/>
             <property name="javax.persistence.jdbc.password" value="${config.database.password}"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>-->
+            <property name="hibernate.hikari.maximumPoolSize" value="100" />
+            <property name="hibernate.hikari.minimumIdle" value="0" />
+            <property name="hibernate.hikari.idleTimeout" value="10000" />
+            <property name="hibernate.hikari.maxLifetime" value="30001" />
+            <property name="hibernate.hikari.connectionTimeout" value="3000" />
+            <property name="hibernate.hikari.validationTimeout" value="2000" />
+            <property name="hibernate.hikari.keepaliveTime" value="30000" />
+            
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.show_sql" value="true" />
 
         </properties>
         
