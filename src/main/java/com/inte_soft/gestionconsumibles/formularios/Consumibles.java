@@ -7,7 +7,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
+import com.inte_soft.gestionconsumibles.dto.PedidoConsumiblesDto;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
 import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesMecanicos;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
@@ -49,6 +49,17 @@ public class Consumibles extends javax.swing.JDialog {
         this.loadConsumibles(this.tipoConsumibles, this.item);
         modelarTabla();
     }
+    public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles, Usuarios usuario, String ot) {
+        initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
+        this.tipoConsumibles = tipoConsumibles;
+        this.item = item;
+        this.gConsumibles = gConsumibles;
+        this.usuario = usuario;
+        this.ot = ot;
+        this.loadConsumibles(this.tipoConsumibles, this.item);
+        modelarTabla();
+    }
     
     public Consumibles(String visualizacion, List<ConsumiblesDtoOt> listcConsumiblesDtoOts, Usuarios usuario, String ot) {
         initComponents();
@@ -58,22 +69,33 @@ public class Consumibles extends javax.swing.JDialog {
             jButton3.setVisible(false);
             this.usuario = usuario;
             this.ot = ot;
+            //agregar dos columnas a la tabla
         }
         this.loadDespliegue(listcConsumiblesDtoOts);
         modelarTabla();
+
         
     }
+
+
+
+    public void addColumn(){
+        this.model.addColumn("Minimo");
+        this.model.addColumn("Maximo");
+    }
     
-    public Consumibles( List<PedidoConsumibles> listPedidoConsumibleses, Usuarios usuario, String ot) {
+    public Consumibles( List<PedidoConsumiblesDto> listPedidoConsumibleses, Usuarios usuario, String ot) {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
             jButton2.setVisible(false);
             jButton3.setVisible(false);
             this.usuario = usuario;
             this.ot = ot;
-        
-        this.verPedido(listPedidoConsumibleses);
         modelarTabla();
+
+        addColumn();
+        this.verPedido(listPedidoConsumibleses);
+
     }
 
     public Consumibles() {
@@ -427,9 +449,9 @@ public class Consumibles extends javax.swing.JDialog {
     private javax.swing.JTable tbListadoConsumibles;
     // End of variables declaration//GEN-END:variables
 
-    private void verPedido(List<PedidoConsumibles> listPedidoConsumibleses) {
+    private void verPedido(List<PedidoConsumiblesDto> listPedidoConsumibleses) {
         DefaultTableModel model =  (DefaultTableModel) tbListadoConsumibles.getModel();
-        for (PedidoConsumibles pedidoConsumibles : listPedidoConsumibleses) {
+        for (PedidoConsumiblesDto pedidoConsumibles : listPedidoConsumibleses) {
             Object[] rowData  = {
                 pedidoConsumibles.getItem(),
                 pedidoConsumibles.getCodigo(),
@@ -438,7 +460,9 @@ public class Consumibles extends javax.swing.JDialog {
                 pedidoConsumibles.getReferencia(),
                 pedidoConsumibles.getMarca(),
                 pedidoConsumibles.getUnidad(),
-                pedidoConsumibles.getCantidad()
+                pedidoConsumibles.getCantidad(),
+                pedidoConsumibles.getMaximo(),
+                pedidoConsumibles.getMinimo()
             };
                 
         

@@ -4,7 +4,6 @@
  */
 package com.inte_soft.gestionconsumibles.dao;
 
-
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,6 +17,7 @@ import javax.persistence.TypedQuery;
  * @author alejo
  */
 public class PedidosDao {
+
     @PersistenceContext
     private final EntityManagerFactory entityManagerFactory;
 
@@ -28,42 +28,41 @@ public class PedidosDao {
     public void close() {
         entityManagerFactory.close();
     }
-    
-    public Pedidos createPedido(Pedidos pedidos){
-       EntityManager entityManager = entityManagerFactory.createEntityManager();
-       entityManager.getTransaction().begin();
-       
-       entityManager.persist(pedidos);
-       Pedidos pedidosr = pedidos;
-       entityManager.getTransaction().commit();
-       entityManager.close();
-       return pedidos;
-   }
-    
-    public Pedidos findById(String id){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-       entityManager.getTransaction().begin();
-       Pedidos pedidos = entityManager.find(Pedidos.class, id);
-       entityManager.getTransaction().commit();
-       entityManager.close();
-       return pedidos;
-    }
-    
-    
-    public List<Pedidos> findWhithoutRevision(int ot){
+
+    public Pedidos createPedido(Pedidos pedidos) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT p " +
-                "FROM Pedidos p " +
-                "WHERE p.revisado = false ";
-         if (ot != 0) {
+        entityManager.persist(pedidos);
+        Pedidos pedidosr = pedidos;
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return pedidos;
+    }
+
+    public Pedidos findById(String id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Pedidos pedidos = entityManager.find(Pedidos.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return pedidos;
+    }
+
+    public List<Pedidos> findWhithoutRevision(int ot) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT p "
+                + "FROM Pedidos p "
+                + "WHERE p.revisado = false ";
+        if (ot != 0) {
             queryString += "AND p.ot = :ot ";
         }
 
         TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
-        
-         if (ot != 0) {
+
+        if (ot != 0) {
             query.setParameter("ot", ot);
         }
 
@@ -74,10 +73,26 @@ public class PedidosDao {
 
         return resultList;
     }
-    
-    public void checkPedidos(Pedidos pedidos){
+
+    public boolean existeOT(int ot) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-       
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT COUNT(p) FROM Pedidos p WHERE p.ot = :ot";
+        TypedQuery<Long> query = entityManager.createQuery(queryString, Long.class);
+        query.setParameter("ot", ot);
+
+        Long count = query.getSingleResult();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return count > 0;
+    }
+
+    public void checkPedidos(Pedidos pedidos) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
 
         entityManager.merge(pedidos);

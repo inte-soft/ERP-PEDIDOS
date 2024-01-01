@@ -4,9 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
@@ -17,6 +15,7 @@ import com.inte_soft.gestionconsumibles.serviceImplement.PedidosServiceImplement
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,20 +41,42 @@ public class PedidoConsumiblesController {
         return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
 
-    public HashMap consumiblesWhithoutCheck(int ot) {
+    public HashMap consumiblesWhithoutCheck(List<Integer> ots) {
         HashMap<Integer, ArrayList<?>> map = new HashMap<>();
-        List<Pedidos> listPedidos = pedidosServices.findWhithoutRevison(ot);
-        List<ConsumiblesDtoRev> listConsumiblesDtoRevs = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(listPedidos);
+        List<Pedidos> listPedidos = new ArrayList<>();
+        List<ConsumiblesDtoRev> listConsumiblesDtoRevs  = new ArrayList<>();
+        for (int ot : ots) {
+            boolean otExiste = pedidosServices.checkOtExiste(ot);
+            if (!otExiste) {
+                JOptionPane.showMessageDialog(null, "La OT " + ot + " no tiene pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                continue;
+            }else {
+            List<Pedidos> listPedidosTemporal = pedidosServices.findWhithoutRevison(ot);
+            List<ConsumiblesDtoRev> listConsumiblesDtoRevsTemporal = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(listPedidosTemporal);
+            
+            if (listConsumiblesDtoRevsTemporal.size() == 0) {
+                JOptionPane.showMessageDialog(null, "La OT " + ot + " no tiene pedidos para exportar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                continue;
+            }else{
+                listConsumiblesDtoRevs.addAll(listConsumiblesDtoRevsTemporal);
+                listPedidos.addAll(listPedidosTemporal);
+            }
+            
+            }
+        }
 
-        map.put(1, new ArrayList<>(listPedidos));
-        map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
-
-        return map;
+        if(listConsumiblesDtoRevs.size()!=0){
+            map.put(1, new ArrayList<>(listPedidos));
+            map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
+            return map;
+        }else{
+           JOptionPane.showMessageDialog(null, "Las OTs que ingreso no tiene pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
     }
 
 
-
-    public List<PedidoConsumibles> findByIdPedido(int idPedido) {
+    public List<PedidoConsumiblesDto> findByIdPedido(int idPedido) {
         return pedidoConsumiblesServices.findByIdPedido(idPedido);
     }
 
@@ -63,4 +84,19 @@ public class PedidoConsumiblesController {
         return pedidoConsumiblesServices.consumiblesPedidosSearchFilter(ot, tipoPedido);
     }
 
+    public List<MaxMinElectDTO> consumiblesElectricosMaxMinList() {
+        return pedidoConsumiblesServices.consumiblesElectricosMaxMinList();
+    }
+
+    public void updateMaxMin(List<MaxMinElectDTO> listMaxMinElectDTO) {
+        pedidoConsumiblesServices.updateMaxMinE(listMaxMinElectDTO);
+    }
+
+    public List<MaxMinElectDTO> consumiblesMecanicosMaxMinList() {
+        return pedidoConsumiblesServices.consumiblesMecanicosMaxMinList();
+    }
+
+    public void updateMaxMinMecanicos(List<MaxMinElectDTO> listMaxMinElectDTO) {
+        pedidoConsumiblesServices.updateMaxMinM(listMaxMinElectDTO);
+    }
 }

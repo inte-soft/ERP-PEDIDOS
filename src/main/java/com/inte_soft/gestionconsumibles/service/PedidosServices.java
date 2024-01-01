@@ -19,4 +19,6 @@ public interface PedidosServices {
 
     public void updatePedido(Pedidos pedido);
 
+    public boolean checkOtExiste(int ot);
+
 }

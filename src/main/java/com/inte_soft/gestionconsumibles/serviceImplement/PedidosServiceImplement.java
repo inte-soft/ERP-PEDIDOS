@@ -40,5 +40,11 @@ public class PedidosServiceImplement implements  PedidosServices{
         pedidosDao = new PedidosDao();
         pedidosDao.merge(pedido);
     }
+
+    @Override
+    public boolean checkOtExiste(int ot) {
+        pedidosDao = new PedidosDao();
+        return pedidosDao.existeOT(ot);
+    }
     
 }

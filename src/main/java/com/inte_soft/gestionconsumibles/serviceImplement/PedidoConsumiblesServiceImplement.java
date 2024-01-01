@@ -7,9 +7,7 @@ package com.inte_soft.gestionconsumibles.serviceImplement;
 import com.inte_soft.gestionconsumibles.dao.MasterDao;
 import com.inte_soft.gestionconsumibles.dao.PedidoConsumiblesDao;
 import com.inte_soft.gestionconsumibles.dao.PedidosDao;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
@@ -77,9 +75,33 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public List<PedidoConsumibles> findByIdPedido(int idPedido) {
+    public List<PedidoConsumiblesDto> findByIdPedido(int idPedido) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.findByIdPedido(idPedido);
+    }
+
+    @Override
+    public List<MaxMinElectDTO> consumiblesElectricosMaxMinList() {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.consumiblesElectricosMaxMinList();
+    }
+
+    @Override
+    public void updateMaxMinE(List<MaxMinElectDTO> listMaxMinElectDTO) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        pedidoConsumiblesDao.updateMaxMinE(listMaxMinElectDTO);
+    }
+
+    @Override
+    public void updateMaxMinM(List<MaxMinElectDTO> listMaxMinElectDTO) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        pedidoConsumiblesDao.updateMaxMinM(listMaxMinElectDTO);
+    }
+
+    @Override
+    public List<MaxMinElectDTO> consumiblesMecanicosMaxMinList() {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.consumiblesMecanicosMaxMinList();
     }
 
     @Override

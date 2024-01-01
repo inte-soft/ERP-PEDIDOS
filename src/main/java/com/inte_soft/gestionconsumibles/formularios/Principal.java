@@ -105,6 +105,9 @@ public class Principal extends javax.swing.JFrame {
         jMAlmacen = new javax.swing.JMenuItem();
         jMProduccion = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        compras = new javax.swing.JMenu();
+        maxMinE = new javax.swing.JMenuItem();
+        maxMinM = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -211,6 +214,26 @@ public class Principal extends javax.swing.JFrame {
         jMProduccion.add(jMenuItem2);
 
         jMenuBar1.add(jMProduccion);
+
+        compras.setText("Compras");
+
+        maxMinE.setText("Maximos y minimos Electricos");
+        maxMinE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxMinEActionPerformed(evt);
+            }
+        });
+        compras.add(maxMinE);
+
+        maxMinM.setText("Maximos y minimos Mecanicos");
+        maxMinM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxMinMActionPerformed(evt);
+            }
+        });
+        compras.add(maxMinM);
+
+        jMenuBar1.add(compras);
 
         setJMenuBar(jMenuBar1);
 
@@ -368,6 +391,18 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(pedidosAlmacen);
         pedidosAlmacen.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void maxMinEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxMinEActionPerformed
+        MaxMin maxMin = new MaxMin("Electricos");
+        escritorio.add(maxMin);
+        maxMin.setVisible(true);
+    }//GEN-LAST:event_maxMinEActionPerformed
+
+    private void maxMinMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxMinMActionPerformed
+        MaxMin maxMin = new MaxMin("Mecanicos");
+        escritorio.add(maxMin);
+        maxMin.setVisible(true);
+    }//GEN-LAST:event_maxMinMActionPerformed
     public void openGestionUsuarios(){
         GestionUsuarios gestionUsuarios = new GestionUsuarios();
         escritorio.add(gestionUsuarios);
@@ -421,6 +456,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cMecanicos;
     private javax.swing.JMenuItem cargarCElectricos;
     private javax.swing.JMenuItem cargarCMecanicos;
+    private javax.swing.JMenu compras;
     private javax.swing.JMenu jAlmacen;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMAdministrar;
@@ -432,6 +468,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem maxMinE;
+    private javax.swing.JMenuItem maxMinM;
     // End of variables declaration//GEN-END:variables
 }
 

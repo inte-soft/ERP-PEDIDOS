@@ -32,13 +32,13 @@ public class TipicosConsumiblesEDao {
      public List<TipicoConsumiblesElectricos> getAll(){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        List<TipicoConsumiblesElectricos> usuariosList = entityManager
+        List<TipicoConsumiblesElectricos> tipicoConsumiblesElectricosList = entityManager
                 .createQuery("SELECT t FROM TipicoConsumiblesElectricos t",TipicoConsumiblesElectricos.class)
                 .getResultList();
         
         entityManager.getTransaction().commit();
         entityManager.close();
-        return usuariosList;  
+        return tipicoConsumiblesElectricosList;  
     }
     
      public void batchCreate(List<TipicoConsumiblesElectricos> tipicoConsumiblesList) {

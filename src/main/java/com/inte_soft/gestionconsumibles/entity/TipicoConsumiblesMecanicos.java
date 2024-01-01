@@ -28,13 +28,20 @@ public class TipicoConsumiblesMecanicos {
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "CODIGO")
    private Master master;
+   @Column(name = "CMAX")
+    private int cMax;
+    @Column(name = "CMIN")
+    private int cMin;
+
 
     public TipicoConsumiblesMecanicos() {
     }
 
-    public TipicoConsumiblesMecanicos(int idConsumibleM, Master master) {
+    public TipicoConsumiblesMecanicos(int idConsumibleM, Master master , int cMax, int cMin) {
         this.idConsumibleM = idConsumibleM;
         this.master = master;
+        this.cMax = cMax;
+        this.cMin = cMin;
     }
 
     public int getIdConsumibleM() {
@@ -52,6 +59,23 @@ public class TipicoConsumiblesMecanicos {
     public void setMaster(Master master) {
         this.master = master;
     }
+
+    public int getMax() {
+        return cMax;
+    }
+
+    public void setMax(int cMax) {
+        this.cMax = cMax;
+    }
+
+    public int getMin() {
+        return cMin;
+    }
+
+    public void setMin(int cMin) {
+        this.cMin = cMin;
+    }
+
    
    
 }

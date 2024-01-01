@@ -9,6 +9,7 @@ import com.inte_soft.gestionconsumibles.controller.PedidosController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.dto.PedidoConsumiblesDto;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
@@ -48,14 +49,18 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private DefaultTableModel model6;
     private TableRowSorter<DefaultTableModel> sorter;
     private List<Pedidos> listPedidos;
+    private List<Integer> listOts;
     public PedidosAlmacen(String departamento, Usuarios usuario) {
         initComponents();
         map = new HashMap<>();
+        listOts = new ArrayList<>();
+        jLabel7.setText("");
         this.verPedidos();
         if(departamento == "Produccion"){
-            
+            this.jTabbedPane1.removeTabAt(3);
             this.jTabbedPane1.removeTabAt(2);
             this.jTabbedPane1.removeTabAt(0);
+            
             
         }
         this.usuario = usuario;
@@ -119,6 +124,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jTextOtSearch = new javax.swing.JTextField();
         jBSearch = new javax.swing.JButton();
         jBExportByOt = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
@@ -182,7 +190,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tbn_verPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,7 +279,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -341,11 +349,6 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         });
 
         jBActualizar.setText("Actualizar");
-        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBActualizarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -355,7 +358,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jBExport, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,7 +385,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
+                "OT", "Codigo", "Descripcion", "Marca", "Tipo", "Referencia", "Unidad", "Cantidad"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -403,6 +406,17 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("OTs:");
+
+        jLabel7.setText("jLabel7");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -410,14 +424,20 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1147, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextOtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBSearch)
+                        .addComponent(jButton3)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBSearch)
+                        .addGap(33, 33, 33)
                         .addComponent(jBExportByOt)
                         .addContainerGap())))
         );
@@ -427,12 +447,16 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextOtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBSearch)))
-                    .addComponent(jBExportByOt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton3)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBExportByOt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBSearch)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -456,9 +480,138 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String ot = jTextOtSearch.getText();
+        
+        if(!ot.isEmpty()){
+            String textoOts = jLabel7.getText();
+            if (textoOts.isEmpty()) {
+                jLabel7.setText(textoOts + ot);
+                listOts.add(Integer.parseInt(ot));
+                
+            }else{
+                jLabel7.setText(textoOts+", " +ot);
+                listOts.add(Integer.parseInt(ot));
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe escribir una OT en el campo de OTs para poder agregarlas a la busqueda", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+        }
+        jTextOtSearch.setText("");
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jBExportByOtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportByOtActionPerformed
+        export(this.jTable2);
+    }//GEN-LAST:event_jBExportByOtActionPerformed
+
+    private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
+        
+        updatePedidosSinRevisarOts(jTable2, listOts);
+        listOts.clear();
+        jLabel7.setText("");
+    }//GEN-LAST:event_jBSearchActionPerformed
+
     private void jBExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportActionPerformed
         export(this.jTable6);
     }//GEN-LAST:event_jBExportActionPerformed
+
+    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
+        Date fecha = new Date();
+        String header = "OT: " + this.jTable4.getValueAt(0, 0).toString() + "     " + fecha;
+        String footer = "Elabora: " + this.usuario.getNombres() + " " + this.usuario.getApellidos();
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        jTablePrinter.printTable(this.jTable4, header, footer);
+
+    }//GEN-LAST:event_jBImprimirActionPerformed
+
+    private void jBDesplegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesplegarActionPerformed
+        int row = this.jTable4.getSelectedRow();
+        if(row>=0){
+            PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+            String ot = this.jTable4.getValueAt(row, 0).toString();
+            List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearcFilter(
+                Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()), this.jComboBox1.getSelectedItem().toString());
+            Consumibles consumibles = new Consumibles("VISUALIZACION",
+                listConsumiblesDtoOt, this.usuario, ot);
+            consumibles.setVisible(true);
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jBDesplegarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if(!this.jTxtOt.getText().isBlank() || !this.jTxtDescripcion.getText().isBlank()){
+            PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+            DefaultTableModel model =  (DefaultTableModel) jTable4.getModel();
+            model.setRowCount(0);
+            List<ConsumiblesDto> listConsumiblesDto = pedidoConsumiblesController.consumiblesPedidosSearch(
+                Integer.parseInt(this.jTxtOt.getText()), this.jTxtDescripcion.getText(),
+                this.jComboBox1.getSelectedItem().toString());
+            for (ConsumiblesDto consumiblesDto : listConsumiblesDto) {
+                Object[] rowData  = {
+                    consumiblesDto.getOt(),
+                    consumiblesDto.getCodigo(),
+                    consumiblesDto.getDescripcion(),
+                    consumiblesDto.getTipo(),
+                    consumiblesDto.getReferencia(),
+                    consumiblesDto.getMarca(),
+                    consumiblesDto.getUnidad(),
+                    consumiblesDto.getCantidad()
+                };
+
+                model.addRow(rowData);
+
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe diligenciar una OT o una Descripcion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        model.setNumRows(0);
+        this.verPedidos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
+        filter();
+    }//GEN-LAST:event_jTextSearchKeyReleased
+
+    private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
+        int row = this.jTable1.getSelectedRow();
+        if(row>=0){
+            PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
+            String ot = this.jTable1.getValueAt(row, 1).toString();
+            List<PedidoConsumiblesDto> listPedidoConsumiblesDto = pedidoConsumiblesController.findByIdPedido(
+                Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
+            Consumibles consumibles = new Consumibles( listPedidoConsumiblesDto,this.usuario,ot);
+            consumibles.setVisible(true);
+            Pedidos pedido = new Pedidos();
+            PedidosController pedidosController = new PedidosController();
+            for(Pedidos pedidos : this.listPedidos){
+                int idList = pedidos.getIdPedido();
+                int id = Integer.parseInt(this.jTable1.getValueAt(row, 0).toString());
+                if(id == idList){
+                    pedido = pedidos;
+                    break;
+                }
+            }
+
+            pedido.setVisto(Boolean.TRUE);
+            pedidosController.updatePedido(pedido);
+            this.verPedidos();
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_tbn_verPedidoActionPerformed
     private void export(JTable jTable){
         ExcelExporter excelExporter = new ExcelExporter();
         excelExporter.exportTable(jTable);
@@ -469,116 +622,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         model6 = modelarTabla(jTable6);
         model6.setRowCount(0);
         pedidosController.applyCheck(listPedidos);
-    }
-    private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
-        int row = this.jTable1.getSelectedRow();
-        if(row>=0){
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
-        String ot = this.jTable1.getValueAt(row, 1).toString();
-        List<PedidoConsumibles> listPedidoConsumibleses = pedidoConsumiblesController.findByIdPedido(
-                Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
-        Consumibles consumibles = new Consumibles( listPedidoConsumibleses,this.usuario,ot);
-        consumibles.setVisible(true);
-        Pedidos pedido = new Pedidos();
-        PedidosController pedidosController = new PedidosController();
-        for(Pedidos pedidos : this.listPedidos){
-            int idList = pedidos.getIdPedido();
-            int id = Integer.parseInt(this.jTable1.getValueAt(row, 0).toString());
-            if(id == idList){
-            pedido = pedidos;
-            break;
-            }            
-        }
-        
-        pedido.setVisto(Boolean.TRUE);
-        pedidosController.updatePedido(pedido);
-        this.verPedidos();
-        
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_tbn_verPedidoActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-        if(!this.jTxtOt.getText().isBlank() || !this.jTxtDescripcion.getText().isBlank()){
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
-        DefaultTableModel model =  (DefaultTableModel) jTable4.getModel();
-        model.setRowCount(0);
-        List<ConsumiblesDto> listConsumiblesDto = pedidoConsumiblesController.consumiblesPedidosSearch(
-                Integer.parseInt(this.jTxtOt.getText()), this.jTxtDescripcion.getText(),
-                this.jComboBox1.getSelectedItem().toString());
-        for (ConsumiblesDto consumiblesDto : listConsumiblesDto) {
-            Object[] rowData  = {
-                consumiblesDto.getOt(),
-                consumiblesDto.getCodigo(),
-                consumiblesDto.getDescripcion(),
-                consumiblesDto.getTipo(),
-                consumiblesDto.getReferencia(),
-                consumiblesDto.getMarca(),
-                consumiblesDto.getUnidad(),
-                consumiblesDto.getCantidad()
-            };
-                
-        
-            model.addRow(rowData);
-        
-        }
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe diligenciar una OT o una Descripcion", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jBDesplegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesplegarActionPerformed
-        int row = this.jTable4.getSelectedRow();
-        if(row>=0){
-        PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
-        String ot = this.jTable4.getValueAt(row, 0).toString();
-        List<ConsumiblesDtoOt> listConsumiblesDtoOt = pedidoConsumiblesController.consumiblesPedidosSearcFilter(
-                Integer.parseInt(this.jTable4.getValueAt(row, 0).toString()), this.jComboBox1.getSelectedItem().toString());
-        Consumibles consumibles = new Consumibles("VISUALIZACION",
-                listConsumiblesDtoOt, this.usuario, ot);
-        consumibles.setVisible(true);
-        
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jBDesplegarActionPerformed
-
-    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
-        updatePedidosSinRevisar(this.jTable6, 0);
-    }//GEN-LAST:event_jBActualizarActionPerformed
-
-    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
-        Date fecha = new Date();
-        String header = "OT: " + this.jTable4.getValueAt(0, 0).toString() + "     " + fecha;
-        String footer = "Elabora: " + this.usuario.getNombres() + " " + this.usuario.getApellidos();
-        JTablePrinter jTablePrinter = new JTablePrinter();
-        jTablePrinter.printTable(this.jTable4, header, footer);
-        
-    }//GEN-LAST:event_jBImprimirActionPerformed
-
-    private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
-        filter();
-    }//GEN-LAST:event_jTextSearchKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-        model.setNumRows(0);
-        this.verPedidos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
-        updatePedidosSinRevisar(jTable2, Integer.parseInt(this.jTextOtSearch.getText()));
-    }//GEN-LAST:event_jBSearchActionPerformed
-
-    private void jBExportByOtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportByOtActionPerformed
-        export(this.jTable2);
-    }//GEN-LAST:event_jBExportByOtActionPerformed
-    private void filter(){
+    }    private void filter(){
         try {
             sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
             
@@ -609,16 +653,18 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             
         }
     }
-    
-    private void updatePedidosSinRevisar(JTable table, int ot){
+    private void updatePedidosSinRevisarOts(JTable table, List<Integer> ots){
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         DefaultTableModel model =  (DefaultTableModel) table.getModel();
         model.setNumRows(0);
-        map = pedidoConsumiblesController.consumiblesWhithoutCheck(ot);
+        map = pedidoConsumiblesController.consumiblesWhithoutCheck(ots);
+        if(this.map == null){
+            return;
+        }
         ArrayList<ConsumiblesDtoRev> listConsumiblesDtoRevs = (ArrayList<ConsumiblesDtoRev>) map.get(2);
         for (ConsumiblesDtoRev consumiblesDto : listConsumiblesDtoRevs) {
             Object[] rowData  = {
-                
+                consumiblesDto.getOt(),
                 consumiblesDto.getCodigo(),
                 consumiblesDto.getDescripcion(),
                 consumiblesDto.getTipo(),
@@ -632,6 +678,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             model.addRow(rowData);
         
         }
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizar;
@@ -642,12 +689,15 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

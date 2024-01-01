@@ -6,9 +6,7 @@ package com.inte_soft.gestionconsumibles.service;
 
 
 
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDto;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
-import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
+import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
@@ -30,6 +28,13 @@ public interface PedidoConsumiblesServices {
     
     public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos);
     
-    public List<PedidoConsumibles> findByIdPedido(int idPedido);
-    
+    public List<PedidoConsumiblesDto> findByIdPedido(int idPedido);
+
+ List<MaxMinElectDTO> consumiblesElectricosMaxMinList();
+
+ void updateMaxMinE(List<MaxMinElectDTO> maxMinElectDTOs);
+
+ List<MaxMinElectDTO> consumiblesMecanicosMaxMinList();
+
+ void updateMaxMinM(List<MaxMinElectDTO> listMaxMinElectDTO);
 }

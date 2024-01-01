@@ -10,7 +10,7 @@ package com.inte_soft.gestionconsumibles.dto;
  */
 public class ConsumiblesDtoRev {
     
-    
+    private int ot;
     private String codigo;
     private String descripcion;
     private String tipo;
@@ -22,7 +22,8 @@ public class ConsumiblesDtoRev {
     public ConsumiblesDtoRev() {
     }
 
-    public ConsumiblesDtoRev(String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
+    public ConsumiblesDtoRev(int ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
+        this.ot = ot;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo = tipo;
@@ -33,6 +34,14 @@ public class ConsumiblesDtoRev {
         
     }
 
+    public int getOt() {
+        return ot;
+    }
+
+    public void setOt(int ot) {
+        this.ot = ot;
+    }
+    
     public String getCodigo() {
         return codigo;
     }
