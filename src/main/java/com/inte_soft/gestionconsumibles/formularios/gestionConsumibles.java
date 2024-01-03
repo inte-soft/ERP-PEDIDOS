@@ -7,6 +7,8 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.WindowSingleton;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,10 +27,23 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
      * Creates new form gestionConsumibles
      */
     private Usuarios usuarios;
+    private WindowSingleton windowSingleton;
     public gestionConsumibles(Usuarios usuarios) {
         initComponents();
         
         this.usuarios = usuarios;
+    }
+
+    public gestionConsumibles(Usuarios usuarios, WindowSingleton windowSingleton) {
+        this.usuarios = usuarios;
+        this.windowSingleton = windowSingleton;
+        initComponents();
+
+    }
+    @Override
+    public void dispose() {
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
+        this.windowSingleton.setCloseWindow();
     }
 
     /**

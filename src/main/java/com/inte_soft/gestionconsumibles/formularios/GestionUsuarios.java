@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.UsuariosController;
 import com.inte_soft.gestionconsumibles.dto.UsuariosDto;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,12 +26,21 @@ public class GestionUsuarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionUsuarios
      */
-    public GestionUsuarios() {
-        
+    private WindowSingleton windowSingleton;
+    public GestionUsuarios(WindowSingleton windowSingleton) {
+        this.windowSingleton = windowSingleton;
         initComponents();
     }
 
-    
+    public GestionUsuarios() {
+        initComponents();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
+        windowSingleton.setCloseWindow();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

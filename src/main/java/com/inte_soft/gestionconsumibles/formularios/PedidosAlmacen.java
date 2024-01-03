@@ -13,10 +13,7 @@ import com.inte_soft.gestionconsumibles.dto.PedidoConsumiblesDto;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
-import com.inte_soft.gestionconsumibles.util.CustomRowRenderer;
-import com.inte_soft.gestionconsumibles.util.ExcelExporter;
-import com.inte_soft.gestionconsumibles.util.JTablePrinter;
-import com.inte_soft.gestionconsumibles.util.ModelarTabla;
+import com.inte_soft.gestionconsumibles.util.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -54,8 +51,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private List<Integer> listOts;
     private ModelarTabla modelarTabla;
     private PedidoConsumiblesController pedidoConsumiblesController;
+    private WindowSingleton windowSingleton;
 
-    public PedidosAlmacen(String departamento, Usuarios usuario) {
+    public PedidosAlmacen(String departamento, Usuarios usuario, WindowSingleton windowSingleton) {
         initComponents();
         map = new HashMap<>();
         listOts = new ArrayList<>();
@@ -70,6 +68,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         this.model1 = modelarTabla(jTable1);
         this.modelarTabla = new ModelarTabla(jTable2);
         this.pedidoConsumiblesController = new PedidoConsumiblesController();
+        this.windowSingleton = windowSingleton;
 
         Runnable tarea = () -> {
             this.verPedidos();
@@ -78,6 +77,12 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         // Programa la tarea para ejecutarse cada 5 minutos
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(tarea, 0, 5, TimeUnit.MINUTES);
+    }
+
+    @Override
+    public void dispose() {
+        windowSingleton.setCloseWindow();
+        super.dispose();
     }
 
     public DefaultTableModel modelarTabla(JTable jTable) {
@@ -351,6 +356,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable2.getColumnModel().getColumn(1).setMinWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setMaxWidth(0);
+        }
 
         jLabel5.setText("OT");
 

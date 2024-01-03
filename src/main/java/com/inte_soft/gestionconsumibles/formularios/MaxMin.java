@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.MaxMinElectDTO;
+import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,11 +25,17 @@ public class MaxMin extends javax.swing.JInternalFrame {
 
     private TableRowSorter<DefaultTableModel> sorter;
     private String tipo;
+    private WindowSingleton windowSingleton;
 
     /**
      * Creates new form MaxMin
      */
-    public MaxMin(String tipo) {
+    public MaxMin() {
+        initComponents();
+
+    }
+
+    public MaxMin (String tipo, WindowSingleton windowSingleton){
         initComponents();
         this.tipo = tipo;
         this.pedidoConsumiblesController = new PedidoConsumiblesController();
@@ -39,8 +46,15 @@ public class MaxMin extends javax.swing.JInternalFrame {
         } else if (this.tipo == "Mecanicos") {
             cargarTablaMecanicos();
         }
-
+        this.windowSingleton = windowSingleton;
     }
+
+    @Override
+    public void dispose(){
+        super.dispose();
+        this.windowSingleton.setCloseWindow();
+    }
+
 
     public void cargarTablaElectricos() {
         List<MaxMinElectDTO> ListMaxMinElectDTO = pedidoConsumiblesController.consumiblesElectricosMaxMinList();

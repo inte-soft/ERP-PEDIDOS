@@ -9,12 +9,9 @@ import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.SplashProceso;
-import javax.swing.ImageIcon;
-import javax.swing.JDesktopPane;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
+import com.inte_soft.gestionconsumibles.util.WindowSingleton;
+
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -33,6 +30,13 @@ public class Principal extends javax.swing.JFrame {
     private MasterController masterController;
     private TConsumiblesEController consumiblesEController;
     private TConsumiblesMController consumiblesMController;
+    private WindowSingleton windowAlmacen;
+    private WindowSingleton windowMxMinE;
+    private WindowSingleton windowMxMinM;
+    private WindowSingleton windowUsuarios;
+    private WindowSingleton windowGestionConsumibles;
+
+    
     private Usuarios usuarios;
     public Principal(Usuarios usuarios ) {
         jProgressBar = new JProgressBar(0, 100);
@@ -43,7 +47,13 @@ public class Principal extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.usuarios=usuarios;
-        
+        this.windowAlmacen = new WindowSingleton();
+        this.windowMxMinE = new WindowSingleton();
+        this.windowMxMinM = new WindowSingleton();
+        this.windowUsuarios = new WindowSingleton();
+        this.windowGestionConsumibles = new WindowSingleton();
+
+
     if(!this.usuarios.getpAdminUser()){
         this.jMAdministrar.setVisible(false);
     }
@@ -314,10 +324,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCElectricosMouseClicked
 
     private void cElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cElectricosActionPerformed
-        gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios);
-        escritorio.add(gestionConsumibles);
-        gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS" );
-        gestionConsumibles.setVisible(true);
+
+        if(!windowGestionConsumibles.getWindowState()){
+            windowGestionConsumibles.setOpenWindow();
+            gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios, windowGestionConsumibles);
+            escritorio.add(gestionConsumibles);
+            gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS" );
+            gestionConsumibles.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_cElectricosActionPerformed
 
     private void cargarCElectricosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarCElectricosActionPerformed
@@ -375,40 +392,74 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarCMecanicosActionPerformed
 
     private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
-        gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios);
-        escritorio.add(gestionConsumibles);
-        gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
-        gestionConsumibles.setVisible(true);
+        if(!windowGestionConsumibles.getWindowState()){
+            windowGestionConsumibles.setOpenWindow();
+            gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios, windowGestionConsumibles);
+            escritorio.add(gestionConsumibles);
+            gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
+            gestionConsumibles.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_cMecanicosActionPerformed
 
     private void jMAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlmacenActionPerformed
-        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Almacen", this.usuarios);
-        escritorio.add(pedidosAlmacen);
-        pedidosAlmacen.setVisible(true);
+        if(!windowAlmacen.getWindowState()){
+            windowAlmacen.setOpenWindow();
+            PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Almacen", this.usuarios, windowAlmacen);
+            escritorio.add(pedidosAlmacen);
+            pedidosAlmacen.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMAlmacenActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Produccion", this.usuarios);
-        escritorio.add(pedidosAlmacen);
-        pedidosAlmacen.setVisible(true);
+        if (!windowAlmacen.getWindowState()) {
+            windowAlmacen.setOpenWindow();
+            PedidosAlmacen pedidosAlmacen = new PedidosAlmacen("Produccion", this.usuarios, windowAlmacen);
+            escritorio.add(pedidosAlmacen);
+            pedidosAlmacen.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void maxMinEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxMinEActionPerformed
-        MaxMin maxMin = new MaxMin("Electricos");
-        escritorio.add(maxMin);
-        maxMin.setVisible(true);
+        if (!windowMxMinE.getWindowState()) {
+            windowMxMinE.setOpenWindow();
+            MaxMin maxMin = new MaxMin("Electricos",windowMxMinE);
+            escritorio.add(maxMin);
+            maxMin.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_maxMinEActionPerformed
 
     private void maxMinMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxMinMActionPerformed
-        MaxMin maxMin = new MaxMin("Mecanicos");
-        escritorio.add(maxMin);
-        maxMin.setVisible(true);
+        if(!windowMxMinM.getWindowState()){
+            windowMxMinM.setOpenWindow();
+            MaxMin maxMin = new MaxMin("Mecanicos", windowMxMinM);
+            escritorio.add(maxMin);
+            maxMin.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_maxMinMActionPerformed
     public void openGestionUsuarios(){
-        GestionUsuarios gestionUsuarios = new GestionUsuarios();
-        escritorio.add(gestionUsuarios);
-        gestionUsuarios.setVisible(true);
-        gestionUsuarios.loadUserData();
+        if(!windowUsuarios.getWindowState()){
+            windowUsuarios.setOpenWindow();
+            GestionUsuarios gestionUsuarios = new GestionUsuarios(windowUsuarios);
+            escritorio.add(gestionUsuarios);
+            gestionUsuarios.setVisible(true);
+            gestionUsuarios.loadUserData();
+        }else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+
     }
     
     /**
