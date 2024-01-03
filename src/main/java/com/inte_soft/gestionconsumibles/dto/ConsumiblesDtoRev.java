@@ -4,25 +4,31 @@
  */
 package com.inte_soft.gestionconsumibles.dto;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author alejo
  */
 public class ConsumiblesDtoRev {
     
-    private int ot;
+    private BigInteger idPdedidoConsumibles;
+    private Integer idPedido;
+    private Integer ot;
     private String codigo;
     private String descripcion;
     private String tipo;
     private String referencia;
     private String marca;
     private String unidad;
-    private double cantidad;
+    private Float cantidad;
 
     public ConsumiblesDtoRev() {
     }
 
-    public ConsumiblesDtoRev(int ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
+    public ConsumiblesDtoRev(BigInteger idPdedidoConsumibles, Integer idPedido, Integer ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad) {
+        this.idPdedidoConsumibles = idPdedidoConsumibles;
+        this.idPedido = idPedido;
         this.ot = ot;
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -31,17 +37,32 @@ public class ConsumiblesDtoRev {
         this.marca = marca;
         this.unidad = unidad;
         this.cantidad = cantidad;
-        
     }
 
-    public int getOt() {
+    public BigInteger getIdPdedidoConsumibles() {
+        return idPdedidoConsumibles;
+    }
+
+    public void setIdPdedidoConsumibles(BigInteger idPdedidoConsumibles) {
+        this.idPdedidoConsumibles = idPdedidoConsumibles;
+    }
+
+    public Integer getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public Integer getOt() {
         return ot;
     }
 
-    public void setOt(int ot) {
+    public void setOt(Integer ot) {
         this.ot = ot;
     }
-    
+
     public String getCodigo() {
         return codigo;
     }
@@ -90,13 +111,17 @@ public class ConsumiblesDtoRev {
         this.unidad = unidad;
     }
 
-    public double getCantidad() {
+    public float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(double cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
+
+    
+
+   
 
 
     

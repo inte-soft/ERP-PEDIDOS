@@ -50,12 +50,15 @@ public class PedidoConsumibles implements java.io.Serializable {
     private float cantidad;
     @Column(name = "VALOR")
     private double valor;
+    @Column(name = "REVISADO")
+    private Boolean revisado;
 
 
     public PedidoConsumibles() {
     }
 
-    public PedidoConsumibles(Pedidos pedidos, int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor) {
+    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean revisado) {
+        this.idPedidoConsumibles = idPedidoConsumibles;
         this.pedidos = pedidos;
         this.item = item;
         this.codigo = codigo;
@@ -66,7 +69,10 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.unidad = unidad;
         this.cantidad = cantidad;
         this.valor = valor;
+        this.revisado = revisado;
     }
+
+
 
     public BigInteger getIdPedidoConsumibles() {
         return idPedidoConsumibles;
@@ -155,6 +161,16 @@ public class PedidoConsumibles implements java.io.Serializable {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public Boolean getRevisado() {
+        return revisado;
+    }
+
+    public void setRevisado(Boolean revisado) {
+        this.revisado = revisado;
+    }
+    
+    
     
     
    

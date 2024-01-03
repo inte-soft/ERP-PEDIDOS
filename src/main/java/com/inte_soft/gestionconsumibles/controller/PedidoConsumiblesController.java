@@ -41,37 +41,17 @@ public class PedidoConsumiblesController {
         return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
 
-    public HashMap consumiblesWhithoutCheck(List<Integer> ots) {
-        HashMap<Integer, ArrayList<?>> map = new HashMap<>();
-        List<Pedidos> listPedidos = new ArrayList<>();
-        List<ConsumiblesDtoRev> listConsumiblesDtoRevs  = new ArrayList<>();
-        for (int ot : ots) {
-            boolean otExiste = pedidosServices.checkOtExiste(ot);
-            if (!otExiste) {
-                JOptionPane.showMessageDialog(null, "La OT " + ot + " no tiene pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                continue;
-            }else {
-            List<Pedidos> listPedidosTemporal = pedidosServices.findWhithoutRevison(ot);
-            List<ConsumiblesDtoRev> listConsumiblesDtoRevsTemporal = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(listPedidosTemporal);
-            
-            if (listConsumiblesDtoRevsTemporal.size() == 0) {
-                JOptionPane.showMessageDialog(null, "La OT " + ot + " no tiene pedidos para exportar", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                continue;
-            }else{
-                listConsumiblesDtoRevs.addAll(listConsumiblesDtoRevsTemporal);
-                listPedidos.addAll(listPedidosTemporal);
-            }
-            
-            }
-        }
+    public List<ConsumiblesDtoRev> consumiblesWhithoutCheck(List<Integer> ots) {
+        List<ConsumiblesDtoRev> listConsumiblesDtoRevs = new ArrayList<>();
+        listConsumiblesDtoRevs = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(ots);
+        
 
-        if(listConsumiblesDtoRevs.size()!=0){
-            map.put(1, new ArrayList<>(listPedidos));
-            map.put(2, new ArrayList<>(listConsumiblesDtoRevs));
-            return map;
-        }else{
+        if(listConsumiblesDtoRevs.size()==0){
+           
            JOptionPane.showMessageDialog(null, "Las OTs que ingreso no tiene pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return null;
+        }else{
+            return listConsumiblesDtoRevs;
         }
     }
 
@@ -98,5 +78,9 @@ public class PedidoConsumiblesController {
 
     public void updateMaxMinMecanicos(List<MaxMinElectDTO> listMaxMinElectDTO) {
         pedidoConsumiblesServices.updateMaxMinM(listMaxMinElectDTO);
+    }
+
+    public void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev) {
+        pedidoConsumiblesServices.applycheck(listConsumiblesDtoRev);
     }
 }

@@ -5,6 +5,7 @@
 package com.inte_soft.gestionconsumibles.serviceImplement;
 
 import com.inte_soft.gestionconsumibles.dao.PedidosDao;
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.service.PedidosServices;
 import java.util.List;
@@ -18,16 +19,7 @@ public class PedidosServiceImplement implements  PedidosServices{
     private PedidosDao pedidosDao;
     
 
-    @Override
-    public void checkPedidos(List<Pedidos> listPedidos) {
-        for (Pedidos pedidos : listPedidos) {
-            pedidos.setRevisado(true);
-            pedidosDao = new PedidosDao();
-            pedidosDao.checkPedidos(pedidos);
-        }
-        
-        
-    }
+
 
     @Override
     public List<Pedidos> findWhithoutRevison(int ot) {

@@ -26,7 +26,7 @@ public interface PedidoConsumiblesServices {
     
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchFilter(int ot, String tipoPedidoString);
     
-    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos);
+    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Integer> ots);
     
     public List<PedidoConsumiblesDto> findByIdPedido(int idPedido);
 
@@ -37,4 +37,6 @@ public interface PedidoConsumiblesServices {
  List<MaxMinElectDTO> consumiblesMecanicosMaxMinList();
 
  void updateMaxMinM(List<MaxMinElectDTO> listMaxMinElectDTO);
+
+ void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev);
 }

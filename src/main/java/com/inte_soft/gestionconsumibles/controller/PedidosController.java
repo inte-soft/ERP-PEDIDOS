@@ -4,6 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.controller;
 
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.service.PedidosServices;
 import com.inte_soft.gestionconsumibles.serviceImplement.PedidosServiceImplement;
@@ -19,9 +20,7 @@ public class PedidosController {
         pedidosServices = new PedidosServiceImplement();
     }
     
-    public void applyCheck(List<Pedidos> listPedidos){
-        pedidosServices.checkPedidos(listPedidos);
-    }
+
     
     public List<Pedidos> listPedidosWhithoutRevision (int ot){
         return pedidosServices.findWhithoutRevison(ot);

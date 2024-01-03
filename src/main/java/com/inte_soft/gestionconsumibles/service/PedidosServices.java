@@ -4,6 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.service;
 
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import java.util.List;
 
@@ -12,8 +13,7 @@ import java.util.List;
  * @author alejo
  */
 public interface PedidosServices {
-    
-    public void checkPedidos(List<Pedidos> listPedidos);
+
     
     public List<Pedidos> findWhithoutRevison(int ot);
 

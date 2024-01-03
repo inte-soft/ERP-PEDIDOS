@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -198,44 +199,20 @@ public class PedidoConsumiblesDao {
         return resultList;
     }
 
-    public List<ConsumiblesDtoRev> filterSearchByRev(List<Pedidos> listPedidos) {
-        if (listPedidos == null || listPedidos.isEmpty()) {
-            return Collections.emptyList();
-        }
+    public List<ConsumiblesDtoRev> filterSearchByRev(List<Integer> ots) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-
-        String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev( pc.pedidos.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)) "
+        String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev(pc.idPedidoConsumibles, p.idPedido, p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad) "
                 + "FROM PedidoConsumibles pc "
                 + "JOIN pc.pedidos p "
-                + "WHERE p.revisado = false ";
-
-        if (listPedidos != null && listPedidos.size() > 0) {
-            queryString += "AND p.idPedido IN (";
-            for (int i = 0; i < listPedidos.size(); i++) {
-                queryString += ":idPedido" + i;
-                if (i < listPedidos.size() - 1) {
-                    queryString += ",";
-                }
-            }
-            queryString += ")";
-        }
-
-        queryString += " GROUP BY pc.pedidos.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
-
+                + "WHERE p.ot IN (:ots) "
+                + "AND pc.revisado = false "
+                + "ORDER BY p.ot, pc.codigo";
         TypedQuery<ConsumiblesDtoRev> query = entityManager.createQuery(queryString, ConsumiblesDtoRev.class);
-
-        if (listPedidos != null && listPedidos.size() > 0) {
-            for (int i = 0; i < listPedidos.size(); i++) {
-                query.setParameter("idPedido" + i, listPedidos.get(i).getIdPedido());
-            }
-        }
-
+        query.setParameter("ots", ots);
         List<ConsumiblesDtoRev> resultList = query.getResultList();
-
         entityManager.getTransaction().commit();
         entityManager.close();
-
         return resultList;
     }
 
@@ -307,5 +284,51 @@ public class PedidoConsumiblesDao {
         }
         entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    public void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        for (ConsumiblesDtoRev consumiblesDtoRev : listConsumiblesDtoRev) {
+            entityManager.createQuery(
+                    "UPDATE PedidoConsumibles "
+                    + "SET revisado = true "
+                    + "WHERE idPedidoConsumibles = :idPedidoConsumibles")
+                    .setParameter("idPedidoConsumibles", consumiblesDtoRev.getIdPdedidoConsumibles())
+                    .executeUpdate();
+        }
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        // realizar una query para validar que si todos los consumibles que tengan el mismo idPedido estan revisados y de ser asi marcar en la tabla pedidos como revisado
+        EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+        entityManager2.getTransaction().begin();
+
+        List<Integer> idPedidosUnicos = listConsumiblesDtoRev.stream()
+                .map(ConsumiblesDtoRev::getIdPedido)
+                .distinct()
+                .collect(Collectors.toList());
+
+        for (Integer idPedido : idPedidosUnicos) {
+            // Check if there are any unrevised PedidoConsumibles left for the current idPedido
+            long unrevisedCount = entityManager2
+                    .createQuery("SELECT COUNT(pc) FROM PedidoConsumibles pc WHERE pc.pedidos.idPedido = :idPedido AND pc.revisado = false", Long.class)
+                    .setParameter("idPedido", idPedido)
+                    .getSingleResult();
+
+            // If there are no unrevised PedidoConsumibles left, set revisado to true in Pedidos
+            if (unrevisedCount == 0) {
+                entityManager2.createQuery(
+                                "UPDATE Pedidos "
+                                        + "SET revisado = true "
+                                        + "WHERE idPedido = :idPedido")
+                        .setParameter("idPedido", idPedido)
+                        .executeUpdate();
+            }
+        }
+
+        entityManager2.getTransaction().commit();
+        entityManager2.close();
+
+
     }
 }

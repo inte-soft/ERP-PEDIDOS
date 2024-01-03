@@ -69,9 +69,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Pedidos> listPedidos) {
+    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Integer> ots) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
-        return pedidoConsumiblesDao.filterSearchByRev(listPedidos);
+        return pedidoConsumiblesDao.filterSearchByRev(ots);
     }
 
     @Override
@@ -96,6 +96,12 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     public void updateMaxMinM(List<MaxMinElectDTO> listMaxMinElectDTO) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         pedidoConsumiblesDao.updateMaxMinM(listMaxMinElectDTO);
+    }
+
+    @Override
+    public void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        pedidoConsumiblesDao.applycheck(listConsumiblesDtoRev);
     }
 
     @Override
