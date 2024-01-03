@@ -240,7 +240,7 @@ public class PedidoConsumiblesDao {
         for (MaxMinElectDTO maxMinElectDTO : listMaxMinElectDTO) {
             entityManager.createQuery(
                     "UPDATE TipicoConsumiblesElectricos "
-                    + "SET eMax = :max, eMin = :min "
+                    + "SET cMax = :max, cMin = :min "
                     + "WHERE codigo = :codigo")
                     .setParameter("max", maxMinElectDTO.getMax())
                     .setParameter("min", maxMinElectDTO.getMin())
