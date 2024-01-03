@@ -50,7 +50,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 pedidoConsumibles.setUnidad(pc.getUnidad());
                 pedidoConsumibles.setCantidad(pc.getCantidad());
                 pedidoConsumibles.setValor(masterDao.findById(pc.getCodigo()).getPrecio_descuento() * pc.getCantidad());
-
+                pedidoConsumibles.setRevisado(false);
                 pedidoConsumiblesDao = new PedidoConsumiblesDao();
                 pedidoConsumiblesDao.createPedido(pedidoConsumibles);
             } catch (Exception e) {

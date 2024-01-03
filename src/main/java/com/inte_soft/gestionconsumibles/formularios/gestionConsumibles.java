@@ -209,6 +209,7 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
             pedidoConsumibles.setMarca(jTable1.getValueAt(i, 6).toString());
             pedidoConsumibles.setUnidad(jTable1.getValueAt(i, 7).toString());
             pedidoConsumibles.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 8).toString()));
+            pedidoConsumibles.setRevisado(Boolean.FALSE);
                 
            listPedidoConsumibleses.add(pedidoConsumibles);
             
