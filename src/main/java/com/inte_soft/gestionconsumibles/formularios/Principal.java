@@ -76,6 +76,7 @@ public class Principal extends javax.swing.JFrame {
     
     if(!this.usuarios.getpCompras()){
         this.compras.setVisible(false);
+        
     }
     
     
