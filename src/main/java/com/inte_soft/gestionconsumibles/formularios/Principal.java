@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
     private WindowSingleton windowMxMinM;
     private WindowSingleton windowUsuarios;
     private WindowSingleton windowGestionConsumibles;
+    private WindowSingleton WindowpedidosEspeciales;
 
     
     private Usuarios usuarios;
@@ -114,11 +115,13 @@ public class Principal extends javax.swing.JFrame {
         cargarCMecanicos = new javax.swing.JMenuItem();
         jAlmacen = new javax.swing.JMenu();
         jMAlmacen = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMProduccion = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         compras = new javax.swing.JMenu();
         maxMinE = new javax.swing.JMenuItem();
         maxMinM = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -203,14 +206,37 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMIngenieria);
 
         jAlmacen.setText("Almacen");
+        jAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAlmacenActionPerformed(evt);
+            }
+        });
 
         jMAlmacen.setText("Almacen");
+        jMAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMAlmacenMouseClicked(evt);
+            }
+        });
         jMAlmacen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMAlmacenActionPerformed(evt);
             }
         });
         jAlmacen.add(jMAlmacen);
+
+        jMenuItem5.setText("Ot´s Programadas");
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem5MouseClicked(evt);
+            }
+        });
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jAlmacen.add(jMenuItem5);
 
         jMenuBar1.add(jAlmacen);
 
@@ -227,6 +253,16 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMProduccion);
 
         compras.setText("Compras");
+        compras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comprasMouseClicked(evt);
+            }
+        });
+        compras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comprasActionPerformed(evt);
+            }
+        });
 
         maxMinE.setText("Maximos y minimos Electricos");
         maxMinE.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +279,19 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         compras.add(maxMinM);
+
+        jMenuItem3.setText("Pedidos Especiales");
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem3MouseClicked(evt);
+            }
+        });
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        compras.add(jMenuItem3);
 
         jMenuBar1.add(compras);
 
@@ -448,6 +497,48 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_maxMinMActionPerformed
+
+    private void comprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprasMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_comprasMouseClicked
+
+    private void jMAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMAlmacenMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMAlmacenMouseClicked
+
+    private void comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprasActionPerformed
+            
+    }//GEN-LAST:event_comprasActionPerformed
+
+    private void jMenuItem3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem3MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        pedidosEspeciales pedidosCompras = new pedidosEspeciales();
+        escritorio.add(pedidosCompras);
+        pedidosCompras.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlmacenActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jAlmacenActionPerformed
+
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem5MouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        otsProgramadas fechaProgramada = new otsProgramadas();
+        escritorio.add(fechaProgramada);
+        fechaProgramada.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
     public void openGestionUsuarios(){
         if(!windowUsuarios.getWindowState()){
             windowUsuarios.setOpenWindow();
@@ -520,6 +611,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem maxMinE;
     private javax.swing.JMenuItem maxMinM;
     // End of variables declaration//GEN-END:variables
