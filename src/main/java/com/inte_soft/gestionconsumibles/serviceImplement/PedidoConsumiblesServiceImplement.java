@@ -116,4 +116,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         return pedidoConsumiblesDao.filteredSearchByOt(ot, tipoPedido);
     }
 
+    @Override
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearchOtArea(int ot, String area) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.filteredSearchByOtArea(ot, area);
+    }
 }

@@ -4,6 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.dao;
 
+import com.inte_soft.gestionconsumibles.dto.PedidoDto;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -108,5 +109,45 @@ public class PedidosDao {
         entityManager.merge(pedido);
         entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    public List<PedidoDto> listPedidos() {
+        //metodo ppara listar todos los pedisos adicionales ordenados por fecha decendete y que no aparazcan pedidos de ot que esten marcadas como terminadas
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen) "
+                + "FROM Pedidos p "
+                + "LEFT JOIN Ot o ON p.ot = o.ot "
+                + "WHERE p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = 'True') "
+                + "ORDER BY p.fecha DESC";
+
+        TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
+        List<PedidoDto> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
+
+    }
+
+    public List<Pedidos> listPedidosSearchByOt(String ot) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT p "
+                + "FROM Pedidos p "
+                + "WHERE p.ot = :ot "
+                + "ORDER BY p.fecha DESC";
+
+        TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
+        query.setParameter("ot", Integer.parseInt(ot));
+        List<Pedidos> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
     }
 }

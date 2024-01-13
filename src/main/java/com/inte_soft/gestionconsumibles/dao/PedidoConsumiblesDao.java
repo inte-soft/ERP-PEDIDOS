@@ -331,4 +331,38 @@ public class PedidoConsumiblesDao {
 
 
     }
+
+    public List<ConsumiblesDtoOt> filteredSearchByOtArea(int ot, String area) {
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt(p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)) "
+                + "FROM PedidoConsumibles pc "
+                + "JOIN pc.pedidos p "
+                + "WHERE 1=1 ";
+
+        if (ot != 0) {
+            queryString += "AND p.ot = :ot ";
+        }
+        if (area != null && !area.isBlank()) {
+            queryString += "AND p.tipoPedido = :area ";
+        }
+        queryString += "GROUP BY p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+
+        TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
+
+        if (ot != 0) {
+            query.setParameter("ot", ot);
+        }
+        if (area != null && !area.isBlank()) {
+            query.setParameter("area", area);
+        }
+        List<ConsumiblesDtoOt> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
+    }
 }

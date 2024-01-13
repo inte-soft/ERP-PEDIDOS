@@ -39,4 +39,6 @@ public interface PedidoConsumiblesServices {
  void updateMaxMinM(List<MaxMinElectDTO> listMaxMinElectDTO);
 
  void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev);
+
+ List<ConsumiblesDtoOt> consumiblesPedidosSearchOtArea(int ot, String area);
 }

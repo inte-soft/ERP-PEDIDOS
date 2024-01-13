@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.controller;
 
 import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
+import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
@@ -82,5 +83,11 @@ public class PedidoConsumiblesController {
 
     public void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev) {
         pedidoConsumiblesServices.applycheck(listConsumiblesDtoRev);
+    }
+
+
+    public List<ConsumiblesDtoOt> consumiblesPedidosSearcOtArea(int ot, String area) {
+
+        return pedidoConsumiblesServices.consumiblesPedidosSearchOtArea(ot, area);
     }
 }

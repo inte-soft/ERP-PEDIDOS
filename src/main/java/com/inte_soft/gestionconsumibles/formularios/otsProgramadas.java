@@ -4,17 +4,30 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.OtController;
+import com.inte_soft.gestionconsumibles.entity.Ot;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 /**
  *
  * @author Usuario
  */
 public class otsProgramadas extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel model;
+    private OtController otController;
     /**
      * Creates new form otsProgramadas
      */
     public otsProgramadas() {
         initComponents();
+        this.otController = new OtController();
+        this.model = (DefaultTableModel) this.jTable1.getModel();
+        loadOts();
+
     }
 
     /**
@@ -37,6 +50,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -47,12 +61,19 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "OT", "FECHA PROGRAMADA", "CIERRE OT", "RESPONSABLE CIERRE"
+                "ID", "OT", "FECHA PROGRAMADA", "CIERRE OT"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -60,14 +81,15 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(500);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(300);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(500);
             jTable1.getColumnModel().getColumn(3).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(800);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(300);
         }
 
         jLabel1.setText("OT:");
@@ -80,6 +102,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setText("Fecha Programada:");
+
+        jButton2.setText("Cerrar OT´s");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,7 +128,9 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                         .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 51, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,7 +143,9 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -121,13 +154,67 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(this.jTextField1.getText().isEmpty() || this.jDateChooser3.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");
+        }else if(this.jTextField1.getText().length() != 5){
+            JOptionPane.showMessageDialog(null, "El numero de OT debe tener 5 digitos");
+        }else {
+
+            this.otController.createOt(
+                    new Ot(
+                            Integer.parseInt(this.jTextField1.getText()),
+                            this.jDateChooser3.getDate(),
+                            false));
+
+            loadOts();
+            this.jTextField1.setText("");
+            this.jDateChooser3.setDate(null);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       int contador = 0;
+        for(int i = 0; i < this.jTable1.getRowCount(); i++){
+            if((Boolean) this.jTable1.getValueAt(i, 3)){
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la OT " + this.jTable1.getValueAt(i, 1) + "?");
+                if(confirm == JOptionPane.NO_OPTION || confirm == JOptionPane.CANCEL_OPTION){
+                    return;
+                }else{
+                    contador++;
+                this.otController.updateOt(
+                        new Ot(
+                                (Integer) this.jTable1.getValueAt(i, 0),
+                                (Integer) this.jTable1.getValueAt(i, 1),
+                                (java.util.Date) this.jTable1.getValueAt(i, 2),
+                                (Boolean) this.jTable1.getValueAt(i, 3)));
+            }
+            }
+            if (contador == 0){
+                JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una OT");
+            }
+            loadOts();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void loadOts(){
+        List<Ot> ots = otController.getOts();
+        model.setRowCount(0);
+        for (Ot ot : ots) {
+            model.addRow(
+                    new Object[]{
+                            ot.getIdOt(),
+                            ot.getOt(),
+                            ot.getFechaAlmacen(),
+                            ot.getTerminado()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
