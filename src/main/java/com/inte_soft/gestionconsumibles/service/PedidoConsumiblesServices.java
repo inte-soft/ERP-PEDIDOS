@@ -10,6 +10,8 @@ import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
+
 import java.util.List;
 
 
@@ -20,7 +22,8 @@ import java.util.List;
  */
 public interface PedidoConsumiblesServices {
    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
-           AreaCompania area, String persona , String Operacion, String ot, String tipoPedido);
+           AreaCompania area, String persona , String Operacion, String ot,
+                                      String tipoPedido, List<PedidosCompras> listPedidosCompras);
 
     public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido);
     

@@ -4,7 +4,17 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.GestionConsumibles;
+import com.inte_soft.gestionconsumibles.controller.PedidosController;
+import com.inte_soft.gestionconsumibles.dto.PedidoDto;
+import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
@@ -12,11 +22,37 @@ import com.inte_soft.gestionconsumibles.util.WindowSingleton;
  */
 public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
+    private PedidosController pedidosController;
+    private WindowSingleton windowSingleton;
+    private DefaultTableModel model;
+    private ModelarTabla modelarTabla;
+    private List<PedidoDto> listPedidoDto;
+    private Usuarios usuarios;
+
     /**
      * Creates new form pedidosEspeciales
      */
-    public pedidosEspeciales() {
+    public pedidosEspeciales(Usuarios usuarios) {
+
         initComponents();
+        this.pedidosController = new PedidosController();
+        this.modelarTabla = new ModelarTabla(this.jTpedidosEspeciales);
+        this.model = this.modelarTabla.getModel();
+        this.usuarios = usuarios;
+        loadPedidosCompras();
+    }
+    
+    public void loadPedidosCompras() {
+        this.listPedidoDto = pedidosController.listPedidosCompras();
+        this.model.setRowCount(0);
+        for (PedidoDto pedidoDto : listPedidoDto) {
+            this.model.addRow(new Object[]{
+                    pedidoDto.getIdPedido(),
+                    pedidoDto.getOt(),
+                    pedidoDto.getFecha(),
+                    pedidoDto.getPersona()
+            });
+        }
     }
 
     pedidosEspeciales(WindowSingleton WindowpedidosEspeciales) {
@@ -78,6 +114,11 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Desplegar");
@@ -128,8 +169,28 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        //validar si hay un afila seleccionada
+        if (this.jTpedidosEspeciales.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un pedido");
+            return;
+        }else {
+            Pedidos pedidos = pedidosController.findById(
+                    Integer.parseInt(this.jTpedidosEspeciales.getValueAt(
+                            this.jTpedidosEspeciales.getSelectedRow(), 0).toString()));
+
+
+            GestionarPedidos gestionarPedidos = new GestionarPedidos(usuarios, pedidos);
+            gestionarPedidos.setModal(true);
+            gestionarPedidos.setVisible(true);
+
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.modelarTabla.filter(this.jTextField1.getText(),1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

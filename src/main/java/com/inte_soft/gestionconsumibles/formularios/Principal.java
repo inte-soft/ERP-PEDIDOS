@@ -377,7 +377,7 @@ public class Principal extends javax.swing.JFrame {
 
         if(!windowGestionConsumibles.getWindowState()){
             windowGestionConsumibles.setOpenWindow();
-            gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios, windowGestionConsumibles);
+            GestionConsumibles gestionConsumibles = new GestionConsumibles(this.usuarios, windowGestionConsumibles);
             escritorio.add(gestionConsumibles);
             gestionConsumibles.tipoConsumibles("CONSUMIBLES ELECTRICOS" );
             gestionConsumibles.setVisible(true);
@@ -444,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
     private void cMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMecanicosActionPerformed
         if(!windowGestionConsumibles.getWindowState()){
             windowGestionConsumibles.setOpenWindow();
-            gestionConsumibles gestionConsumibles = new gestionConsumibles(this.usuarios, windowGestionConsumibles);
+            GestionConsumibles gestionConsumibles = new GestionConsumibles(this.usuarios, windowGestionConsumibles);
             escritorio.add(gestionConsumibles);
             gestionConsumibles.tipoConsumibles("CONSUMIBLES MECANICOS");
             gestionConsumibles.setVisible(true);
@@ -519,7 +519,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        pedidosEspeciales pedidosCompras = new pedidosEspeciales();
+        pedidosEspeciales pedidosCompras = new pedidosEspeciales(this.usuarios);
         escritorio.add(pedidosCompras);
         pedidosCompras.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed

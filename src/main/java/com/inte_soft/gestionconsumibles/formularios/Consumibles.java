@@ -34,13 +34,13 @@ public class Consumibles extends javax.swing.JDialog {
      */
     private String tipoConsumibles;
     private String item;
-    private gestionConsumibles gConsumibles;
+    private GestionConsumibles gConsumibles;
     private Usuarios usuario;
     private String ot;
     private DefaultTableModel model;
     private TableRowSorter<DefaultTableModel> sorter;
     
-    public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles) {
+    public Consumibles(String tipoConsumibles, String item, GestionConsumibles gConsumibles) {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
         this.tipoConsumibles = tipoConsumibles;
@@ -49,7 +49,7 @@ public class Consumibles extends javax.swing.JDialog {
         this.loadConsumibles(this.tipoConsumibles, this.item);
         modelarTabla();
     }
-    public Consumibles(String tipoConsumibles, String item, gestionConsumibles gConsumibles, Usuarios usuario, String ot) {
+    public Consumibles(String tipoConsumibles, String item, GestionConsumibles gConsumibles, Usuarios usuario, String ot) {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoIcono.png")).getImage());
         this.tipoConsumibles = tipoConsumibles;

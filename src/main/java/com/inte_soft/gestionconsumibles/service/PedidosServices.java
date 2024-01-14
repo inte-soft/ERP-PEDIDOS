@@ -26,4 +26,7 @@ public interface PedidosServices {
 
     List<Pedidos> listPedidosSearchByOt(String ot);
 
+    List<PedidoDto> listPedidosCompras();
+
+    Pedidos findById(int i);
 }

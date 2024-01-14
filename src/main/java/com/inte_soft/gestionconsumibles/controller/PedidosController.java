@@ -40,4 +40,14 @@ public class PedidosController {
     public List<Pedidos> listPedidosSearchByOt(String ot) {
         return pedidosServices.listPedidosSearchByOt(ot);
     }
+
+
+    public List<PedidoDto> listPedidosCompras() {
+        return pedidosServices.listPedidosCompras();
+    }
+
+    public Pedidos findById(int i) {
+        return pedidosServices.findById(i);
+
+    }
 }

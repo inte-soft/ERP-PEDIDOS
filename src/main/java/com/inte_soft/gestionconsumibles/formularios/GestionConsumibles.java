@@ -5,8 +5,9 @@
 package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
+import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
+import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import java.util.ArrayList;
@@ -21,20 +22,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Inte-Soft
  */
-public class gestionConsumibles extends javax.swing.JInternalFrame {
+public class GestionConsumibles extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form gestionConsumibles
+     * Creates new form GestionConsumibles
      */
     private Usuarios usuarios;
     private WindowSingleton windowSingleton;
-    public gestionConsumibles(Usuarios usuarios) {
+    public GestionConsumibles(Usuarios usuarios) {
         initComponents();
         
         this.usuarios = usuarios;
     }
 
-    public gestionConsumibles(Usuarios usuarios, WindowSingleton windowSingleton) {
+    public GestionConsumibles(Usuarios usuarios, WindowSingleton windowSingleton) {
         this.usuarios = usuarios;
         this.windowSingleton = windowSingleton;
         initComponents();
@@ -229,10 +230,68 @@ public class gestionConsumibles extends javax.swing.JInternalFrame {
            listPedidoConsumibleses.add(pedidoConsumibles);
             
         }
+        List<PedidosCompras> ListPedidosCompras = new ArrayList<>();
+        List<PedidoConsumibles> listPedidoConsumiblesdelete = new ArrayList<>();
+        //metodo para buscar consumibles que no esten tipicos de pedidos electricos o mecanicos y meterlos en pedidos compras
+        if (this.cbSeleccion.getSelectedItem().toString().equals("CONSUMIBLES ELECTRICOS")) {
+            TConsumiblesEController tConsumiblesEController = new TConsumiblesEController();
+            List<TipicoConsumiblesElectricos> ListTipicoConsumiblesElectricos = tConsumiblesEController.getAll();
+            for (PedidoConsumibles pc : listPedidoConsumibleses) {
+                boolean isFound = false;
+                for (TipicoConsumiblesElectricos tce : ListTipicoConsumiblesElectricos) {
+                    if (pc.getCodigo().equals(tce.getMaster().getCodigo())) {
+                        isFound = true;
+                        break;
+                    }
+                }
+                if (!isFound) {
+                    PedidosCompras pedidosCompras = new PedidosCompras();
+                    pedidosCompras.setItem(pc.getItem());
+                    pedidosCompras.setCodigo(pc.getCodigo());
+                    pedidosCompras.setDescripcion(pc.getDescripcion());
+                    pedidosCompras.setTipo(pc.getTipo());
+                    pedidosCompras.setReferencia(pc.getReferencia());
+                    pedidosCompras.setMarca(pc.getMarca());
+                    pedidosCompras.setUnidad(pc.getUnidad());
+                    pedidosCompras.setCantidad(pc.getCantidad());
+                    pedidosCompras.setComprado(false);
+                    ListPedidosCompras.add(pedidosCompras);
+                    listPedidoConsumiblesdelete.add(pc);
+                }
+            }
+        } else  if (this.cbSeleccion.getSelectedItem().toString().equals("CONSUMIBLES MECANICOS")){
+            TConsumiblesMController tConsumiblesMController = new TConsumiblesMController();
+            List<TipicoConsumiblesMecanicos> listTipicoConsumiblesMecanicos = tConsumiblesMController.getAll();
+            for (PedidoConsumibles pc : listPedidoConsumibleses) {
+                boolean isFound = false;
+                for (TipicoConsumiblesMecanicos tcm : listTipicoConsumiblesMecanicos) {
+                    if (pc.getCodigo().equals(tcm.getMaster().getCodigo())) {
+                        isFound = true;
+                        break;
+                    }
+                }
+                if (!isFound) {
+                    PedidosCompras pedidosCompras = new PedidosCompras();
+                    pedidosCompras.setItem(pc.getItem());
+                    pedidosCompras.setCodigo(pc.getCodigo());
+                    pedidosCompras.setDescripcion(pc.getDescripcion());
+                    pedidosCompras.setTipo(pc.getTipo());
+                    pedidosCompras.setReferencia(pc.getReferencia());
+                    pedidosCompras.setMarca(pc.getMarca());
+                    pedidosCompras.setUnidad(pc.getUnidad());
+                    pedidosCompras.setCantidad(pc.getCantidad());
+                    pedidosCompras.setComprado(false);
+                    ListPedidosCompras.add(pedidosCompras);
+                    listPedidoConsumiblesdelete.add(pc);
+                }
+            }
+        }
+        listPedidoConsumibleses.removeAll(listPedidoConsumiblesdelete);
+
         pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
                 this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
                 this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText(),
-                this.cbSeleccion.getSelectedItem().toString());
+                this.cbSeleccion.getSelectedItem().toString(), ListPedidosCompras);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

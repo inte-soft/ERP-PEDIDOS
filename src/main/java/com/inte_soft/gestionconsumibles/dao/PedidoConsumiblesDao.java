@@ -5,10 +5,7 @@
 package com.inte_soft.gestionconsumibles.dao;
 
 import com.inte_soft.gestionconsumibles.dto.*;
-import com.inte_soft.gestionconsumibles.entity.Master;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Pedidos;
-import com.inte_soft.gestionconsumibles.entity.TipicoConsumiblesElectricos;
+import com.inte_soft.gestionconsumibles.entity.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

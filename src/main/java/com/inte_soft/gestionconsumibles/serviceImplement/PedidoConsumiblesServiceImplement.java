@@ -5,12 +5,14 @@
 package com.inte_soft.gestionconsumibles.serviceImplement;
 
 import com.inte_soft.gestionconsumibles.dao.MasterDao;
+import com.inte_soft.gestionconsumibles.dao.PedidoComprasDao;
 import com.inte_soft.gestionconsumibles.dao.PedidoConsumiblesDao;
 import com.inte_soft.gestionconsumibles.dao.PedidosDao;
 import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.AreaCompania;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
+import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
 import java.util.Date;
 import java.util.List;
@@ -22,10 +24,11 @@ import java.util.List;
 public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServices {
 
     private PedidoConsumiblesDao pedidoConsumiblesDao;
+    private PedidoComprasDao pedidoComprasDao;
 
     @Override
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona,
-            String Operacion, String ot, String tipoPedido) {
+            String Operacion, String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras) {
         MasterDao masterDao = new MasterDao();
         PedidosDao pedidosDao = new PedidosDao();
         Pedidos pedidos = new Pedidos();
@@ -35,7 +38,10 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidos.setOperacion(Operacion);
         pedidos.setFecha(new Date());
         pedidos.setTipoPedido(tipoPedido);
+        pedidos.setComprado(true);
         Pedidos pedidosPersist = pedidosDao.createPedido(pedidos);
+
+
 
         for (PedidoConsumibles pc : pedidoConsumibleses) {
             try {
@@ -57,6 +63,44 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
                 e.printStackTrace();
 
+            }
+        }
+
+        if(!listPedidosCompras.isEmpty()){
+            Pedidos pedidosCom = new Pedidos();
+            pedidosCom.setOt(Integer.parseInt(ot));
+            pedidosCom.setPersona(persona);
+            pedidosCom.setArea(area);
+            pedidosCom.setOperacion("Pedio Compras");
+            pedidosCom.setFecha(new Date());
+            pedidosCom.setTipoPedido(tipoPedido);
+            pedidosCom.setComprado(false);
+            Pedidos pedidosPersistCompras = pedidosDao.createPedido(pedidosCom);
+
+            for (PedidosCompras  pc : listPedidosCompras) {
+                try {
+                    PedidosCompras pedidoConsumibles = new PedidosCompras();
+                    pedidoConsumibles.setPedido(pedidosPersistCompras);
+                    pedidoConsumibles.setItem(pc.getItem());
+                    pedidoConsumibles.setCodigo(pc.getCodigo());
+                    pedidoConsumibles.setDescripcion(pc.getDescripcion());
+                    pedidoConsumibles.setTipo(pc.getTipo());
+                    pedidoConsumibles.setReferencia(pc.getReferencia());
+                    pedidoConsumibles.setMarca(pc.getMarca());
+                    pedidoConsumibles.setUnidad(pc.getUnidad());
+                    pedidoConsumibles.setCantidad(pc.getCantidad());
+                    pedidoConsumibles.setValor(masterDao.findById(pc.getCodigo()).getPrecio_descuento() * pc.getCantidad());
+                    pedidoConsumibles.setComprado(false);
+                    pedidoComprasDao = new PedidoComprasDao();
+                    pedidoComprasDao.createPedido(pedidoConsumibles);
+
+
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+
+                }
             }
         }
 
