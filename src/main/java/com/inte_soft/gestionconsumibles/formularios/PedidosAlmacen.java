@@ -804,13 +804,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             String ot = this.jTable3.getValueAt(row, 1).toString();
             PedidosController pedidosController = new PedidosController();
             List<PedidoConsumiblesDto> listPedidoConsumiblesDto = pedidoConsumiblesController.findByIdPedido(
-                    Integer.parseInt(this.jTable1.getValueAt(row, 0).toString()));
+                    Integer.parseInt(this.jTable3.getValueAt(row, 0).toString()));
             Consumibles consumibles = new Consumibles(listPedidoConsumiblesDto, this.usuario, ot);
             consumibles.setVisible(true);
             Pedidos pedido = new Pedidos();
             for (PedidoDto pedidos : this.listPedidos) {
                 int idList = pedidos.getIdPedido();
-                int id = Integer.parseInt(this.jTable1.getValueAt(row, 0).toString());
+                int id = Integer.parseInt(this.jTable3.getValueAt(row, 0).toString());
                 if (id == idList) {
                     pedido.setIdPedido(pedidos.getIdPedido());
                     pedido.setOt(pedidos.getOt());
