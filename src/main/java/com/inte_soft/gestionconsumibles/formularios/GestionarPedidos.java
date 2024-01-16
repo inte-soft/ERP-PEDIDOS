@@ -44,8 +44,8 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.pedidosComprasController = new PedidosComprasController();
         this.modelarTabla = new ModelarTabla(this.tbListadoConsumibles);
         this.model = this.modelarTabla.getModel();
-        this.pedidos = pedidos;
-        loadPedidosCompras();
+        this.pedidos = pedido;
+        loadPedidosCompras(this.pedidos);
 
 
 
@@ -77,14 +77,14 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Comprado"
+                "id", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Comprado", "valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true
+                true, false, false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,24 +97,30 @@ public class GestionarPedidos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbListadoConsumibles);
         if (tbListadoConsumibles.getColumnModel().getColumnCount() > 0) {
-            tbListadoConsumibles.getColumnModel().getColumn(0).setMinWidth(50);
-            tbListadoConsumibles.getColumnModel().getColumn(0).setMaxWidth(150);
-            tbListadoConsumibles.getColumnModel().getColumn(1).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(1).setMaxWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(2).setMinWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(1200);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setMinWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setMinWidth(50);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setMaxWidth(150);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(1200);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(600);
+            tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(5).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(600);
             tbListadoConsumibles.getColumnModel().getColumn(6).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(7).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(8).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(9).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(9).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(0);
         }
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -178,19 +184,23 @@ public class GestionarPedidos extends javax.swing.JDialog {
             List<PedidosCompras> listPedidosCompras = new ArrayList<>();
 
             for (int i = 0; i < this.tbListadoConsumibles.getRowCount(); i++) {
-                if ((Boolean) this.tbListadoConsumibles.getValueAt(i, 8)) {
+                if ((Boolean) this.tbListadoConsumibles.getValueAt(i, 9)) {
                     // se crea el objeto pedido compra
                     PedidosCompras pedidosCompras = new PedidosCompras();
+                    pedidosCompras.setId(i);
                     pedidosCompras.setId((Integer) this.tbListadoConsumibles.getValueAt(i, 0));
+                    pedidosCompras.setItem( this.tbListadoConsumibles.getValueAt(i, 1).toString());
+                    pedidosCompras.setCodigo(this.tbListadoConsumibles.getValueAt(i, 2).toString());
+                    pedidosCompras.setDescripcion(this.tbListadoConsumibles.getValueAt(i, 3).toString());
+                    pedidosCompras.setTipo(this.tbListadoConsumibles.getValueAt(i, 4).toString());
+                    pedidosCompras.setReferencia(this.tbListadoConsumibles.getValueAt(i, 5).toString());
+                    pedidosCompras.setMarca(this.tbListadoConsumibles.getValueAt(i, 6).toString());
+                    pedidosCompras.setUnidad(this.tbListadoConsumibles.getValueAt(i, 7).toString());
+                    pedidosCompras.setCantidad((Float) (this.tbListadoConsumibles.getValueAt(i, 8)));
+                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 9));
+                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 10));
+
                     pedidosCompras.setPedido(this.pedidos);
-                    pedidosCompras.setCodigo((String) this.tbListadoConsumibles.getValueAt(i, 1));
-                    pedidosCompras.setDescripcion((String) this.tbListadoConsumibles.getValueAt(i, 2));
-                    pedidosCompras.setTipo((String) this.tbListadoConsumibles.getValueAt(i, 3));
-                    pedidosCompras.setReferencia((String) this.tbListadoConsumibles.getValueAt(i, 4));
-                    pedidosCompras.setMarca((String) this.tbListadoConsumibles.getValueAt(i, 5));
-                    pedidosCompras.setUnidad((String) this.tbListadoConsumibles.getValueAt(i, 6));
-                    pedidosCompras.setCantidad((Float) this.tbListadoConsumibles.getValueAt(i, 7));
-                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 8));
                     pedidosCompras.setFechaCompra(new Date());
                     pedidosCompras.setComprador(this.usuarios.getNombres()+" "+this.usuarios.getApellidos());
                     // se llama al metodo para guardar el pedido
@@ -199,6 +209,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
                 }
             }
             this.pedidosComprasController.UpdatePedidoCompras(listPedidosCompras, this.pedidos);
+            this.dispose();
         } else if (count == 0) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un item en la casilla de comprado");
         }
@@ -251,20 +262,26 @@ public class GestionarPedidos extends javax.swing.JDialog {
         });
     }
 
-    public void loadPedidosCompras(){
-        List<PedidosCompras> listPedidosCompras =this.pedidosComprasController.listPedidosCompras();
+    public void loadPedidosCompras(Pedidos pedidos){
+        this.model.setRowCount(0);
+        List<PedidosCompras> listPedidosCompras =this.pedidosComprasController.listPedidosCompras(pedidos);
         for (PedidosCompras pedidosCompras : listPedidosCompras) {
-            Object[] fila = new Object[9];
+            Object[] fila = new Object[11];
             fila[0] = pedidosCompras.getId();
-            fila[1] = pedidosCompras.getCodigo();
-            fila[2] = pedidosCompras.getDescripcion();
-            fila[3] = pedidosCompras.getTipo();
-            fila[4] = pedidosCompras.getReferencia();
-            fila[5] = pedidosCompras.getMarca();
-            fila[6] = pedidosCompras.getUnidad();
-            fila[7] = pedidosCompras.getCantidad();
-            fila[8] = pedidosCompras.getComprado();
-            model.addRow(fila);
+            fila[1] = pedidosCompras.getItem();
+            fila[2] = pedidosCompras.getCodigo();
+            fila[3] = pedidosCompras.getDescripcion();
+            fila[4] = pedidosCompras.getTipo();
+            fila[5] = pedidosCompras.getReferencia();
+            fila[6] = pedidosCompras.getMarca();
+            fila[7] = pedidosCompras.getUnidad();
+            fila[8] = pedidosCompras.getCantidad();
+            fila[9] = pedidosCompras.getComprado();
+            fila[10] = pedidosCompras.getValor();
+            
+
+            this.model.addRow(fila);
+
 
         }
     }

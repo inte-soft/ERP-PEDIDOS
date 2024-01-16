@@ -41,7 +41,7 @@ public class PedidosDao {
         return pedidos;
     }
 
-    public Pedidos findById(String id) {
+    public Pedidos findById(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Pedidos pedidos = entityManager.find(Pedidos.class, id);
@@ -116,12 +116,13 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "WHERE p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = 'True') "
+                + "WHERE p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = 'True') AND p.operacion = 'Pedido Adicional' AND p.comprado = TRUE "
                 + "ORDER BY p.fecha DESC";
-
+        
+        
         TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
         List<PedidoDto> resultList = query.getResultList();
 
@@ -138,7 +139,7 @@ public class PedidosDao {
 
         String queryString = "SELECT p "
                 + "FROM Pedidos p "
-                + "WHERE p.ot = :ot "
+                + "WHERE p.ot = :ot and p.comprado = TRUE "
                 + "ORDER BY p.fecha DESC";
 
         TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
@@ -156,10 +157,10 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "WHERE p.operacion = 'Pedido Compras' "
+                + "WHERE p.operacion = 'Pedido Compras' and p.comprado = FALSE "
                 + "ORDER BY p.fecha DESC";
 
         TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);

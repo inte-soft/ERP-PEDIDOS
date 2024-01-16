@@ -61,8 +61,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jLabel7.setText("");
         this.verPedidos();
         if (departamento == "Produccion") {
+            this.jTabbedPane1.removeTabAt(4);
+            this.jTabbedPane1.removeTabAt(3);
             this.jTabbedPane1.removeTabAt(2);
             this.jTabbedPane1.removeTabAt(0);
+            
 
         }
         this.otController = new OtController();
@@ -77,6 +80,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
         Runnable tarea = () -> {
             this.verPedidos();
+            this.verProgramado();
+            
         };
 
         // Programa la tarea para ejecutarse cada 5 minutos
@@ -165,6 +170,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         jTableProgramado = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
@@ -516,7 +522,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Busqueda");
 
-        jButton4.setText("Actualizar");
+        jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -599,6 +605,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton7.setText("Actualizar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -612,7 +625,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                         .addGap(65, 65, 65)
                         .addComponent(jButton5)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton6)))
+                        .addComponent(jButton6)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton7)))
                 .addContainerGap(639, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -621,7 +636,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(107, Short.MAX_VALUE))
@@ -864,6 +880,10 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        verProgramado();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     private void export(JTable jTable) {
         //crar una jtable temporalque tenga todas las filas que fueron chequeadas en la ultima columna como true
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -1000,6 +1020,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

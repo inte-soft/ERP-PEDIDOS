@@ -61,7 +61,7 @@ public class PedidosServiceImplement implements  PedidosServices{
     @Override
     public Pedidos findById(int i) {
         pedidosDao = new PedidosDao();
-        return pedidosDao.findById((String.valueOf( i)));
+        return pedidosDao.findById(i);
     }
 
 }

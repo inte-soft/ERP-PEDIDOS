@@ -41,11 +41,16 @@ public class PedidoComprasDao {
         }
     }
 
-    public List<PedidosCompras> listPedidosCompras() {
+    public List<PedidosCompras> listPedidosCompras(Pedidos pedidos) {
+        List<PedidosCompras> pedidosCompras = new ArrayList<>();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        String queryString = "SELECT p FROM PedidosCompras p";
-        List<PedidosCompras> pedidosCompras = entityManager.createQuery(queryString, PedidosCompras.class).getResultList();
+        String queryString = "SELECT p " +
+                "FROM PedidosCompras p " +
+                "WHERE p.pedido = :pedido";
+        pedidosCompras = entityManager.createQuery(queryString, PedidosCompras.class)
+                .setParameter("pedido", pedidos)
+                .getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return pedidosCompras;
@@ -107,7 +112,7 @@ public class PedidoComprasDao {
             EntityManager entityManager3 = entityManagerFactory.createEntityManager();
             entityManager3.getTransaction().begin();
             String queryString2 = "UPDATE Pedidos p " +
-                    "SET p.comprado = true " +
+                    "SET p.comprado = TRUE, p.revisado = TRUE " +
                     "WHERE p.id = :id";
             entityManager3.createQuery(queryString2)
                     .setParameter("id", pedido.getIdPedido())

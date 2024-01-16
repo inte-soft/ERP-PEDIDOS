@@ -17,11 +17,12 @@ public class PedidoDto {
     private String tipoPedido;
     private boolean visto;
     private Date fechaAlmacen;
+    private boolean comprado;
 
     public PedidoDto() {
     }
 
-    public PedidoDto(int idPedido, int ot, String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, Date fechaAlmacen) {
+    public PedidoDto(int idPedido, int ot, String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, Date fechaAlmacen, boolean comprado) {
         this.idPedido = idPedido;
         this.ot = ot;
         this.persona = persona;
@@ -32,7 +33,10 @@ public class PedidoDto {
         this.tipoPedido = tipoPedido;
         this.visto = visto;
         this.fechaAlmacen = fechaAlmacen;
+        this.comprado = comprado;
     }
+
+    
 
 
     public int getIdPedido() {
@@ -114,4 +118,14 @@ public class PedidoDto {
     public void setFechaAlmacen(Date fechaAlmacen) {
         this.fechaAlmacen = fechaAlmacen;
     }
+
+    public boolean isComprado() {
+        return comprado;
+    }
+
+    public void setComprado(boolean comprado) {
+        this.comprado = comprado;
+    }
+    
+    
 }

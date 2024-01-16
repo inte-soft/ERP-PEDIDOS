@@ -35,7 +35,8 @@ public class Principal extends javax.swing.JFrame {
     private WindowSingleton windowMxMinM;
     private WindowSingleton windowUsuarios;
     private WindowSingleton windowGestionConsumibles;
-    private WindowSingleton WindowpedidosEspeciales;
+    private WindowSingleton windowpedidosEspeciales;
+    private WindowSingleton windowOtProgramada;
 
     
     private Usuarios usuarios;
@@ -53,6 +54,8 @@ public class Principal extends javax.swing.JFrame {
         this.windowMxMinM = new WindowSingleton();
         this.windowUsuarios = new WindowSingleton();
         this.windowGestionConsumibles = new WindowSingleton();
+        this.windowOtProgramada = new WindowSingleton();
+        this.windowpedidosEspeciales = new WindowSingleton();
 
 
     if(!this.usuarios.getpAdminUser()){
@@ -518,10 +521,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3MouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        pedidosEspeciales pedidosCompras = new pedidosEspeciales(this.usuarios);
-        escritorio.add(pedidosCompras);
-        pedidosCompras.setVisible(true);
+        if (!windowpedidosEspeciales.getWindowState()) {
+            windowpedidosEspeciales.setOpenWindow();
+            pedidosEspeciales pedidosCompras = new pedidosEspeciales(this.usuarios, windowpedidosEspeciales);
+            escritorio.add(pedidosCompras);
+            pedidosCompras.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlmacenActionPerformed
@@ -535,10 +542,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5MouseClicked
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        otsProgramadas fechaProgramada = new otsProgramadas();
-        escritorio.add(fechaProgramada);
-        fechaProgramada.setVisible(true);
+
+        if (!windowOtProgramada.getWindowState()) {
+            windowOtProgramada.setOpenWindow();
+            otsProgramadas fechaProgramada = new otsProgramadas(this.windowOtProgramada);
+            escritorio.add(fechaProgramada);
+            fechaProgramada.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
     public void openGestionUsuarios(){
         if(!windowUsuarios.getWindowState()){

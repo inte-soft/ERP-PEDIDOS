@@ -32,9 +32,10 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
     /**
      * Creates new form pedidosEspeciales
      */
-    public pedidosEspeciales(Usuarios usuarios) {
+    public pedidosEspeciales(Usuarios usuarios, WindowSingleton windowSingleton) {
 
         initComponents();
+        this.windowSingleton = windowSingleton;
         this.pedidosController = new PedidosController();
         this.modelarTabla = new ModelarTabla(this.jTpedidosEspeciales);
         this.model = this.modelarTabla.getModel();
@@ -167,6 +168,12 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        windowSingleton.setCloseWindow();
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //validar si hay un afila seleccionada

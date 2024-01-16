@@ -11,9 +11,9 @@ import java.util.List;
 public class PedidosComprasServiceImplement implements PedidosComprasService {
 
     @Override
-    public List<PedidosCompras> listPedidosCompras() {
+    public List<PedidosCompras> listPedidosCompras(Pedidos pedidos) {
         PedidoComprasDao pedidoComprasDao = new PedidoComprasDao();
-        return pedidoComprasDao.listPedidosCompras();
+        return pedidoComprasDao.listPedidosCompras(pedidos);
     }
 
     @Override

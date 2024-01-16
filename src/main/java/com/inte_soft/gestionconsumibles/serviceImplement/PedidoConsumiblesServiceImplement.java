@@ -71,7 +71,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
             pedidosCom.setOt(Integer.parseInt(ot));
             pedidosCom.setPersona(persona);
             pedidosCom.setArea(area);
-            pedidosCom.setOperacion("Pedio Compras");
+            pedidosCom.setOperacion("Pedido Compras");
             pedidosCom.setFecha(new Date());
             pedidosCom.setTipoPedido(tipoPedido);
             pedidosCom.setComprado(false);

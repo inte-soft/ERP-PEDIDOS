@@ -6,7 +6,7 @@ import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
 import java.util.List;
 
 public interface PedidosComprasService {
-    List<PedidosCompras> listPedidosCompras();
+    List<PedidosCompras> listPedidosCompras(Pedidos pedidos);
 
     void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, Pedidos pedido);
 }

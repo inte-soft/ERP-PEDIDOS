@@ -6,6 +6,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 
 import com.inte_soft.gestionconsumibles.controller.OtController;
 import com.inte_soft.gestionconsumibles.entity.Ot;
+import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,11 +20,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
 
     private DefaultTableModel model;
     private OtController otController;
+    private WindowSingleton windowSingleton;
     /**
      * Creates new form otsProgramadas
      */
-    public otsProgramadas() {
+    public otsProgramadas(WindowSingleton windowSingleton) {
         initComponents();
+        this.windowSingleton = windowSingleton;
         this.otController = new OtController();
         this.model = (DefaultTableModel) this.jTable1.getModel();
         loadOts();
@@ -154,7 +157,12 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    @Override
+    public void dispose() {
+        super.dispose();
+        windowSingleton.setCloseWindow();
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.jTextField1.getText().isEmpty() || this.jDateChooser3.getDate() == null){
             JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");

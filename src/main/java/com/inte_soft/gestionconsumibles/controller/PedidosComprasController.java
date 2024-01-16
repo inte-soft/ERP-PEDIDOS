@@ -8,14 +8,16 @@ import com.inte_soft.gestionconsumibles.serviceImplement.PedidosComprasServiceIm
 import java.util.List;
 
 public class PedidosComprasController {
+    
+    private PedidosComprasService pedidosComprasService;
 
     public PedidosComprasController() {
         this.pedidosComprasService = new PedidosComprasServiceImplement();
     }
 
-    private PedidosComprasService pedidosComprasService;
-    public List<PedidosCompras> listPedidosCompras() {
-        return pedidosComprasService.listPedidosCompras();
+    
+    public List<PedidosCompras> listPedidosCompras(Pedidos pedidos) {
+        return pedidosComprasService.listPedidosCompras(pedidos);
 
     }
 
