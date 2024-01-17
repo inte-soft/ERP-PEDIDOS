@@ -785,6 +785,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     pedido.setRevisado(pedidos.isRevisado());
                     pedido.setTipoPedido(pedidos.getTipoPedido());
                     pedido.setVisto(pedidos.isVisto());
+                    pedido.setComprado(pedidos.isComprado());
                     break;
                 }
             }
@@ -818,9 +819,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     pedido.setArea(pedidos.getArea());
                     pedido.setFecha(pedidos.getFecha());
                     pedido.setOperacion(pedidos.getOperacion());
-                    pedido.setRevisado(pedidos.isRevisado());
+                    pedido.setRevisado(Boolean.FALSE);
                     pedido.setTipoPedido(pedidos.getTipoPedido());
                     pedido.setVisto(pedidos.isVisto());
+                    pedido.setComprado(pedidos.isComprado());
+                    
                     break;
                 }
             }
