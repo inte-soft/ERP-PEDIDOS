@@ -32,6 +32,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
     private DefaultTableModel model;
     private Pedidos pedidos;
     private pedidosEspeciales pedidosEspeciales;
+    private List<PedidosCompras> listPedidosCompras;
 
 
     public GestionarPedidos(java.awt.Frame parent, boolean modal) {
@@ -48,6 +49,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.pedidos = pedido;
         loadPedidosCompras(this.pedidos);
         this.pedidosEspeciales = pedidosEspeciales;
+        
 
 
 
@@ -186,6 +188,15 @@ public class GestionarPedidos extends javax.swing.JDialog {
             List<PedidosCompras> listPedidosCompras = new ArrayList<>();
 
             for (int i = 0; i < this.tbListadoConsumibles.getRowCount(); i++) {
+                Boolean flag = false;
+                for(PedidosCompras pedidosCompras: this.listPedidosCompras){
+                    if(this.tbListadoConsumibles.getValueAt(i, 9).toString()==pedidosCompras.getCodigo() && pedidosCompras.getComprado()== Boolean.TRUE){
+                        flag = true;
+                    }   
+                }
+                if(flag){
+                    continue;
+                }
                 if ((Boolean) this.tbListadoConsumibles.getValueAt(i, 9)) {
                     // se crea el objeto pedido compra
                     PedidosCompras pedidosCompras = new PedidosCompras();
@@ -267,7 +278,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
     public void loadPedidosCompras(Pedidos pedidos){
         this.model.setRowCount(0);
-        List<PedidosCompras> listPedidosCompras =this.pedidosComprasController.listPedidosCompras(pedidos);
+        this.listPedidosCompras =this.pedidosComprasController.listPedidosCompras(pedidos);
         for (PedidosCompras pedidosCompras : listPedidosCompras) {
             Object[] fila = new Object[11];
             fila[0] = pedidosCompras.getId();
