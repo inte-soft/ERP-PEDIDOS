@@ -31,6 +31,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
     private ModelarTabla modelarTabla;
     private DefaultTableModel model;
     private Pedidos pedidos;
+    private pedidosEspeciales pedidosEspeciales;
 
 
     public GestionarPedidos(java.awt.Frame parent, boolean modal) {
@@ -38,7 +39,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         initComponents();
     }
 
-    public GestionarPedidos(Usuarios usuarios, Pedidos pedido) {
+    public GestionarPedidos(Usuarios usuarios, Pedidos pedido, pedidosEspeciales pedidosEspeciales) {
         initComponents();
         this.usuarios = usuarios;
         this.pedidosComprasController = new PedidosComprasController();
@@ -46,6 +47,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.model = this.modelarTabla.getModel();
         this.pedidos = pedido;
         loadPedidosCompras(this.pedidos);
+        this.pedidosEspeciales = pedidosEspeciales;
 
 
 
@@ -213,6 +215,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         } else if (count == 0) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un item en la casilla de comprado");
         }
+        this.pedidosEspeciales.loadPedidosCompras();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

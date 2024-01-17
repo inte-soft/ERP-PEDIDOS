@@ -69,6 +69,7 @@ public class PedidoConsumiblesDao {
         // Crear una lista de PedidoConsumiblesDto combinando los dos conjuntos de datos
         List<PedidoConsumiblesDto> pedidoConsumiblesDtoList = new ArrayList<>();
         for (PedidoConsumibles pc : pedidoConsumiblesList) {
+            Boolean flag = false;
             for (MaxMinElectDTO mme : maxMinElectDTOList) {
                 if (pc.getCodigo().equals(mme.getCodigo())) {
                     PedidoConsumiblesDto dto = new PedidoConsumiblesDto();
@@ -86,7 +87,27 @@ public class PedidoConsumiblesDao {
                     dto.setMinimo(mme.getMin());
                     dto.setMaximo(mme.getMax());
                     pedidoConsumiblesDtoList.add(dto);
+                    flag = true;
+                    break;
+                    
                 }
+            }
+            if(!flag){
+               PedidoConsumiblesDto dto = new PedidoConsumiblesDto();
+                    dto.setIdPedidoC(pc.getIdPedidoConsumibles());
+                    dto.setIdPedido(pc.getPedidos().getIdPedido());
+                    dto.setItem(pc.getItem());
+                    dto.setCodigo(pc.getCodigo());
+                    dto.setDescripcion(pc.getDescripcion());
+                    dto.setTipo(pc.getTipo());
+                    dto.setReferencia(pc.getReferencia());
+                    dto.setMarca(pc.getMarca());
+                    dto.setUnidad(pc.getUnidad());
+                    dto.setCantidad(pc.getCantidad());
+                    dto.setValor(pc.getValor());
+                    dto.setMinimo(0);
+                    dto.setMaximo(0);
+                    pedidoConsumiblesDtoList.add(dto);
             }
         }
 
