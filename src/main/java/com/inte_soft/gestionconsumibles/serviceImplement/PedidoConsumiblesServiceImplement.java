@@ -31,6 +31,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
             String Operacion, String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras) {
         MasterDao masterDao = new MasterDao();
         PedidosDao pedidosDao = new PedidosDao();
+         if(!pedidoConsumibleses.isEmpty()){
         Pedidos pedidos = new Pedidos();
         pedidos.setOt(Integer.parseInt(ot));
         pedidos.setPersona(persona);
@@ -64,7 +65,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 e.printStackTrace();
 
             }
-        }
+        }}
 
         if(!listPedidosCompras.isEmpty()){
             Pedidos pedidosCom = new Pedidos();

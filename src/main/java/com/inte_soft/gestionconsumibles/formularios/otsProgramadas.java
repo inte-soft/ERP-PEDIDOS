@@ -200,11 +200,12 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                                 (Boolean) this.jTable1.getValueAt(i, 3)));
             }
             }
-            if (contador == 0){
+            
+        }
+        if (contador == 0){
                 JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una OT");
             }
             loadOts();
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void loadOts(){
