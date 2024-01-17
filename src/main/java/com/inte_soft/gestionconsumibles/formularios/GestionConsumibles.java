@@ -233,7 +233,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         List<PedidosCompras> ListPedidosCompras = new ArrayList<>();
         List<PedidoConsumibles> listPedidoConsumiblesdelete = new ArrayList<>();
         //metodo para buscar consumibles que no esten tipicos de pedidos electricos o mecanicos y meterlos en pedidos compras
-        if (this.cbSeleccion.getSelectedItem().toString().equals("CONSUMIBLES ELECTRICOS") || this.cbSeleccion.getSelectedItem().toString().equals("CONSUMIBLES ELECTRICOS")) {
+        if (this.cbSeleccion.getSelectedItem().toString().equals("CONSUMIBLES ELECTRICOS") ) {
             TConsumiblesEController tConsumiblesEController = new TConsumiblesEController();
             List<TipicoConsumiblesElectricos> ListTipicoConsumiblesElectricos = tConsumiblesEController.getAll();
             for (PedidoConsumibles pc : listPedidoConsumibleses) {
