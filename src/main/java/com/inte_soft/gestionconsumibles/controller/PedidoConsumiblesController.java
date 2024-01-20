@@ -31,9 +31,9 @@ public class PedidoConsumiblesController {
 
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
                                        AreaCompania area, String persona, String Operacion,
-                                       String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras) {
+                                       String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras, String typeOperacionCompras) {
 
-        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot, tipoPedido, listPedidosCompras);
+        pedidoConsumiblesServices.crearPedidoConsumibles(pedidoConsumibleses, area, persona, Operacion, ot, tipoPedido, listPedidosCompras, typeOperacionCompras);
     }
 
     public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido) {

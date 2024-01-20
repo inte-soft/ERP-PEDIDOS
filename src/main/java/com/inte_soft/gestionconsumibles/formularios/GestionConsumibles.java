@@ -209,6 +209,13 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String typeOperacionCompras = "";
+        if (this.cbSeleccion1.getSelectedItem().equals("Pedido Adicional")) {
+            typeOperacionCompras = "Compras Adicional";
+            
+        }else if(this.cbSeleccion1.getSelectedItem().equals("Pedido Inicial")){
+            typeOperacionCompras = "Compras Inicial";
+        }
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         List<PedidoConsumibles> listPedidoConsumibleses = new ArrayList<>();
         if (this.jTable1.isEditing()) {
@@ -291,7 +298,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
                 this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
                 this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText(),
-                this.cbSeleccion.getSelectedItem().toString(), ListPedidosCompras);
+                this.cbSeleccion.getSelectedItem().toString(), ListPedidosCompras, typeOperacionCompras);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

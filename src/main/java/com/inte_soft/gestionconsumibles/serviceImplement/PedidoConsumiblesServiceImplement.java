@@ -28,7 +28,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
     @Override
     public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses, AreaCompania area, String persona,
-            String Operacion, String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras) {
+            String Operacion, String ot, String tipoPedido, List<PedidosCompras> listPedidosCompras, String typeOperacionCompras) {
         MasterDao masterDao = new MasterDao();
         PedidosDao pedidosDao = new PedidosDao();
          if(!pedidoConsumibleses.isEmpty()){
@@ -41,8 +41,8 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidos.setTipoPedido(tipoPedido);
         pedidos.setComprado(true);
         Pedidos pedidosPersist = pedidosDao.createPedido(pedidos);
-
-
+        
+        
 
         for (PedidoConsumibles pc : pedidoConsumibleses) {
             try {
@@ -66,13 +66,17 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
             }
         }}
+         
+         
+            
+       
 
         if(!listPedidosCompras.isEmpty()){
             Pedidos pedidosCom = new Pedidos();
             pedidosCom.setOt(Integer.parseInt(ot));
             pedidosCom.setPersona(persona);
             pedidosCom.setArea(area);
-            pedidosCom.setOperacion("Pedido Compras");
+            pedidosCom.setOperacion(typeOperacionCompras);
             pedidosCom.setFecha(new Date());
             pedidosCom.setTipoPedido(tipoPedido);
             pedidosCom.setComprado(false);

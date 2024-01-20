@@ -119,7 +119,7 @@ public class PedidosDao {
         String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "WHERE (p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = TRUE )) AND p.operacion = 'Pedido Adicional' AND p.comprado = TRUE "
+                + "WHERE (p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = TRUE )) AND p.operacion LIKE '%Adicional%' AND p.comprado = TRUE "
                 + "ORDER BY p.fecha DESC";
         
         
@@ -160,7 +160,7 @@ public class PedidosDao {
         String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "WHERE p.operacion = 'Pedido Compras' and p.comprado = FALSE "
+                + "WHERE p.operacion LIKE 'Compras%' and p.comprado = FALSE "
                 + "ORDER BY p.fecha DESC";
 
         TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
