@@ -324,7 +324,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.model.setRowCount(0);
         this.listPedidosCompras =this.pedidosComprasController.listPedidosCompras(pedidos);
         for (PedidosCompras pedidosCompras : listPedidosCompras) {
-            Object[] fila = new Object[11];
+            Object[] fila = new Object[12];
             fila[0] = pedidosCompras.getId();
             fila[1] = pedidosCompras.getItem();
             fila[2] = pedidosCompras.getCodigo();
@@ -336,6 +336,9 @@ public class GestionarPedidos extends javax.swing.JDialog {
             fila[8] = pedidosCompras.getCantidad();
             fila[9] = pedidosCompras.getComprado();
             fila[10] = pedidosCompras.getValor();
+            if (pedidosCompras.getObservacion() == null) {
+                pedidosCompras.setObservacion("");
+            }
             fila[11] = pedidosCompras.getObservacion();
             
 
