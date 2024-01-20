@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
@@ -180,9 +181,19 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void stopEditing(JTable table) {
+        if (table.isEditing()) {
+            TableCellEditor cellEditor = table.getCellEditor();
+            if (cellEditor != null) {
+                cellEditor.stopCellEditing();
+            }
+        }
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // metodo para guardar las compras primero se valida si hay algun check seleccionado
+        stopEditing(this.tbListadoConsumibles);
         Integer count = 0;
         if (this.tbListadoConsumibles.getRowCount() > 0) {
             List<PedidosCompras> listPedidosCompras = new ArrayList<>();
@@ -216,7 +227,11 @@ public class GestionarPedidos extends javax.swing.JDialog {
                     pedidosCompras.setPedido(this.pedidos);
                     pedidosCompras.setFechaCompra(new Date());
                     pedidosCompras.setComprador(this.usuarios.getNombres()+" "+this.usuarios.getApellidos());
-                    pedidosCompras.setObservacion(this.tbListadoConsumibles.getValueAt(i, 11).toString());
+                    String observacion = "";
+                    if (!this.tbListadoConsumibles.getValueAt(i, 11).equals(null) ) {
+                        observacion = this.tbListadoConsumibles.getValueAt(i, 11).toString();
+                    }
+                    pedidosCompras.setObservacion(observacion);
                     // se llama al metodo para guardar el pedido
                     listPedidosCompras.add(pedidosCompras);
                     count++;
@@ -234,6 +249,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.modelarTabla.filter(this.jTextField1.getText(),null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
