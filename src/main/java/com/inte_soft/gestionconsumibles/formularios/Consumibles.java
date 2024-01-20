@@ -82,6 +82,7 @@ public class Consumibles extends javax.swing.JDialog {
     public void addColumn(){
         this.model.addColumn("Minimo");
         this.model.addColumn("Maximo");
+        this.model.addColumn("Observacion");
     }
     
     public Consumibles( List<PedidoConsumiblesDto> listPedidoConsumibleses, Usuarios usuario, String ot) {
@@ -462,7 +463,8 @@ public class Consumibles extends javax.swing.JDialog {
                 pedidoConsumibles.getUnidad(),
                 pedidoConsumibles.getCantidad(),
                 pedidoConsumibles.getMaximo(),
-                pedidoConsumibles.getMinimo()
+                pedidoConsumibles.getMinimo(),
+                pedidoConsumibles.getObservacion()
             };
                 
         

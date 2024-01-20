@@ -81,14 +81,14 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "id", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Comprado", "valor"
+                "id", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Comprado", "valor", "Observacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, true, false
+                true, false, false, false, false, false, false, false, false, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -216,6 +216,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
                     pedidosCompras.setPedido(this.pedidos);
                     pedidosCompras.setFechaCompra(new Date());
                     pedidosCompras.setComprador(this.usuarios.getNombres()+" "+this.usuarios.getApellidos());
+                    pedidosCompras.setObservacion(this.tbListadoConsumibles.getValueAt(i, 11).toString());
                     // se llama al metodo para guardar el pedido
                     listPedidosCompras.add(pedidosCompras);
                     count++;

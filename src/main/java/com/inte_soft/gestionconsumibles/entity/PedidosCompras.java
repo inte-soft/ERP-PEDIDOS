@@ -38,12 +38,15 @@ public class PedidosCompras {
 
     @Column(name = "comprador")
     private String comprador;
+    
+    @Column(name = "OBSERVACION")
+    private String observacion;
 
     public PedidosCompras() {
     }
 
-    public PedidosCompras(Integer id, Pedidos pedido, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean comprado, Date fechaCompra, String comprador) {
-       this.id = id;
+    public PedidosCompras(Integer id, Pedidos pedido, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean comprado, Date fechaCompra, String comprador, String observacion) {
+        this.id = id;
         this.pedido = pedido;
         this.item = item;
         this.codigo = codigo;
@@ -57,7 +60,10 @@ public class PedidosCompras {
         this.comprado = comprado;
         this.fechaCompra = fechaCompra;
         this.comprador = comprador;
+        this.observacion = observacion;
     }
+
+    
 
     public Integer getId() {
         return id;
@@ -170,5 +176,15 @@ public class PedidosCompras {
     public void setComprador(String comprador) {
         this.comprador = comprador;
     }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+    
+    
 
 }

@@ -84,6 +84,7 @@ public class PedidoConsumiblesDao {
                     dto.setUnidad(pc.getUnidad());
                     dto.setCantidad(pc.getCantidad());
                     dto.setValor(pc.getValor());
+                    dto.setObservacion(pc.getObservacion());
                     dto.setMinimo(mme.getMin());
                     dto.setMaximo(mme.getMax());
                     pedidoConsumiblesDtoList.add(dto);
@@ -129,9 +130,11 @@ public class PedidoConsumiblesDao {
                 (String) objects[6],
                 (String) objects[7],
                 (String) objects[8],
-                (Double) objects[9],
-                (Integer) objects[10],
-                (Integer) objects[11]
+                (Float)  objects[9],
+                (Double) objects[10],
+                (String) objects[11],
+                (Integer) objects[12],
+                (Integer) objects[13]
         );
     }
 

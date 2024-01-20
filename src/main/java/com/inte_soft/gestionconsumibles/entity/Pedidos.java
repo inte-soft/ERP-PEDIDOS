@@ -46,8 +46,10 @@ public class Pedidos  implements java.io.Serializable{
     @Column(name = "VISTO")
     private boolean visto;
 
-    @Column(name = "comprado")
+    @Column(name = "COMPRADO")
     private boolean comprado;
+    
+ 
     
 
     public Pedidos() {

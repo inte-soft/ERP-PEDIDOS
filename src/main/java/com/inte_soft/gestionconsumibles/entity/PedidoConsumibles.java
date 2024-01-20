@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -52,12 +53,14 @@ public class PedidoConsumibles implements java.io.Serializable {
     private double valor;
     @Column(name = "REVISADO")
     private Boolean revisado;
+    @Column(name = "OBSERVACION")
+    private String observacion;
 
 
     public PedidoConsumibles() {
     }
 
-    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean revisado) {
+    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean revisado, String observacion) {
         this.idPedidoConsumibles = idPedidoConsumibles;
         this.pedidos = pedidos;
         this.item = item;
@@ -70,7 +73,10 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.cantidad = cantidad;
         this.valor = valor;
         this.revisado = revisado;
+        this.observacion = observacion;
     }
+
+    
 
 
 
@@ -169,7 +175,15 @@ public class PedidoConsumibles implements java.io.Serializable {
     public void setRevisado(Boolean revisado) {
         this.revisado = revisado;
     }
-    
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+   
     
     
     

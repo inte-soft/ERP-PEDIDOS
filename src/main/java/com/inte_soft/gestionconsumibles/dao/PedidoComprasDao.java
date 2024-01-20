@@ -71,6 +71,7 @@ public class PedidoComprasDao {
             pedidoConsumibles.setCantidad(pedidosCompras.getCantidad());
             pedidoConsumibles.setValor(pedidosCompras.getValor());
             pedidoConsumibles.setRevisado(true);
+            pedidoConsumibles.setObservacion(pedidosCompras.getObservacion());
             listPedidoConsumibles.add(pedidoConsumibles);
 
         }

@@ -15,13 +15,15 @@ public class PedidoConsumiblesDto {
     private String unidad;
     private Float cantidad;
     private Double valor;
+    private String observacion;
     private Integer minimo;
     private Integer maximo;
+    
 
     public PedidoConsumiblesDto() {
     }
 
-    public PedidoConsumiblesDto(BigInteger idPedidoC, Integer idPedido, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Double valor, Integer minimo, Integer maximo) {
+    public PedidoConsumiblesDto(BigInteger idPedidoC, Integer idPedido, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad, Double valor, String observacion, Integer minimo, Integer maximo) {
         this.idPedidoC = idPedidoC;
         this.idPedido = idPedido;
         this.item = item;
@@ -31,10 +33,14 @@ public class PedidoConsumiblesDto {
         this.referencia = referencia;
         this.marca = marca;
         this.unidad = unidad;
+        this.cantidad = cantidad;
         this.valor = valor;
+        this.observacion = observacion;
         this.minimo = minimo;
         this.maximo = maximo;
     }
+
+    
 
     public BigInteger getIdPedidoC() {
         return idPedidoC;
@@ -138,6 +144,14 @@ public class PedidoConsumiblesDto {
 
     public void setMaximo(Integer maximo) {
         this.maximo = maximo;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     
