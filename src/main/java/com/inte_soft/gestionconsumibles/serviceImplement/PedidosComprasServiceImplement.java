@@ -17,9 +17,9 @@ public class PedidosComprasServiceImplement implements PedidosComprasService {
     }
 
     @Override
-    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, Pedidos pedido) {
+    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, List<PedidosCompras> listPedidosComprasUpdate, Pedidos pedido) {
         PedidoComprasDao pedidoComprasDao = new PedidoComprasDao();
-        pedidoComprasDao.UpdatePedidoCompras(listPedidosCompras, pedido);
+        pedidoComprasDao.UpdatePedidoCompras(listPedidosCompras, listPedidosComprasUpdate, pedido);
     }
 
 }

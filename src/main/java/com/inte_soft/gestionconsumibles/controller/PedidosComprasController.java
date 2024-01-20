@@ -21,7 +21,7 @@ public class PedidosComprasController {
 
     }
 
-    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, Pedidos pedido) {
-        pedidosComprasService.UpdatePedidoCompras(listPedidosCompras, pedido);
+    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, List<PedidosCompras> listPedidosComprasUpdate, Pedidos pedido) {
+        pedidosComprasService.UpdatePedidoCompras(listPedidosCompras, listPedidosComprasUpdate, pedido);
     }
 }

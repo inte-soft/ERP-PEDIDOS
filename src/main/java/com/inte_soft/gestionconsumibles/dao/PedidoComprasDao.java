@@ -3,6 +3,7 @@ package com.inte_soft.gestionconsumibles.dao;
 import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
 import com.inte_soft.gestionconsumibles.entity.Pedidos;
 import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
+import org.hibernate.sql.Update;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,7 +57,9 @@ public class PedidoComprasDao {
         return pedidosCompras;
     }
 
-    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, Pedidos pedido) {
+    public void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, List<PedidosCompras> listPedidosComprasUpdate, Pedidos pedido) {
+
+        this.updatePedidoCompras(listPedidosComprasUpdate);
         List<PedidoConsumibles> listPedidoConsumibles = new ArrayList<>();
         for (PedidosCompras pedidosCompras : listPedidosCompras) {
             PedidoConsumibles pedidoConsumibles = new PedidoConsumibles();
@@ -123,5 +126,15 @@ public class PedidoComprasDao {
         }
 
 
+    }
+
+    public void updatePedidoCompras(List<PedidosCompras> pedidosCompras) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        for (PedidosCompras pedidosCompras1 : pedidosCompras) {
+            entityManager.merge(pedidosCompras1);
+        }
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

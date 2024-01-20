@@ -197,11 +197,12 @@ public class GestionarPedidos extends javax.swing.JDialog {
         Integer count = 0;
         if (this.tbListadoConsumibles.getRowCount() > 0) {
             List<PedidosCompras> listPedidosCompras = new ArrayList<>();
+            List<PedidosCompras> listPedidosComprasUpdate = new ArrayList<>();
 
             for (int i = 0; i < this.tbListadoConsumibles.getRowCount(); i++) {
                 Boolean flag = false;
                 for(PedidosCompras pedidosCompras: this.listPedidosCompras){
-                    if(this.tbListadoConsumibles.getValueAt(i, 9).toString()==pedidosCompras.getCodigo() && pedidosCompras.getComprado()== Boolean.TRUE){
+                    if(this.tbListadoConsumibles.getValueAt(i, 2).toString()==pedidosCompras.getCodigo() && pedidosCompras.getComprado()== Boolean.TRUE){
                         flag = true;
                     }   
                 }
@@ -235,9 +236,35 @@ public class GestionarPedidos extends javax.swing.JDialog {
                     // se llama al metodo para guardar el pedido
                     listPedidosCompras.add(pedidosCompras);
                     count++;
+                } else {
+                    // se crea el objeto pedido compra
+                    PedidosCompras pedidosCompras = new PedidosCompras();
+                    pedidosCompras.setId(i);
+                    pedidosCompras.setId((Integer) this.tbListadoConsumibles.getValueAt(i, 0));
+                    pedidosCompras.setItem( this.tbListadoConsumibles.getValueAt(i, 1).toString());
+                    pedidosCompras.setCodigo(this.tbListadoConsumibles.getValueAt(i, 2).toString());
+                    pedidosCompras.setDescripcion(this.tbListadoConsumibles.getValueAt(i, 3).toString());
+                    pedidosCompras.setTipo(this.tbListadoConsumibles.getValueAt(i, 4).toString());
+                    pedidosCompras.setReferencia(this.tbListadoConsumibles.getValueAt(i, 5).toString());
+                    pedidosCompras.setMarca(this.tbListadoConsumibles.getValueAt(i, 6).toString());
+                    pedidosCompras.setUnidad(this.tbListadoConsumibles.getValueAt(i, 7).toString());
+                    pedidosCompras.setCantidad((Float) (this.tbListadoConsumibles.getValueAt(i, 8)));
+                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 9));
+                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 10));
+
+                    pedidosCompras.setPedido(this.pedidos);
+                    pedidosCompras.setFechaCompra(new Date());
+                    String observacion = "";
+                    if (!this.tbListadoConsumibles.getValueAt(i, 11).equals(null) ) {
+                        observacion = this.tbListadoConsumibles.getValueAt(i, 11).toString();
+                    }
+                    pedidosCompras.setObservacion(observacion);
+                    // se llama al metodo para guardar el pedido
+                    listPedidosComprasUpdate.add(pedidosCompras);
+
                 }
             }
-            this.pedidosComprasController.UpdatePedidoCompras(listPedidosCompras, this.pedidos);
+            this.pedidosComprasController.UpdatePedidoCompras(listPedidosCompras, listPedidosComprasUpdate, this.pedidos);
             this.dispose();
         } else if (count == 0) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un item en la casilla de comprado");

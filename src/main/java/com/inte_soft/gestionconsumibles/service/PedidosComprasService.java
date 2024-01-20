@@ -8,5 +8,5 @@ import java.util.List;
 public interface PedidosComprasService {
     List<PedidosCompras> listPedidosCompras(Pedidos pedidos);
 
-    void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, Pedidos pedido);
+    void UpdatePedidoCompras(List<PedidosCompras> listPedidosCompras, List<PedidosCompras> listPedidosComprasUpdate, Pedidos pedido);
 }
