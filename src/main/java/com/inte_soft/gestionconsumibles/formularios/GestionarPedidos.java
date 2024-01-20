@@ -336,6 +336,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
             fila[8] = pedidosCompras.getCantidad();
             fila[9] = pedidosCompras.getComprado();
             fila[10] = pedidosCompras.getValor();
+            fila[11] = pedidosCompras.getObservacion();
             
 
             this.model.addRow(fila);
