@@ -8,9 +8,12 @@ import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesEController;
 import com.inte_soft.gestionconsumibles.controller.TConsumiblesMController;
 import com.inte_soft.gestionconsumibles.entity.*;
+import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
+import java.awt.print.Printable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -69,6 +72,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         lbOt1 = new javax.swing.JLabel();
         item = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        Imprimir = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -131,6 +135,13 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
             }
         });
 
+        Imprimir.setText("Imprimir");
+        Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +172,9 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2)
+                        .addGap(42, 42, 42)
+                        .addComponent(Imprimir)))
                 .addGap(29, 214, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,7 +195,9 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(Imprimir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -313,10 +328,20 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No ha selecionado ningun usuario para modificar", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
+        Date fecha = new Date();
+        String header = "OT: " + this.txtOt.getText() +  "  -  "+ this.item+ "    " + fecha;
+        String footer = "Elabora: " + this.usuarios.getNombres() + " " + this.usuarios.getApellidos();
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        jTablePrinter.printTable(this.jTable1, header, footer);
+
+    }//GEN-LAST:event_ImprimirActionPerformed
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Imprimir;
     private javax.swing.JButton btnGestionar;
     private javax.swing.JComboBox<String> cbSeleccion;
     private javax.swing.JComboBox<String> cbSeleccion1;

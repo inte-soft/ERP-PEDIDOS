@@ -29,4 +29,6 @@ public interface PedidosServices {
     List<PedidoDto> listPedidosCompras();
 
     Pedidos findById(int i);
+
+    List<PedidoDto> listPedidosComprasOk();
 }

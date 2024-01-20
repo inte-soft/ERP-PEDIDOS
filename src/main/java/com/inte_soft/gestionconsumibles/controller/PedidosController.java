@@ -50,4 +50,8 @@ public class PedidosController {
         return pedidosServices.findById(i);
 
     }
+
+    public List<PedidoDto> listPedidosComprasOk() {
+        return pedidosServices.listPedidosComprasOk();
+    }
 }

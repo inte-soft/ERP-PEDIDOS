@@ -41,7 +41,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         initComponents();
     }
 
-    public GestionarPedidos(Usuarios usuarios, Pedidos pedido, pedidosEspeciales pedidosEspeciales) {
+    public GestionarPedidos(Usuarios usuarios, Pedidos pedido, pedidosEspeciales pedidosEspeciales, String tipo ) {
         initComponents();
         this.usuarios = usuarios;
         this.pedidosComprasController = new PedidosComprasController();
@@ -50,6 +50,12 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.pedidos = pedido;
         loadPedidosCompras(this.pedidos);
         this.pedidosEspeciales = pedidosEspeciales;
+        // validar si  es comprado o no y deshabilitar edicion para todas la columnas de la tabla
+        if(tipo == "comprado"){
+            
+            this.tbListadoConsumibles.setEnabled(false);
+            this.jButton2.setEnabled(false);
+        }
         
 
 
@@ -82,14 +88,14 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "id", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Comprado", "valor", "Observacion"
+                "id", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "FechaCompra", "Comprado", "valor", "Observacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, true, false, true
+                true, false, false, false, false, false, false, false, false, false, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,11 +127,11 @@ public class GestionarPedidos extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(8).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(200);
-            tbListadoConsumibles.getColumnModel().getColumn(9).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(9).setMaxWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(0);
         }
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -324,7 +330,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.model.setRowCount(0);
         this.listPedidosCompras =this.pedidosComprasController.listPedidosCompras(pedidos);
         for (PedidosCompras pedidosCompras : listPedidosCompras) {
-            Object[] fila = new Object[12];
+            Object[] fila = new Object[13];
             fila[0] = pedidosCompras.getId();
             fila[1] = pedidosCompras.getItem();
             fila[2] = pedidosCompras.getCodigo();
@@ -334,12 +340,13 @@ public class GestionarPedidos extends javax.swing.JDialog {
             fila[6] = pedidosCompras.getMarca();
             fila[7] = pedidosCompras.getUnidad();
             fila[8] = pedidosCompras.getCantidad();
-            fila[9] = pedidosCompras.getComprado();
-            fila[10] = pedidosCompras.getValor();
+            fila[9] = pedidosCompras.getFechaCompra().toString();
+            fila[10] = pedidosCompras.getComprado();
+            fila[11] = pedidosCompras.getValor();
             if (pedidosCompras.getObservacion() == null) {
                 pedidosCompras.setObservacion("");
             }
-            fila[11] = pedidosCompras.getObservacion();
+            fila[12] = pedidosCompras.getObservacion();
             
 
             this.model.addRow(fila);

@@ -171,4 +171,23 @@ public class PedidosDao {
 
         return resultList;
     }
+
+    public List<PedidoDto> listPedidosComprasOk() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
+                + "FROM Pedidos p "
+                + "LEFT JOIN Ot o ON p.ot = o.ot "
+                + "WHERE p.operacion LIKE 'Compras%' and p.comprado = TRUE "
+                + "ORDER BY p.fecha DESC";
+
+        TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
+        List<PedidoDto> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
+    }
 }

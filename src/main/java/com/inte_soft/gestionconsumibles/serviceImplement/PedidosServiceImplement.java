@@ -64,4 +64,10 @@ public class PedidosServiceImplement implements  PedidosServices{
         return pedidosDao.findById(i);
     }
 
+    @Override
+    public List<PedidoDto> listPedidosComprasOk() {
+        pedidosDao = new PedidosDao();
+        return pedidosDao.listPedidosComprasOk();
+    }
+
 }
