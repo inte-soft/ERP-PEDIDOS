@@ -106,6 +106,7 @@ public class PedidoConsumiblesDao {
                     dto.setUnidad(pc.getUnidad());
                     dto.setCantidad(pc.getCantidad());
                     dto.setValor(pc.getValor());
+                    dto.setObservacion(pc.getObservacion());
                     dto.setMinimo(0);
                     dto.setMaximo(0);
                     pedidoConsumiblesDtoList.add(dto);
