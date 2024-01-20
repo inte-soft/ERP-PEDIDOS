@@ -186,11 +186,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto", "Area de Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -495,11 +495,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto", "Area de Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -847,7 +847,10 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     pedidos.getOt(),
                     pedidos.getFecha(),
                     pedidos.getPersona(),
+                    pedidos.getOperacion(),
+                    pedidos.isVisto(),
                     pedidos.getTipoPedido()
+                
                 };
                 this.model3.addRow(rowData);
             }
@@ -976,7 +979,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 pedidos.getFecha(),
                 pedidos.getPersona(),
                 pedidos.getOperacion(),
-                pedidos.isVisto()
+                pedidos.isVisto(),
+                pedidos.getTipoPedido()
             };
             model.addRow(rowData);
 
