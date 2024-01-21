@@ -52,7 +52,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         this.pedidosEspeciales = pedidosEspeciales;
         // validar si  es comprado o no y deshabilitar edicion para todas la columnas de la tabla
         if(tipo == "comprado"){
-            
+
             this.tbListadoConsumibles.setEnabled(false);
             this.jButton2.setEnabled(false);
         }
@@ -340,7 +340,11 @@ public class GestionarPedidos extends javax.swing.JDialog {
             fila[6] = pedidosCompras.getMarca();
             fila[7] = pedidosCompras.getUnidad();
             fila[8] = pedidosCompras.getCantidad();
+            if(pedidosCompras.getFechaCompra()== null){
+                fila[9] ="";
+            }else {
             fila[9] = pedidosCompras.getFechaCompra().toString();
+            }
             fila[10] = pedidosCompras.getComprado();
             fila[11] = pedidosCompras.getValor();
             if (pedidosCompras.getObservacion() == null) {

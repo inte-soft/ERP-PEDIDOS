@@ -331,7 +331,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
 
     private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
         Date fecha = new Date();
-        String header = "OT: " + this.txtOt.getText() +  "  -  "+ this.item+ "    " + fecha;
+        String header = "OT: " + this.txtOt.getText() +  "  -  "+ this.item.getText() + "    " + fecha;
         String footer = "Elabora: " + this.usuarios.getNombres() + " " + this.usuarios.getApellidos();
         JTablePrinter jTablePrinter = new JTablePrinter();
         jTablePrinter.printTable(this.jTable1, header, footer);
