@@ -215,7 +215,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
                 if(flag){
                     continue;
                 }
-                if ((Boolean) this.tbListadoConsumibles.getValueAt(i, 9)) {
+                if ((Boolean) this.tbListadoConsumibles.getValueAt(i, 10)) {
                     // se crea el objeto pedido compra
                     PedidosCompras pedidosCompras = new PedidosCompras();
                     pedidosCompras.setId(i);
@@ -228,15 +228,15 @@ public class GestionarPedidos extends javax.swing.JDialog {
                     pedidosCompras.setMarca(this.tbListadoConsumibles.getValueAt(i, 6).toString());
                     pedidosCompras.setUnidad(this.tbListadoConsumibles.getValueAt(i, 7).toString());
                     pedidosCompras.setCantidad((Float) (this.tbListadoConsumibles.getValueAt(i, 8)));
-                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 9));
-                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 10));
+                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 10));
+                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 11));
 
                     pedidosCompras.setPedido(this.pedidos);
                     pedidosCompras.setFechaCompra(new Date());
                     pedidosCompras.setComprador(this.usuarios.getNombres()+" "+this.usuarios.getApellidos());
                     String observacion = "";
-                    if (!this.tbListadoConsumibles.getValueAt(i, 11).equals(null) ) {
-                        observacion = this.tbListadoConsumibles.getValueAt(i, 11).toString();
+                    if (!this.tbListadoConsumibles.getValueAt(i, 12).equals(null) ) {
+                        observacion = this.tbListadoConsumibles.getValueAt(i, 12).toString();
                     }
                     pedidosCompras.setObservacion(observacion);
                     // se llama al metodo para guardar el pedido
@@ -255,14 +255,14 @@ public class GestionarPedidos extends javax.swing.JDialog {
                     pedidosCompras.setMarca(this.tbListadoConsumibles.getValueAt(i, 6).toString());
                     pedidosCompras.setUnidad(this.tbListadoConsumibles.getValueAt(i, 7).toString());
                     pedidosCompras.setCantidad((Float) (this.tbListadoConsumibles.getValueAt(i, 8)));
-                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 9));
-                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 10));
+                    pedidosCompras.setComprado((Boolean) this.tbListadoConsumibles.getValueAt(i, 10));
+                    pedidosCompras.setValor((Double)this.tbListadoConsumibles.getValueAt(i, 11));
 
                     pedidosCompras.setPedido(this.pedidos);
                     pedidosCompras.setFechaCompra(new Date());
                     String observacion = "";
-                    if (!this.tbListadoConsumibles.getValueAt(i, 11).equals(null) ) {
-                        observacion = this.tbListadoConsumibles.getValueAt(i, 11).toString();
+                    if (!this.tbListadoConsumibles.getValueAt(i, 12).equals(null) ) {
+                        observacion = this.tbListadoConsumibles.getValueAt(i, 12).toString();
                     }
                     pedidosCompras.setObservacion(observacion);
                     // se llama al metodo para guardar el pedido
