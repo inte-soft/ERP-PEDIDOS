@@ -99,7 +99,39 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(8).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(900);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(900);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(300);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(300);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(500);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(500);
+            jTable1.getColumnModel().getColumn(6).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(500);
+            jTable1.getColumnModel().getColumn(6).setMaxWidth(500);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(8).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(8).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(9).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(9).setMaxWidth(200);
+            jTable1.getColumnModel().getColumn(10).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(10).setMaxWidth(200);
         }
 
         lbOt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -175,7 +207,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                         .addComponent(jButton2)
                         .addGap(42, 42, 42)
                         .addComponent(Imprimir)))
-                .addGap(29, 214, Short.MAX_VALUE))
+                .addGap(29, 753, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

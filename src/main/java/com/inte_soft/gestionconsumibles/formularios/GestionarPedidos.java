@@ -108,30 +108,45 @@ public class GestionarPedidos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbListadoConsumibles);
         if (tbListadoConsumibles.getColumnModel().getColumnCount() > 0) {
-            tbListadoConsumibles.getColumnModel().getColumn(0).setMinWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setMinWidth(50);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setMaxWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(1).setMinWidth(50);
-            tbListadoConsumibles.getColumnModel().getColumn(1).setMaxWidth(150);
-            tbListadoConsumibles.getColumnModel().getColumn(2).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(1).setMaxWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setMinWidth(50);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(120);
             tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(1200);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setPreferredWidth(900);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(900);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(4).setPreferredWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(5).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(600);
+            tbListadoConsumibles.getColumnModel().getColumn(5).setPreferredWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(6).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(6).setPreferredWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(7).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setPreferredWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(8).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setPreferredWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(9).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(9).setPreferredWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(9).setMaxWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(0);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(12).setMinWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(12).setPreferredWidth(800);
+            tbListadoConsumibles.getColumnModel().getColumn(12).setMaxWidth(800);
         }
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -159,7 +174,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1220, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1506, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
