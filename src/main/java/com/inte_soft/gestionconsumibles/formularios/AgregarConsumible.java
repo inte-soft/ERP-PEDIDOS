@@ -165,9 +165,9 @@ public class AgregarConsumible extends javax.swing.JDialog {
                         model.getValueAt(0, 0),
                         master.getCodigo(),
                         master.getDescripcion(),
-                        master.getMarca(),
                         master.getTipo(),
                         master.getReferencia(),
+                        master.getMarca(),
                         master.getUnidad(),
                     };
             model.addRow(rowData);

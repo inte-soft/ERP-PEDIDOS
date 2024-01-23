@@ -169,9 +169,9 @@ public class Consumibles extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(200);
             tbListadoConsumibles.getColumnModel().getColumn(3).setPreferredWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(4).setPreferredWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(4).setPreferredWidth(350);
+            tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(350);
             tbListadoConsumibles.getColumnModel().getColumn(5).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(5).setPreferredWidth(500);
             tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(500);
@@ -232,7 +232,7 @@ public class Consumibles extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1516, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1630, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()

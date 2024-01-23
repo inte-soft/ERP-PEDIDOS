@@ -141,9 +141,9 @@ public class GestionarPedidos extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(0);
+            tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(0);
             tbListadoConsumibles.getColumnModel().getColumn(12).setMinWidth(200);
             tbListadoConsumibles.getColumnModel().getColumn(12).setPreferredWidth(800);
             tbListadoConsumibles.getColumnModel().getColumn(12).setMaxWidth(800);
