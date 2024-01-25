@@ -66,4 +66,16 @@ public class OtDao {
         entityManager.close();
         return otOptional;
     }
+
+    public void updateOtAlistado(List<Ot> listOt) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        for (Ot ot : listOt) {
+            entityManager.merge(ot);
+        }
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
 }

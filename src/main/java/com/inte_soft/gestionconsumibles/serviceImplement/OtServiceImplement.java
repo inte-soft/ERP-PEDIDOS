@@ -37,4 +37,10 @@ public class OtServiceImplement implements OtService {
         OtDao otDao = new OtDao();
         otDao.updateOt(ot);
     }
+
+    @Override
+    public void updateOtAlistado(List<Ot> listOt) {
+        OtDao otDao = new OtDao();
+        otDao.updateOtAlistado(listOt);
+    }
 }

@@ -10,4 +10,6 @@ public interface OtService {
     void createOt(Ot ot);
 
     void updateOt(Ot ot);
+
+    void updateOtAlistado(List<Ot> listOt);
 }

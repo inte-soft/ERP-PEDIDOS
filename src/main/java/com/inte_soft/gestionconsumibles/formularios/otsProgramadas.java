@@ -192,12 +192,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                     return;
                 }else{
                     contador++;
-                this.otController.updateOt(
-                        new Ot(
-                                (Integer) this.jTable1.getValueAt(i, 0),
-                                (Integer) this.jTable1.getValueAt(i, 1),
-                                (java.util.Date) this.jTable1.getValueAt(i, 2),
-                                (Boolean) this.jTable1.getValueAt(i, 3)));
+                    Ot ot = new Ot();
+                    ot.setIdOt((Integer) this.jTable1.getValueAt(i, 0));
+                    ot.setOt((Integer) this.jTable1.getValueAt(i, 1));
+                    ot.setFechaAlmacen((java.util.Date) this.jTable1.getValueAt(i, 2));
+                    ot.setTerminado((Boolean) this.jTable1.getValueAt(i, 3));
+
+                this.otController.updateOt(ot);
             }
             }
             

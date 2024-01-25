@@ -167,14 +167,14 @@ public class Consumibles extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(2).setPreferredWidth(900);
             tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(900);
             tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(200);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setPreferredWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(200);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(4).setPreferredWidth(350);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMaxWidth(350);
             tbListadoConsumibles.getColumnModel().getColumn(5).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(5).setPreferredWidth(500);
-            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(500);
+            tbListadoConsumibles.getColumnModel().getColumn(5).setPreferredWidth(200);
+            tbListadoConsumibles.getColumnModel().getColumn(5).setMaxWidth(200);
             tbListadoConsumibles.getColumnModel().getColumn(6).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(6).setPreferredWidth(200);
             tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(200);
@@ -228,35 +228,32 @@ public class Consumibles extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1630, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBImprimir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(640, 640, 640))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBImprimir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

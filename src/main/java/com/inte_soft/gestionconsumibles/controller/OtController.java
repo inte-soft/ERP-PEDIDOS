@@ -28,4 +28,8 @@ public class OtController {
         otService.updateOt(ot);
 
     }
+
+    public void updateOtAlistado(List<Ot> listOt) {
+        otService.updateOtAlistado(listOt);
+    }
 }
