@@ -954,9 +954,12 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             int row = this.jTableProgramado.getSelectedRow();
             int ot = Integer.parseInt(this.jTableProgramado.getValueAt(row, 1).toString());
             List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.consumiblesPedidosSearcOtArea(ot, "CONSUMIBLES ELECTRICOS");
-            Consumibles consumibles = new Consumibles("VISUALIZACION",
+            /*Consumibles consumibles = new Consumibles("VISUALIZACION",
                     listConsumiblesDtoOt, this.usuario, ot + "");
-            consumibles.setVisible(true);
+            consumibles.setVisible(true);*/
+            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario);
+            listadoPendiente.setVisible(Boolean.TRUE);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }

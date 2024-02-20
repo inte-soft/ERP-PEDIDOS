@@ -4,17 +4,39 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.ModelarTabla;
+
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 /**
  *
  * @author Usuario
  */
-public class listadoPendiente extends javax.swing.JInternalFrame {
+public class ListadoPendiente extends javax.swing.JDialog {
 
+    private List<ConsumiblesDtoOt> consumiblesDtoOts;
+    private Usuarios usuarios;
+    private DefaultTableModel model;
+    private ModelarTabla modelarTabla;
+    
     /**
      * Creates new form listadoPendiente
      */
-    public listadoPendiente() {
+    public ListadoPendiente() {
         initComponents();
+    }
+    
+    public ListadoPendiente(List<ConsumiblesDtoOt> listConsumiblesDtoOt, Usuarios usuarios){
+        initComponents();
+        this.consumiblesDtoOts = listConsumiblesDtoOt;
+        this.usuarios = usuarios;
+        modelarTabla = new ModelarTabla(tbListadoConsumibles);
+        model = modelarTabla.getModel();
+        loadConsumibles();
+
     }
 
     /**
@@ -33,8 +55,7 @@ public class listadoPendiente extends javax.swing.JInternalFrame {
         jTextSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        setClosable(true);
-        setIconifiable(true);
+
         setTitle("Consumibles");
         setVisible(true);
 
@@ -112,12 +133,32 @@ public class listadoPendiente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void loadConsumibles(){
+        model.setRowCount(0);
+        for (ConsumiblesDtoOt consumiblesDtoOt : consumiblesDtoOts) {
+            model.addRow(new Object[]{
+                consumiblesDtoOt.getItem(),
+                consumiblesDtoOt.getCodigo(),
+                consumiblesDtoOt.getDescripcion(),
+                consumiblesDtoOt.getTipo(),
+                consumiblesDtoOt.getReferencia(),
+                consumiblesDtoOt.getMarca(),
+                consumiblesDtoOt.getUnidad(),
+                consumiblesDtoOt.getCantidad(),
+                consumiblesDtoOt.getMax(),
+                consumiblesDtoOt.getMin(),
+                consumiblesDtoOt.getAlistado(),
+                consumiblesDtoOt.getCantidad() - consumiblesDtoOt.getAlistado(),
+            });
+
+        }
+    }
     private void jTextSearchItemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchItemKeyReleased
-        filterItem();
+        
     }//GEN-LAST:event_jTextSearchItemKeyReleased
 
     private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
-        filter();
+        
     }//GEN-LAST:event_jTextSearchKeyReleased
 
 

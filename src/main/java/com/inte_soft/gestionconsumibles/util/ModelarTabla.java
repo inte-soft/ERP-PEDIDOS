@@ -18,6 +18,11 @@ public class ModelarTabla {
     private DefaultTableModel model;
     private TableRowSorter<DefaultTableModel> sorter;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param table
+     */
     public ModelarTabla(JTable table) {
         this.model = (DefaultTableModel) table.getModel();
         table.setModel(model);

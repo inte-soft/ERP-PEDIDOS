@@ -53,6 +53,9 @@ public class PedidoConsumibles implements java.io.Serializable {
     private double valor;
     @Column(name = "REVISADO")
     private Boolean revisado;
+
+    @Column(name = "ALISTADO")
+    private double alistado;
     @Column(name = "OBSERVACION")
     private String observacion;
 
@@ -60,7 +63,7 @@ public class PedidoConsumibles implements java.io.Serializable {
     public PedidoConsumibles() {
     }
 
-    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean revisado, String observacion) {
+    public PedidoConsumibles(BigInteger idPedidoConsumibles, Pedidos pedidos, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, float cantidad, double valor, Boolean revisado, double alistado, String observacion) {
         this.idPedidoConsumibles = idPedidoConsumibles;
         this.pedidos = pedidos;
         this.item = item;
@@ -73,6 +76,7 @@ public class PedidoConsumibles implements java.io.Serializable {
         this.cantidad = cantidad;
         this.valor = valor;
         this.revisado = revisado;
+        this.alistado = alistado;
         this.observacion = observacion;
     }
 
@@ -183,7 +187,16 @@ public class PedidoConsumibles implements java.io.Serializable {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
-   
+
+    public double getAlistado() {
+        return alistado;
+    }
+
+    public void setAlistado(double alistado) {
+        this.alistado = alistado;
+    }
+
+
     
     
     

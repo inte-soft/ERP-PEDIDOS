@@ -83,7 +83,13 @@ public class PedidoConsumiblesController {
         pedidoConsumiblesServices.applycheck(listConsumiblesDtoRev);
     }
 
-
+    /**
+     * Metodo que retorna los consumibles que se han pedido en una OT
+     *
+     * @param ot, numero de la OT
+     * @param area, area del consumible
+     * @return
+     */
     public List<ConsumiblesDtoOt> consumiblesPedidosSearcOtArea(int ot, String area) {
 
         return pedidoConsumiblesServices.consumiblesPedidosSearchOtArea(ot, area);

@@ -18,11 +18,15 @@ public class ConsumiblesDtoOt {
     private String marca;
     private String unidad;
     private double cantidad;
+    private double max;
+    private double min;
+    private double alistado;
+    private String observacion;
 
     public ConsumiblesDtoOt() {
     }
 
-    public ConsumiblesDtoOt(int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad) {
+    public ConsumiblesDtoOt(int ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado, String observacion) {
         this.ot = ot;
         this.item = item;
         this.codigo = codigo;
@@ -32,6 +36,10 @@ public class ConsumiblesDtoOt {
         this.marca = marca;
         this.unidad = unidad;
         this.cantidad = cantidad;
+        this.max = max;
+        this.min = min;
+        this.alistado = alistado;
+        this.observacion = observacion;
     }
 
     public int getOt() {
@@ -105,6 +113,36 @@ public class ConsumiblesDtoOt {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
+
+    public double getMax() {
+        return max;
+    }
+
+    public void setMax(double max) {
+        this.max = max;
+    }
+
+    public double getMin() {
+        return min;
+    }
+
+    public void setMin(double min) {
+        this.min = min;
+    }
+
+    public double getAlistado() {
+        return alistado;
+    }
+
+    public void setAlistado(double alistado) {
+        this.alistado = alistado;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
 }
