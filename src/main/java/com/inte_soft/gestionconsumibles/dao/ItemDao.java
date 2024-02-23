@@ -60,4 +60,11 @@ entityManager.getTransaction().begin();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
+
+    public List<Item> getItemsByOt(Ot ot) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Item> items = entityManager.createQuery("SELECT i FROM Item i WHERE i.ot = :ot", Item.class).setParameter("ot", ot).getResultList();
+        entityManager.close();
+        return items;
+    }
 }
