@@ -20,8 +20,8 @@ public class OtController {
 
     }
 
-    public void createOt(Ot ot) {
-        otService.createOt(ot);
+    public Ot createOt(Ot ot) {
+        return otService.createOt(ot);
     }
 
     public void updateOt(Ot ot) {

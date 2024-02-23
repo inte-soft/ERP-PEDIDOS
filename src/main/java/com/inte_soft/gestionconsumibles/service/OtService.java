@@ -7,7 +7,7 @@ import java.util.List;
 public interface OtService {
     List<Ot> getOts();
 
-    void createOt(Ot ot);
+    Ot createOt(Ot ot);
 
     void updateOt(Ot ot);
 

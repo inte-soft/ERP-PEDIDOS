@@ -16,15 +16,14 @@ public class OtServiceImplement implements OtService {
     }
 
     @Override
-    public void createOt(Ot ot) {
+    public Ot createOt(Ot ot) {
         //validar si existe la ot
         Optional<Ot> otOptional = getByOt(ot.getOt());
         if (otOptional.isPresent()) {
-            JOptionPane.showMessageDialog(null, "La OT ya existe");
-            return;
+            return otOptional.get();
         }
         OtDao otDao = new OtDao();
-        otDao.createOt(ot);
+        return otDao.createOt(ot);
     }
 
     private Optional<Ot> getByOt(Integer ot) {

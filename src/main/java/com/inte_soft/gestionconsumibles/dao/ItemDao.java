@@ -1,5 +1,6 @@
 package com.inte_soft.gestionconsumibles.dao;
 
+import com.inte_soft.gestionconsumibles.entity.Item;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 
 import javax.persistence.EntityManager;
@@ -9,12 +10,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-public class OtDao {
+public class ItemDao {
 
     @PersistenceContext
     private final EntityManagerFactory entityManagerFactory;
 
-    public OtDao() {
+
+    public ItemDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
 
@@ -22,60 +24,38 @@ public class OtDao {
         entityManagerFactory.close();
     }
 
+    public void createItem(Item item) {
 
-    public List<Ot> getOts() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+entityManager.getTransaction().begin();
 
-        List<Ot> ots = entityManager.createQuery(
-                "SELECT o FROM Ot o WHERE o.terminado = FALSE ORDER BY o.fechaAlmacen ASC",
-                Ot.class).getResultList();
+        entityManager.persist(item);
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        return ots;
 
     }
 
-    public Ot createOt(Ot ot) {
+    public List<Item> getItems() {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        entityManager.persist(ot);
-
-        entityManager.getTransaction().commit();
+        List<Item> items = entityManager.createQuery("SELECT i FROM Item i", Item.class).getResultList();
         entityManager.close();
-        return ot;
+        return items;
     }
 
-    public void updateOt(Ot ot) {
+    public Optional<Item> getItemByOtAndItem(Ot ot, Integer item) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        entityManager.merge(ot);
-        entityManager.getTransaction().commit();
+        Optional<Item> itemOptional = Optional.ofNullable(entityManager.find(Item.class, item));
         entityManager.close();
+        return itemOptional;
     }
 
-    public Optional<Ot> getByOt(Integer ot) {
+    public void updateItem(Item item) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Optional<Ot> otOptional = Optional.ofNullable(entityManager.find(Ot.class, ot));
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return otOptional;
-    }
-
-    public void updateOtAlistado(List<Ot> listOt) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        for (Ot ot : listOt) {
-            entityManager.merge(ot);
-        }
+        entityManager.merge(item);
 
         entityManager.getTransaction().commit();
         entityManager.close();

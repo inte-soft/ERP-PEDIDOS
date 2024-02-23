@@ -4,12 +4,15 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.ItemController;
 import com.inte_soft.gestionconsumibles.controller.OtController;
+import com.inte_soft.gestionconsumibles.entity.Item;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +24,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     private DefaultTableModel model;
     private OtController otController;
     private WindowSingleton windowSingleton;
+    private ItemController itemController;
+    private List<Item> items = new ArrayList<>();
     /**
      * Creates new form otsProgramadas
      */
@@ -28,6 +33,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         initComponents();
         this.windowSingleton = windowSingleton;
         this.otController = new OtController();
+        this.itemController = new ItemController();
         this.model = (DefaultTableModel) this.jTable1.getModel();
         loadOts();
 
@@ -54,6 +60,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -113,6 +121,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Item");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,36 +130,47 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)))
-                .addGap(14, 14, 14)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1)
+                                .addComponent(jButton2)))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -164,21 +185,36 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(this.jTextField1.getText().isEmpty() || this.jDateChooser3.getDate() == null){
-            JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");
-        }else if(this.jTextField1.getText().length() != 5){
-            JOptionPane.showMessageDialog(null, "El numero de OT debe tener 5 digitos");
-        }else {
 
-            this.otController.createOt(
+        if(this.jTextField1.getText().isEmpty() || this.jDateChooser3.getDate() == null || this.jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");
+        }else if(this.jTextField1.getText().length() != 5) {
+            JOptionPane.showMessageDialog(null, "El numero de OT debe tener 5 digitos");
+
+        }else  {
+            Integer item = null;
+            try {
+                item = Integer.parseInt(this.jTextField2.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El item debe ser numerico");
+                return;
+            }
+
+            Ot ot = this.otController.createOt(
                     new Ot(
                             Integer.parseInt(this.jTextField1.getText()),
                             this.jDateChooser3.getDate(),
+                            false,
                             false));
+            Item item1 = new Item();
+            item1.setItem(item);
+            item1.setOt(ot);
+            this.itemController.createItem(item1);
 
             loadOts();
             this.jTextField1.setText("");
             this.jDateChooser3.setDate(null);
+            this.jTextField2.setText("");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -192,13 +228,14 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                     return;
                 }else{
                     contador++;
-                    Ot ot = new Ot();
-                    ot.setIdOt((Integer) this.jTable1.getValueAt(i, 0));
-                    ot.setOt((Integer) this.jTable1.getValueAt(i, 1));
-                    ot.setFechaAlmacen((java.util.Date) this.jTable1.getValueAt(i, 2));
-                    ot.setTerminado((Boolean) this.jTable1.getValueAt(i, 3));
-
-                this.otController.updateOt(ot);
+                    Item item = new Item();
+                    int finalI = i;
+                    item.setOt(items.stream()
+                            .filter(x -> x.getOt().getOt()
+                                    .equals(this.jTable1.getValueAt(finalI, 1))).findFirst().get().getOt());
+                    item.setItem(Integer.parseInt(this.jTable1.getValueAt(i, 2).toString()));
+                    item.setCerrado(true);
+                    this.itemController.updateItem(item);
             }
             }
             
@@ -210,15 +247,16 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void loadOts(){
-        List<Ot> ots = otController.getOts();
-        model.setRowCount(0);
-        for (Ot ot : ots) {
-            model.addRow(
-                    new Object[]{
-                            ot.getIdOt(),
-                            ot.getOt(),
-                            ot.getFechaAlmacen(),
-                            ot.getTerminado()});
+        items = this.itemController.getItems();
+        this.model.setRowCount(0);
+        for(Item ot : items){
+            this.model.addRow(new Object[]{
+                ot.getOt().getIdOt(),
+                ot.getOt().getOt(),
+                ot.getItem(),
+                ot.getOt().getFechaAlmacen(),
+                ot.getOt().getTerminado()
+            });
         }
     }
 
@@ -232,8 +270,10 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
