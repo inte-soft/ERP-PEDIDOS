@@ -8,7 +8,7 @@ import java.util.Date;
 public class PedidoDto {
 
     private int idPedido;
-    private int ot;
+    private String ot;
     private String persona;
     private AreaCompania area;
     private Date fecha;
@@ -22,7 +22,7 @@ public class PedidoDto {
     public PedidoDto() {
     }
 
-    public PedidoDto(int idPedido, int ot, String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, Date fechaAlmacen, boolean comprado) {
+    public PedidoDto(int idPedido, String ot, String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, Date fechaAlmacen, boolean comprado) {
         this.idPedido = idPedido;
         this.ot = ot;
         this.persona = persona;
@@ -47,11 +47,11 @@ public class PedidoDto {
         this.idPedido = idPedido;
     }
 
-    public int getOt() {
+    public String getOt() {
         return ot;
     }
 
-    public void setOt(int ot) {
+    public void setOt(String ot) {
         this.ot = ot;
     }
 

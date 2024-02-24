@@ -4,7 +4,9 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
+import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 
@@ -22,6 +24,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
     private DefaultTableModel model;
     private ModelarTabla modelarTabla;
     private List<String> listItem;
+    private PedidoConsumiblesController pedidoConsumiblesController;
     
     /**
      * Creates new form listadoPendiente
@@ -30,9 +33,10 @@ public class ListadoPendiente extends javax.swing.JDialog {
         initComponents();
     }
     
-    public ListadoPendiente(List<ConsumiblesDtoOt> listConsumiblesDtoOt, Usuarios usuarios, List<String> listItem){
+    public ListadoPendiente(Usuarios usuarios, List<String> listItem, String area, Ot ot){
+        this.pedidoConsumiblesController = new PedidoConsumiblesController();
         initComponents();
-        this.consumiblesDtoOts = listConsumiblesDtoOt;
+        this.consumiblesDtoOts = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem,area );;
         this.usuarios = usuarios;
         modelarTabla = new ModelarTabla(tbListadoConsumibles);
         model = modelarTabla.getModel();
@@ -155,7 +159,8 @@ public class ListadoPendiente extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(tbListadoConsumibles.getSelectedRow()>0){
             // buscar consumibles filtrado por los item listitem
-            
+
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

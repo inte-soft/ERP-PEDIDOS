@@ -119,7 +119,7 @@ public class PedidosDao {
         String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, i.entrega, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "LEFT JOIN Item i ON p.ot = i.ot "
+                + "LEFT JOIN Item i ON o.id = i.ot "
                 + "WHERE (p.ot NOT IN (SELECT o.ot FROM Ot o WHERE o.terminado = TRUE )) AND p.operacion LIKE '%Adicional%' AND p.comprado = TRUE "
                 + "ORDER BY i.entrega DESC";
         
@@ -158,11 +158,12 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, i.entrega, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
+                + "LEFT JOIN Item i ON o.id = i.ot "
                 + "WHERE p.operacion LIKE 'Compras%' and p.comprado = FALSE "
-                + "ORDER BY p.fecha DESC";
+                + "ORDER BY i.entrega DESC";
 
         TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
         List<PedidoDto> resultList = query.getResultList();
@@ -177,9 +178,10 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, o.fechaAlmacen, p.comprado) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, i.entrega, p.comprado) "
                 + "FROM Pedidos p "
                 + "LEFT JOIN Ot o ON p.ot = o.ot "
+                + "LEFT JOIN Item i ON o.id = i.ot "
                 + "WHERE p.operacion LIKE 'Compras%' and p.comprado = TRUE "
                 + "ORDER BY p.fecha DESC";
 

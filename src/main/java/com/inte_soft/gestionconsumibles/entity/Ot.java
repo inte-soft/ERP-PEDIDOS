@@ -9,8 +9,8 @@ public class Ot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_OT")
-    private Integer idOt;
+    @Column(name = "ID")
+    private Integer id;
     @Column(name = "OT")
     private String ot;
 
@@ -23,8 +23,8 @@ public class Ot {
     public Ot() {
     }
 
-    public Ot(Integer idOt, String ot, Boolean terminado, Boolean alistado) {
-        this.idOt = idOt;
+    public Ot(Integer id, String ot, Boolean terminado, Boolean alistado) {
+        this.id = id;
         this.ot = ot;
         this.terminado = terminado;
         this.alistado = alistado;
@@ -42,11 +42,11 @@ public class Ot {
     }
 
     public Integer getIdOt() {
-        return idOt;
+        return id;
     }
 
-    public void setIdOt(Integer idOt) {
-        this.idOt = idOt;
+    public void setIdOt(Integer id) {
+        this.id = id;
     }
 
     public String getOt() {

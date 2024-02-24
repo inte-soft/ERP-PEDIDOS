@@ -29,7 +29,7 @@ public class Pedidos  implements java.io.Serializable{
     @Column(name = "ID_PEDIDO")
     private int idPedido;
     @Column(name = "OT")
-    private int ot;
+    private String ot;
     @Column(name = "PERSONA_ELABORA")
     private String persona;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,7 +55,7 @@ public class Pedidos  implements java.io.Serializable{
     public Pedidos() {
     }
 
-    public Pedidos(int ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, boolean comprado) {
+    public Pedidos(String ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, boolean comprado) {
         this.persona = persona;
         this.ot = ot;
         this.area = area;
@@ -75,11 +75,11 @@ public class Pedidos  implements java.io.Serializable{
         this.idPedido = idPedido;
     }
 
-    public int getOt() {
+    public String getOt() {
         return ot;
     }
 
-    public void setOt(int ot) {
+    public void setOt(String ot) {
         this.ot = ot;
     }
 

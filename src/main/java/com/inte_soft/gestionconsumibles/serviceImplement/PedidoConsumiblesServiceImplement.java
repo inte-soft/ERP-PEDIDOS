@@ -30,7 +30,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         PedidosDao pedidosDao = new PedidosDao();
          if(!pedidoConsumibleses.isEmpty()){
         Pedidos pedidos = new Pedidos();
-        pedidos.setOt(Integer.parseInt(ot));
+        pedidos.setOt((ot));
         pedidos.setPersona(persona);
         pedidos.setArea(area);
         pedidos.setOperacion(Operacion);
@@ -70,7 +70,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
         if(!listPedidosCompras.isEmpty()){
             Pedidos pedidosCom = new Pedidos();
-            pedidosCom.setOt(Integer.parseInt(ot));
+            pedidosCom.setOt((ot));
             pedidosCom.setPersona(persona);
             pedidosCom.setArea(area);
             pedidosCom.setOperacion(typeOperacionCompras);
