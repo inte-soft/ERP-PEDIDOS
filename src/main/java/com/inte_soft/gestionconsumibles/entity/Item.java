@@ -19,14 +19,20 @@ public class Item {
 
     @Column(name = "ENTREGA")
     private Date entrega;
+
+    @Column(name= "ALISTADO")
+    private Boolean alistado;
+
     public Item() {
     }
 
-    public Item(Integer item, Ot ot, Boolean cerrado, Date entrega) {
+    public Item(Integer id, Integer item, Ot ot, Boolean cerrado, Date entrega, Boolean alistado) {
+        this.id = id;
         this.item = item;
         this.ot = ot;
         this.cerrado = cerrado;
         this.entrega = entrega;
+        this.alistado = alistado;
     }
 
     public Integer getId() {
@@ -67,5 +73,13 @@ public class Item {
 
     public void setEntrega(Date entrega) {
         this.entrega = entrega;
+    }
+
+    public Boolean getAlistado() {
+        return alistado;
+    }
+
+    public void setAlistado(Boolean alistado) {
+        this.alistado = alistado;
     }
 }

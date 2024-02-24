@@ -137,7 +137,6 @@ public class ListadoPendiente extends javax.swing.JDialog {
         model.setRowCount(0);
         for (ConsumiblesDtoOt consumiblesDtoOt : consumiblesDtoOts) {
             model.addRow(new Object[]{
-                consumiblesDtoOt.getItem(),
                 consumiblesDtoOt.getCodigo(),
                 consumiblesDtoOt.getDescripcion(),
                 consumiblesDtoOt.getTipo(),

@@ -4,14 +4,12 @@
  */
 package com.inte_soft.gestionconsumibles.formularios;
 
+import com.inte_soft.gestionconsumibles.controller.ItemController;
 import com.inte_soft.gestionconsumibles.controller.OtController;
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.controller.PedidosController;
 import com.inte_soft.gestionconsumibles.dto.*;
-import com.inte_soft.gestionconsumibles.entity.Ot;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Pedidos;
-import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.util.*;
 
 import java.awt.Color;
@@ -54,8 +52,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private ModelarTabla modelarTabla;
     private PedidoConsumiblesController pedidoConsumiblesController;
     private WindowSingleton windowSingleton;
-
+    private List<Item> listItems;
     private OtController otController;
+    private ItemController itemController;
 
     public PedidosAlmacen(String departamento, Usuarios usuario, WindowSingleton windowSingleton) {
         initComponents();
@@ -71,6 +70,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
         }
         this.otController = new OtController();
+        this.itemController = new ItemController();
         this.usuario = usuario;
         this.model1 = modelarTabla(jTable1);
         this.modelarTabla = new ModelarTabla(jTable2);
@@ -94,22 +94,24 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
     public void verProgramado() {
         this.model6.setRowCount(0);
-        List<Ot> listOt = this.otController.getOts();
-        for (Ot ot : listOt) {
+        listItems = this.itemController.getItems();
+        for (Item ot : listItems) {
             if (ot.getAlistado() == false) {
                 Object[] rowData = {
-                    ot.getIdOt(),
-                    ot.getOt(),
-                    ot.getTerminado(),
-                    ot.getAlistado()
+                    ot.getId(),
+                    ot.getOt().getOt(),
+                    ot.getItem(),
+                    ot.getEntrega(),
+                    ot.getCerrado()
                 };
                 this.model6.addRow(rowData);
             } else {
                 Object[] rowData = {
-                    ot.getIdOt(),
-                    ot.getOt(),
-                    ot.getTerminado(),
-                    ot.getAlistado()
+                    ot.getId(),
+                    ot.getOt().getIdOt(),
+                    ot.getItem(),
+                    ot.getEntrega()
+
                 };
                 this.model5.addRow(rowData);
             }
@@ -590,14 +592,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "OT", "Fecha a Entregar", "Terminado", "Alistado"
+                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Seleccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -613,11 +615,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             jTableProgramado.getColumnModel().getColumn(0).setMinWidth(0);
             jTableProgramado.getColumnModel().getColumn(0).setPreferredWidth(0);
             jTableProgramado.getColumnModel().getColumn(0).setMaxWidth(0);
-            jTableProgramado.getColumnModel().getColumn(3).setMinWidth(0);
-            jTableProgramado.getColumnModel().getColumn(3).setPreferredWidth(0);
-            jTableProgramado.getColumnModel().getColumn(3).setMaxWidth(0);
-            jTableProgramado.getColumnModel().getColumn(4).setMinWidth(100);
-            jTableProgramado.getColumnModel().getColumn(4).setMaxWidth(300);
+            jTableProgramado.getColumnModel().getColumn(4).setMinWidth(0);
+            jTableProgramado.getColumnModel().getColumn(4).setPreferredWidth(0);
+            jTableProgramado.getColumnModel().getColumn(4).setMaxWidth(0);
+            jTableProgramado.getColumnModel().getColumn(5).setMinWidth(100);
+            jTableProgramado.getColumnModel().getColumn(5).setMaxWidth(300);
         }
 
         jButton5.setText("Electricos");
@@ -646,11 +648,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "OT", "Fecha a Entregar", "Terminado", "Alistado"
+                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Alistado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -659,12 +661,12 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(jTable5);
         if (jTable5.getColumnModel().getColumnCount() > 0) {
-            jTable5.getColumnModel().getColumn(3).setMinWidth(0);
-            jTable5.getColumnModel().getColumn(3).setPreferredWidth(0);
-            jTable5.getColumnModel().getColumn(3).setMaxWidth(0);
             jTable5.getColumnModel().getColumn(4).setMinWidth(0);
             jTable5.getColumnModel().getColumn(4).setPreferredWidth(0);
             jTable5.getColumnModel().getColumn(4).setMaxWidth(0);
+            jTable5.getColumnModel().getColumn(5).setMinWidth(0);
+            jTable5.getColumnModel().getColumn(5).setPreferredWidth(0);
+            jTable5.getColumnModel().getColumn(5).setMaxWidth(0);
         }
 
         jLabel10.setText("Pendietes por Alistar");
@@ -688,7 +690,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
@@ -708,7 +710,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(331, 331, 331)
                                 .addComponent(jLabel11)))))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -948,30 +950,78 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
+        Integer contador = 0;
+        List<String> listItem = new ArrayList<>();
+        Ot ot = new Ot();
         if (this.jTableProgramado.getSelectedRow() >= 0) {
-            int row = this.jTableProgramado.getSelectedRow();
-            int ot = Integer.parseInt(this.jTableProgramado.getValueAt(row, 1).toString());
-            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.consumiblesPedidosSearcOtArea(ot, "CONSUMIBLES ELECTRICOS");
-            /*Consumibles consumibles = new Consumibles("VISUALIZACION",
-                    listConsumiblesDtoOt, this.usuario, ot + "");
-            consumibles.setVisible(true);*/
+            for(int i = 0; i < this.jTableProgramado.getRowCount(); i++){
+                Object seleccion = this.jTableProgramado.getValueAt(i, 5);
+                Boolean cheked = true;
+                if (null == seleccion) {
+                    cheked = false;
+                }
+                if(cheked){
+                    contador++;
+                    listItem.add(getSelectedItem(
+                            Integer.parseInt(
+                                    jTableProgramado.getValueAt(i, 0)
+                                            .toString())).getItem().toString());
+                    String ot1= jTableProgramado.getValueAt(i, 1).toString();
+                    if (ot.getOt() == null || ot.getOt() == ot1) {
+                        ot = getSelectedItem(
+                                Integer.parseInt(
+                                        jTableProgramado.getValueAt(i, 0)
+                                                .toString())).getOt();
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar OTs iguales", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                }
+
+            }
+            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "ELECTRICOS");
             ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario);
             listadoPendiente.setVisible(Boolean.TRUE);
-            
         } else {
             JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+        Integer contador = 0;
+        List<String> listItem = new ArrayList<>();
+        Ot ot = new Ot();
         if (this.jTableProgramado.getSelectedRow() >= 0) {
-            int row = this.jTableProgramado.getSelectedRow();
-            int ot = Integer.parseInt(this.jTableProgramado.getValueAt(row, 1).toString());
-            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.consumiblesPedidosSearcOtArea(ot, "CONSUMIBLES MECANICOS");
-            Consumibles consumibles = new Consumibles("VISUALIZACION",
-                    listConsumiblesDtoOt, this.usuario, ot + "");
-            consumibles.setVisible(true);
+            for(int i = 0; i < this.jTableProgramado.getRowCount(); i++){
+                Object seleccion = this.jTableProgramado.getValueAt(i, 5);
+                Boolean cheked = true;
+                if (null == seleccion) {
+                    cheked = false;
+                }
+                if(cheked){
+                    contador++;
+                    listItem.add(getSelectedItem(
+                            Integer.parseInt(
+                                    jTableProgramado.getValueAt(i, 0)
+                                            .toString())).getItem().toString());
+                    String ot1= jTableProgramado.getValueAt(i, 1).toString();
+                    if (ot.getOt() == null || ot.getOt() == ot1) {
+                        ot = getSelectedItem(
+                                Integer.parseInt(
+                                        jTableProgramado.getValueAt(i, 0)
+                                                .toString())).getOt();
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar OTs iguales", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                }
+
+            }
+            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "MECANICOS");
+            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario);
+            listadoPendiente.setVisible(Boolean.TRUE);
         } else {
             JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
@@ -1151,7 +1201,13 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
         }
 
+
+
     }
+    public Item getSelectedItem(Integer id) {
+        return this.listItems.stream().filter(item -> item.getId().equals(id)).findFirst().orElse(null);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SerchROT;
     private javax.swing.JButton jBDesplegar;

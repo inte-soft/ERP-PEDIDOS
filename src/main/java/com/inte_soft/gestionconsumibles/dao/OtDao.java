@@ -28,7 +28,7 @@ public class OtDao {
         entityManager.getTransaction().begin();
 
         List<Ot> ots = entityManager.createQuery(
-                "SELECT o FROM Ot o WHERE o.terminado = FALSE ORDER BY o.fechaAlmacen ASC",
+                "SELECT o FROM Ot o WHERE o.terminado = FALSE",
                 Ot.class).getResultList();
 
         entityManager.getTransaction().commit();

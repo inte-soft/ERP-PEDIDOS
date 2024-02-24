@@ -94,4 +94,10 @@ public class PedidoConsumiblesController {
 
         return pedidoConsumiblesServices.consumiblesPedidosSearchOtArea(ot, area);
     }
+
+
+    public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
+        return pedidoConsumiblesServices.getConsumiblesByOtAndItem(ot, listItem,area);
+
+    }
 }

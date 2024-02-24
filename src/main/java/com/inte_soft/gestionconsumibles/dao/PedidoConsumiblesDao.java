@@ -390,4 +390,26 @@ public class PedidoConsumiblesDao {
 
     return resultList;
 }
+
+    public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt(p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad), AVG(COALESCE(tce.cMax, tcm.cMax)), AVG(COALESCE(tce.cMin, tcm.cMin)), SUM(pc.alistado)) "
+                + "FROM PedidoConsumibles pc "
+                + "JOIN pc.pedidos p "
+                + "LEFT JOIN TipicoConsumiblesElectricos tce ON pc.codigo = tce.master.codigo "
+                + "LEFT JOIN TipicoConsumiblesMecanicos tcm ON pc.codigo = tcm.master.codigo "
+                + "WHERE p.ot = :ot "
+                + "AND pc.item IN (:listItem) "
+                + "AND p.tipoPedido = :area "
+                + "GROUP BY p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+        TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
+        query.setParameter("ot", Integer.parseInt(ot.getOt()));
+        query.setParameter("listItem", listItem);
+        query.setParameter("area", area);
+        List<ConsumiblesDtoOt> resultList = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return resultList;
+    }
 }

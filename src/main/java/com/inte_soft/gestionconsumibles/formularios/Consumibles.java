@@ -430,7 +430,6 @@ public class Consumibles extends javax.swing.JDialog {
         DefaultTableModel model =  (DefaultTableModel) tbListadoConsumibles.getModel();
         for (ConsumiblesDtoOt consumiblesDto : listcConsumiblesDtoOts) {
             Object[] rowData  = {
-                consumiblesDto.getItem(),
                 consumiblesDto.getCodigo(),
                 consumiblesDto.getDescripcion(),
                 consumiblesDto.getTipo(),

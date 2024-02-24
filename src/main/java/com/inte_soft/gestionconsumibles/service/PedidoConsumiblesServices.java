@@ -7,10 +7,7 @@ package com.inte_soft.gestionconsumibles.service;
 
 
 import com.inte_soft.gestionconsumibles.dto.*;
-import com.inte_soft.gestionconsumibles.entity.AreaCompania;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Pedidos;
-import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
+import com.inte_soft.gestionconsumibles.entity.*;
 
 import java.util.List;
 
@@ -44,4 +41,7 @@ public interface PedidoConsumiblesServices {
  void applycheck(List<ConsumiblesDtoRev> listConsumiblesDtoRev);
 
  List<ConsumiblesDtoOt> consumiblesPedidosSearchOtArea(int ot, String area);
+
+
+ List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area);
 }

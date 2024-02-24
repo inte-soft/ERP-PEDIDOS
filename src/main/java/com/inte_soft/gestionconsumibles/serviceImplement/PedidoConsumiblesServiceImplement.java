@@ -9,10 +9,7 @@ import com.inte_soft.gestionconsumibles.dao.PedidoComprasDao;
 import com.inte_soft.gestionconsumibles.dao.PedidoConsumiblesDao;
 import com.inte_soft.gestionconsumibles.dao.PedidosDao;
 import com.inte_soft.gestionconsumibles.dto.*;
-import com.inte_soft.gestionconsumibles.entity.AreaCompania;
-import com.inte_soft.gestionconsumibles.entity.PedidoConsumibles;
-import com.inte_soft.gestionconsumibles.entity.Pedidos;
-import com.inte_soft.gestionconsumibles.entity.PedidosCompras;
+import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
 import java.util.Date;
 import java.util.List;
@@ -170,4 +167,12 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filteredSearchByOtArea(ot, area);
     }
+
+    @Override
+    public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.getConsumiblesByOtAndItem(ot, listItem, area);
+    }
+
+
 }

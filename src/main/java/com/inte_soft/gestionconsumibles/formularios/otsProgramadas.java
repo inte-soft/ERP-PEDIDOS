@@ -209,6 +209,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             item1.setItem(item);
             item1.setOt(ot);
             item1.setCerrado(false);
+            item1.setAlistado(false);
             item1.setEntrega(this.jDateChooser3.getDate());
             this.itemController.createItem(item1);
 
