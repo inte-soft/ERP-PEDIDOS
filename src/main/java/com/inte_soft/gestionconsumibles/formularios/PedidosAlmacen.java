@@ -100,7 +100,6 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 Object[] rowData = {
                     ot.getIdOt(),
                     ot.getOt(),
-                    ot.getFechaAlmacen(),
                     ot.getTerminado(),
                     ot.getAlistado()
                 };
@@ -109,7 +108,6 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 Object[] rowData = {
                     ot.getIdOt(),
                     ot.getOt(),
-                    ot.getFechaAlmacen(),
                     ot.getTerminado(),
                     ot.getAlistado()
                 };
@@ -998,14 +996,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 if (confirm == JOptionPane.YES_OPTION) {
                     Ot ot = new Ot();
                     ot.setIdOt(Integer.parseInt(this.jTableProgramado.getValueAt(i, 0).toString()));
-                    ot.setOt(Integer.parseInt(this.jTableProgramado.getValueAt(i, 1).toString()));
+                    ot.setOt((this.jTableProgramado.getValueAt(i, 1).toString()));
                     String fechaStr = this.jTableProgramado.getValueAt(i, 2).toString();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // El formato de la cadena de fecha
-                    try {
-                        ot.setFechaAlmacen(dateFormat.parse(fechaStr));
+                    /*try {
+                        //ot.setFechaAlmacen(dateFormat.parse(fechaStr));
                     } catch (ParseException e) {
                         e.printStackTrace(); // Manejar la excepción adecuadamente
-                    }
+                    }*/
                     ot.setTerminado(Boolean.parseBoolean(this.jTableProgramado.getValueAt(i, 3).toString()));
                     ot.setAlistado(cheked);
                     listOt.add(ot);

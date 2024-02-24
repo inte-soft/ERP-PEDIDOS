@@ -58,15 +58,20 @@ public class OtDao {
         entityManager.close();
     }
 
-    public Optional<Ot> getByOt(Integer ot) {
+    public Optional<Ot> getByOt(String ot) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-
-        Optional<Ot> otOptional = Optional.ofNullable(entityManager.find(Ot.class, ot));
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return otOptional;
+        try {
+            Ot ot1 = entityManager.createQuery(
+                    "SELECT o FROM Ot o WHERE o.ot = :ot",
+                    Ot.class).setParameter("ot", ot).getSingleResult();
+            return Optional.of(ot1);
+        } catch (Exception e) {
+            return Optional.empty();
+        } finally {
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        }
     }
 
     public void updateOtAlistado(List<Ot> listOt) {
@@ -80,4 +85,6 @@ public class OtDao {
         entityManager.getTransaction().commit();
         entityManager.close();
     }
+
+
 }

@@ -25,5 +25,6 @@ public class ItemController {
     }
 
     public void updateItem(Item item) {
+        itemService.updateItem(item);
     }
 }

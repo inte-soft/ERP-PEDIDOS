@@ -16,6 +16,13 @@ public class ItemServiceImplement implements ItemService {
     private OtDao otDao;
     @Override
     public void createItem(Item item) {
+        OtDao otDao = new OtDao();
+        Optional<Ot> otOptional = otDao.getByOt(item.getOt().getOt().toString());
+        if (otOptional.isPresent()) {
+            item.setOt(otOptional.get());
+            item.getOt().setTerminado(Boolean.FALSE);
+        }
+
         Optional<Item> itemOptional = getItemByOtAndItem(item.getOt(), item.getItem());
         if (itemOptional.isPresent()) {
             JOptionPane.showMessageDialog(null, "El item ya existe");
@@ -43,10 +50,13 @@ public class ItemServiceImplement implements ItemService {
         // buscar si tos los items de la ot estan terminados
         List<Item> items = itemDao.getItemsByOt(item.getOt());
         Boolean terminado = Boolean.TRUE;
+        Integer cantidad = 0;
         for (Item i : items) {
             if (!i.getCerrado()) {
-                terminado = false;
-                return;
+                cantidad++;
+                if (cantidad > 1) {
+                    terminado = false;
+                }
             }
         }
 

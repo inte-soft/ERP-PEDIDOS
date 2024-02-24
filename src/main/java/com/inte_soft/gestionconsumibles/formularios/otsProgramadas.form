@@ -111,7 +111,7 @@
                 <Column editable="false" title="OT" type="java.lang.Object"/>
                 <Column editable="false" title="ITEM" type="java.lang.Object"/>
                 <Column editable="false" title="FECHA PROGRAMADA" type="java.lang.Object"/>
-                <Column editable="false" title="CIERRE OT" type="java.lang.Boolean"/>
+                <Column editable="true" title="CIERRE OT" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

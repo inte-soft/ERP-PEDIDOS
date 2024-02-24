@@ -12,9 +12,7 @@ public class Ot {
     @Column(name = "ID_OT")
     private Integer idOt;
     @Column(name = "OT")
-    private Integer ot;
-    @Column(name = "FECHA_ALMACEN")
-    private Date fechaAlmacen;
+    private String ot;
 
     @Column(name = "TERMINADO")
     private Boolean terminado;
@@ -25,24 +23,21 @@ public class Ot {
     public Ot() {
     }
 
-    public Ot(Integer idOt, Integer ot, Date fechaAlmacen, Boolean terminado, Boolean alistado) {
+    public Ot(Integer idOt, String ot, Boolean terminado, Boolean alistado) {
         this.idOt = idOt;
         this.ot = ot;
-        this.fechaAlmacen = fechaAlmacen;
         this.terminado = terminado;
         this.alistado = alistado;
     }
 
-    public Ot(Integer ot, Date fechaAlmacen, Boolean terminado, Boolean alistado) {
+    public Ot(String ot, Boolean terminado, Boolean alistado) {
         this.ot = ot;
-        this.fechaAlmacen = fechaAlmacen;
         this.terminado = terminado;
         this.alistado = alistado;
     }
 
-    public Ot(Integer ot, Date fechaAlmacen, Boolean terminado) {
+    public Ot(String ot, Boolean terminado) {
         this.ot = ot;
-        this.fechaAlmacen = fechaAlmacen;
         this.terminado = terminado;
     }
 
@@ -54,20 +49,12 @@ public class Ot {
         this.idOt = idOt;
     }
 
-    public Integer getOt() {
+    public String getOt() {
         return ot;
     }
 
-    public void setOt(Integer ot) {
+    public void setOt(String ot) {
         this.ot = ot;
-    }
-
-    public Date getFechaAlmacen() {
-        return fechaAlmacen;
-    }
-
-    public void setFechaAlmacen(Date fechaAlmacen) {
-        this.fechaAlmacen = fechaAlmacen;
     }
 
     public Boolean getTerminado() {

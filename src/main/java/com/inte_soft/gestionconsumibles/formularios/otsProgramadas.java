@@ -79,7 +79,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -202,13 +202,14 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
 
             Ot ot = this.otController.createOt(
                     new Ot(
-                            Integer.parseInt(this.jTextField1.getText()),
-                            this.jDateChooser3.getDate(),
+                            (this.jTextField1.getText()),
                             false,
                             false));
             Item item1 = new Item();
             item1.setItem(item);
             item1.setOt(ot);
+            item1.setCerrado(false);
+            item1.setEntrega(this.jDateChooser3.getDate());
             this.itemController.createItem(item1);
 
             loadOts();
@@ -222,18 +223,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        int contador = 0;
         for(int i = 0; i < this.jTable1.getRowCount(); i++){
-            if((Boolean) this.jTable1.getValueAt(i, 3)){
+            if((Boolean) this.jTable1.getValueAt(i, 4)){
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la OT " + this.jTable1.getValueAt(i, 1) + "?");
                 if(confirm == JOptionPane.NO_OPTION || confirm == JOptionPane.CANCEL_OPTION){
                     return;
                 }else{
                     contador++;
-                    Item item = new Item();
-                    int finalI = i;
-                    item.setOt(items.stream()
-                            .filter(x -> x.getOt().getOt()
-                                    .equals(this.jTable1.getValueAt(finalI, 1))).findFirst().get().getOt());
-                    item.setItem(Integer.parseInt(this.jTable1.getValueAt(i, 2).toString()));
+                    Item item = items.get(i);
                     item.setCerrado(true);
                     this.itemController.updateItem(item);
             }
@@ -254,8 +250,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                 ot.getOt().getIdOt(),
                 ot.getOt().getOt(),
                 ot.getItem(),
-                ot.getOt().getFechaAlmacen(),
-                ot.getOt().getTerminado()
+                ot.getEntrega(),
+                ot.getCerrado()
             });
         }
     }

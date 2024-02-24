@@ -26,7 +26,7 @@ public class OtServiceImplement implements OtService {
         return otDao.createOt(ot);
     }
 
-    private Optional<Ot> getByOt(Integer ot) {
+    private Optional<Ot> getByOt(String ot) {
         OtDao otDao = new OtDao();
         return otDao.getByOt(ot);
     }
