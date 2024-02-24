@@ -20,11 +20,12 @@ public class ConsumiblesDtoOt {
     private double max;
     private double min;
     private double alistado;
+    private String area;
 
     public ConsumiblesDtoOt() {
     }
 
-    public ConsumiblesDtoOt(int ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado) {
+    public ConsumiblesDtoOt(int ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado, String area) {
         this.ot = ot;
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -36,7 +37,7 @@ public class ConsumiblesDtoOt {
         this.max = max;
         this.min = min;
         this.alistado = alistado;
-
+        this.area = area;
     }
 
     public int getOt() {
@@ -127,7 +128,13 @@ public class ConsumiblesDtoOt {
         this.alistado = alistado;
     }
 
+    public String getArea() {
+        return area;
+    }
 
+    public void setArea(String area) {
+        this.area = area;
+    }
 
 
 }

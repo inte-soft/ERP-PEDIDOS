@@ -21,6 +21,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
     private Usuarios usuarios;
     private DefaultTableModel model;
     private ModelarTabla modelarTabla;
+    private List<String> listItem;
     
     /**
      * Creates new form listadoPendiente
@@ -29,12 +30,13 @@ public class ListadoPendiente extends javax.swing.JDialog {
         initComponents();
     }
     
-    public ListadoPendiente(List<ConsumiblesDtoOt> listConsumiblesDtoOt, Usuarios usuarios){
+    public ListadoPendiente(List<ConsumiblesDtoOt> listConsumiblesDtoOt, Usuarios usuarios, List<String> listItem){
         initComponents();
         this.consumiblesDtoOts = listConsumiblesDtoOt;
         this.usuarios = usuarios;
         modelarTabla = new ModelarTabla(tbListadoConsumibles);
         model = modelarTabla.getModel();
+        this.listItem = listItem;
         loadConsumibles();
 
     }
@@ -50,11 +52,9 @@ public class ListadoPendiente extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbListadoConsumibles = new javax.swing.JTable();
-        jTextSearchItem = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jTextSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-
+        jButton1 = new javax.swing.JButton();
 
         setTitle("Consumibles");
         setVisible(true);
@@ -64,11 +64,11 @@ public class ListadoPendiente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Maximos", "Minimos", "Alistado", "Pendiente", "Observaciones"
+                "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Maximos", "Minimos", "Alistado", "Pendiente"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -77,14 +77,6 @@ public class ListadoPendiente extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbListadoConsumibles);
 
-        jTextSearchItem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextSearchItemKeyReleased(evt);
-            }
-        });
-
-        jLabel3.setText("Item");
-
         jTextSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextSearchKeyReleased(evt);
@@ -92,6 +84,13 @@ public class ListadoPendiente extends javax.swing.JDialog {
         });
 
         jLabel2.setText("Busqueda");
+
+        jButton1.setText("Diligenciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,11 +101,9 @@ public class ListadoPendiente extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(939, Short.MAX_VALUE))
+                .addGap(181, 181, 181)
+                .addComponent(jButton1)
+                .addContainerGap(789, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -120,9 +117,8 @@ public class ListadoPendiente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(500, Short.MAX_VALUE))
+                    .addComponent(jButton1))
+                .addContainerGap(501, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(50, Short.MAX_VALUE)
@@ -152,21 +148,23 @@ public class ListadoPendiente extends javax.swing.JDialog {
 
         }
     }
-    private void jTextSearchItemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchItemKeyReleased
-        
-    }//GEN-LAST:event_jTextSearchItemKeyReleased
-
     private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
         
     }//GEN-LAST:event_jTextSearchKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(tbListadoConsumibles.getSelectedRow()>0){
+            // buscar consumibles filtrado por los item listitem
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextSearch;
-    private javax.swing.JTextField jTextSearchItem;
     private javax.swing.JTable tbListadoConsumibles;
     // End of variables declaration//GEN-END:variables
 }

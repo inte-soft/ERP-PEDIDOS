@@ -949,11 +949,17 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        int contador1 = 0;
+        for (int i = 0; i < this.jTableProgramado.getRowCount(); i++){
+            if (null != this.jTableProgramado.getValueAt(i,5)){
+                contador1++;
+            }
+        }
+        if(contador1>0) {
         Integer contador = 0;
         List<String> listItem = new ArrayList<>();
         Ot ot = new Ot();
-        if (this.jTableProgramado.getSelectedRow() >= 0) {
+
             for(int i = 0; i < this.jTableProgramado.getRowCount(); i++){
                 Object seleccion = this.jTableProgramado.getValueAt(i, 5);
                 Boolean cheked = true;
@@ -980,38 +986,45 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 }
 
             }
-            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "ELECTRICOS");
-            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario);
+            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "CONSUMIBLES ELECTRICOS");
+            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario,listItem);
             listadoPendiente.setVisible(Boolean.TRUE);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe chekear almenos una linea", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Integer contador = 0;
-        List<String> listItem = new ArrayList<>();
-        Ot ot = new Ot();
-        if (this.jTableProgramado.getSelectedRow() >= 0) {
-            for(int i = 0; i < this.jTableProgramado.getRowCount(); i++){
+        int contador1 = 0;
+        for (int i = 0; i < this.jTableProgramado.getRowCount(); i++){
+            if (null != this.jTableProgramado.getValueAt(i,5)){
+                contador1++;
+            }
+        }
+        if(contador1>0) {
+            Integer contador = 0;
+            List<String> listItem = new ArrayList<>();
+            Ot ot = new Ot();
+
+            for (int i = 0; i < this.jTableProgramado.getRowCount(); i++) {
                 Object seleccion = this.jTableProgramado.getValueAt(i, 5);
                 Boolean cheked = true;
                 if (null == seleccion) {
                     cheked = false;
                 }
-                if(cheked){
+                if (cheked) {
                     contador++;
                     listItem.add(getSelectedItem(
                             Integer.parseInt(
                                     jTableProgramado.getValueAt(i, 0)
                                             .toString())).getItem().toString());
-                    String ot1= jTableProgramado.getValueAt(i, 1).toString();
+                    String ot1 = jTableProgramado.getValueAt(i, 1).toString();
                     if (ot.getOt() == null || ot.getOt() == ot1) {
                         ot = getSelectedItem(
                                 Integer.parseInt(
                                         jTableProgramado.getValueAt(i, 0)
                                                 .toString())).getOt();
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Debe seleccionar OTs iguales", "Advertencia", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
@@ -1019,11 +1032,12 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                 }
 
             }
-            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "MECANICOS");
-            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt,this.usuario);
+            List<ConsumiblesDtoOt> listConsumiblesDtoOt = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem, "CONSUMIBLES MECANICOS");
+            ListadoPendiente listadoPendiente = new ListadoPendiente(listConsumiblesDtoOt, this.usuario, listItem);
             listadoPendiente.setVisible(Boolean.TRUE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe Seleccionar una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, "Debe chekear almenos una linea", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed

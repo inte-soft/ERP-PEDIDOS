@@ -160,6 +160,7 @@ public class Consumibles extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(0).setMinWidth(50);
             tbListadoConsumibles.getColumnModel().getColumn(0).setPreferredWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(0).setMaxWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(0).setHeaderValue("Item");
             tbListadoConsumibles.getColumnModel().getColumn(1).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(1).setPreferredWidth(120);
             tbListadoConsumibles.getColumnModel().getColumn(1).setMaxWidth(120);
