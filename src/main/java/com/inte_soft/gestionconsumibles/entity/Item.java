@@ -12,7 +12,7 @@ public class Item {
     @Column(name = "ITEM")
     private Integer item;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "ID_OT")
     private Ot ot;
     @Column(name = "cerrado")
     private Boolean cerrado;
