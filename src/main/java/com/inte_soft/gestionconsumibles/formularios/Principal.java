@@ -120,6 +120,7 @@ public class Principal extends javax.swing.JFrame {
         jAlmacen = new javax.swing.JMenu();
         jMAlmacen = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMProduccion = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         compras = new javax.swing.JMenu();
@@ -241,6 +242,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jAlmacen.add(jMenuItem5);
+
+        jMenuItem4.setText("Entregas");
+        jAlmacen.add(jMenuItem4);
 
         jMenuBar1.add(jAlmacen);
 
@@ -625,6 +629,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem maxMinE;
     private javax.swing.JMenuItem maxMinM;
