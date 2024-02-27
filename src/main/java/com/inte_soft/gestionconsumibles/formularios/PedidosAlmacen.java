@@ -821,7 +821,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
             model.setRowCount(0);
             List<ConsumiblesDto> listConsumiblesDto = pedidoConsumiblesController.consumiblesPedidosSearch(
-                    Integer.parseInt(this.jTxtOt.getText()), this.jTxtDescripcion.getText(),
+                    (this.jTxtOt.getText()), this.jTxtDescripcion.getText(),
                     this.jComboBox1.getSelectedItem().toString());
             for (ConsumiblesDto consumiblesDto : listConsumiblesDto) {
                 Object[] rowData = {
@@ -1028,7 +1028,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     } else {
         JOptionPane.showMessageDialog(null, "Debe chekear almenos una linea", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }
-}//GEN-LAST:event_jButton6ActionPerformed
+}                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         verProgramado();

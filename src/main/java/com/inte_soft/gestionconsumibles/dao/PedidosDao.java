@@ -144,7 +144,7 @@ public class PedidosDao {
                 + "ORDER BY p.fecha DESC";
 
         TypedQuery<Pedidos> query = entityManager.createQuery(queryString, Pedidos.class);
-        query.setParameter("ot", Integer.parseInt(ot));
+        query.setParameter("ot",ot);
         List<Pedidos> resultList = query.getResultList();
 
         entityManager.getTransaction().commit();

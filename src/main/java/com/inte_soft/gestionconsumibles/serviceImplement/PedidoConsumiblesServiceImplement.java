@@ -109,7 +109,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido) {
+    public List<ConsumiblesDto> consumiblesPedidosSearch(String ot, String descripcion, String tipoPedido) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filteredSearch(ot, descripcion, tipoPedido);
     }

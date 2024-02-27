@@ -148,7 +148,7 @@ public class PedidoConsumiblesDao {
 
     }
 
-    public List<ConsumiblesDto> filteredSearch(Integer ot, String descripcion, String tipoPedido) {
+    public List<ConsumiblesDto> filteredSearch(String ot, String descripcion, String tipoPedido) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 

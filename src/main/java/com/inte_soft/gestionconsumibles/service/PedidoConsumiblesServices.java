@@ -22,7 +22,7 @@ public interface PedidoConsumiblesServices {
            AreaCompania area, String persona , String Operacion, String ot,
                                       String tipoPedido, List<PedidosCompras> listPedidosCompras, String typeOperacionCompras);
 
-    public List<ConsumiblesDto> consumiblesPedidosSearch(int ot, String descripcion, String tipoPedido);
+    public List<ConsumiblesDto> consumiblesPedidosSearch(String ot, String descripcion, String tipoPedido);
     
     public List<ConsumiblesDtoOt> consumiblesPedidosSearchFilter(int ot, String tipoPedidoString);
     
