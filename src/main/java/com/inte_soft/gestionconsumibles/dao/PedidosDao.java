@@ -160,8 +160,9 @@ public class PedidosDao {
 
         String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, i.entrega, p.comprado) "
                 + "FROM Pedidos p "
-                + "LEFT JOIN Ot o ON p.ot = o.ot "
-                + "LEFT JOIN Item i ON o.id = i.ot "
+                + "JOIN Ot o ON p.ot = o.ot "
+                + "JOIN PedidosCompras pc ON p.idPedido = pc.pedido "
+                + "LEFT JOIN Item i ON pc.item = i.item "
                 + "WHERE p.operacion LIKE 'Compras%' and p.comprado = FALSE "
                 + "ORDER BY i.entrega DESC";
 
