@@ -8,9 +8,11 @@ import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,6 +65,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
         jTextSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setTitle("Consumibles");
         setVisible(true);
@@ -100,6 +103,13 @@ public class ListadoPendiente extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setText("Imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +121,9 @@ public class ListadoPendiente extends javax.swing.JDialog {
                 .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(181, 181, 181)
                 .addComponent(jButton1)
-                .addContainerGap(789, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(jButton2)
+                .addContainerGap(634, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -125,7 +137,8 @@ public class ListadoPendiente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(501, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -158,7 +171,12 @@ public class ListadoPendiente extends javax.swing.JDialog {
         }
     }
     private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
-        
+        //imprimir tabla
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        Date fecha = new Date();
+        String header = "OT: " + this.ot + "     " + fecha;
+        String footer = "Elabora: " + this.usuarios.getNombres() + " " + this.usuarios.getApellidos();
+        jTablePrinter.printTable(tbListadoConsumibles, header, footer);
     }//GEN-LAST:event_jTextSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -174,10 +192,15 @@ public class ListadoPendiente extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextSearch;
