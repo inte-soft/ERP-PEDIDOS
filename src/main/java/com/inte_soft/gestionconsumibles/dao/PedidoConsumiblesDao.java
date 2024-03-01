@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -65,7 +66,6 @@ public class PedidoConsumiblesDao {
         maxMinElectDTOList.addAll(maxMinElectricosList);
 
 
-
         // Crear una lista de PedidoConsumiblesDto combinando los dos conjuntos de datos
         List<PedidoConsumiblesDto> pedidoConsumiblesDtoList = new ArrayList<>();
         for (PedidoConsumibles pc : pedidoConsumiblesList) {
@@ -90,26 +90,26 @@ public class PedidoConsumiblesDao {
                     pedidoConsumiblesDtoList.add(dto);
                     flag = true;
                     break;
-                    
+
                 }
             }
-            if(!flag){
-               PedidoConsumiblesDto dto = new PedidoConsumiblesDto();
-                    dto.setIdPedidoC(pc.getIdPedidoConsumibles());
-                    dto.setIdPedido(pc.getPedidos().getIdPedido());
-                    dto.setItem(pc.getItem());
-                    dto.setCodigo(pc.getCodigo());
-                    dto.setDescripcion(pc.getDescripcion());
-                    dto.setTipo(pc.getTipo());
-                    dto.setReferencia(pc.getReferencia());
-                    dto.setMarca(pc.getMarca());
-                    dto.setUnidad(pc.getUnidad());
-                    dto.setCantidad(pc.getCantidad());
-                    dto.setValor(pc.getValor());
-                    dto.setObservacion(pc.getObservacion());
-                    dto.setMinimo(0);
-                    dto.setMaximo(0);
-                    pedidoConsumiblesDtoList.add(dto);
+            if (!flag) {
+                PedidoConsumiblesDto dto = new PedidoConsumiblesDto();
+                dto.setIdPedidoC(pc.getIdPedidoConsumibles());
+                dto.setIdPedido(pc.getPedidos().getIdPedido());
+                dto.setItem(pc.getItem());
+                dto.setCodigo(pc.getCodigo());
+                dto.setDescripcion(pc.getDescripcion());
+                dto.setTipo(pc.getTipo());
+                dto.setReferencia(pc.getReferencia());
+                dto.setMarca(pc.getMarca());
+                dto.setUnidad(pc.getUnidad());
+                dto.setCantidad(pc.getCantidad());
+                dto.setValor(pc.getValor());
+                dto.setObservacion(pc.getObservacion());
+                dto.setMinimo(0);
+                dto.setMaximo(0);
+                pedidoConsumiblesDtoList.add(dto);
             }
         }
 
@@ -131,7 +131,7 @@ public class PedidoConsumiblesDao {
                 (String) objects[6],
                 (String) objects[7],
                 (String) objects[8],
-                (Float)  objects[9],
+                (Float) objects[9],
                 (Double) objects[10],
                 (String) objects[11],
                 (Integer) objects[12],
@@ -261,9 +261,9 @@ public class PedidoConsumiblesDao {
 
         for (MaxMinElectDTO maxMinElectDTO : listMaxMinElectDTO) {
             entityManager.createQuery(
-                    "UPDATE TipicoConsumiblesElectricos "
-                    + "SET cMax = :max, cMin = :min "
-                    + "WHERE codigo = :codigo")
+                            "UPDATE TipicoConsumiblesElectricos "
+                                    + "SET cMax = :max, cMin = :min "
+                                    + "WHERE codigo = :codigo")
                     .setParameter("max", maxMinElectDTO.getMax())
                     .setParameter("min", maxMinElectDTO.getMin())
                     .setParameter("codigo", maxMinElectDTO.getCodigo())
@@ -296,9 +296,9 @@ public class PedidoConsumiblesDao {
         entityManager.getTransaction().begin();
         for (MaxMinElectDTO maxMinElectDTO : listMaxMinElectDTO) {
             entityManager.createQuery(
-                    "UPDATE TipicoConsumiblesMecanicos "
-                    + "SET cMax = :max, cMin = :min "
-                    + "WHERE codigo = :codigo")
+                            "UPDATE TipicoConsumiblesMecanicos "
+                                    + "SET cMax = :max, cMin = :min "
+                                    + "WHERE codigo = :codigo")
                     .setParameter("max", maxMinElectDTO.getMax())
                     .setParameter("min", maxMinElectDTO.getMin())
                     .setParameter("codigo", maxMinElectDTO.getCodigo())
@@ -313,9 +313,9 @@ public class PedidoConsumiblesDao {
         entityManager.getTransaction().begin();
         for (ConsumiblesDtoRev consumiblesDtoRev : listConsumiblesDtoRev) {
             entityManager.createQuery(
-                    "UPDATE PedidoConsumibles "
-                    + "SET revisado = true "
-                    + "WHERE idPedidoConsumibles = :idPedidoConsumibles")
+                            "UPDATE PedidoConsumibles "
+                                    + "SET revisado = true "
+                                    + "WHERE idPedidoConsumibles = :idPedidoConsumibles")
                     .setParameter("idPedidoConsumibles", consumiblesDtoRev.getIdPdedidoConsumibles())
                     .executeUpdate();
         }
@@ -356,40 +356,40 @@ public class PedidoConsumiblesDao {
 
     public List<ConsumiblesDtoOt> filteredSearchByOtArea(int ot, String area) {
 
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    entityManager.getTransaction().begin();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
         String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt(p.ot," +
                 " pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad)," +
                 " AVG(COALESCE(tce.cMax, tcm.cMax)), AVG(COALESCE(tce.cMin, tcm.cMin)), SUM(pc.alistado), pc.observacion) "
-            + "FROM PedidoConsumibles pc "
-            + "JOIN pc.pedidos p "
-            + "LEFT JOIN TipicoConsumiblesElectricos tce ON pc.codigo = tce.master.codigo "
-            + "LEFT JOIN TipicoConsumiblesMecanicos tcm ON pc.codigo = tcm.master.codigo "
-            + "WHERE 1=1 ";
+                + "FROM PedidoConsumibles pc "
+                + "JOIN pc.pedidos p "
+                + "LEFT JOIN TipicoConsumiblesElectricos tce ON pc.codigo = tce.master.codigo "
+                + "LEFT JOIN TipicoConsumiblesMecanicos tcm ON pc.codigo = tcm.master.codigo "
+                + "WHERE 1=1 ";
 
-    if (ot != 0) {
-        queryString += "AND p.ot = :ot ";
+        if (ot != 0) {
+            queryString += "AND p.ot = :ot ";
+        }
+        if (area != null && !area.isBlank()) {
+            queryString += "AND p.tipoPedido = :area ";
+        }
+        queryString += "GROUP BY p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
+
+        TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
+
+        if (ot != 0) {
+            query.setParameter("ot", ot);
+        }
+        if (area != null && !area.isBlank()) {
+            query.setParameter("area", area);
+        }
+        List<ConsumiblesDtoOt> resultList = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return resultList;
     }
-    if (area != null && !area.isBlank()) {
-        queryString += "AND p.tipoPedido = :area ";
-    }
-    queryString += "GROUP BY p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad";
-
-    TypedQuery<ConsumiblesDtoOt> query = entityManager.createQuery(queryString, ConsumiblesDtoOt.class);
-
-    if (ot != 0) {
-        query.setParameter("ot", ot);
-    }
-    if (area != null && !area.isBlank()) {
-        query.setParameter("area", area);
-    }
-    List<ConsumiblesDtoOt> resultList = query.getResultList();
-
-    entityManager.getTransaction().commit();
-    entityManager.close();
-
-    return resultList;
-}
 
     public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -408,6 +408,67 @@ public class PedidoConsumiblesDao {
         query.setParameter("listItem", listItem);
         query.setParameter("area", area);
         List<ConsumiblesDtoOt> resultList = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return resultList;
+    }
+
+    public List<EntregaDto> getConsumiblesByOtAndItemUnicConsumible(Ot ot, List<String> listItem, String area, String codigo) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.EntregaDto(pc.idPedidoConsumibles, i.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad, COALESCE(COALESCE(tce.cMax,0) + COALESCE(tcm.cMax,0)), COALESCE(COALESCE(tce.cMin,0) + COALESCE(tcm.cMin,0)), pc.alistado, p.tipoPedido, pc.observacion) "
+                    + "FROM PedidoConsumibles pc "
+                    + "JOIN pc.pedidos p "
+                    + "LEFT JOIN TipicoConsumiblesElectricos tce ON pc.codigo = tce.master.codigo "
+                    + "LEFT JOIN TipicoConsumiblesMecanicos tcm ON pc.codigo = tcm.master.codigo "
+                    + "LEFT JOIN Item i ON pc.item = i.item "
+                    + "WHERE p.ot = :ot "
+                    + "AND pc.item IN (:listItem) "
+                    + "AND p.tipoPedido = :area "
+                    + "AND pc.codigo = :codigo";
+            TypedQuery<EntregaDto> query = entityManager.createQuery(queryString, EntregaDto.class);
+            query.setParameter("ot", ot.getOt());
+            query.setParameter("listItem", listItem);
+            query.setParameter("area", area);
+            query.setParameter("codigo", codigo);
+            List<EntregaDto> resultList = query.getResultList();
+            entityManager.getTransaction().commit();
+            return resultList;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public Optional<PedidoConsumibles> findById(BigInteger id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Optional<PedidoConsumibles> result = Optional.ofNullable(entityManager.find(PedidoConsumibles.class, id));
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return result;
+    }
+
+    public void updatePedido(PedidoConsumibles pedidoConsumible) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(pedidoConsumible);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public List<PedidoConsumibles> findByPedido(int idPedido) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<PedidoConsumibles> resultList = entityManager
+                .createQuery("SELECT pc FROM PedidoConsumibles pc WHERE pc.pedidos.idPedido = :idPedido", PedidoConsumibles.class)
+                .setParameter("idPedido", idPedido)
+                .getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return resultList;

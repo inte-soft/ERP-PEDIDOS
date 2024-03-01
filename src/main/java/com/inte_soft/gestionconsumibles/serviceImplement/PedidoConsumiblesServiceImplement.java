@@ -13,6 +13,7 @@ import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -172,6 +173,44 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.getConsumiblesByOtAndItem(ot, listItem, area);
+    }
+
+    @Override
+    public List<EntregaDto> getConsumiblesByOtAndItemUnicConsumible(Ot ot, List<String> listItem, String area, String codigo) {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.getConsumiblesByOtAndItemUnicConsumible(ot,listItem,area,codigo);
+    }
+
+    @Override
+    public void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto) {
+        //un bucle donde se busque el pedido pol el id y se axtualizce el campo alistado y observacio
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        for (EntregaDto e : consumiblesEntregaDto) {
+            Optional<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.findById(e.getId());
+            if (pedidoConsumibles.isPresent()) {
+                PedidoConsumibles pedidoConsumible = pedidoConsumibles.get();
+                pedidoConsumible.setAlistado(e.getAlistado());
+                pedidoConsumible.setObservacion(e.getObservacion());
+                pedidoConsumiblesDao.updatePedido(pedidoConsumible);
+            }
+
+        }
+        // buscar los todos los pedidos de la ot y revisar en pedidos consumibles si la cantidad y la cantidad alistada son iguales y marcar el pedido como alistado
+        String ot = consumiblesEntregaDto.get(0).getOt().getOt();
+        PedidosDao pedidosDao = new PedidosDao();
+        List<Pedidos> pedidos = pedidosDao.findByOt(ot);
+        for (Pedidos p : pedidos) {
+            List<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.findByPedido(p.getIdPedido());
+            boolean revisado = true;
+            for (PedidoConsumibles pc : pedidoConsumibles) {
+                if (pc.getCantidad() != pc.getAlistado()) {
+                    revisado = false;
+                    break;
+                }
+            }
+            p.setRevisado(revisado);
+            pedidosDao.updatePedido(p);
+        }
     }
 
 

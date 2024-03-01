@@ -985,6 +985,8 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
         ListadoPendiente listadoPendiente = new ListadoPendiente(this.usuario, listItem, "CONSUMIBLES ELECTRICOS", ot);
         listadoPendiente.setVisible(Boolean.TRUE);
+        listadoPendiente.setLocationRelativeTo(null);
+        listadoPendiente.setModal(Boolean.TRUE);
     } else {
         JOptionPane.showMessageDialog(null, "Debe chekear almenos una linea", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }

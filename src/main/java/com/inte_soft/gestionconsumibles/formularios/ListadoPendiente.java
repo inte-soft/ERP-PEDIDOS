@@ -25,6 +25,9 @@ public class ListadoPendiente extends javax.swing.JDialog {
     private ModelarTabla modelarTabla;
     private List<String> listItem;
     private PedidoConsumiblesController pedidoConsumiblesController;
+    private Ot ot;
+    private String area;
+
     
     /**
      * Creates new form listadoPendiente
@@ -36,11 +39,12 @@ public class ListadoPendiente extends javax.swing.JDialog {
     public ListadoPendiente(Usuarios usuarios, List<String> listItem, String area, Ot ot){
         this.pedidoConsumiblesController = new PedidoConsumiblesController();
         initComponents();
-        this.consumiblesDtoOts = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem,area );;
         this.usuarios = usuarios;
         modelarTabla = new ModelarTabla(tbListadoConsumibles);
         model = modelarTabla.getModel();
         this.listItem = listItem;
+        this.ot = ot;
+        this.area = area;
         loadConsumibles();
 
     }
@@ -134,6 +138,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void loadConsumibles(){
+        this.consumiblesDtoOts = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem,area );;
         model.setRowCount(0);
         for (ConsumiblesDtoOt consumiblesDtoOt : consumiblesDtoOts) {
             model.addRow(new Object[]{
@@ -157,12 +162,18 @@ public class ListadoPendiente extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         if(tbListadoConsumibles.getSelectedRow()>0){
             // buscar consumibles filtrado por los item listitem
-
+            String codigo = (String) tbListadoConsumibles.getValueAt(tbListadoConsumibles.getSelectedRow(), 0).toString();
+            EntregaConsumibles entregaConsumibles = new EntregaConsumibles(usuarios, listItem, area, ot,codigo, this);
+            entregaConsumibles.setVisible(true);
+            entregaConsumibles.setLocationRelativeTo(null);
+            entregaConsumibles.setModal(true);
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
