@@ -61,6 +61,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         map = new HashMap<>();
         listOts = new ArrayList<>();
         jLabel7.setText("");
+        jBDesplegar.setVisible(Boolean.FALSE);
         this.verPedidos();
         if (departamento == "Produccion") {
             this.jTabbedPane1.removeTabAt(4);

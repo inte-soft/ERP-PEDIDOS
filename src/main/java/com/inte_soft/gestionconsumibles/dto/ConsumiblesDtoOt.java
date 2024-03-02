@@ -25,6 +25,7 @@ public class ConsumiblesDtoOt {
     public ConsumiblesDtoOt() {
     }
 
+
     public ConsumiblesDtoOt(String ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado, String area) {
         this.ot = ot;
         this.codigo = codigo;
