@@ -254,6 +254,9 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnGestionarActionPerformed
     
+    public Usuarios getUsuarios(){
+        return this.usuarios;
+    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String typeOperacionCompras = "";

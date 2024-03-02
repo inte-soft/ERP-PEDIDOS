@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class ListadoPendiente extends javax.swing.JDialog {
+public class ListadoPendiente extends JDialog {
 
     private List<ConsumiblesDtoOt> consumiblesDtoOts;
     private Usuarios usuarios;
@@ -68,8 +68,9 @@ public class ListadoPendiente extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consumibles");
-        setVisible(true);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
 
         tbListadoConsumibles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,7 +196,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private  void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String items = "";
         for (String listItem1 : listItem) {
             items += listItem1 + ", ";
@@ -203,10 +204,17 @@ public class ListadoPendiente extends javax.swing.JDialog {
         Date fecha = new Date();
         String header = "OT: " + this.ot.getOt() + " Items: " + items +"     " + fecha;
         String footer = "Elabora: " + this.usuarios.getNombres() + " " + this.usuarios.getApellidos();
-        JTablePrinter jTablePrinter = new JTablePrinter();
-        jTablePrinter.printTable(tbListadoConsumibles, header, footer);
-        this.setModal(Boolean.FALSE);
-        this.toFront();
+        try {
+            final JTablePrinter jTablePrinter = new JTablePrinter();
+            jTablePrinter.printTable(tbListadoConsumibles, header, footer);
+            this.setModal(Boolean.FALSE);
+            this.toFront();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No puede imprimirse");
+        }finally {
+            this.setModal(Boolean.TRUE);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

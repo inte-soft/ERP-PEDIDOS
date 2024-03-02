@@ -47,6 +47,7 @@ public class Consumibles extends javax.swing.JDialog {
         this.item = item;
         this.gConsumibles = gConsumibles;
         this.loadConsumibles(this.tipoConsumibles, this.item);
+        this.usuario = gConsumibles.getUsuarios();
         modelarTabla();
     }
     public Consumibles(String tipoConsumibles, String item, GestionConsumibles gConsumibles, Usuarios usuario, String ot) {

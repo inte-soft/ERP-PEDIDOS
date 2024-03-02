@@ -14,7 +14,7 @@ import javax.swing.JTable;
  * @author alejo
  */
 public class JTablePrinter {
-    public  void printTable(JTable table, String header, String footer){
+    public final   void printTable(JTable table, String header, String footer){
         MessageFormat headerPrint = new MessageFormat(header);
         MessageFormat footerPrint = new MessageFormat(footer);
         
@@ -24,6 +24,7 @@ public class JTablePrinter {
         catch(Exception e){
             JOptionPane.showMessageDialog(null, " No puede imprimirse");
         }
+
     }
         
 }
