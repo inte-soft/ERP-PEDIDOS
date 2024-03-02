@@ -11,6 +11,7 @@ import com.inte_soft.gestionconsumibles.entity.Usuarios;
 import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 import java.util.List;
@@ -181,7 +182,7 @@ public class ListadoPendiente extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if(tbListadoConsumibles.getSelectedRow()>0){
+        if(tbListadoConsumibles.getSelectedRow()>=0){
             // buscar consumibles filtrado por los item listitem
             String codigo = (String) tbListadoConsumibles.getValueAt(tbListadoConsumibles.getSelectedRow(), 0).toString();
             EntregaConsumibles entregaConsumibles = new EntregaConsumibles(usuarios, listItem, area, ot,codigo, this);
@@ -189,6 +190,8 @@ public class ListadoPendiente extends javax.swing.JDialog {
             entregaConsumibles.setLocationRelativeTo(null);
             entregaConsumibles.setModal(true);
 
+        }else {
+            JOptionPane.showMessageDialog(null, "Seleccione un consumible");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
