@@ -195,6 +195,8 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         }
         // buscar los todos los pedidos de la ot y revisar en pedidos consumibles si la cantidad y la cantidad alistada son iguales y marcar el item como alistado
         String ot = consumiblesEntregaDto.get(0).getOt();
+        OtDao OtDao = new OtDao();
+        Ot ot1 = OtDao.getOtByOt(ot);
         PedidosDao pedidosDao = new PedidosDao();
         for (String item : listItem) {
             List<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.getConsumiblesByOyAndListItem(ot, item);
@@ -207,7 +209,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 }
                 ItemDao itemDao = new ItemDao();
                 if (alistado) {
-                    itemDao.updateItemAlistado(ot, item);
+                    itemDao.updateItemAlistado(ot1, item);
                 }
             }
         }

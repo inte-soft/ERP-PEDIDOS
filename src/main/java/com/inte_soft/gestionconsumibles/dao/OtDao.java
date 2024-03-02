@@ -18,6 +18,8 @@ public class OtDao {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
 
+
+
     public void close() {
         entityManagerFactory.close();
     }
@@ -87,4 +89,16 @@ public class OtDao {
     }
 
 
+    public Ot getOtByOt(String ot) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        Ot ot1 = entityManager.createQuery(
+                "SELECT o FROM Ot o WHERE o.ot = :ot",
+                Ot.class).setParameter("ot", ot).getSingleResult();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return ot1;
+    }
 }
