@@ -111,7 +111,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             } else {
                 Object[] rowData = {
                     ot.getId(),
-                    ot.getOt().getIdOt(),
+                    ot.getOt().getOt(),
                     ot.getItem(),
                     ot.getEntrega()
 
