@@ -48,7 +48,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private DefaultTableModel model6;
     private TableRowSorter<DefaultTableModel> sorter;
     private List<PedidoDto> listPedidos;
-    private List<Integer> listOts;
+    private List<String> listOts;
     private ModelarTabla modelarTabla;
     private PedidoConsumiblesController pedidoConsumiblesController;
     private WindowSingleton windowSingleton;
@@ -766,11 +766,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             String textoOts = jLabel7.getText();
             if (textoOts.isEmpty()) {
                 jLabel7.setText(textoOts + ot);
-                listOts.add(Integer.parseInt(ot));
+                listOts.add(ot);
 
             } else {
                 jLabel7.setText(textoOts + ", " + ot);
-                listOts.add(Integer.parseInt(ot));
+                listOts.add(ot);
             }
 
         } else {
@@ -1122,7 +1122,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ConsumiblesDtoRev consumiblesDtoRev = new ConsumiblesDtoRev();
             consumiblesDtoRev.setIdPdedidoConsumibles(BigInteger.valueOf(Long.parseLong(tempTable.getValueAt(i, 0).toString())));
             consumiblesDtoRev.setIdPedido(Integer.parseInt(tempTable.getValueAt(i, 1).toString()));
-            consumiblesDtoRev.setOt(Integer.parseInt(tempTable.getValueAt(i, 2).toString()));
+            consumiblesDtoRev.setOt(tempTable.getValueAt(i, 2).toString());
             consumiblesDtoRev.setCodigo(tempTable.getValueAt(i, 3).toString());
             consumiblesDtoRev.setDescripcion(tempTable.getValueAt(i, 4).toString());
             consumiblesDtoRev.setTipo(tempTable.getValueAt(i, 5).toString());
@@ -1179,7 +1179,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }
 
-    private void updatePedidosSinRevisarOts(JTable table, List<Integer> ots) {
+    private void updatePedidosSinRevisarOts(JTable table, List<String> ots) {
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);

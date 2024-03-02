@@ -113,7 +113,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<Integer> ots) {
+    public List<ConsumiblesDtoRev> consumiblesPedidosSearchByRev(List<String> ots) {
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         return pedidoConsumiblesDao.filterSearchByRev(ots);
     }

@@ -40,7 +40,7 @@ public class PedidoConsumiblesController {
         return pedidoConsumiblesServices.consumiblesPedidosSearch(ot, descripcion, tipoPedido);
     }
 
-    public List<ConsumiblesDtoRev> consumiblesWhithoutCheck(List<Integer> ots) {
+    public List<ConsumiblesDtoRev> consumiblesWhithoutCheck(List<String> ots) {
         List<ConsumiblesDtoRev> listConsumiblesDtoRevs = new ArrayList<>();
         listConsumiblesDtoRevs = pedidoConsumiblesServices.consumiblesPedidosSearchByRev(ots);
         

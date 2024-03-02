@@ -221,7 +221,7 @@ public class PedidoConsumiblesDao {
         return resultList;
     }
 
-    public List<ConsumiblesDtoRev> filterSearchByRev(List<Integer> ots) {
+    public List<ConsumiblesDtoRev> filterSearchByRev(List<String> ots) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoRev(pc.idPedidoConsumibles, p.idPedido, p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad) "

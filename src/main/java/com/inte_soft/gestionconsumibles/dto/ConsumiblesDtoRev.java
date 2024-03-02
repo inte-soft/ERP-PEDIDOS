@@ -14,7 +14,7 @@ public class ConsumiblesDtoRev {
     
     private BigInteger idPdedidoConsumibles;
     private Integer idPedido;
-    private Integer ot;
+    private String ot;
     private String codigo;
     private String descripcion;
     private String tipo;
@@ -26,7 +26,7 @@ public class ConsumiblesDtoRev {
     public ConsumiblesDtoRev() {
     }
 
-    public ConsumiblesDtoRev(BigInteger idPdedidoConsumibles, Integer idPedido, Integer ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad) {
+    public ConsumiblesDtoRev(BigInteger idPdedidoConsumibles, Integer idPedido, String ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad) {
         this.idPdedidoConsumibles = idPdedidoConsumibles;
         this.idPedido = idPedido;
         this.ot = ot;
@@ -55,11 +55,11 @@ public class ConsumiblesDtoRev {
         this.idPedido = idPedido;
     }
 
-    public Integer getOt() {
+    public String getOt() {
         return ot;
     }
 
-    public void setOt(Integer ot) {
+    public void setOt(String ot) {
         this.ot = ot;
     }
 
