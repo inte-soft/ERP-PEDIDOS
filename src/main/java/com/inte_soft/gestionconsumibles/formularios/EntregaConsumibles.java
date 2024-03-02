@@ -146,7 +146,7 @@ public class EntregaConsumibles extends javax.swing.JDialog {
             model.addRow(
                     new Object[]{
                             entregaDto.getId(),
-                            entregaDto.getOt().getOt(),
+                            entregaDto.getOt(),
                             entregaDto.getItem(),
                             entregaDto.getCodigo(),
                             entregaDto.getDescripcion(),

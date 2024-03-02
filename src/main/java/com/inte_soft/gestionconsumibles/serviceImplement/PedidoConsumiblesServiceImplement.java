@@ -196,7 +196,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
         }
         // buscar los todos los pedidos de la ot y revisar en pedidos consumibles si la cantidad y la cantidad alistada son iguales y marcar el pedido como alistado
-        String ot = consumiblesEntregaDto.get(0).getOt().getOt();
+        String ot = consumiblesEntregaDto.get(0).getOt();
         PedidosDao pedidosDao = new PedidosDao();
         List<Pedidos> pedidos = pedidosDao.findByOt(ot);
         for (Pedidos p : pedidos) {

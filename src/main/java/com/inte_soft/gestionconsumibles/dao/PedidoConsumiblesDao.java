@@ -417,16 +417,19 @@ public class PedidoConsumiblesDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.EntregaDto(pc.idPedidoConsumibles, i.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad, COALESCE(COALESCE(tce.cMax,0) + COALESCE(tcm.cMax,0)), COALESCE(COALESCE(tce.cMin,0) + COALESCE(tcm.cMin,0)), pc.alistado, p.tipoPedido, pc.observacion) "
+            String queryString = "SELECT NEW com.inte_soft.gestionconsumibles.dto.EntregaDto(pc.idPedidoConsumibles, p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad, MAX(COALESCE(COALESCE(tce.cMax,0) + COALESCE(tcm.cMax,0))), MAX(COALESCE(COALESCE(tce.cMin,0) + COALESCE(tcm.cMin,0))), pc.alistado, p.tipoPedido, pc.observacion) "
                     + "FROM PedidoConsumibles pc "
-                    + "JOIN pc.pedidos p "
+                    + "JOIN pc.pedidos p ON pc.pedidos.idPedido = p.idPedido "
                     + "LEFT JOIN TipicoConsumiblesElectricos tce ON pc.codigo = tce.master.codigo "
                     + "LEFT JOIN TipicoConsumiblesMecanicos tcm ON pc.codigo = tcm.master.codigo "
                     + "LEFT JOIN Item i ON pc.item = i.item "
+                    + "LEFT JOIN Ot o ON p.ot = o.ot "
                     + "WHERE p.ot = :ot "
                     + "AND pc.item IN (:listItem) "
                     + "AND p.tipoPedido = :area "
-                    + "AND pc.codigo = :codigo";
+                    + "AND pc.codigo = :codigo "
+                    + "AND p.comprado = true "
+                    + "GROUP BY pc.idPedidoConsumibles, p.ot, pc.item, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, pc.cantidad, p.tipoPedido, pc.observacion";
             TypedQuery<EntregaDto> query = entityManager.createQuery(queryString, EntregaDto.class);
             query.setParameter("ot", ot.getOt());
             query.setParameter("listItem", listItem);

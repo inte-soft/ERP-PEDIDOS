@@ -7,7 +7,7 @@ import java.math.BigInteger;
 public class EntregaDto {
 
         private BigInteger id;
-        private Ot ot;
+        private String ot;
         private String item;
         private String codigo;
         private String descripcion;
@@ -26,7 +26,7 @@ public class EntregaDto {
         public EntregaDto() {
         }
 
-        public EntregaDto(BigInteger id, Ot ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad, Integer max, Integer min, double alistado, String area, String observacion) {
+        public EntregaDto(BigInteger id, String ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad, Integer max, Integer min, double alistado, String area, String observacion) {
             this.id = id;
             this.ot = ot;
             this.item = item;
@@ -52,11 +52,11 @@ public class EntregaDto {
         this.id = id;
     }
 
-    public Ot getOt() {
+    public String getOt() {
         return ot;
     }
 
-    public void setOt(Ot ot) {
+    public void setOt(String ot) {
         this.ot = ot;
     }
 
