@@ -126,7 +126,7 @@ public class EntregaConsumibles extends javax.swing.JDialog {
                 }
             }
         }
-        pedidoConsumiblesController.updateEntregaConsumibles(consumiblesEntregaDto);
+        pedidoConsumiblesController.updateEntregaConsumibles(consumiblesEntregaDto, listItem);
         listadoPendiente.loadConsumibles();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

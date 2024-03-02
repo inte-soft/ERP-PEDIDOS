@@ -105,8 +105,8 @@ public class PedidoConsumiblesController {
         return pedidoConsumiblesServices.getConsumiblesByOtAndItemUnicConsumible(ot, listItem, area, codigo);
     }
 
-    public void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto) {
-        pedidoConsumiblesServices.updateEntregaConsumibles(consumiblesEntregaDto);
+    public void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto, List<String> listItem) {
+        pedidoConsumiblesServices.updateEntregaConsumibles(consumiblesEntregaDto, listItem);
 
     }
 }

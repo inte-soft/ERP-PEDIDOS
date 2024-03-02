@@ -476,4 +476,19 @@ public class PedidoConsumiblesDao {
         entityManager.close();
         return resultList;
     }
+
+
+
+    public List<PedidoConsumibles> getConsumiblesByOyAndListItem(String ot, String item) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<PedidoConsumibles> resultList = entityManager
+                .createQuery("SELECT pc FROM PedidoConsumibles pc WHERE pc.pedidos.ot = :ot AND pc.item = :item", PedidoConsumibles.class)
+                .setParameter("ot", ot)
+                .setParameter("item", item)
+                .getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return resultList;
+    }
 }

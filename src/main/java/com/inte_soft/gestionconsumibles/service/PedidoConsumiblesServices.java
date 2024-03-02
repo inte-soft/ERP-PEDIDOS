@@ -47,6 +47,6 @@ public interface PedidoConsumiblesServices {
 
  List<EntregaDto> getConsumiblesByOtAndItemUnicConsumible(Ot ot, List<String> listItem, String area, String codigo);
 
- void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto);
+ void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto, List<String> listItem);
 
 }

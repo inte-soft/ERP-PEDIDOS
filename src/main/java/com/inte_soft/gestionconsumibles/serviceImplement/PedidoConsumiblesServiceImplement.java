@@ -4,10 +4,7 @@
  */
 package com.inte_soft.gestionconsumibles.serviceImplement;
 
-import com.inte_soft.gestionconsumibles.dao.MasterDao;
-import com.inte_soft.gestionconsumibles.dao.PedidoComprasDao;
-import com.inte_soft.gestionconsumibles.dao.PedidoConsumiblesDao;
-import com.inte_soft.gestionconsumibles.dao.PedidosDao;
+import com.inte_soft.gestionconsumibles.dao.*;
 import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
@@ -182,8 +179,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
     }
 
     @Override
-    public void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto) {
+    public void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto, List<String> listItem) {
         //un bucle donde se busque el pedido pol el id y se axtualizce el campo alistado y observacio
+
         pedidoConsumiblesDao = new PedidoConsumiblesDao();
         for (EntregaDto e : consumiblesEntregaDto) {
             Optional<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.findById(e.getId());
@@ -195,22 +193,25 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
             }
 
         }
-        // buscar los todos los pedidos de la ot y revisar en pedidos consumibles si la cantidad y la cantidad alistada son iguales y marcar el pedido como alistado
+        // buscar los todos los pedidos de la ot y revisar en pedidos consumibles si la cantidad y la cantidad alistada son iguales y marcar el item como alistado
         String ot = consumiblesEntregaDto.get(0).getOt();
         PedidosDao pedidosDao = new PedidosDao();
-        List<Pedidos> pedidos = pedidosDao.findByOt(ot);
-        for (Pedidos p : pedidos) {
-            List<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.findByPedido(p.getIdPedido());
-            boolean revisado = true;
-            for (PedidoConsumibles pc : pedidoConsumibles) {
-                if (pc.getCantidad() != pc.getAlistado()) {
-                    revisado = false;
-                    break;
+        for (String item : listItem) {
+            List<PedidoConsumibles> pedidoConsumibles = pedidoConsumiblesDao.getConsumiblesByOyAndListItem(ot, item);
+            if (pedidoConsumibles.size() > 0) {
+                Boolean alistado = true;
+                for (PedidoConsumibles pc : pedidoConsumibles) {
+                    if (pc.getCantidad() != pc.getAlistado()) {
+                        alistado = false;
+                    }
+                }
+                ItemDao itemDao = new ItemDao();
+                if (alistado) {
+                    itemDao.updateItemAlistado(ot, item);
                 }
             }
-            p.setRevisado(revisado);
-            pedidosDao.updatePedido(p);
         }
+
     }
 
 

@@ -79,4 +79,17 @@ entityManager.getTransaction().begin();
         entityManager.close();
         return items;
     }
+
+    public void updateItemAlistado(String ot, String item) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        entityManager.createQuery("UPDATE Item i SET i.alistado = TRUE WHERE i.ot = :ot AND i.item = :item")
+                .setParameter("ot", ot)
+                .setParameter("item", item)
+                .executeUpdate();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
 }
