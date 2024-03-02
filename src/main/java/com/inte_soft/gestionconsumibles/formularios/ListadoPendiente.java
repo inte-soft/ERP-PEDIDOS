@@ -196,7 +196,17 @@ public class ListadoPendiente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        String items = "";
+        for (String listItem1 : listItem) {
+            items += listItem1 + ", ";
+        }
+        Date fecha = new Date();
+        String header = "OT: " + this.ot.getOt() + " Items: " + items +"     " + fecha;
+        String footer = "Elabora: " + this.usuarios.getNombres() + " " + this.usuarios.getApellidos();
+        JTablePrinter jTablePrinter = new JTablePrinter();
+        jTablePrinter.printTable(tbListadoConsumibles, header, footer);
+        this.setModal(Boolean.FALSE);
+        this.toFront();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
