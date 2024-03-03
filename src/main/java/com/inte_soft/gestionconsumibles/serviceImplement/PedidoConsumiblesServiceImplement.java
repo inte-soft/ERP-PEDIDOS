@@ -8,6 +8,8 @@ import com.inte_soft.gestionconsumibles.dao.*;
 import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
         pedidos.setTipoPedido(tipoPedido);
         pedidos.setComprado(true);
         Pedidos pedidosPersist = pedidosDao.createPedido(pedidos);
-        
+
+
+
         
 
         for (PedidoConsumibles pc : pedidoConsumibleses) {
@@ -60,10 +64,33 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 e.printStackTrace();
 
             }
-        }}
+        }
+
+             List<String> listItem = new ArrayList<>();
+             //buscar los items de los pedidos sin repetir
+             for (PedidoConsumibles pc : pedidoConsumibleses) {
+                 if (!listItem.contains(pc.getItem())) {
+                     listItem.add(pc.getItem());
+                 }
+             }
+
+             try {
+
+
+                 //modificar el campo alistado de los items de la ot
+                 ItemDao itemDao = new ItemDao();
+                 OtDao OtDao = new OtDao();
+                 Ot ot1 = OtDao.getOtByOt(ot);
+                 for (String item : listItem) {
+                     itemDao.updateItemAlistadoFalse(ot1, item);
+                 }
+             }catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
          
-         
-            
+
+
        
 
         if(!listPedidosCompras.isEmpty()){
@@ -103,6 +130,8 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 }
             }
         }
+
+
 
     }
 

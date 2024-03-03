@@ -30,7 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="1506" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="1268" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -55,7 +55,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="900" minWidth="300" prefWidth="900" resizable="true">
+                <Column maxWidth="900" minWidth="400" prefWidth="900" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -135,7 +135,12 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="300" minWidth="100" prefWidth="300" resizable="true">
+                <Column maxWidth="100" minWidth="50" prefWidth="100" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="100" minWidth="50" prefWidth="100" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -145,12 +150,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="300" minWidth="100" prefWidth="300" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="300" minWidth="100" prefWidth="300" resizable="true">
+                <Column maxWidth="120" minWidth="60" prefWidth="120" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
