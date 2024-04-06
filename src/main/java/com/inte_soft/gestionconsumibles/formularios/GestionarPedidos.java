@@ -119,7 +119,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(2).setMinWidth(50);
             tbListadoConsumibles.getColumnModel().getColumn(2).setPreferredWidth(120);
             tbListadoConsumibles.getColumnModel().getColumn(2).setMaxWidth(120);
-            tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(3).setMinWidth(400);
             tbListadoConsumibles.getColumnModel().getColumn(3).setPreferredWidth(900);
             tbListadoConsumibles.getColumnModel().getColumn(3).setMaxWidth(900);
             tbListadoConsumibles.getColumnModel().getColumn(4).setMinWidth(100);
@@ -131,18 +131,18 @@ public class GestionarPedidos extends javax.swing.JDialog {
             tbListadoConsumibles.getColumnModel().getColumn(6).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(6).setPreferredWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(6).setMaxWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(7).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(7).setPreferredWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(8).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(8).setPreferredWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setMinWidth(50);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(7).setMaxWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setMinWidth(50);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setPreferredWidth(100);
+            tbListadoConsumibles.getColumnModel().getColumn(8).setMaxWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(9).setMinWidth(100);
             tbListadoConsumibles.getColumnModel().getColumn(9).setPreferredWidth(300);
             tbListadoConsumibles.getColumnModel().getColumn(9).setMaxWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(100);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(300);
-            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(300);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(60);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setPreferredWidth(120);
+            tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(120);
             tbListadoConsumibles.getColumnModel().getColumn(11).setMinWidth(0);
             tbListadoConsumibles.getColumnModel().getColumn(11).setPreferredWidth(0);
             tbListadoConsumibles.getColumnModel().getColumn(11).setMaxWidth(0);
@@ -183,7 +183,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1506, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -202,7 +202,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
