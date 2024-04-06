@@ -37,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
     private WindowSingleton windowGestionConsumibles;
     private WindowSingleton windowpedidosEspeciales;
     private WindowSingleton windowOtProgramada;
+    private WindowSingleton windowPendientes;
 
     
     private Usuarios usuarios;
@@ -56,10 +57,12 @@ public class Principal extends javax.swing.JFrame {
         this.windowGestionConsumibles = new WindowSingleton();
         this.windowOtProgramada = new WindowSingleton();
         this.windowpedidosEspeciales = new WindowSingleton();
+        this.windowPendientes = new WindowSingleton();
 
 
     if(!this.usuarios.getpAdminUser()){
         this.jMAdministrar.setVisible(false);
+        this.jMenuInformes.setVisible(Boolean.FALSE);
     }
     
     if(!this.usuarios.getpAlmacen()){
@@ -106,6 +109,10 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAdministrar = new javax.swing.JMenu();
@@ -126,8 +133,18 @@ public class Principal extends javax.swing.JFrame {
         maxMinE = new javax.swing.JMenuItem();
         maxMinM = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuInformes = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -298,6 +315,18 @@ public class Principal extends javax.swing.JFrame {
         compras.add(jMenuItem3);
 
         jMenuBar1.add(compras);
+
+        jMenuInformes.setText("Informes");
+
+        jMenuItem4.setText("Pendientes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuInformes.add(jMenuItem4);
+
+        jMenuBar1.add(jMenuInformes);
 
         setJMenuBar(jMenuBar1);
 
@@ -552,6 +581,17 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if (!windowPendientes.getWindowState()) {
+            windowPendientes.setOpenWindow();
+            Pendientes pendientes = new Pendientes(this.windowPendientes);
+            escritorio.add(pendientes);
+            pendientes.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La ventana ya esta abierta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     public void openGestionUsuarios(){
         if(!windowUsuarios.getWindowState()){
             windowUsuarios.setOpenWindow();
@@ -620,11 +660,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMIngenieria;
     private javax.swing.JMenu jMProduccion;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem maxMinE;
     private javax.swing.JMenuItem maxMinM;

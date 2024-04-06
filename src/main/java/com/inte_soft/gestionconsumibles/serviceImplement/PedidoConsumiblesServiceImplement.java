@@ -245,5 +245,11 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
 
     }
 
+    @Override
+    public List<PendientesDto> getConsumiblesPendientes() {
+        pedidoConsumiblesDao = new PedidoConsumiblesDao();
+        return pedidoConsumiblesDao.getConsumiblesPendientes();
+    }
+
 
 }

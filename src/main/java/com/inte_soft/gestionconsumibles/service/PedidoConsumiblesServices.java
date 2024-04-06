@@ -49,4 +49,5 @@ public interface PedidoConsumiblesServices {
 
  void updateEntregaConsumibles(List<EntregaDto> consumiblesEntregaDto, List<String> listItem);
 
+    List<PendientesDto> getConsumiblesPendientes();
 }

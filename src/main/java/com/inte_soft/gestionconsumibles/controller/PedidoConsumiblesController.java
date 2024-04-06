@@ -109,4 +109,8 @@ public class PedidoConsumiblesController {
         pedidoConsumiblesServices.updateEntregaConsumibles(consumiblesEntregaDto, listItem);
 
     }
+
+    public List<PendientesDto> getConsumiblesPendientes() {
+        return pedidoConsumiblesServices.getConsumiblesPendientes();
+    }
 }

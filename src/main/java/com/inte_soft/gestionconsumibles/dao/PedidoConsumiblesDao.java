@@ -491,4 +491,19 @@ public class PedidoConsumiblesDao {
         entityManager.close();
         return resultList;
     }
+
+    public List<PendientesDto> getConsumiblesPendientes() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<PendientesDto> resultList = entityManager
+                .createQuery("SELECT NEW com.inte_soft.gestionconsumibles.dto.PendientesDto(p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, SUM(pc.cantidad), SUM(pc.alistado), p.tipoPedido) "
+                        + "FROM PedidoConsumibles pc "
+                        + "JOIN pc.pedidos p "
+                        + "WHERE pc.alistado < pc.cantidad "
+                        + "GROUP BY p.ot, pc.codigo, pc.descripcion, pc.tipo, pc.referencia, pc.marca, pc.unidad, p.tipoPedido", PendientesDto.class)
+                .getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return resultList;
+    }
 }
