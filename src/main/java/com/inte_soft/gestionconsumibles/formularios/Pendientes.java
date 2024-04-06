@@ -7,6 +7,7 @@ package com.inte_soft.gestionconsumibles.formularios;
 import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.dto.PendientesDto;
+import com.inte_soft.gestionconsumibles.util.ExcelExporter;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
@@ -62,6 +63,7 @@ public class Pendientes extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         for (PendientesDto pendientesDto  : consumiblesDtoOtList) {
             model.addRow(new Object[]{
+                    pendientesDto.getOt(),
                     pendientesDto.getCodigo(),
                     pendientesDto.getDescripcion(),
                     pendientesDto.getTipo(),
@@ -112,6 +114,11 @@ public class Pendientes extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Exportar a Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +145,16 @@ public class Pendientes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTable1.getRowCount()>0) {
+            ExcelExporter excelExporter = new ExcelExporter();
+            excelExporter.exportTable(jTable1);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "debes tener datos para poder exportar","Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
