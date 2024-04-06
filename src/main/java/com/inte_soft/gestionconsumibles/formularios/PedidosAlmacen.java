@@ -1180,6 +1180,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void updatePedidosSinRevisarOts(JTable table, List<String> ots) {
+        try{
         PedidoConsumiblesController pedidoConsumiblesController = new PedidoConsumiblesController();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
@@ -1204,6 +1205,9 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
             model.addRow(rowData);
 
+        }
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
     }
