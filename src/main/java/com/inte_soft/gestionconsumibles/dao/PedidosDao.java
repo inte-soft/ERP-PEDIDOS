@@ -118,7 +118,8 @@ public class PedidosDao {
 
         String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado) "
                 + "FROM Pedidos p "
-                + "WHERE  p.operacion LIKE '%Adicional%' AND p.comprado = TRUE";
+                + "WHERE  p.operacion LIKE '%Adicional%' AND p.comprado = TRUE "
+                + "ORDER BY p.fecha DESC";
         
         
         TypedQuery<PedidoDto> query = entityManager.createQuery(queryString, PedidoDto.class);
