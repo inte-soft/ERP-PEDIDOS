@@ -60,6 +60,7 @@ public class GestionarPedidos extends javax.swing.JDialog {
         
         if( this.usuarios.getpAlmacen()){
             this.jButton2.setVisible(Boolean.FALSE);
+            ocultarColumna();
             
         }
 
@@ -403,6 +404,13 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
 
         }
+    }
+
+
+    public void ocultarColumna(){
+        this.tbListadoConsumibles.getColumnModel().getColumn(10).setMinWidth(0);
+        this.tbListadoConsumibles.getColumnModel().getColumn(10).setMaxWidth(0);
+        this.tbListadoConsumibles.getColumnModel().getColumn(10).setWidth(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
