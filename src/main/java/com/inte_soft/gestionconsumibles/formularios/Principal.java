@@ -81,7 +81,7 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
-    if(!this.usuarios.getpCompras()){
+    if(!this.usuarios.getpCompras()||!this.usuarios.getpAlmacen()){
         this.compras.setVisible(false);
         
     }
