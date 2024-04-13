@@ -371,7 +371,7 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String tipo = "comprado";
-        desplegar(this.jTpedidosEspeciales1, tipo);
+        desplegar(this.jTpedidosEspeciales1, tipo, this.usuarios);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
