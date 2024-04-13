@@ -323,12 +323,12 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //validar si hay un afila seleccionada
         String tipo = "sinComprar";
-        desplegar(this.jTpedidosEspeciales, tipo);
+        desplegar(this.jTpedidosEspeciales, tipo,this.usuarios);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void desplegar(JTable jTable, String tipo){
+    public void desplegar(JTable jTable, String tipo,Usuarios usuarios){
         if (jTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un pedido");
             return;

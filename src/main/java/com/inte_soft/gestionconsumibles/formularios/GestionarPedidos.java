@@ -58,6 +58,10 @@ public class GestionarPedidos extends javax.swing.JDialog {
             this.jButton2.setEnabled(false);
         }
         
+        if( this.usuarios.getpAlmacen()){
+            this.jButton2.setVisible(Boolean.FALSE);
+            
+        }
 
 
 
