@@ -41,7 +41,9 @@ public class GestionarPedidos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    /**
+     * Creates new form gestionarPedidos
+     */
     public GestionarPedidos(Usuarios usuarios, Pedidos pedido, pedidosEspeciales pedidosEspeciales, String tipo ) {
         initComponents();
         this.usuarios = usuarios;
@@ -57,12 +59,14 @@ public class GestionarPedidos extends javax.swing.JDialog {
             this.tbListadoConsumibles.setEnabled(false);
             this.jButton2.setEnabled(false);
         }
-        
-        if( this.usuarios.getpAlmacen()){
+
+        if( this.usuarios.getpAlmacen() && !this.usuarios.getpCompras()){
             this.jButton2.setVisible(Boolean.FALSE);
             ocultarColumna();
             
         }
+
+
 
 
 
@@ -222,7 +226,11 @@ public class GestionarPedidos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    /**
+     * Metodo para detener la edicion de la tabla
+     * @param table
+     */
     private void stopEditing(JTable table) {
         if (table.isEditing()) {
             TableCellEditor cellEditor = table.getCellEditor();
@@ -231,7 +239,11 @@ public class GestionarPedidos extends javax.swing.JDialog {
             }
         }
     }
-    
+
+    /**
+     * Metodo para guardar las compras
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // metodo para guardar las compras primero se valida si hay algun check seleccionado
         stopEditing(this.tbListadoConsumibles);
@@ -312,11 +324,17 @@ public class GestionarPedidos extends javax.swing.JDialog {
         }
         this.pedidosEspeciales.loadPedidosCompras();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Metodo para buscar en la tabla
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.modelarTabla.filter(this.jTextField1.getText(),null);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    /**
+     * Metodo para imprimir el listado de pedidos
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // metodo para imprimir el listado de pedidos
         Date fecha = new Date();

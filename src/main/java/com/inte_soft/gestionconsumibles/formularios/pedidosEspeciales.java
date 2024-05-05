@@ -47,7 +47,7 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
         this.usuarios = usuarios;
         loadPedidosCompras();
         loadPedidosComprasOk();
-        // nuevo hillo con una rutina que se ejecute cada 5 minutos
+        // nuevo hilo con una rutina que se ejecute cada 5 minutos
         Thread thread = new Thread(() -> {
             while (true) {
                 try {
