@@ -391,6 +391,13 @@ public class PedidoConsumiblesDao {
         return resultList;
     }
 
+    /**
+     *
+     * @param ot
+     * @param listItem
+     * @param area
+     * @return consumiblesDtoOt
+     */
     public List<ConsumiblesDtoOt> getConsumiblesByOtAndItem(Ot ot, List<String> listItem, String area) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();

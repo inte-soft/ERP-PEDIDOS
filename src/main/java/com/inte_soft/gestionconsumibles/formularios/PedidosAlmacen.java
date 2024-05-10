@@ -47,9 +47,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     private DefaultTableModel model5;
     private DefaultTableModel model6;
     private TableRowSorter<DefaultTableModel> sorter;
+    private TableRowSorter<DefaultTableModel> sorter2;
     private List<PedidoDto> listPedidos;
     private List<String> listOts;
     private ModelarTabla modelarTabla;
+    private ModelarTabla modelarTabla1;
     private PedidoConsumiblesController pedidoConsumiblesController;
     private WindowSingleton windowSingleton;
     private List<Item> listItems;
@@ -73,7 +75,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         this.otController = new OtController();
         this.itemController = new ItemController();
         this.usuario = usuario;
-        this.model1 = modelarTabla(jTable1);
+        modelarTabla1 = new ModelarTabla(jTable1);
+        this.model1 = modelarTabla1.getModel();
         this.modelarTabla = new ModelarTabla(jTable2);
         this.pedidoConsumiblesController = new PedidoConsumiblesController();
         this.windowSingleton = windowSingleton;
@@ -841,7 +844,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchKeyReleased
-        filter();
+        modelarTabla1.filter(jTextSearch.getText(), 1);
     }//GEN-LAST:event_jTextSearchKeyReleased
 
     private void tbn_verPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_verPedidoActionPerformed
@@ -1134,13 +1137,21 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         this.pedidoConsumiblesController.applycheck(listConsumiblesDtoRev);
     }
 
-    private void filter() {
-        try {
-            sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
+    private void filter(String text) {
+        if (text.isEmpty()) {
+            try {
+                sorter.setRowFilter(RowFilter.regexFilter(this.jTextSearch.getText()));
 
-        } catch (Exception e) {
+            } catch (Exception e) {
 
+            }
+        }else {
+            try {
+                sorter.setRowFilter(RowFilter.regexFilter(text));
+            } catch (Exception e) {
+            }
         }
+
     }
 
     public void verPedidos() {

@@ -232,7 +232,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
             if (pedidoConsumibles.size() > 0) {
                 Boolean alistado = true;
                 for (PedidoConsumibles pc : pedidoConsumibles) {
-                    if (pc.getCantidad() != pc.getAlistado()) {
+                    if (Double.parseDouble(String.valueOf(pc.getCantidad())) != pc.getAlistado()) {
                         alistado = false;
                     }
                 }
