@@ -192,9 +192,31 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El numero de OT debe tener 5 digitos");
 
         }else  {
-            Integer item = null;
+            String item = null;
             try {
-                item = Integer.parseInt(this.jTextField2.getText());
+                item = this.jTextField2.getText();
+                Boolean withDot = false;
+                Integer integer1 = 0;
+                Integer integer2 = 0;
+                if(item.contains(".")){
+                    try {
+                        integer1 = Integer.parseInt(item.split("\\.")[0]);
+                        if (item.contains(".")) {
+                            integer2 = Integer.parseInt(item.split("\\.")[1]);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "El item debe ser numerico");
+                        return;
+                    }
+                    withDot = true;
+                }else if (item.contains(",")){
+                    JOptionPane.showMessageDialog(null, "El item debe ser numerico de este formato: 00.00 ");
+                    return;
+                }
+                if(item.isBlank()){
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un item");
+                    return;
+                }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "El item debe ser numerico");
                 return;

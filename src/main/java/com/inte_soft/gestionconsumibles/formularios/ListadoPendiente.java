@@ -8,11 +8,13 @@ import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.ConsumiblesDtoOt;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.CustomRowRendererGreen;
 import com.inte_soft.gestionconsumibles.util.JTablePrinter;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -155,6 +157,10 @@ public class ListadoPendiente extends JDialog {
     public void loadConsumibles(){
         this.consumiblesDtoOts = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem,area );;
         model.setRowCount(0);
+        Color customColor = Color.GREEN;
+        Font font = new Font("Arial", Font.BOLD, 14);
+        CustomRowRendererGreen customRowRendererGreen = new CustomRowRendererGreen(font, customColor);
+        this.tbListadoConsumibles.setDefaultRenderer(Object.class, customRowRendererGreen);
         for (ConsumiblesDtoOt consumiblesDtoOt : consumiblesDtoOts) {
             model.addRow(new Object[]{
                 consumiblesDtoOt.getCodigo(),

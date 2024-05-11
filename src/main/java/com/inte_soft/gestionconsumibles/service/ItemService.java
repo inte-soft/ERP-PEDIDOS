@@ -11,7 +11,7 @@ public interface ItemService {
 
     List<Item> getItems();
 
-    public Optional<Item> getItemByOtAndItem(Ot ot, Integer item);
+    public Optional<Item> getItemByOtAndItem(Ot ot, String item);
 
     public void updateItem(Item item);
 }

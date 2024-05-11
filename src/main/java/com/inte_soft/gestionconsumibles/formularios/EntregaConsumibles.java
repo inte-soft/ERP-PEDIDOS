@@ -8,9 +8,12 @@ import com.inte_soft.gestionconsumibles.controller.PedidoConsumiblesController;
 import com.inte_soft.gestionconsumibles.dto.EntregaDto;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.entity.Usuarios;
+import com.inte_soft.gestionconsumibles.util.CustomRowRendererGreen;
 import com.inte_soft.gestionconsumibles.util.ModelarTabla;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -119,6 +122,13 @@ public class EntregaConsumibles extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         stopEditing();
         for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if (Double.parseDouble(jTable1.getValueAt(i, 10).toString()) > Double.parseDouble(jTable1.getValueAt(i, 9).toString())) {
+                JOptionPane.showMessageDialog(this, "La cantidad alistada no puede ser mayor a la cantidad solicitada");
+                return;
+            }
+
+        }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
             for (EntregaDto entregaDto : consumiblesEntregaDto) {
                 if (entregaDto.getId().equals(BigInteger.valueOf(Integer.parseInt( jTable1.getValueAt(i, 0).toString())))) {
                     entregaDto.setAlistado(Double.parseDouble(jTable1.getValueAt(i, 10).toString()));
@@ -143,6 +153,12 @@ public class EntregaConsumibles extends javax.swing.JDialog {
             if (entregaDto.getObservacion() == null) {
                 entregaDto.setObservacion("");
             }
+            if(entregaDto.getAreaPedido().contains("Compras")){
+                entregaDto.setAreaPedido("Compras");
+            }else {
+                entregaDto.setAreaPedido("Ingenieria");
+            }
+
             model.addRow(
                     new Object[]{
                             entregaDto.getId(),
@@ -157,7 +173,8 @@ public class EntregaConsumibles extends javax.swing.JDialog {
                             entregaDto.getCantidad(),
                             entregaDto.getAlistado(),
                             entregaDto.getCantidad() - entregaDto.getAlistado(),
-                            entregaDto.getObservacion()
+                            entregaDto.getObservacion(),
+                            entregaDto.getAreaPedido()
                             });
         }
     }

@@ -240,6 +240,32 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
+        try {
+            String item = (this.item.getText());
+            Integer integer1 = 0;
+            Integer integer2 = 0;
+            integer1 = Integer.parseInt(item.split("\\.")[0]);
+        if (item.contains(".")) {
+            integer2 = Integer.parseInt(item.split("\\.")[1]);
+        }
+            if (integer1 < 0 || integer1 > 99 || integer2 < 0 || integer2 > 99) {
+                JOptionPane.showMessageDialog(null,
+                        "El item debe ser un numero con el formato 00.00",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else if (item.contains(",")) {
+                JOptionPane.showMessageDialog(null,
+                        "El item debe ser un numero con el formato 00.00",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,
+                    "El item debe ser un numero con el formato 00.00",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if(!txtOt.getText().isBlank()
                 && cbSeleccion1.getSelectedItem() != "Selecciona" 
                 && !item.getText().isBlank()){

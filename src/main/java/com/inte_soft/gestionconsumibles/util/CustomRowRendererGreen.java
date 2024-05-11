@@ -1,16 +1,14 @@
 package com.inte_soft.gestionconsumibles.util;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import javax.swing.JTable;
+import java.awt.*;
 
-public class CustomRowRenderer extends DefaultTableCellRenderer {
+public class CustomRowRendererGreen extends DefaultTableCellRenderer {
     private Font customFont;
     private Color customColor;
 
-    public CustomRowRenderer(Font font, Color color) {
+    public CustomRowRendererGreen(Font font, Color color) {
         customFont = font;
         customColor = color;
     }
@@ -19,11 +17,11 @@ public class CustomRowRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-        // Obtén el valor de la columna 5 (visto)
-        boolean isVisto = (boolean) table.getValueAt(row, 5);
 
-        // Aplica el formato personalizado a toda la fila si es "False"
-        if (!isVisto) {
+        Double pendiente =  Double.parseDouble(table.getValueAt(row, 10).toString());
+
+
+        if (pendiente == 0){
             component.setFont(customFont);
             component.setForeground(customColor);
         } else {

@@ -40,7 +40,7 @@ public class ItemServiceImplement implements ItemService {
     }
 
     @Override
-    public Optional<Item> getItemByOtAndItem(Ot ot, Integer item) {
+    public Optional<Item> getItemByOtAndItem(Ot ot, String item) {
         itemDao = new ItemDao();
         return itemDao.getItemByOtAndItem(ot, item);
     }

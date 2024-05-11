@@ -15,7 +15,6 @@ import com.inte_soft.gestionconsumibles.util.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.math.BigInteger;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1162,7 +1161,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // Crea una instancia de tu CustomCellRenderer
         Font customFont = new Font("Arial", Font.BOLD, 14);
         Color customColor = Color.BLUE;
-        CustomRowRenderer customRowRenderer = new CustomRowRenderer(customFont, customColor);
+        CustomRowRendererBlue customRowRenderer = new CustomRowRendererBlue(customFont, customColor);
         jTable1.setDefaultRenderer(Object.class, customRowRenderer);
         for (PedidoDto pedidos : this.listPedidos) {
             Object[] rowData = {

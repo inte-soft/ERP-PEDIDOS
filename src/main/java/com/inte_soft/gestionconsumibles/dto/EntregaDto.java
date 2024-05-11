@@ -21,12 +21,13 @@ public class EntregaDto {
         private double alistado;
         private String area;
         private String observacion;
+        private String areaPedido;
 
 
         public EntregaDto() {
         }
 
-        public EntregaDto(BigInteger id, String ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad, Integer max, Integer min, double alistado, String area, String observacion) {
+        public EntregaDto(BigInteger id, String ot, String item, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, Float cantidad, Integer max, Integer min, double alistado, String area, String observacion, String areaPedido) {
             this.id = id;
             this.ot = ot;
             this.item = item;
@@ -42,6 +43,7 @@ public class EntregaDto {
             this.alistado = alistado;
             this.area = area;
             this.observacion = observacion;
+            this.areaPedido = areaPedido;
         }
 
     public BigInteger getId() {
@@ -164,6 +166,12 @@ public class EntregaDto {
             this.observacion = observacion;
         }
 
+    public String getAreaPedido() {
+            return areaPedido;
+        }
+    public void setAreaPedido(String areaPedido) {
+            this.areaPedido = areaPedido;
+        }
 
 
 

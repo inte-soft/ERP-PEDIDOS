@@ -47,7 +47,7 @@ entityManager.getTransaction().begin();
         return items;
     }
 
-    public Optional<Item> getItemByOtAndItem(Ot ot, Integer item) {
+    public Optional<Item> getItemByOtAndItem(Ot ot, String item) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Item item1 = entityManager.createQuery(

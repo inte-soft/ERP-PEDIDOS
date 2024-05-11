@@ -10,7 +10,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "ITEM")
-    private Integer item;
+    private String item;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_OT")
     private Ot ot;
@@ -26,7 +26,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Integer id, Integer item, Ot ot, Boolean cerrado, Date entrega, Boolean alistado) {
+    public Item(Integer id, String item, Ot ot, Boolean cerrado, Date entrega, Boolean alistado) {
         this.id = id;
         this.item = item;
         this.ot = ot;
@@ -43,11 +43,11 @@ public class Item {
         this.id = id;
     }
 
-    public Integer getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(Integer item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
