@@ -70,11 +70,11 @@ public class EntregaConsumibles extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Ot", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad", "Entregado", "Pendiente", "Obcervaciones"
+                "ID", "Ot", "Item", "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cantidad", "Entregado", "Pendiente", "Obcervaciones", "Area_Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false, true, false, true
+                true, false, false, false, false, false, false, false, false, false, true, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -100,7 +100,7 @@ public class EntregaConsumibles extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
