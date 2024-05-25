@@ -86,7 +86,7 @@ entityManager.getTransaction().begin();
 
         entityManager.createQuery("UPDATE Item i SET i.alistado = TRUE WHERE i.ot = :ot AND i.item = :item")
                 .setParameter("ot", ot)
-                .setParameter("item", Integer.parseInt(item))
+                .setParameter("item", item)
                 .executeUpdate();
 
         entityManager.getTransaction().commit();

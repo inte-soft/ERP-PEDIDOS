@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -149,6 +150,10 @@ public class EntregaConsumibles extends javax.swing.JDialog {
     private void loadConsumibles(){
         consumiblesEntregaDto = pedidoConsumiblesController.getConsumiblesByOtAndItemUnicConsumible(ot, listItem, area, codigo);
         model.setRowCount(0);
+        Color customColor = Color.BLUE;
+        Font font = new Font("Arial", Font.BOLD, 14);
+        CustomRowRendererGreen customRowRendererGreen = new CustomRowRendererGreen(font, customColor,11);
+        jTable1.setDefaultRenderer(Object.class, customRowRendererGreen);
         for(EntregaDto entregaDto : consumiblesEntregaDto){
             if (entregaDto.getObservacion() == null) {
                 entregaDto.setObservacion("");
@@ -172,7 +177,7 @@ public class EntregaConsumibles extends javax.swing.JDialog {
                             entregaDto.getUnidad(),
                             entregaDto.getCantidad(),
                             entregaDto.getAlistado(),
-                            entregaDto.getCantidad() - entregaDto.getAlistado(),
+                            Double.parseDouble(String.format(Locale.US, "%.1f", entregaDto.getCantidad() - entregaDto.getAlistado())),
                             entregaDto.getObservacion(),
                             entregaDto.getAreaPedido()
                             });

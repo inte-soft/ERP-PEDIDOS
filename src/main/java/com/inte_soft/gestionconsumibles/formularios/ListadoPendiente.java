@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -157,9 +158,9 @@ public class ListadoPendiente extends JDialog {
     public void loadConsumibles(){
         this.consumiblesDtoOts = this.pedidoConsumiblesController.getConsumiblesByOtAndItem(ot, listItem,area );;
         model.setRowCount(0);
-        Color customColor = Color.GREEN;
+        Color customColor = Color.BLACK;
         Font font = new Font("Arial", Font.BOLD, 14);
-        CustomRowRendererGreen customRowRendererGreen = new CustomRowRendererGreen(font, customColor);
+        CustomRowRendererGreen customRowRendererGreen = new CustomRowRendererGreen(font, customColor,10);
         this.tbListadoConsumibles.setDefaultRenderer(Object.class, customRowRendererGreen);
         for (ConsumiblesDtoOt consumiblesDtoOt : consumiblesDtoOts) {
             model.addRow(new Object[]{
@@ -173,7 +174,7 @@ public class ListadoPendiente extends JDialog {
                 consumiblesDtoOt.getMax(),
                 consumiblesDtoOt.getMin(),
                 consumiblesDtoOt.getAlistado(),
-                consumiblesDtoOt.getCantidad() - consumiblesDtoOt.getAlistado(),
+                    Double.parseDouble(String.format(Locale.US, "%.1f", consumiblesDtoOt.getCantidad() - consumiblesDtoOt.getAlistado())),
             });
 
         }
