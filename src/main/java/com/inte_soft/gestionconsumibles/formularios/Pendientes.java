@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -72,7 +73,7 @@ public class Pendientes extends javax.swing.JInternalFrame {
                     pendientesDto.getUnidad(),
                     pendientesDto.getCantidad(),
                     pendientesDto.getAlistado(),
-                    pendientesDto.getCantidad()-pendientesDto.getAlistado(),
+                    Double.parseDouble(String.format(Locale.US, "%.1f",pendientesDto.getCantidad()-pendientesDto.getAlistado()),
                     pendientesDto.getArea().replace("CONSUMIBLES ","")
             });
         }
