@@ -73,7 +73,7 @@ public class Pendientes extends javax.swing.JInternalFrame {
                     pendientesDto.getUnidad(),
                     pendientesDto.getCantidad(),
                     pendientesDto.getAlistado(),
-                    Double.parseDouble(String.format(Locale.US, "%.1f",pendientesDto.getCantidad()-pendientesDto.getAlistado()),
+                    Double.parseDouble(String.format(Locale.US, "%.1f",pendientesDto.getCantidad()-pendientesDto.getAlistado())),
                     pendientesDto.getArea().replace("CONSUMIBLES ","")
             });
         }
@@ -134,6 +134,11 @@ public class Pendientes extends javax.swing.JInternalFrame {
         jLabel1.setText("Buscar:");
 
         jTextBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextBuscarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,6 +189,10 @@ public class Pendientes extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadPendientes();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextBuscarKeyReleased
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

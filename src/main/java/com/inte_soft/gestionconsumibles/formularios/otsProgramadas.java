@@ -128,6 +128,11 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         jLabel4.setText("Buscar:");
 
         jTextBuscar2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextBuscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextBuscar2KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,6 +275,10 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             }
             loadOts();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextBuscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscar2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextBuscar2KeyReleased
 
     public void loadOts(){
         items = this.itemController.getItems();
