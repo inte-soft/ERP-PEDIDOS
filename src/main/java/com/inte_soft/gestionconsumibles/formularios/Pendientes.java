@@ -191,9 +191,19 @@ public class Pendientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarKeyReleased
-        // TODO add your handling code here:
+        filterTable();
+
+
     }//GEN-LAST:event_jTextBuscarKeyReleased
-    
+
+    public void filterTable(){
+        String text = jTextBuscar.getText();
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

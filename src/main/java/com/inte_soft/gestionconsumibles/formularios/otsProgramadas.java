@@ -12,6 +12,7 @@ import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     private WindowSingleton windowSingleton;
     private ItemController itemController;
     private List<Item> items = new ArrayList<>();
+    private TableRowSorter<DefaultTableModel> sorter;
     /**
      * Creates new form otsProgramadas
      */
@@ -34,9 +36,18 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         this.windowSingleton = windowSingleton;
         this.otController = new OtController();
         this.itemController = new ItemController();
-        this.model = (DefaultTableModel) this.jTable1.getModel();
+        this.model = modelarTabla(jTable1);
         loadOts();
 
+    }
+
+    public DefaultTableModel modelarTabla(JTable jTable){
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        jTable.setModel(model);
+        jTable.setAutoCreateRowSorter(true);
+        sorter = new TableRowSorter<>(model);
+        jTable.setRowSorter(sorter);
+        return model;
     }
 
     /**
@@ -277,9 +288,17 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextBuscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscar2KeyReleased
-        // TODO add your handling code here:
+        filterTable();
     }//GEN-LAST:event_jTextBuscar2KeyReleased
 
+    public void filterTable(){
+        String text = jTextBuscar2.getText();
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+    }
     public void loadOts(){
         items = this.itemController.getItems();
         this.model.setRowCount(0);
