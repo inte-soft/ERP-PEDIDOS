@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     private ItemController itemController;
     private List<Item> items = new ArrayList<>();
     private TableRowSorter<DefaultTableModel> sorter;
+    private Item item;
     /**
      * Creates new form otsProgramadas
      */
@@ -38,6 +40,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         this.itemController = new ItemController();
         this.model = modelarTabla(jTable1);
         loadOts();
+        jButtonGuardar.setVisible(Boolean.FALSE);
+        jCalendarioActualizar.setVisible(Boolean.FALSE);
 
     }
 
@@ -325,11 +329,33 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextBuscar2KeyReleased
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+        int row = this.jTable1.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una OT");
+        }else{
+            item = new Item();
+            item.setId((Integer) this.jTable1.getValueAt(row, 0));
+            item.setOt(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getOt());
+            item.setItem((String) this.jTable1.getValueAt(row, 2));
+            item.setEntrega((Date) this.jTable1.getValueAt(row, 3));
+            item.setCerrado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getCerrado());
+            item.setAlistado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getAlistado());
+            jButtonGuardar.setVisible(Boolean.TRUE);
+            jCalendarioActualizar.setVisible(Boolean.TRUE);
+        }
+
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
+        if(this.jCalendarioActualizar.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Debe ingresar una fecha");
+        }else{
+            item.setEntrega(this.jCalendarioActualizar.getDate());
+            this.itemController.updateItem(item);
+            loadOts();
+            jButtonGuardar.setVisible(Boolean.FALSE);
+            jCalendarioActualizar.setVisible(Boolean.FALSE);
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     public void filterTable(){
@@ -343,13 +369,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     public void loadOts(){
         items = this.itemController.getItems();
         this.model.setRowCount(0);
-        for(Item ot : items){
+        for(Item item : items){
             this.model.addRow(new Object[]{
-                ot.getOt().getIdOt(),
-                ot.getOt().getOt(),
-                ot.getItem(),
-                ot.getEntrega(),
-                ot.getCerrado()
+                    item.getId(),
+                    item.getOt().getOt(),
+                    item.getItem(),
+                    item.getEntrega(),
+                    item.getCerrado()
             });
         }
     }

@@ -150,7 +150,7 @@ public class EntregaConsumibles extends javax.swing.JDialog {
     private void loadConsumibles(){
         consumiblesEntregaDto = pedidoConsumiblesController.getConsumiblesByOtAndItemUnicConsumible(ot, listItem, area, codigo);
         model.setRowCount(0);
-        Color customColor = Color.BLUE;
+        Color customColor = Color.BLACK;
         Font font = new Font("Arial", Font.BOLD, 14);
         CustomRowRendererGreen customRowRendererGreen = new CustomRowRendererGreen(font, customColor,11);
         jTable1.setDefaultRenderer(Object.class, customRowRendererGreen);

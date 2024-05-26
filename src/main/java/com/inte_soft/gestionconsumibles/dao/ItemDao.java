@@ -41,7 +41,7 @@ entityManager.getTransaction().begin();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Item> items = entityManager.createQuery("SELECT i FROM Item i " +
                         "WHERE i.cerrado = FALSE " +
-                    "ORDER BY i.entrega ASC ",
+                    "ORDER BY i.entrega DESC ",
                 Item.class).getResultList();
         entityManager.close();
         return items;
