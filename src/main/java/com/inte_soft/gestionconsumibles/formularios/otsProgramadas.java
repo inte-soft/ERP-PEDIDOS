@@ -245,7 +245,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if(this.jTextField1.getText().isEmpty() || this.jCalendarioActualizar.getDate() == null || this.jTextField2.getText().isEmpty()){
+
+        if(this.jTextField1.getText().isBlank() || this.jDateChooser4.getDate() == null || this.jTextField2.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");
         }else if(this.jTextField1.getText().length() != 5) {
             JOptionPane.showMessageDialog(null, "El numero de OT debe tener 5 digitos");
@@ -291,12 +292,12 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             item1.setOt(ot);
             item1.setCerrado(false);
             item1.setAlistado(false);
-            item1.setEntrega(this.jCalendarioActualizar.getDate());
+            item1.setEntrega(this.jDateChooser4.getDate());
             this.itemController.createItem(item1);
 
             loadOts();
             this.jTextField1.setText("");
-            this.jCalendarioActualizar.setDate(null);
+            this.jDateChooser4.setDate(null);
             this.jTextField2.setText("");
         }
 

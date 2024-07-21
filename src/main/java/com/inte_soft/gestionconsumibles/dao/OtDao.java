@@ -17,6 +17,9 @@ public class OtDao {
     public OtDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
+    public OtDao(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
 
 

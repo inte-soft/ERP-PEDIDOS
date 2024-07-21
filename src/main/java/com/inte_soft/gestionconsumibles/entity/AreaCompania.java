@@ -16,42 +16,42 @@ import javax.persistence.Table;
  * @author alejo
  */
 @Entity
-@Table(name = "area_compania")
+@Table(name = "AREA_COMPANIA")
 public class AreaCompania implements java.io.Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_AREA")
     private Integer idArea;
+
     @Column(name = "NOMBRE_AREA")
     private String nombreArea;
 
     public AreaCompania() {
     }
 
-    public AreaCompania(int areaCompania, String nombreArea) {
-        this.idArea = areaCompania;
+    public AreaCompania(Integer idArea, String nombreArea) {
+        this.idArea = idArea;
         this.nombreArea = nombreArea;
     }
-    
-    @Id
-    @Column(name = "ID_AREA")
-    public Integer getAreaCompania() {
+
+    public Integer getIdArea() {
         return idArea;
     }
 
-    @Column(name = "NOMBRE_AREA")
+    public void setIdArea(Integer idArea) {
+        this.idArea = idArea;
+    }
+
     public String getNombreArea() {
         return nombreArea;
     }
-    @Column(name = "ID_AREA")
-    public void setAreaCompania(Integer idArea) {
-        this.idArea = idArea;
-    }
-    @Column(name = "NOMBRE_AREA")
+
     public void setNombreArea(String nombreArea) {
         this.nombreArea = nombreArea;
     }
-    
-    
+
+    public Integer getAreaCompania() {
+        return idArea;
+    }
 }

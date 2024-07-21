@@ -23,7 +23,10 @@ public class AreaCompaniaDao {
     public  AreaCompaniaDao (){
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
-    
+    public  AreaCompaniaDao (EntityManagerFactory entityManagerFactory){
+        this.entityManagerFactory = entityManagerFactory;
+    }
+
     public void close(){
         entityManagerFactory.close();
     }

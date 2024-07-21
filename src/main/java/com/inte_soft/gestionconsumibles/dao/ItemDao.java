@@ -19,6 +19,9 @@ public class ItemDao {
     public ItemDao() {
         entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     }
+    public ItemDao(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     public void close() {
         entityManagerFactory.close();
@@ -99,7 +102,7 @@ entityManager.getTransaction().begin();
 
         entityManager.createQuery("UPDATE Item i SET i.alistado = FALSE WHERE i.ot = :ot AND i.item = :item")
                 .setParameter("ot", ot1)
-                .setParameter("item", Integer.parseInt(item))
+                .setParameter("item", item)
                 .executeUpdate();
 
         entityManager.getTransaction().commit();
