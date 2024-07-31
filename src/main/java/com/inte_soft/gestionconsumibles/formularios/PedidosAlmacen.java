@@ -695,6 +695,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jTextF_Buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextF_Buscar1KeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextF_Buscar1KeyTyped(evt);
             }
@@ -710,6 +713,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jTextF_Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextF_Buscar2KeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextF_Buscar2KeyTyped(evt);
             }
@@ -1132,12 +1138,20 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_jTextF_Buscar2ActionPerformed
 
     private void jTextF_Buscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar1KeyTyped
-        this.modelarTablaProgrmado.filter(jTextF_Buscar1.getText(), null);
+        
     }//GEN-LAST:event_jTextF_Buscar1KeyTyped
 
     private void jTextF_Buscar2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar2KeyTyped
-        this.modelarTablaEntregado.filter(jTextF_Buscar2.getText(), null);
+        
     }//GEN-LAST:event_jTextF_Buscar2KeyTyped
+
+    private void jTextF_Buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar1KeyReleased
+        this.modelarTablaProgrmado.filter(jTextF_Buscar1.getText(), null);
+    }//GEN-LAST:event_jTextF_Buscar1KeyReleased
+
+    private void jTextF_Buscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar2KeyReleased
+        this.modelarTablaEntregado.filter(jTextF_Buscar2.getText(), null);
+    }//GEN-LAST:event_jTextF_Buscar2KeyReleased
 
     
     private void export(JTable jTable) {
