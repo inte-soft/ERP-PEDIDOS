@@ -104,7 +104,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
         this.model5.setRowCount(0);
         listItems = this.itemController.getItems();
         for (Item ot : listItems) {
-            if (ot.getAlistado() == false) {
+            if (!ot.getEstado().equals(Constants.PEDIDO_ALISTADO)) {
                 Object[] rowData = {
                     ot.getId(),
                     ot.getOt().getOt(),
@@ -689,17 +689,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextF_Buscar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextF_Buscar1ActionPerformed(evt);
-            }
-        });
         jTextF_Buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextF_Buscar1KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextF_Buscar1KeyTyped(evt);
             }
         });
 
@@ -707,17 +699,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Buscar");
 
-        jTextF_Buscar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextF_Buscar2ActionPerformed(evt);
-            }
-        });
         jTextF_Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextF_Buscar2KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextF_Buscar2KeyTyped(evt);
             }
         });
 
@@ -1129,22 +1113,6 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_jButton8ActionPerformed
 
     
-    private void jTextF_Buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextF_Buscar1ActionPerformed
-        
-    }//GEN-LAST:event_jTextF_Buscar1ActionPerformed
-
-    private void jTextF_Buscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextF_Buscar2ActionPerformed
-        
-    }//GEN-LAST:event_jTextF_Buscar2ActionPerformed
-
-    private void jTextF_Buscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar1KeyTyped
-        
-    }//GEN-LAST:event_jTextF_Buscar1KeyTyped
-
-    private void jTextF_Buscar2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar2KeyTyped
-        
-    }//GEN-LAST:event_jTextF_Buscar2KeyTyped
-
     private void jTextF_Buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextF_Buscar1KeyReleased
         this.modelarTablaProgrmado.filter(jTextF_Buscar1.getText(), null);
     }//GEN-LAST:event_jTextF_Buscar1KeyReleased

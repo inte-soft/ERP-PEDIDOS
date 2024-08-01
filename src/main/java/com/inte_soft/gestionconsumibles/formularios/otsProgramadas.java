@@ -8,6 +8,7 @@ import com.inte_soft.gestionconsumibles.controller.ItemController;
 import com.inte_soft.gestionconsumibles.controller.OtController;
 import com.inte_soft.gestionconsumibles.entity.Item;
 import com.inte_soft.gestionconsumibles.entity.Ot;
+import com.inte_soft.gestionconsumibles.util.Constants;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
 
 import javax.swing.*;
@@ -291,7 +292,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             item1.setItem(item);
             item1.setOt(ot);
             item1.setCerrado(false);
-            item1.setAlistado(false);
+            item1.setEstado(Constants.PEDIDO_PROGRAMADO);
             item1.setEntrega(this.jDateChooser4.getDate());
             this.itemController.createItem(item1);
 
@@ -340,7 +341,7 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             item.setItem((String) this.jTable1.getValueAt(row, 2));
             item.setEntrega((Date) this.jTable1.getValueAt(row, 3));
             item.setCerrado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getCerrado());
-            item.setAlistado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getAlistado());
+            item.setEstado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getEstado());
             jButtonGuardar.setVisible(Boolean.TRUE);
             jCalendarioActualizar.setVisible(Boolean.TRUE);
         }
