@@ -100,6 +100,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
     }
 
     public void verProgramado() {
+        CustomRowRendererItems customRowRendererItems = new CustomRowRendererItems();
+        this.jTableProgramado.setDefaultRenderer(Object.class, customRowRendererItems);
         this.model6.setRowCount(0);
         this.model5.setRowCount(0);
         listItems = this.itemController.getItems();
@@ -111,7 +113,8 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     ot.getItem(),
                     ot.getEntrega(),
                     ot.getCerrado(),
-                        Boolean.FALSE
+                    Boolean.FALSE,
+                    ot.getEstado()
                 };
                 this.model6.addRow(rowData);
             } else {
@@ -120,6 +123,7 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     ot.getOt().getOt(),
                     ot.getItem(),
                     ot.getEntrega()
+                     
 
                 };
                 this.model5.addRow(rowData);
@@ -601,14 +605,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Seleccion"
+                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Seleccion", "estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -627,8 +631,9 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
             jTableProgramado.getColumnModel().getColumn(4).setMinWidth(0);
             jTableProgramado.getColumnModel().getColumn(4).setPreferredWidth(0);
             jTableProgramado.getColumnModel().getColumn(4).setMaxWidth(0);
-            jTableProgramado.getColumnModel().getColumn(5).setMinWidth(100);
-            jTableProgramado.getColumnModel().getColumn(5).setMaxWidth(300);
+            jTableProgramado.getColumnModel().getColumn(6).setMinWidth(0);
+            jTableProgramado.getColumnModel().getColumn(6).setPreferredWidth(0);
+            jTableProgramado.getColumnModel().getColumn(6).setMaxWidth(0);
         }
 
         jButton5.setText("Electricos");

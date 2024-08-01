@@ -83,13 +83,14 @@ entityManager.getTransaction().begin();
         return items;
     }
 
-    public void updateItemAlistado(Ot ot, String item) {
+    public void updateItemState(Ot ot, String item, Integer estado) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.createQuery("UPDATE Item i SET i.alistado = TRUE WHERE i.ot = :ot AND i.item = :item")
+        entityManager.createQuery("UPDATE Item i SET i.estado = :estado WHERE i.ot = :ot AND i.item = :item")
                 .setParameter("ot", ot)
                 .setParameter("item", item)
+                .setParameter("estado", estado)
                 .executeUpdate();
 
         entityManager.getTransaction().commit();

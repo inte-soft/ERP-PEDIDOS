@@ -8,6 +8,7 @@ import com.inte_soft.gestionconsumibles.dao.*;
 import com.inte_soft.gestionconsumibles.dto.*;
 import com.inte_soft.gestionconsumibles.entity.*;
 import com.inte_soft.gestionconsumibles.service.PedidoConsumiblesServices;
+import com.inte_soft.gestionconsumibles.util.Constants;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,7 +83,7 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                  OtDao OtDao = new OtDao();
                  Ot ot1 = OtDao.getOtByOt(ot);
                  for (String item : listItem) {
-                     itemDao.updateItemAlistadoFalse(ot1, item);
+                     itemDao.updateItemState(ot1, item, Constants.PEDIDO_DEVUELTO);
                  }
              }catch (Exception e) {
                  e.printStackTrace();
@@ -238,7 +239,9 @@ public class PedidoConsumiblesServiceImplement implements PedidoConsumiblesServi
                 }
                 ItemDao itemDao = new ItemDao();
                 if (alistado) {
-                    itemDao.updateItemAlistado(ot1, item);
+                    itemDao.updateItemState(ot1, item, Constants.PEDIDO_ALISTADO);
+                }else{
+                    itemDao.updateItemState(ot1, item, Constants.PEDIDO_EN_PROCESO);
                 }
             }
         }

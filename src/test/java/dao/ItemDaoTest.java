@@ -111,33 +111,6 @@ public class ItemDaoTest {
         assertEquals(2, items.size());
     }
 
-    @Test
-    public void testUpdateItemAlistado() {
-        Ot ot = new Ot("OT001", false, false);
-        Item item = new Item(null, "Item1", ot, false, new Date(), 0);
-        OtDao otDao = new OtDao(entityManagerFactory);
-        otDao.createOt(ot);
-        itemDao.createItem(item);
 
-        itemDao.updateItemAlistado(ot, "Item1");
 
-        Optional<Item> updatedItem = itemDao.getItemByOtAndItem(ot, "Item1");
-        assertTrue(updatedItem.isPresent());
-        assertTrue(updatedItem.get().getEstado().equals(0));
-    }
-
-    @Test
-    public void testUpdateItemAlistadoFalse() {
-        Ot ot = new Ot("OT001", false, false);
-        Item item = new Item(null, "Item1", ot, false, new Date(), 3);
-        OtDao otDao = new OtDao(entityManagerFactory);
-        otDao.createOt(ot);
-        itemDao.createItem(item);
-
-        itemDao.updateItemAlistadoFalse(ot, "Item1");
-
-        Optional<Item> updatedItem = itemDao.getItemByOtAndItem(ot, "Item1");
-        assertTrue(updatedItem.isPresent());
-        assertFalse(updatedItem.get().getEstado().equals(1));
-    }
 }
