@@ -71,4 +71,13 @@ public class ItemServiceImplement implements ItemService {
 
 
     }
+
+    public Item getItemById(Integer itemId) {
+        return itemDao.getItemById(itemId);
+    }
+
+    public void updateItemOt(Item item) {
+        ItemDao itemDao = new ItemDao();
+        itemDao.updateItem(item);
+    }
 }

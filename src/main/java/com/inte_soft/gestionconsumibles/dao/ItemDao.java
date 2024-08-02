@@ -109,4 +109,21 @@ entityManager.getTransaction().begin();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
+
+    public Item getItemById(Integer itemId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Item item1 = entityManager.createQuery(
+                    "SELECT i FROM Item i WHERE i.id = :itemId",
+                    Item.class)
+                    .setParameter("itemId", itemId)
+                    .getSingleResult();
+            return item1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            entityManager.close();
+        }
+    }
 }

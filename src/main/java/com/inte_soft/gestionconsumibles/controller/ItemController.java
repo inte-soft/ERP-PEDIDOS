@@ -27,4 +27,12 @@ public class ItemController {
     public void updateItem(Item item) {
         itemService.updateItem(item);
     }
+
+    public Item getItemById(Integer itemId) {
+        return itemService.getItemById(itemId);
+    }
+
+    public void updateItemOt(Item item) {
+       itemService.updateItemOt(item);
+    }
 }

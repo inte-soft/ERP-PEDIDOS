@@ -10,6 +10,7 @@ import com.inte_soft.gestionconsumibles.entity.Item;
 import com.inte_soft.gestionconsumibles.entity.Ot;
 import com.inte_soft.gestionconsumibles.util.Constants;
 import com.inte_soft.gestionconsumibles.util.WindowSingleton;
+import java.awt.Dialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -93,14 +94,14 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "OT", "ITEM", "FECHA PROGRAMADA", "CIERRE OT"
+                "ID", "OT", "ITEM", "FECHA PROGRAMADA", "RECIBE", "FECHA PROD.", "OBSERVACION", "CIERRE OT"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,8 +121,8 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
             jTable1.getColumnModel().getColumn(3).setMinWidth(150);
             jTable1.getColumnModel().getColumn(3).setMaxWidth(500);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(300);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(300);
         }
 
         jLabel1.setText("OT:");
@@ -224,7 +225,6 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                     .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,8 +245,13 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-
+        CreateEditOT createEditOT = new CreateEditOT(this);
+        createEditOT.setModal(Boolean.TRUE);
+        createEditOT.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
+        createEditOT.setVisible(Boolean.TRUE);
+        
+        
+        /*
         if(this.jTextField1.getText().isBlank() || this.jDateChooser4.getDate() == null || this.jTextField2.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos");
         }else if(this.jTextField1.getText().length() != 5) {
@@ -301,13 +306,14 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
             this.jDateChooser4.setDate(null);
             this.jTextField2.setText("");
         }
+        */
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        int contador = 0;
         for(int i = 0; i < this.jTable1.getRowCount(); i++){
-            if((Boolean) this.jTable1.getValueAt(i, 4)){
+            if((Boolean) this.jTable1.getValueAt(i, 7)){
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la OT " + this.jTable1.getValueAt(i, 1) + "?");
                 if(confirm == JOptionPane.NO_OPTION || confirm == JOptionPane.CANCEL_OPTION){
                     return;
@@ -335,15 +341,12 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
         if(row == -1){
             JOptionPane.showMessageDialog(null, "Debe seleccionar una OT");
         }else{
-            item = new Item();
-            item.setId((Integer) this.jTable1.getValueAt(row, 0));
-            item.setOt(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getOt());
-            item.setItem((String) this.jTable1.getValueAt(row, 2));
-            item.setEntrega((Date) this.jTable1.getValueAt(row, 3));
-            item.setCerrado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getCerrado());
-            item.setEstado(items.stream().filter(ot -> ot.getId() == item.getId()).findFirst().get().getEstado());
-            jButtonGuardar.setVisible(Boolean.TRUE);
-            jCalendarioActualizar.setVisible(Boolean.TRUE);
+            item = this.itemController.getItemById((Integer) this.jTable1.getValueAt(row, 0));
+            CreateEditOT createEditOT = new CreateEditOT(this, item);
+            createEditOT.setModal(Boolean.TRUE);
+            createEditOT.setLocationRelativeTo(null);
+            createEditOT.setVisible(Boolean.TRUE);
+
         }
 
     }//GEN-LAST:event_jButtonModificarActionPerformed
@@ -377,6 +380,9 @@ public class otsProgramadas extends javax.swing.JInternalFrame {
                     item.getOt().getOt(),
                     item.getItem(),
                     item.getEntrega(),
+                    item.getRecibe(),
+                    item.getFechaRecibe(),
+                    item.getObservacion(),
                     item.getCerrado()
             });
         }

@@ -114,7 +114,10 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
                     ot.getEntrega(),
                     ot.getCerrado(),
                     Boolean.FALSE,
-                    ot.getEstado()
+                    ot.getEstado(),
+                    ot.getFechaRecibe(),
+                    ot.getRecibe(),
+                    ot.getObservacion()
                 };
                 this.model6.addRow(rowData);
             } else {
@@ -605,14 +608,14 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Seleccion", "estado"
+                "ID", "OT", "Item", "Fecha a Entregar", "Terminado", "Seleccion", "estado", "Fecha Produccion", "Recibe", "Observacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
