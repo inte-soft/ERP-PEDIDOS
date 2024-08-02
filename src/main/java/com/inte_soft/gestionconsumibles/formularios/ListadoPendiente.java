@@ -80,11 +80,11 @@ public class ListadoPendiente extends JDialog {
 
             },
             new String [] {
-                "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Maximos", "Minimos", "Alistado", "Pendiente"
+                "Codigo", "Descripción", "Tipo", "Referencia", "Marca", "Unidad", "Cant", "Maximos", "Minimos", "Alistado", "Pendiente", "Operacion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -128,12 +128,12 @@ public class ListadoPendiente extends JDialog {
                 .addComponent(jButton1)
                 .addGap(79, 79, 79)
                 .addComponent(jButton2)
-                .addContainerGap(634, Short.MAX_VALUE))
+                .addContainerGap(644, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(16, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +174,8 @@ public class ListadoPendiente extends JDialog {
                 consumiblesDtoOt.getMax(),
                 consumiblesDtoOt.getMin(),
                 consumiblesDtoOt.getAlistado(),
-                    Double.parseDouble(String.format(Locale.US, "%.1f", consumiblesDtoOt.getCantidad() - consumiblesDtoOt.getAlistado())),
+                Double.parseDouble(String.format(Locale.US, "%.1f", consumiblesDtoOt.getCantidad() - consumiblesDtoOt.getAlistado())),
+                consumiblesDtoOt.getOperacion()
             });
 
         }

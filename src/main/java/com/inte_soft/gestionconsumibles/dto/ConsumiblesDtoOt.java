@@ -10,6 +10,7 @@ package com.inte_soft.gestionconsumibles.dto;
  */
 public class ConsumiblesDtoOt {
     private String ot;
+    private String operacion;
     private String codigo;
     private String descripcion;
     private String tipo;
@@ -25,9 +26,9 @@ public class ConsumiblesDtoOt {
     public ConsumiblesDtoOt() {
     }
 
-
-    public ConsumiblesDtoOt(String ot, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado, String area) {
+    public ConsumiblesDtoOt(String ot, String operacion, String codigo, String descripcion, String tipo, String referencia, String marca, String unidad, double cantidad, double max, double min, double alistado, String area) {
         this.ot = ot;
+        this.operacion = operacion;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo = tipo;
@@ -41,12 +42,21 @@ public class ConsumiblesDtoOt {
         this.area = area;
     }
 
+
     public String getOt() {
         return ot;
     }
 
     public void setOt(String ot) {
         this.ot = ot;
+    }
+
+    public String getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
     }
 
     public String getCodigo() {
