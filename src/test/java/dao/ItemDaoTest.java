@@ -44,7 +44,7 @@ public class ItemDaoTest {
     @Test
     public void testCreateItem() {
         Ot ot = new Ot("OT001", false, false);
-        Item item = new Item(null, "Item1", ot, false, new Date(), 0);
+        Item item = new Item(null, "Item1", ot, false, new Date(), 0, null, null, null);
         OtDao otDao = new OtDao(entityManagerFactory);
         otDao.createOt(ot);
         itemDao.createItem(item);
@@ -57,8 +57,8 @@ public class ItemDaoTest {
     @Test
     public void testGetItems() {
         Ot ot = new Ot("OT001", false, false);
-        Item item1 = new Item(null, "Item1", ot, false, new Date(), 0);
-        Item item2 = new Item(null, "Item2", ot, false, new Date(), 0);
+        Item item1 = new Item(null, "Item1", ot, false, new Date(), 0, null, null, null);
+        Item item2 = new Item(null, "Item2", ot, false, new Date(), 0, null, null, null);
         OtDao otDao = new OtDao(entityManagerFactory);
         otDao.createOt(ot);
         itemDao.createItem(item1);
@@ -71,7 +71,7 @@ public class ItemDaoTest {
     @Test
     public void testGetItemByOtAndItem() {
         Ot ot = new Ot("OT001", false, false);
-        Item item = new Item(null, "Item1", ot, false, new Date(), 0);
+        Item item = new Item(null, "Item1", ot, false, new Date(), 0, null, null, null);
         OtDao otDao = new OtDao(entityManagerFactory);
         otDao.createOt(ot);
         itemDao.createItem(item);
@@ -84,7 +84,7 @@ public class ItemDaoTest {
     @Test
     public void testUpdateItem() {
         Ot ot = new Ot("OT001", false, false);
-        Item item = new Item(null, "Item1", ot, false, new Date(), 0);
+        Item item = new Item(null, "Item1", ot, false, new Date(), 0, null, null, null);
         OtDao otDao = new OtDao(entityManagerFactory);
         otDao.createOt(ot);
         itemDao.createItem(item);
@@ -100,8 +100,8 @@ public class ItemDaoTest {
     @Test
     public void testGetItemsByOt() {
         Ot ot = new Ot("OT001", false, false);
-        Item item1 = new Item(null, "Item1", ot, false, new Date(), 0);
-        Item item2 = new Item(null, "Item2", ot, false, new Date(), 0);
+        Item item1 = new Item(null, "Item1", ot, false, new Date(), 0, null, null, null);
+        Item item2 = new Item(null, "Item2", ot, false, new Date(), 0, null, null, null);
         OtDao otDao = new OtDao(entityManagerFactory);
         otDao.createOt(ot);
         itemDao.createItem(item1);
