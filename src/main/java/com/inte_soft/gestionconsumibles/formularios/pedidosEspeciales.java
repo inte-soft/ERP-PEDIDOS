@@ -65,11 +65,24 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
         this.listPedidoDto = pedidosController.listPedidosCompras();
         this.model.setRowCount(0);
         for (PedidoDto pedidoDto : listPedidoDto) {
+            String prioridad = "";
+            switch(pedidoDto.getPrioridad()){
+                case 1:
+                    prioridad = "Bajo";
+                    break;
+                case 2:
+                    prioridad =  "Medio";
+                    break;
+                case 3:
+                    prioridad = "Alto";
+                    break;
+            }
             this.model.addRow(new Object[]{
                     pedidoDto.getIdPedido(),
                     pedidoDto.getOt(),
                     pedidoDto.getFecha(),
-                    pedidoDto.getPersona()
+                    pedidoDto.getPersona(),
+                    prioridad
             });
         }
     }
@@ -144,11 +157,11 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -236,11 +249,11 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -348,11 +361,24 @@ public class pedidosEspeciales extends javax.swing.JInternalFrame {
         this.listPedidoDto = pedidosController.listPedidosComprasOk();
         this.model2.setRowCount(0);
         for (PedidoDto pedidoDto : listPedidoDto) {
+            String prioridad = "";
+            switch(pedidoDto.getPrioridad()){
+                case 1:
+                    prioridad = "Bajo";
+                    break;
+                case 2:
+                    prioridad =  "Medio";
+                    break;
+                case 3:
+                    prioridad = "Alto";
+                    break;
+            }
             this.model2.addRow(new Object[]{
                     pedidoDto.getIdPedido(),
                     pedidoDto.getOt(),
                     pedidoDto.getFecha(),
-                    pedidoDto.getPersona()
+                    pedidoDto.getPersona(),
+                    prioridad
             });
         }
         

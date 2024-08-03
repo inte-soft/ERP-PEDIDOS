@@ -49,15 +49,19 @@ public class Pedidos  implements java.io.Serializable{
     @Column(name = "COMPRADO")
     private boolean comprado;
     
+    @Column(name = "PRIORIDAD")
+    private Integer prioridad;
+    
  
     
 
     public Pedidos() {
     }
 
-    public Pedidos(String ot,String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, boolean comprado) {
-        this.persona = persona;
+    public Pedidos(int idPedido, String ot, String persona, AreaCompania area, Date fecha, String operacion, boolean revisado, String tipoPedido, boolean visto, boolean comprado, Integer prioridad) {
+        this.idPedido = idPedido;
         this.ot = ot;
+        this.persona = persona;
         this.area = area;
         this.fecha = fecha;
         this.operacion = operacion;
@@ -65,6 +69,7 @@ public class Pedidos  implements java.io.Serializable{
         this.tipoPedido = tipoPedido;
         this.visto = visto;
         this.comprado = comprado;
+        this.prioridad = prioridad;
     }
 
     public int getIdPedido() {
@@ -147,7 +152,13 @@ public class Pedidos  implements java.io.Serializable{
         this.comprado = comprado;
     }
 
-   
+    public Integer getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(Integer prioridad) {
+        this.prioridad = prioridad;
+    }
     
    
 }

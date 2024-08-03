@@ -20,7 +20,7 @@ import java.util.List;
 public interface PedidoConsumiblesServices {
    public void crearPedidoConsumibles(List<PedidoConsumibles> pedidoConsumibleses,
            AreaCompania area, String persona , String Operacion, String ot,
-                                      String tipoPedido, List<PedidosCompras> listPedidosCompras, String typeOperacionCompras);
+                                      String tipoPedido, List<PedidosCompras> listPedidosCompras, String typeOperacionCompras, Integer prioridad);
 
     public List<ConsumiblesDto> consumiblesPedidosSearch(String ot, String descripcion, String tipoPedido);
     

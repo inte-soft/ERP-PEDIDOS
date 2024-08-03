@@ -112,11 +112,11 @@ public class PedidosDao {
     }
 
     public List<PedidoDto> listPedidos() {
-        //metodo ppara listar todos los pedisos adicionales ordenados por fecha decendete y que no aparazcan pedidos de ot que esten marcadas como terminadas
+        //metodo para listar todos los pedisos adicionales ordenados por fecha decendete y que no aparazcan pedidos de ot que esten marcadas como terminadas
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado, p.prioridad) "
                 + "FROM Pedidos p "
                 + "WHERE  p.operacion LIKE '%Adicional%' AND p.comprado = TRUE "
                 + "ORDER BY p.fecha DESC";
@@ -156,7 +156,7 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado, p.prioridad) "
                 + "FROM Pedidos p "
                 + "WHERE p.operacion LIKE 'Compras%' and p.comprado = FALSE ";
 
@@ -173,7 +173,7 @@ public class PedidosDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado) "
+        String queryString = "SELECT new com.inte_soft.gestionconsumibles.dto.PedidoDto(p.idPedido, p.ot, p.persona, p.area, p.fecha, p.operacion, p.revisado, p.tipoPedido, p.visto, p.fecha, p.comprado, p.prioridad) "
                 + "FROM Pedidos p "
                 + "WHERE p.operacion LIKE 'Compras%' and p.comprado = TRUE";
 

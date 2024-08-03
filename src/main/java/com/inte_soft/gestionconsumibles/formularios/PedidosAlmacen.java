@@ -228,11 +228,11 @@ public class PedidosAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto", "Area de Pedido"
+                "# Pedido", "OT", "Fecha", "Solicitante", "Tipo Pedido", "Visto", "Area de Pedido", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1221,6 +1221,19 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         CustomRowRendererBlue customRowRenderer = new CustomRowRendererBlue(customFont, customColor);
         jTable1.setDefaultRenderer(Object.class, customRowRenderer);
         for (PedidoDto pedidos : this.listPedidos) {
+            String prioridad = "";
+            switch (pedidos.getPrioridad())
+            {
+                case 1:
+                    prioridad = "Baja";
+                    break;
+                case 2:
+                    prioridad = "Media";
+                    break;
+                case 3:
+                    prioridad = "Alta";
+                    break;
+            }
             Object[] rowData = {
                 pedidos.getIdPedido(),
                 pedidos.getOt(),
@@ -1228,7 +1241,8 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 pedidos.getPersona(),
                 pedidos.getOperacion(),
                 pedidos.isVisto(),
-                pedidos.getTipoPedido()
+                pedidos.getTipoPedido(),
+                prioridad
             };
             model.addRow(rowData);
 

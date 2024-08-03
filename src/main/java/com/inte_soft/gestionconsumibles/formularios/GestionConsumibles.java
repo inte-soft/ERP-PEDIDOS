@@ -73,6 +73,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
         item = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         Imprimir = new javax.swing.JButton();
+        jComboBoxPrioridad = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -174,6 +175,8 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBoxPrioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bajo", "Medio", "Alto" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +200,9 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                         .addComponent(lbtipoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSeleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(btnGestionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,7 +211,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                         .addComponent(jButton2)
                         .addGap(31, 31, 31)
                         .addComponent(Imprimir)))
-                .addGap(29, 479, Short.MAX_VALUE))
+                .addGap(291, 321, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -226,7 +231,8 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
                     .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(cbSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbtipoPedido))
+                    .addComponent(lbtipoPedido)
+                    .addComponent(jComboBoxPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -375,11 +381,22 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
             }
         }
         listPedidoConsumibleses.removeAll(listPedidoConsumiblesdelete);
-
+        Integer typePrioridad = 0;
+        switch (this.jComboBoxPrioridad.getSelectedItem().toString()) {
+            case "Bajo":
+                typePrioridad = 1;
+                break;
+            case "Medio":
+                typePrioridad = 2;
+                break;
+            case "Alto":
+                typePrioridad = 3;
+                break;
+        }
         pedidoConsumiblesController.crearPedidoConsumibles(listPedidoConsumibleses,
                 this.usuarios.getAreaCompania(), this.usuarios.getNombres() + " " + this.usuarios.getApellidos(),
                 this.cbSeleccion1.getSelectedItem().toString(), this.txtOt.getText(),
-                this.cbSeleccion.getSelectedItem().toString(), ListPedidosCompras, typeOperacionCompras);
+                this.cbSeleccion.getSelectedItem().toString(), ListPedidosCompras, typeOperacionCompras, typePrioridad);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -414,6 +431,7 @@ public class GestionConsumibles extends javax.swing.JInternalFrame {
     private javax.swing.JTextField item;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBoxPrioridad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
